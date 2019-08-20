@@ -1,0 +1,36 @@
+{
+  "name": "train-parcel",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "babel": "babel-node ./bin/www",
+    "nodemon": "nodemon --exec babel-node ./bin/www"
+  },
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "morgan": "~1.9.1"
+  },
+  "description": "This is the web application which is useful for Parcel Office Managers and Customers. It helps them to book a slot for sending a parcel, checking the live status and doing other management tasks digitally.",
+  "main": "bin/www",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/akzarma/train-parcel.git"
+  },
+  "author": "demo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/akzarma/train-parcel/issues"
+  },
+  "homepage": "https://gitlab.com/akzarma/train-parcel#readme"
+}
