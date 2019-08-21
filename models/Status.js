@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   statuses.associate = function(models) {
     // associations can be defined here
+    statuses.hasOne(models.packages);
   };
   return statuses;
 };
