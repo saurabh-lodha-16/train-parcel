@@ -13,7 +13,11 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "pg": "^7.12.0",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.13.0",
+    "sequelize-cli": "^5.5.0"
   },
   "description": "This is the web application which is useful for Parcel Office Managers and Customers. It helps them to book a slot for sending a parcel, checking the live status and doing other management tasks digitally.",
   "main": "bin/www",
