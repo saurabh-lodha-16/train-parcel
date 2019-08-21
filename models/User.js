@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const users = sequelize.define('users', {
     id: {
       allowNull: false,
       primaryKey: true,
@@ -29,8 +29,9 @@ module.exports = (sequelize, DataTypes) => {
        type:DataTypes.UUID
      },
   }, {});
-  User.associate = function(models) {
+  users.associate = function(models) {
     // associations can be defined here
+   users.hasOne(models.roleAssigns);
   };
-  return User;
+  return users;
 };

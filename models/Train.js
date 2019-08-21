@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Train = sequelize.define('train', {
+  const trains = sequelize.define('trains', {
     id: {
       allowNull: false,
       primaryKey: true,
@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.STRING
     }, 
   }, {});
-  Train.associate = function(models) {
+  trains.associate = function(models) {
     // associations can be defined here
   };
-  return Train;
+  return trains;
 };

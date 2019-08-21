@@ -1,11 +1,11 @@
 {
   "development": {
-    "username": "kflhihhi",
-    "password": "RwPT5U2KH1MkoJG46Dd-6Kxk7gs6L9Tx",
-    "database": "kflhihhi",
-    "host": "isilo.db.elephantsql.com",
+    "username": "saucr16",
+    "password": "123456",
+    "database": "trainParcel",
+    "host": "127.0.0.1",
     "dialect": "postgres",
-    "port": 5432
+    "operatorsAliases": false
   },
   "test": {
     "username": "root",
