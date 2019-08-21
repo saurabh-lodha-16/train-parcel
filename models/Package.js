@@ -66,6 +66,7 @@ module.exports = (sequelize, DataTypes) => {
     packages.belongsTo(models.users);
     packages.belongsTo(models.trains);
     packages.belongsTo(models.statuses);
+    packages.hasOne(models.receipts);
   };
   return packages;
 };
