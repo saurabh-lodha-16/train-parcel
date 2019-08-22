@@ -2,17 +2,13 @@
   <HEAD>
   </HEAD>
   <body>
-    <form method = "post"  action = "http://localhost:3000/city/edit">
+    <form method = "post"  action = "http://localhost:3000/status/add">
     	<div>
-  	    <label for="name">City Name:</label>
-  	    <input type = "text" name = "name" value = <%= name %>>
-    	</div>
-      <div>
-        <label for="name">City id:</label>
-        <input type = "hidden" name = "id" value =<%= id %>>
-      </div>  	
+  	    <label for="type">Type :</label>
+  	    <input type = "text" name = "type">
+    	</div>	
     	<div>
-  	    <button type="submit">Update details</button>
+  	    <button type="submit">Add Status</button>
     	</div>
     </form>
   </body>  
