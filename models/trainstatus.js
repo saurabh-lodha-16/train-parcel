@@ -7,15 +7,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    train_id: {
+    trainId: {
       type: DataTypes.UUID,
       allowNull: true,
-      references: {
-        model: 'trains',
-        key: 'id',
-        onUpdate: "cascade",
-        onDelete: "set null"
-      }
     },
     date:{
       type:DataTypes.DATEONLY,
@@ -24,22 +18,10 @@ module.exports = (sequelize, DataTypes) => {
     sCity: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'cities',
-        key: 'id',
-        onUpdate: "cascade",
-        onDelete: "set null"
-      }
     },
     dCity: {
       type: DataTypes.UUID,
       allowNull: false,
-      references: {
-        model: 'cities',
-        key: 'id',
-        onUpdate: "cascade",
-        onDelete: "set null"
-      }
     },
     sTime: {
       type: DataTypes.TIME,
@@ -52,7 +34,10 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   trainStatuses.associate = function (models) {
     // associations can be defined here
-    trainStatuses.belongsTo(models.trains);
+    trainStatuses.belongsTo(models.trains, {targetKey:'id'});
+    trainStatuses.belongsTo(models.cities, {targetKey:'id', foreignKey:'sCity'});
+    trainStatuses.belongsTo(models.cities, {targetKey:'id', foreignKey:'dCity'});
+
   };
   return trainStatuses;
 };

@@ -8,25 +8,13 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      user_id: {
+      userId: {
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'users',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
-      role_id:{
+      roleId:{
         type:Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'roles',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
       createdAt: {
         allowNull: false,

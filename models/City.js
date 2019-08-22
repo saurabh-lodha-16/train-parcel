@@ -13,6 +13,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   cities.associate = function(models) {
     // associations can be defined here
+    cities.hasOne(models.offices, {foreignKey:'cityId', sourceKey:'id'})
+    cities.hasOne(models.trainStatuses, {foreignKey:'sCity', sourceKey:'id'})
+    cities.hasOne(models.trainStatuses, {foreignKey:'dCity', sourceKey:'id'})
+    cities.hasOne(models.packages, {foreignKey:'sCity', sourceKey:'id'})
+    cities.hasOne(models.packages, {foreignKey:'dCity', sourceKey:'id'})
   };
   return cities;
 };

@@ -11,12 +11,6 @@ module.exports = {
       train_id: {
         type: Sequelize.UUID,
         allowNull: true,
-        references: {
-          model: 'trains',
-          key: 'id',
-          onUpdate: "cascade",
-          onDelete: "set null"
-        }
       },
       date:{
         type:Sequelize.DATEONLY,
@@ -25,22 +19,10 @@ module.exports = {
       sCity: {
         type: Sequelize.UUID,
         allowNull: false,
-        references: {
-          model: 'cities',
-          key: 'id',
-          onUpdate: "cascade",
-          onDelete: "set null"
-        }
       },
       dCity: {
         type: Sequelize.UUID,
         allowNull: false,
-        references: {
-          model: 'cities',
-          key: 'id',
-          onUpdate: "cascade",
-          onDelete: "set null"
-        }
       },
       sTime: {
         type: Sequelize.TIME,

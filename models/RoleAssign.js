@@ -7,31 +7,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    user_id: {
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'users',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
-    role_id:{
+    roleId:{
       type:DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'roles',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
   }, {});
   roleAssigns.associate = function(models) {
     // associations can be defined here
-   roleAssigns.belongsTo(models.users);
-   roleAssigns.belongsTo(models.roles);
+   roleAssigns.belongsTo(models.users, {targetKey:'id'});
+   roleAssigns.belongsTo(models.roles, {targetKey:'id'});
   };
   return roleAssigns;
 };

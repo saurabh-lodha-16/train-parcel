@@ -14,53 +14,21 @@ module.exports = {
         type:Sequelize.INTEGER,
         autoIncrement: true,
       },
-      user_id: {
+      senderUserId: {
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'users',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
-      recv_id:{
+      rcvrUserId:{
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'users',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
-      recv_name:{
-        type:Sequelize.STRING,
-        allowNull:false
-      },
-      recv_details:{
-        type:Sequelize.STRING,
-        allowNull:false
-      },
-      train_id:{
+      trainId:{
         type:Sequelize.UUID,
         allowNull: true,
-        references:{
-         model: 'trains',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
-      status_id: {
+      statusId: {
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'statuses',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
       weight: {
         type:Sequelize.FLOAT
@@ -68,22 +36,10 @@ module.exports = {
       sCity:{
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'cities',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-      }
     },
       dCity:{
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'cities',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-      }
     },
       createdAt: {
         allowNull: false,

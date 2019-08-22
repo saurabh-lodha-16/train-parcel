@@ -17,8 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   trains.associate = function(models) {
     // associations can be defined here
-    trains.hasOne(models.packages);
-    trains.hasMany(models.trainStatuses);
+    trains.hasOne(models.packages, {foreignKey:'trainId', sourceKey:'id'});
+    trains.hasMany(models.trainStatuses, {foreignKey:'trainId', sourceKey:'id'});
   };
   return trains;
 };

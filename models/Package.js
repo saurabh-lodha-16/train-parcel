@@ -13,53 +13,21 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.INTEGER,
       autoIncrement: true,
     },
-    user_id: {
+    senderUserId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'users',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
-    recv_id:{
+    rcvrUserId:{
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'users',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
-    recv_name:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
-    recv_details:{
-      type:DataTypes.STRING,
-      allowNull:false
-    },
-    train_id:{
+    trainId:{
       type:DataTypes.UUID,
       allowNull: true,
-      references:{
-       model: 'trains',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
-    status_id: {
+    statusId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'statuses',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
     weight: {
       type:DataTypes.FLOAT
@@ -67,30 +35,21 @@ module.exports = (sequelize, DataTypes) => {
     sCity:{
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'cities',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-    }
   },
     dCity:{
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'cities',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-    }
   },
 }, {});
   packages.associate = function(models) {
     // associations can be defined here
-    packages.belongsTo(models.users);
-    packages.belongsTo(models.trains);
-    packages.belongsTo(models.statuses);
-    packages.hasOne(models.receipts);
+    packages.belongsTo(models.users, {targetKey:'id', foreignKey:'senderUserId'});
+    packages.belongsTo(models.users, {targetKey:'id', foreignKey:'rcvrUserId'});
+    packages.belongsTo(models.trains, {targetKey:'id'});
+    packages.belongsTo(models.statuses, {targetKey:'id'});
+    packages.belongsTo(models.cities, {targetKey:'id', foreignKey:'sCity'});
+    packages.belongsTo(models.cities, {targetKey:'id', foreignKey:'dCity'});
+    packages.hasOne(models.receipts, {foreignKey:'packageId', sourceKey:'id'});
   };
   return packages;
 };

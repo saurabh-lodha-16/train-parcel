@@ -7,25 +7,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    user_id: {
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'users',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
-    package_id:{
+    packageId:{
       type:DataTypes.UUID,
       allowNull: false,
-      references:{
-       model: 'packages',
-       key: 'id',
-       onUpdate: "cascade",
-       onDelete: "set null"
-      }
     },
     totalAmount:{
       type:DataTypes.FLOAT,
@@ -33,8 +21,8 @@ module.exports = (sequelize, DataTypes) => {
     },  
   }, {});
   receipts.associate = function(models) {
-    receipts.belongsTo(models.users);
-    receipts.belongsTo(models.packages);
+    receipts.belongsTo(models.users, {targetKey:'id'});
+    receipts.belongsTo(models.packages, {targetKey:'id'});
   };
   return receipts;
 };

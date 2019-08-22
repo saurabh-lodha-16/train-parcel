@@ -11,22 +11,10 @@ module.exports = {
       user_id: {
         type: Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'users',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
       package_id:{
         type:Sequelize.UUID,
         allowNull: false,
-        references:{
-         model: 'packages',
-         key: 'id',
-         onUpdate: "cascade",
-         onDelete: "set null"
-        }
       },
       totalAmount:{
         type:Sequelize.FLOAT,

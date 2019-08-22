@@ -12,13 +12,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     email: {
-      unique:true,
+      unique: true,
       allowNull: true,
       type: DataTypes.STRING
     },
     //change its type
     mobileNo: {
-      unique:true,
+      unique: true,
       allowNull: true,
       type: DataTypes.BIGINT
     },
@@ -34,9 +34,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   users.associate = function (models) {
     // associations can be defined here
-    users.hasOne(models.roleAssigns);
-    users.hasMany(models.packages);
-    users.hasOne(models.receipts);
+    users.hasOne(models.roleAssigns, { foreignKey: 'userId', sourceKey: 'id' });
+    users.hasMany(models.packages, { foreignKey: 'senderUserId', sourceKey: 'id' });
+    users.hasMany(models.packages, { foreignKey: 'rcvrUserId', sourceKey: 'id' });
+    users.hasOne(models.receipts, { foreignKey: 'userId', sourceKey: 'id' });
+    users.hasOne(models.offices, { foreignKey: 'userId', sourceKey: 'id' });
   };
   return users;
 };
