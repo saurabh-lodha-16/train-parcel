@@ -13,12 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     email: {
-      unique: true,
+      unique:true,
       allowNull: true,
       type: DataTypes.STRING
     },
     //change its type
     mobileNo: {
+      unique:true,
       allowNull: true,
       type: DataTypes.BIGINT
     },

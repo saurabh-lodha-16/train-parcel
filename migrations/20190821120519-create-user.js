@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
-        unique: true,
+        unique:true,
         allowNull: true,
         type: Sequelize.STRING
       },
       //change its type
       mobileNo: {
-        unique: true,
+        unique:true,
         allowNull: true,
         type: Sequelize.BIGINT
       },
