@@ -3,9 +3,10 @@ import db from '../../models/index.js';
 const Train = db.trains;
 export function addTrain(req, res) {
   Train.create({
-    name: req.body.name
+    name: req.body.name,
+    trainNo:req.body.trainNo
   }).then(() => {
-    console.log('Order created');
+    console.log('Train Added');
     res.redirect('train');
   });
 }

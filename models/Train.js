@@ -7,6 +7,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
+    trainNo:{
+      allowNull:false,
+      type:DataTypes.INTEGER
+    },
     name: {
       type:DataTypes.STRING
     }, 

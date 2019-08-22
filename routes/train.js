@@ -15,9 +15,7 @@ router.get('/add', function(req, res, next) {
   res.render('train/add');
 });
 
-router.post('/add', function(req, res, next) {
-  addTrain(req, res);
-});
+router.post('/add', addTrain);
 
 router.get('/edit', editTrain);
 router.post('/edit', updateTrain);
