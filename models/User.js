@@ -12,20 +12,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
      },
      email: { 
-      allowNull: false,
        type: DataTypes.STRING
      },
      //change its type
      mobileNo: { 
-      allowNull: false,
-       type: DataTypes.STRING
+       type: DataTypes.BIGINT
      },
      password: { 
-      allowNull: false,
        type: DataTypes.STRING
      }, 
      key:{
-      allowNull: false,
        type:DataTypes.UUID
      },
   }, {});

@@ -34,6 +34,14 @@ module.exports = {
          onDelete: "set null"
         }
       },
+      recv_name:{
+        type:Sequelize.STRING,
+        allowNull:false
+      },
+      recv_details:{
+        type:Sequelize.STRING,
+        allowNull:false
+      },
       train_id:{
         type:Sequelize.UUID,
         allowNull: true,
