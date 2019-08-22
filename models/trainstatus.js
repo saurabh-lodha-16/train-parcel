@@ -17,6 +17,10 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: "set null"
       }
     },
+    date:{
+      type:DataTypes.DATEONLY,
+      allowNull:false,
+    },
     sCity: {
       type: DataTypes.UUID,
       allowNull: false,

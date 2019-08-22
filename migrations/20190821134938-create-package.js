@@ -8,7 +8,23 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
+      serial_no:{
+        allowNull:false,
+        unique:true,
+        type:Sequelize.INTEGER,
+        autoIncrement: true,
+      },
       user_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references:{
+         model: 'users',
+         key: 'id',
+         onUpdate: "cascade",
+         onDelete: "set null"
+        }
+      },
+      recv_id:{
         type: Sequelize.UUID,
         allowNull: false,
         references:{

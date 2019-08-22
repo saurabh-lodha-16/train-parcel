@@ -7,7 +7,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
+    serial_no:{
+      allowNull:false,
+      unique:true,
+      type:DataTypes.INTEGER,
+      autoIncrement: true,
+    },
     user_id: {
+      type: DataTypes.UUID,
+      allowNull: false,
+      references:{
+       model: 'users',
+       key: 'id',
+       onUpdate: "cascade",
+       onDelete: "set null"
+      }
+    },
+    recv_id:{
       type: DataTypes.UUID,
       allowNull: false,
       references:{

@@ -18,6 +18,10 @@ module.exports = {
           onDelete: "set null"
         }
       },
+      date:{
+        type:Sequelize.DATEONLY,
+        allowNull:false,
+      },
       sCity: {
         type: Sequelize.UUID,
         allowNull: false,

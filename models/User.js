@@ -32,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
   users.associate = function(models) {
     // associations can be defined here
    users.hasOne(models.roleAssigns);
-   users.hasOne(models.packages);
+   users.hasMany(models.packages);
    users.hasOne(models.receipts);
   };
   return users;
