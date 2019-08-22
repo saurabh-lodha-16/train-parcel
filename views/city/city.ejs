@@ -1,0 +1,45 @@
+<html>
+
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script>
+			$(document).ready(function () {
+				$.get("http://localhost:3000/city/", function (data, status) {
+					console.log(data);
+					for (let city of data) {
+						console.log(city.id);
+						$("#table").append(`<tr> <td>${city.name} </td>
+						<td><a href ="http://localhost:3000/city/edit?_id=${city.id}">Edit</a> </td></tr>`);
+					}
+				})
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<p>
+			<h1>Cities List</h1>
+		</p>
+		<table id="table">
+			<tr>
+				<th>City name</th>
+			</tr>
+
+		</table>
+
+		<br>
+		<br>
+		<a id="btn3" href="http://localhost:3000/city/add">Add city</a>
+
+	</body>
+
+	<style>
+		table,
+		th,
+		td {
+			border: 1px solid black;
+		}
+	</style>
+
+</html>
