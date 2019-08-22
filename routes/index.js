@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-import { loginGet } from '../controllers/login'
-import { loginPost } from '../controllers/login'
-import { registerGet } from '../controllers/register'
-import { registerPost } from '../controllers/register'
+import { loginGet } from '../controllers/auth/login'
+import { loginPost } from '../controllers/auth/login'
+import { registerGet } from '../controllers/auth/register'
+import { registerPost } from '../controllers/auth/register'
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
