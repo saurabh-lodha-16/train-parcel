@@ -8,30 +8,37 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      name: { 
+      name: {
         allowNull: false,
         type: Sequelize.STRING
-       },
-       email: { 
-         type: Sequelize.STRING
-       },
-        //change its type
-       mobileNo: {
-         type: Sequelize.BIGINT
-       },
-       password: { 
-         type: Sequelize.STRING
-       }, 
-       key:{
-         type:Sequelize.UUID
-       },
+      },
+      email: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      //change its type
+      mobileNo: {
+        allowNull: true,
+        type: Sequelize.BIGINT
+      },
+      password: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      key: {
+        allowNull: true,
+        type: Sequelize.UUID,
+        defaultValue:Sequelize.UUIDV4
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
+     
+
       }
     });
   },

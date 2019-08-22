@@ -7,29 +7,34 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    name: { 
+    name: {
       allowNull: false,
       type: DataTypes.STRING
-     },
-     email: { 
-       type: DataTypes.STRING
-     },
-     //change its type
-     mobileNo: { 
-       type: DataTypes.BIGINT
-     },
-     password: { 
-       type: DataTypes.STRING
-     }, 
-     key:{
-       type:DataTypes.UUID
-     },
+    },
+    email: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    //change its type
+    mobileNo: {
+      allowNull: true,
+      type: DataTypes.BIGINT
+    },
+    password: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    key: {
+      allowNull: true,
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4
+    },
   }, {});
-  users.associate = function(models) {
+  users.associate = function (models) {
     // associations can be defined here
-   users.hasOne(models.roleAssigns);
-   users.hasMany(models.packages);
-   users.hasOne(models.receipts);
+    users.hasOne(models.roleAssigns);
+    users.hasMany(models.packages);
+    users.hasOne(models.receipts);
   };
   return users;
 };
