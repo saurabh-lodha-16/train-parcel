@@ -16,15 +16,12 @@ export  function loginPost(req, res){
         if (user) {
             if (user.password == pwd) {
                 req.session.user = user;
-                res.write('Hello ' + user.name);
-                res.end();
+                res.render('dashboard')
             } else {
-                res.write('You have entered a wrong password!');
-                res.end();
+                res.render('auth/login', {alert: 'danger', alertMsg: 'You have entered wrong credentials!'})
             }
         } else {
-            res.write('User with ' + email + ' doesn\'t exist');
-            res.end();
+            res.render('auth/login', {alert: 'danger', alertMsg: 'You have entered wrong credentials!'})
         }
     });
     // res.render('login');
