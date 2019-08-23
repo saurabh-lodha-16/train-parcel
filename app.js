@@ -12,7 +12,7 @@ const trainsRouter = require('./routes/train');
 const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
-const unloadRouter = require('./routes/unload');
+// const unloadRouter = require('./routes/unload');
 const trainStatusRouter = require('./routes/trainStatus');
 
 import models from './models';
@@ -44,7 +44,7 @@ app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
 app.use('/role', roleRouter);
-app.use('/unload', unloadRouter);
+// app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
 
 // catch 404 and forward to error handler

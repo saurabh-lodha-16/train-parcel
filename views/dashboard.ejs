@@ -1,1 +1,91 @@
-<% include ./common/alert %>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+    <% include ./common/head %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/dashboard.css">
+</head>
+
+
+
+<body class="container-fluid">
+    <header>
+        <% include ./common/navbar %>
+    </header>
+
+    <% include ./common/alert %>
+
+    <div class="container">
+
+        <div class="row tables-div">
+            <div class="col-md">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Pending</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% var i=0; for(id in pendingPackages){ %>
+                        <tr>
+                            <td><%= i %></td>
+                            <td><%= pendingPackages[id].serial_no %></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-md">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">In-Transit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% i=0; for(id in inTransitPackages){ %>
+                        <tr>
+                            <td><%= i %></td>
+                            <td><%= inTransitPackages[id].serial_no %></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+            </div>
+            <div class="col-md">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% i=0; for(id in completedPackages){ %>
+                        <tr>
+                            <td><%= i %></td>
+                            <td><%= completedPackages[id].serial_no %></td>
+                        </tr>
+                        <% } %>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <footer>
+            <% include ./common/footer %>
+        </footer>
+
+    </div>
+
+
+</body>
+
+</html>
