@@ -29,8 +29,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     key: {
       allowNull: true,
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4
+      type: DataTypes.STRING,
+    },
+    eKey: {
+      allowNull: true,
+      type: DataTypes.STRING,
     },
   }, {});
   users.associate = function (models) {

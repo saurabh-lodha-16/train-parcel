@@ -29,8 +29,11 @@ module.exports = {
       },
       key: {
         allowNull: true,
-        type: Sequelize.UUID,
-        defaultValue:Sequelize.UUIDV4
+        type: Sequelize.STRING,
+      },
+      eKey: {
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
