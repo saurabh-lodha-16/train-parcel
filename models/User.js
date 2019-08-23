@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4
     },
     name: {
-      unique: true,
       allowNull: false,
       type: DataTypes.STRING
     },
@@ -20,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     //change its type
     mobileNo: {
       unique: true,
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.BIGINT
     },
     password: {
