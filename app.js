@@ -5,11 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
 const cityRouter = require('./routes/city');
 const trainsRouter = require('./routes/train');
 const statusRouter = require('./routes/status');
+const loginRouter = require('./routes/users');
+const roleRouter = require('./routes/role');
+const unloadRouter = require('./routes/unload');
 
 import models from './models';
 const app = express();
@@ -39,6 +42,8 @@ app.use('/users', usersRouter);
 app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
+app.use('/role', roleRouter);
+app.use('/unload', unloadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
