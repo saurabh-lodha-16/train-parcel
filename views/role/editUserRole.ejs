@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Edit role
+    </title>
+</head>
+
+<body>
+    <h2>Select Role</h2>
+    <br />
+    <form action='editUserRole/status' method='post'>
+        <input type="hidden" name = "user_id" value=<%=user_id%>> 
+        <select name="role_id">
+            <% for(role of roleArray) { %>
+            <option value=<%= `${role.id}` %>><%= `${role.name}` %></option>
+            <% } %>
+        </select>
+        <br />
+        <br />
+        <button type="submit" value="Submit"> Confirm role </button>
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 5px;
+      text-align: left;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>Existing users in System</h2>
+  <table>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>role</th>
+      <th>Access Level</th>
+    </tr>
+    <form action='view_users/editUserRole' method='post'>
+      <% for (user of usersArray) { %>
+      <tr>
+        <td> <%= `${user.id}` %> </td>
+        <td> <%= `${user.name}` %> </td>
+        <td> <%= `${user.roleAssign.role.name}` %></td>
+        <td> <%= `${user.roleAssign.role.level}` %></td>
+        <td>
+          <button type="submit" value=<%= user.id %> name="user_id">
+            Edit role
+          </button>
+        </td>
+      </tr>
+      <% } %>
+    </form>
+  </table>
+  <br />
+</body>
+</html>
