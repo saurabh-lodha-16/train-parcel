@@ -12,8 +12,15 @@ const trainsRouter = require('./routes/train');
 const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
-const unloadRouter = require('./routes/unload');
+<<<<<<< Updated upstream
 const trainStatusRouter = require('./routes/trainStatus');
+=======
+const unloadRouter = require('./routes/unload');
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+const packageRouter = require('./routes/package');
 
 import models from './models';
 const app = express();
@@ -44,8 +51,15 @@ app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
 app.use('/role', roleRouter);
-app.use('/unload', unloadRouter);
+<<<<<<< Updated upstream
 app.use('/trainStatus', trainStatusRouter);
+=======
+app.use('/unload', unloadRouter);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
+app.use('/package',packageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
