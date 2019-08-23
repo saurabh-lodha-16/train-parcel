@@ -5,8 +5,7 @@
     "database": "trainParcel",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "operatorsAliases": false,
-    "port":5433
+    "operatorsAliases": false
   },
   "test": {
     "username": "root",
