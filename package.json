@@ -13,11 +13,13 @@
     "ejs": "~2.6.1",
     "express": "~4.16.1",
     "form-data": "^2.5.0",
+    "express-session": "^1.16.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "node-fetch": "^2.6.0",
     "pg": "^7.12.0",
     "pg-hstore": "^2.3.3",
+    "request": "^2.88.0",
     "sequelize": "^5.13.0",
     "sequelize-cli": "^5.5.0",
     "twilio": "^3.33.4"
