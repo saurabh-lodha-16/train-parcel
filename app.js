@@ -13,7 +13,6 @@ const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
 const trainStatusRouter = require('./routes/trainStatus');
-const unloadRouter = require('./routes/unload');
 const packageRouter = require('./routes/package');
 
 import models from './models';
@@ -45,18 +44,7 @@ app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
 app.use('/role', roleRouter);
-<<<<<<< HEAD
-// app.use('/unload', unloadRouter);
-=======
-<<<<<<< Updated upstream
->>>>>>> af3b3452208aac13f80e332aeefcea53da1dc4b8
 app.use('/trainStatus', trainStatusRouter);
-=======
-app.use('/unload', unloadRouter);
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 app.use('/package',packageRouter);
 
 // catch 404 and forward to error handler
