@@ -16,7 +16,7 @@ export  function loginPost(req, res){
         if (user) {
             if (user.password == pwd) {
                 req.session.user = user;
-                res.render('dashboard')
+                res.redirect('dashboard/')
             } else {
                 res.render('auth/login', {alert: 'danger', alertMsg: 'You have entered wrong credentials!'})
             }

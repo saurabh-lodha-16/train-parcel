@@ -17,3 +17,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   return statuses;
 };
+
+// Status types:
+// PENDING
+// IN-TRANSIT
+// COMPLETED
