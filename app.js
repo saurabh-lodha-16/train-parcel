@@ -30,6 +30,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+process.env.TZ = 'Asia/Kolkata';
 
 app.use(session({
   key: 'user_sid',
@@ -60,6 +61,9 @@ app.use(function(req, res, next) {
 //ye async karna hai
 models.sequelize.sync();
 // error handler
+import { addSomeShit } from './controllers/trainStatus/fillStations';
+addSomeShit();
+
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
