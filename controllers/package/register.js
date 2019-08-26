@@ -63,7 +63,7 @@ async function createPackage(senderId, receiverId, statusId, weightPackage, sour
   }
 }
 
-exports.renderRegistration = async function (req, res) {
+export async function renderRegistration(req, res) {
   try {
     let cityArray = await retrieveCityNames();
     res.render('package/registerPackage.ejs', {
@@ -77,7 +77,7 @@ exports.renderRegistration = async function (req, res) {
   }
 };
 
-exports.registerPackage = async function (req, res) {
+export async function registerPackage(req, res) {
   try {
     let senderId = '7c74ad54-9e21-4137-8a90-d20918106281';
     let statusInstance = await getStatus('pending');
