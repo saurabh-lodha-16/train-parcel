@@ -12,6 +12,14 @@ const trainsRouter = require('./routes/train');
 const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+//const unloadRouter = require('./routes/unload');
+>>>>>>> Stashed changes
+=======
+//const unloadRouter = require('./routes/unload');
+>>>>>>> Stashed changes
 const trainStatusRouter = require('./routes/trainStatus');
 const packageRouter = require('./routes/package');
 
@@ -44,6 +52,7 @@ app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
 app.use('/role', roleRouter);
+//app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
 app.use('/package',packageRouter);
 
