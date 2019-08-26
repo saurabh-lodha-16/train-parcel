@@ -1,0 +1,47 @@
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$.get("http://localhost:3000/office/all", function (data, status) {
+				console.log(data);
+				for (let office of data) {
+					console.log(office.id);
+          $("#table").append(`<tr> <td>${office.userId} </td>
+            <td>${office.cityId} </td>
+						<td><a href ="http://localhost:3000/office/edit?_id=${office.id}">Edit</a> </td></tr>`);
+				}
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<% include ../common/alert %>
+	<p>
+		<h1>Cities List</h1>
+	</p>
+	<table id="table">
+		<tr>
+      <th>User Id</th>
+			<th>City Id</th>
+		</tr>
+
+	</table>
+
+	<br>
+	<br>
+	<a id="btn3" href="http://localhost:3000/office/add">Add city</a>
+
+</body>
+
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+	}
+</style>
+
+</html>

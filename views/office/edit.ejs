@@ -5,19 +5,22 @@
 
 <body>
   <% include ../common/alert %>
-  <form method="post" action="http://localhost:3000/city/add">
+  <form method="post" action="http://localhost:3000/office/edit">
     <div>
-      <label for="name">City Name:</label>
-      <input type="text" name="name">
+      <label for="name">User Id:</label>
+      <input type="text" name="name"  readonly value=<%= userId %>>
     </div>
     <div>
-      <button type="submit">Add city</button>
+      <label for="name">City Id:</label>
+      <input type="text" name="id" value=<%= cityId %>>
+    </div>
+    <div>
+      <button type="submit">Update details</button>
     </div>
   </form>
 </body>
 <style>
   form {
-    /* Just to center the form on the page */
     margin: 0 auto;
     width: 400px;
     /* To see the outline of the form */
