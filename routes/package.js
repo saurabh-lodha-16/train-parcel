@@ -1,5 +1,4 @@
-import {renderRegistration, registerPackage} 
-from '../controllers/packageController/packageController';
+import {renderRegistration, registerPackage} from '../controllers/package/register';
 import express from 'express';
 let router = express.Router();
 router.get('/', renderRegistration );
