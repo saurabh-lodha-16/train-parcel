@@ -32,8 +32,13 @@
       <tr>
         <td> <%= `${user.id}` %> </td>
         <td> <%= `${user.name}` %> </td>
+        <% if (user.roleAssign) { %>
         <td> <%= `${user.roleAssign.role.name}` %></td>
         <td> <%= `${user.roleAssign.role.level}` %></td>
+        <% } else { %>
+        <td>  User </td>
+        <td>  10 </td>
+        <% } %>
         <td>
           <button type="submit" value=<%= user.id %> name="user_id">
             Edit role
