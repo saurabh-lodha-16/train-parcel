@@ -2,48 +2,55 @@
 <html>
 
 <head>
+    <% include ../common/head %>
+    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
     <title>
         Add role
     </title>
 </head>
 
-<body>
-    <h2> Add package details </h2>
-    <br />
-    <form action='/package/register' method='post'>
-        weight : <br />
-        <input type="text" name="weight"><br />
+<body class="container">
+
+    <% include ../common/alert %>
+    <main>
+        <h2> Add package details </h2>
         <br />
-        source city : <br />
-        <select name="source_city_id">
-            <% for(let city of citiesArray) { %>
-            <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-            <% } %>
-        </select>
-        <br />
-        <br />
-        destination city: <br />
-        <select name="destination_city_id">
-            <% for(let city of citiesArray) { %>
-            <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-            <% } %>
-        </select>
-        <br />
-        <br />
-        Receiver Name : <br />
-        <input type="text"name="name">
-        <br />
-        <br />
-        Receiver email : <br />
-        <input type="text"name="email">
-        <br />
-        <br />
-        Receiver phone number : <br />
-        <input type="text" name="phoneNo">
-        <br />
-        <br />
-        <button type="submit" value="Submit"> Register Package </button>
-    </form>
+        <form action='/package/register' method='post'>
+            weight : <br />
+            <input type="text" name="weight"><br />
+            <br />
+            source city : <br />
+            <select name="source_city_id">
+                <% for(let city of citiesArray) { %>
+                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+                <% } %>
+            </select>
+            <br />
+            <br />
+            destination city: <br />
+            <select name="destination_city_id">
+                <% for(let city of citiesArray) { %>
+                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+                <% } %>
+            </select>
+            <br />
+            <br />
+            Receiver Name : <br />
+            <input type="text" name="name">
+            <br />
+            <br />
+            Receiver email : <br />
+            <input type="text" name="email">
+            <br />
+            <br />
+            Receiver phone number : <br />
+            <input type="text" name="phoneNo">
+            <br />
+            <br />
+            <button type="submit" value="Submit"> Register Package </button>
+        </form>
+    </main>
+
 </body>
 
 </html>

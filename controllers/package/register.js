@@ -30,7 +30,7 @@ async function createUser(name, email, phoneNo) {
   try {
     let createdUser;
     let fetchedUser = await user.findOne({
-      mobileNo: phoneNo
+      where: { mobileNo: phoneNo }
     });
     if (!fetchedUser) {
       createdUser = await user.create({
@@ -72,15 +72,18 @@ export async function renderRegistration(req, res) {
   } catch (err) {
     res.render('package/registerPackage.ejs', {
       alertMsg: err,
-      alert: "Danger"
+      alert: "danger",
+      citiesArray: cityArray
     });
   }
 };
 
 export async function registerPackage(req, res) {
+  let cityArray = await retrieveCityNames();
   try {
-    let senderId = '7c74ad54-9e21-4137-8a90-d20918106281';
-    let statusInstance = await getStatus('pending');
+    let cityArray = await retrieveCityNames();
+    let senderId = 'bafd904a-8425-4e0d-8e95-c6ea531d76c8';
+    let statusInstance = await getStatus('PENDING');
     let statusId = statusInstance.id;
     let createdUser = await createUser(req.body.name, req.body.email, req.body.phoneNo);
     let receiverId = createdUser.id;
@@ -91,7 +94,8 @@ export async function registerPackage(req, res) {
   } catch (err) {
     res.render('package/registerPackage.ejs', {
       alertMsg: err,
-      alert: "Danger"
+      alert: "danger",
+      citiesArray: cityArray
     });
   }
 };
