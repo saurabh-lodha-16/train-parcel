@@ -6,6 +6,6 @@ import { fillStations, addSomeShit, getPackageStatus } from '../controllers/trai
 router.get('/', getStations);
 router.get('/fillStations', fillStations);
 router.get('/addSomeShit', addSomeShit);
-router.post('/getPackageStatus', getPackageStatus);
+// router.post('/getPackageStatus', getPackageStatus);
 
 module.exports = router;
