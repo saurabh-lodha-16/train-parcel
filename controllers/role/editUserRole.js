@@ -3,7 +3,7 @@ let users = db['users'];
 let roles = db['roles'];
 let roleAssigns = db['roleAssigns'];
 
-exports.viewUsers = async function(req, res) {
+export async function viewUsers(req, res) {
   let userArray = await users.findAll({
     include: [{
       model : roleAssigns,
@@ -17,7 +17,7 @@ exports.viewUsers = async function(req, res) {
   });
 };
 
-exports.editUserRole = async function(req, res) {
+export async function editUserRole(req, res) {
   let roleArray = await roles.findAll({
     attributes : ['id', 'name', 'level']
   });
@@ -27,7 +27,7 @@ exports.editUserRole = async function(req, res) {
   });
 };
 
-exports.editUserRoleResult = async function(req, res) {
+export async function editUserRoleResult(req, res) {
   await roleAssigns.update (
     {roleId : req.body.role_id},
     {where : {userId : req.body.user_id}}

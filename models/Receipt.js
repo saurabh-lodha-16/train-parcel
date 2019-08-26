@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.FLOAT,
       allowNull: false,
     },  
+    isActive:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:true
+    } 
   }, {});
   receipts.associate = function(models) {
     receipts.belongsTo(models.users, {targetKey:'id'});

@@ -12,10 +12,6 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: true,
       },
-      date:{
-        type:Sequelize.DATEONLY,
-        allowNull:false,
-      },
       sCity: {
         type: Sequelize.UUID,
         allowNull: false,
@@ -25,11 +21,11 @@ module.exports = {
         allowNull: false,
       },
       sTime: {
-        type: Sequelize.TIME,
+        type: Sequelize.DATE,
         allowNull: false
       },
       dTime: {
-        type: Sequelize.TIME,
+        type: Sequelize.DATE,
         allowNull: false
       },
       createdAt: {

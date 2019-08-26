@@ -8,22 +8,22 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      serial_no:{
-        allowNull:false,
-        unique:true,
-        type:Sequelize.INTEGER,
+      serial_no: {
+        allowNull: false,
+        unique: true,
+        type: Sequelize.INTEGER,
         autoIncrement: true,
       },
       senderUserId: {
         type: Sequelize.UUID,
         allowNull: false,
       },
-      rcvrUserId:{
+      rcvrUserId: {
         type: Sequelize.UUID,
         allowNull: false,
       },
-      trainId:{
-        type:Sequelize.UUID,
+      trainId: {
+        type: Sequelize.UUID,
         allowNull: true,
       },
       statusId: {
@@ -31,16 +31,20 @@ module.exports = {
         allowNull: false,
       },
       weight: {
-        type:Sequelize.FLOAT
-      }, 
-      sCity:{
+        type: Sequelize.FLOAT
+      },
+      sCity: {
         type: Sequelize.UUID,
         allowNull: false,
-    },
-      dCity:{
+      },
+      dCity: {
         type: Sequelize.UUID,
         allowNull: false,
-    },
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

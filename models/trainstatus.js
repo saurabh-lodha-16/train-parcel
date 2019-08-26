@@ -11,10 +11,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: true,
     },
-    date:{
-      type:DataTypes.DATEONLY,
-      allowNull:false,
-    },
     sCity: {
       type: DataTypes.UUID,
       allowNull: false,
@@ -24,13 +20,17 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
     sTime: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: false
     },
     dTime: {
-      type: DataTypes.TIME,
+      type: DataTypes.DATE,
       allowNull: false
     },
+    isRunning:{
+      type: DataTypes.BOOLEAN,
+      defaultValue:true 
+     },
   }, {});
   trainStatuses.associate = function (models) {
     // associations can be defined here

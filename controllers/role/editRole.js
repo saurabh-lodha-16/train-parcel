@@ -1,7 +1,7 @@
 import db from '../../models';
 let roles = db['roles'];
 
-exports.renderRolePage = async function(req, res) {
+export async function renderRolePage(req, res) {
   let roleArray = await roles.findAll({
     attributes : ['id', 'name', 'level']
   });
@@ -10,11 +10,11 @@ exports.renderRolePage = async function(req, res) {
   });
 };
 
-exports.addRole = function(req, res) {
+export function addRole(req, res) {
   res.render('role/addRole.ejs');
 };
 
-exports.addRoleResult = async function(req, res) {
+export async function addRoleResult(req, res) {
   let createdRole = await roles.create({
     name : req.body.name,
     level : req.body.level
@@ -22,13 +22,13 @@ exports.addRoleResult = async function(req, res) {
   res.redirect('/role');
 };
 
-exports.editRole = function(req, res) {
+export function editRole(req, res) {
   res.render('role/editRole.ejs',{
     role_id : req.body.role_id
   });
 };
 
-exports.editRoleResult =async function(req, res) {
+export async function editRoleResult(req, res) {
   await roles.update (
     {name : req.body.name, level : req.body.level},
     {where : {id : req.body.user_id}}

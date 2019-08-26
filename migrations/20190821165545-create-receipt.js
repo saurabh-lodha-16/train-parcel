@@ -12,14 +12,18 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
       },
-      package_id:{
-        type:Sequelize.UUID,
+      package_id: {
+        type: Sequelize.UUID,
         allowNull: false,
       },
-      totalAmount:{
-        type:Sequelize.FLOAT,
+      totalAmount: {
+        type: Sequelize.FLOAT,
         allowNull: false,
-      },  
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
