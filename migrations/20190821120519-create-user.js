@@ -13,13 +13,13 @@ module.exports = {
         type: Sequelize.STRING
       },
       email: {
-        unique:true,
+        unique: true,
         allowNull: true,
         type: Sequelize.STRING
       },
       //change its type
       mobileNo: {
-        unique:true,
+        unique: true,
         allowNull: true,
         type: Sequelize.BIGINT
       },
@@ -35,6 +35,10 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING,
       },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -42,7 +46,7 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-     
+
 
       }
     });

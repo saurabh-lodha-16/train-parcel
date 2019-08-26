@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       type:DataTypes.UUID,
       allowNull: false,
     },
+    isActive:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:true
+    } 
   }, {});
   roleAssigns.associate = function(models) {
     // associations can be defined here

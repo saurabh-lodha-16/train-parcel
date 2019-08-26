@@ -13,7 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     },
     name: {
       type:DataTypes.STRING
-    }, 
+    },
+    isActive:{
+      type:DataTypes.BOOLEAN,
+      defaultValue:true
+    } 
   }, {});
   trains.associate = function(models) {
     // associations can be defined here

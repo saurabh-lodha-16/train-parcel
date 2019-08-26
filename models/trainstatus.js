@@ -27,6 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.DATE,
       allowNull: false
     },
+    isRunning:{
+      type: DataTypes.BOOLEAN,
+      defaultValue:true 
+     },
   }, {});
   trainStatuses.associate = function (models) {
     // associations can be defined here

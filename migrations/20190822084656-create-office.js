@@ -16,6 +16,10 @@ module.exports = {
         type:Sequelize.UUID,
         allowNull:false,
       },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

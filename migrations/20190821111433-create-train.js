@@ -8,12 +8,16 @@ module.exports = {
         type: Sequelize.UUID,
         defaultValue: Sequelize.UUIDV4
       },
-      trainNo:{
-        type:Sequelize.INTEGER,
-        allowNull:false
+      trainNo: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       name: {
         type: Sequelize.STRING,
+      },
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: true
       },
       createdAt: {
         allowNull: false,

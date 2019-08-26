@@ -7,19 +7,23 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    userId:{
+    userId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    cityId:{
-      type:DataTypes.UUID,
-      allowNull:false,
+    cityId: {
+      type: DataTypes.UUID,
+      allowNull: false,
     },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {});
-  offices.associate = function(models) {
+  offices.associate = function (models) {
     // associations can be defined here
-    offices.belongsTo(models.users, {targetKey:'id'});
-    offices.belongsTo(models.cities, {targetKey:'id'});
+    offices.belongsTo(models.users, { targetKey: 'id' });
+    offices.belongsTo(models.cities, { targetKey: 'id' });
   };
   return offices;
 };

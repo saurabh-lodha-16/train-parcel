@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4
     },
     name: {
-      type:DataTypes.STRING
+      type:DataTypes.STRING,
+      unique:true
     }
   }, {});
   cities.associate = function(models) {
