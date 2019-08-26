@@ -90,6 +90,10 @@ function sendWAOTP(name, phone, otp) {
     //         console.log('=======================================', response.json())
     //     }) // .text(), etc.
     //     .catch((e) => { console.log('================errorWAOTP===================', e) });
+
+
+
+    //TODO: to be shifted to external file
     const accountSid = 'AC4eecddeed388af0beb36880bd18938f7';
     const authToken = '7f5b9c3fff5b2a8fec1eda34c705ef4f';
     const client = require('twilio')(accountSid, authToken);
