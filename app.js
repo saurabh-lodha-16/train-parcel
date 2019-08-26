@@ -12,14 +12,7 @@ const trainsRouter = require('./routes/train');
 const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
 //const unloadRouter = require('./routes/unload');
->>>>>>> Stashed changes
-=======
-//const unloadRouter = require('./routes/unload');
->>>>>>> Stashed changes
 const trainStatusRouter = require('./routes/trainStatus');
 const packageRouter = require('./routes/package');
 
