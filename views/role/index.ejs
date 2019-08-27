@@ -23,7 +23,7 @@
 <body class="container">
   <% include ../common/alert %>
   <h2>Existing roles in System</h2>
-  <table>
+  <table class="table">
     <tr>
       <th>id</th>
       <th>name</th>
@@ -36,7 +36,7 @@
         <td> <%= `${role.name}` %> </td>
         <td> <%= `${role.level}` %> </td>
         <td>
-          <button type="submit" value=<%= role.id %> name="role_id">
+          <button class ="btn btn-primary" type="submit" value=<%= role.id %> name="role_id">
             Edit role
           </button>
         </td>
@@ -47,11 +47,13 @@
   <br />
   <br />
   <form action='add_role/' method='get'>
-    <button type="submit" value="Submit">Add role</button>
+    <button class ="btn btn-primary" type="submit" value="Submit">Add role</button>
   </form>
   <br />
   <form action='view_users/' method='get'>
-    <button type="submit" value="Submit">User role management</button>
+    <button class ="btn btn-primary" type="submit" value="Submit">User role management</button>
+
+  
   </form>
   <br />
 </body>

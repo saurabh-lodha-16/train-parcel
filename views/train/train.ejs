@@ -18,9 +18,6 @@
 
 	<body>
 			<% include ../common/alert %>
-		<p>
-			<h1>Trains List</h1>
-		</p>
 		<table id="table">
 			<tr>
 				<th>Train name</th>
@@ -31,7 +28,10 @@
 
 		<br>
 		<br>
-		<a id="btn3" href="http://localhost:3000/train/add">Add Train</a>
+		<form action="http://localhost:3000/train/add" method='get'>
+			<button class ="btn btn-primary" type="submit" value="Submit">Add Train</button>
+		</form>
+	
 
 	</body>
 

@@ -23,7 +23,7 @@
 <body class="container">
   <% include ../common/alert %>
   <h2>Existing users in System</h2>
-  <table>
+  <table class="table">
     <tr>
       <th>id</th>
       <th>name</th>
@@ -43,7 +43,7 @@
         <td>  10 </td>
         <% } %>
         <td>
-          <button type="submit" value=<%= user.id %> name="user_id">
+          <button class ="btn btn-primary" type="submit" value=<%= user.id %> name="user_id">
             Edit role
           </button>
         </td>

@@ -19,10 +19,7 @@
 
 <body>
 	<% include ../common/alert %>
-	<p>
-		<h1>Office List</h1>
-	</p>
-	<table id="table">
+	<table id="table" class="table">
 		<tr>
       <th>User Id</th>
 			<th>City Id</th>
@@ -32,7 +29,9 @@
 
 	<br>
 	<br>
-	<a id="btn3" href="http://localhost:3000/office/add">Update User</a>
+	<form action="http://localhost:3000/office/add" method='get'>
+    <button class ="btn btn-primary" type="submit" value="Submit">Update User</button>
+  </form>
 
 </body>
 
