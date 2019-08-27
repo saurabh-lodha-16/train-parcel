@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+
+    <% include ./common/head %>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/dashboard.css">
+</head>
+
+
+
+<body>
+    <header>
+
+        <% include ./common/navbar %>
+    </header>
+
+    <% include ./common/alert %>
+
+    <div class="wrapper">
+        <% include ./common/sidebar %>
+
+        <div id="content">
+            <%- include(content) %>
+        </div>
+
+
+
+    </div>
+    <footer>
+        <% include ./common/footer %>
+    </footer>
+</body>
+
+</html>

@@ -2,29 +2,25 @@ import models from '../../models';
 import db from '../../models/index.js';
 var moment = require('moment');
 const Op = db.Sequelize.Op;
-import { getCurrCity } from './fillStations';
+import { getCurrCity } from '../trainStatus/fillStations';
 
 //serialNo se 
-export async function getPackageStatus(req, res) {
-    const serial_no = req.body.serial_no;
-    let temp1 = await models.statuses.findOne({ where: { type: 'PENDING' } });
-    let pendingId = temp1.dataValues.id;
+export async function getPackageStatus(serial_no) {
     let temp2 = await models.statuses.findOne({ where: { type: 'COMPLETED' } });
     let completedId = temp2.dataValues.id;
-    var packageDetails = await models.packages.findOne({ where: { serial_no: serial_no } });
-    var statusId = packageDetails.dataValues.statusId;
-    var trainId = packageDetails.dataValues.trainId;
-    var sCity = packageDetails.dataValues.sCity;
-    var dCity = packageDetails.dataValues.dCity;
+    let packageDetails = await models.packages.findOne({ where: { serial_no: serial_no } });
+    let statusId = packageDetails.dataValues.statusId;
+    let trainId = packageDetails.dataValues.trainId;
+    let sCity = packageDetails.dataValues.sCity;
+    let dCity = packageDetails.dataValues.dCity;
 
     if (statusId == completedId) {
         console.log('Your package has reached')
     }
     else {
         //show trail
-        var x = moment().format();
+        let x = moment().format();
         x = x.split('T');
-        var time = x[0] + " " + x[1];
         const answer = await models.trainStatuses.findAll({ where: { trainId: trainId, isRunning: true } });
         const result = [];
         for (let i = 0; i < answer.length; i++) {
@@ -54,6 +50,6 @@ export async function getPackageStatus(req, res) {
         }
         const final_answer = result.slice(sIndex, dIndex);
         final_answer[liveIndex].isLive = true;
-        res.send(final_answer);
+        return final_answer
     }
 }

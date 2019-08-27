@@ -5,5 +5,5 @@ let router = express.Router();
 
 router.get('/', renderRegistration);
 router.post('/register', registerPackage);
-router.get('/track', trackGet)
+router.get('/track/:serial_no', trackGet)
 module.exports = router;
