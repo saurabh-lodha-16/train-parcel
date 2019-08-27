@@ -13,10 +13,9 @@ const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
 const officeRouter = require('./routes/office');
-//const unloadRouter = require('./routes/unload');
-
 const trainStatusRouter = require('./routes/trainStatus');
 const packageRouter = require('./routes/package');
+const updateProfileRouter = require('./routes/profile')
 
 
 import models from './models';
@@ -53,6 +52,7 @@ app.use('/role', roleRouter);
 app.use('/trainStatus', trainStatusRouter);
 app.use('/package',packageRouter);
 app.use('/office',officeRouter);
+app.use('/updateProfile',updateProfileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

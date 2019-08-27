@@ -10,7 +10,7 @@
 					console.log(office.id);
           $("#table").append(`<tr> <td>${office.userId} </td>
             <td>${office.cityId} </td>
-						<td><a href ="http://localhost:3000/office/edit?_id=${office.id}">Edit</a> </td></tr>`);
+						</tr>`);
 				}
 			})
 		});
@@ -20,7 +20,7 @@
 <body>
 	<% include ../common/alert %>
 	<p>
-		<h1>Cities List</h1>
+		<h1>Office List</h1>
 	</p>
 	<table id="table">
 		<tr>
@@ -32,7 +32,7 @@
 
 	<br>
 	<br>
-	<a id="btn3" href="http://localhost:3000/office/add">Add city</a>
+	<a id="btn3" href="http://localhost:3000/office/add">Update User</a>
 
 </body>
 

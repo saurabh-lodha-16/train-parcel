@@ -2,6 +2,8 @@
 <html>
 
 <head>
+  <% include ../common/head %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
   <style>
     table,
     th,
@@ -18,7 +20,8 @@
   </style>
 </head>
 
-<body>
+<body class="container">
+  <% include ../common/alert %>
   <h2>Existing roles in System</h2>
   <table>
     <tr>
@@ -26,7 +29,7 @@
       <th>name</th>
       <th>level</th>
     </tr>
-    <form action='edit_role' method='post'>
+    <form action='role/edit_role' method='get'>
       <% for (role of rolesArray) { %>
       <tr>
         <td> <%= `${role.id}` %> </td>

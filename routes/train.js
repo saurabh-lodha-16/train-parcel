@@ -12,7 +12,6 @@ router.get('/train', (req, res, next) => {
 });
 
 
-
 router.get('/add', function(req, res, next) {
   res.render('train/add');
 });

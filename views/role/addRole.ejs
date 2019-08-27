@@ -2,21 +2,28 @@
 <html>
 
 <head>
+  <% include ../common/head %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
   <title>
     Add role
   </title>
 </head>
-<body>
-  <h2> Add a role in system </h2>
-  <br />
-  <form action='add_role/status' method='post'>
-    name : <br />
-    <input type="text" name="name"><br />
+
+<body class="container">
+  <% include ../common/alert %>
+  <main>
+    <h2> Add a role in system </h2>
     <br />
-    level : <br />
-    <input type="text" name="level"><br />
-    <br />
-    <button type="submit" value="Submit"> Add role </button>
-  </form>
+    <form action='add_role' method='post'>
+      name : <br />
+      <input type="text" name="name"><br />
+      <br />
+      level : <br />
+      <input type="text" name="level"><br />
+      <br />
+      <button type="submit" value="Submit"> Add role </button>
+    </form>
+  </main>
 </body>
+
 </html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ../common/head %>
+    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
+    <title>
+        Update Profile.
+    </title>
+</head>
+
+<body class="container">
+    <% include ../common/alert %>
+    <main>
+        <h2> Update profile details. </h2>
+        <br />
+        <form action='updateprofile' method='post'>
+            Name : <br />
+            <input type="text" name="name">
+            <br />
+            <br />
+            email : <br />
+            <input type="email" name="email">
+            <br />
+            <br />
+            phone number : <br />
+            <input type="number" name="phoneNo">
+            <br />
+            <br />
+            <button type="submit" value="Submit"> Update Profile </button>
+        </form>
+    </main>
+</body>
+</html>
