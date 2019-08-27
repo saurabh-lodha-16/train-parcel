@@ -12,7 +12,9 @@ const trainsRouter = require('./routes/train');
 const statusRouter = require('./routes/status');
 const loginRouter = require('./routes/users');
 const roleRouter = require('./routes/role');
+const officeRouter = require('./routes/office');
 //const unloadRouter = require('./routes/unload');
+
 const trainStatusRouter = require('./routes/trainStatus');
 const packageRouter = require('./routes/package');
 
@@ -29,6 +31,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+process.env.TZ = 'Asia/Kolkata';
 
 app.use(session({
   key: 'user_sid',
@@ -49,6 +52,7 @@ app.use('/role', roleRouter);
 //app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
 app.use('/package',packageRouter);
+app.use('/office',officeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -58,6 +62,9 @@ app.use(function(req, res, next) {
 //ye async karna hai
 models.sequelize.sync();
 // error handler
+import { addSomeShit } from './controllers/trainStatus/fillStations';
+addSomeShit();
+
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;

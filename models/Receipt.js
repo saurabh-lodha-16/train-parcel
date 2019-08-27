@@ -11,22 +11,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    packageId:{
-      type:DataTypes.UUID,
+    packageId: {
+      type: DataTypes.UUID,
       allowNull: false,
     },
-    totalAmount:{
-      type:DataTypes.FLOAT,
+    totalAmount: {
+      type: DataTypes.FLOAT,
       allowNull: false,
-    },  
-    isActive:{
-      type:DataTypes.BOOLEAN,
-      defaultValue:true
-    } 
+    },
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {});
-  receipts.associate = function(models) {
-    receipts.belongsTo(models.users, {targetKey:'id'});
-    receipts.belongsTo(models.packages, {targetKey:'id'});
+  receipts.associate = function (models) {
+    receipts.belongsTo(models.users, { targetKey: 'id' });
+    receipts.belongsTo(models.packages, { targetKey: 'id' });
   };
   return receipts;
 };

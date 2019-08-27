@@ -8,6 +8,7 @@
     "nodemon": "nodemon --exec babel-node ./bin/www"
   },
   "dependencies": {
+    "coffeescript": "^2.4.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "ejs": "~2.6.1",
@@ -26,7 +27,8 @@
     "request": "^2.88.0",
     "sequelize": "^5.13.0",
     "sequelize-cli": "^5.5.0",
-    "twilio": "^3.33.4"
+    "twilio": "^3.33.4",
+    "uuid": "^3.3.3"
   },
   "description": "This is the web application which is useful for Parcel Office Managers and Customers. It helps them to book a slot for sending a parcel, checking the live status and doing other management tasks digitally.",
   "main": "bin/www",

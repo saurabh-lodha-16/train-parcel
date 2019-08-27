@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-
+import {fetchAllUsers} from '../controllers/users/FetchAllUsers';
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', fetchAllUsers);
 
 module.exports = router;

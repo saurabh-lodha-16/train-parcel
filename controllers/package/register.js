@@ -64,8 +64,8 @@ async function createPackage(senderId, receiverId, statusId, weightPackage, sour
 }
 
 export async function renderRegistration(req, res) {
+  let cityArray = await retrieveCityNames();
   try {
-    let cityArray = await retrieveCityNames();
     res.render('package/registerPackage.ejs', {
       citiesArray: cityArray
     });
@@ -90,7 +90,11 @@ export async function registerPackage(req, res) {
     let sourceId = req.body.source_city_id;
     let destinationId = req.body.destination_city_id;
     let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
-    res.redirect('../package');
+    res.render('package/registerPackage.ejs', {
+      alertMsg: "Package successfully registered.",
+      alert: "success",
+      citiesArray: cityArray
+    });
   } catch (err) {
     res.render('package/registerPackage.ejs', {
       alertMsg: err,

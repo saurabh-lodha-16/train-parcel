@@ -1,44 +1,44 @@
 <html>
 
-	<head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script>
-			$(document).ready(function () {
-				$.get("http://localhost:3000/status/", function (data, statuse) {
-					console.log(data);
-					for (let status of data) {
-						$("#table").append(`<tr> <td>${status.type} </td>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$.get("http://localhost:3000/status/", function (data, statuse) {
+				console.log(data);
+				for (let status of data) {
+					$("#table").append(`<tr> <td>${status.type} </td>
 						<td><a href ="http://localhost:3000/status/edit?_id=${status.id}">Edit</a> </td></tr>`);
-					}
-				})
-			});
-		</script>
-	</head>
+				}
+			})
+		});
+	</script>
+</head>
 
-	<body>
+<body>
+	<% include ../common/alert %>
+	<p>
+		<h1>Status List</h1>
+	</p>
+	<table id="table">
+		<tr>
+			<th>Status Type</th>
+		</tr>
 
-		<p>
-			<h1>Status List</h1>
-		</p>
-		<table id="table">
-			<tr>
-				<th>Status Type</th>
-			</tr>
+	</table>
 
-		</table>
+	<br>
+	<br>
+	<a id="btn3" href="http://localhost:3000/status/add">Add Status</a>
 
-		<br>
-		<br>
-		<a id="btn3" href="http://localhost:3000/status/add">Add Status</a>
+</body>
 
-	</body>
-
-	<style>
-		table,
-		th,
-		td {
-			border: 1px solid black;
-		}
-	</style>
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+	}
+</style>
 
 </html>

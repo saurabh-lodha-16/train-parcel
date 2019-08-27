@@ -28,6 +28,10 @@ module.exports = {
         type: Sequelize.DATE,
         allowNull: false
       },
+      isRunning:{
+       type: Sequelize.BOOLEAN,
+       defaultValue:true 
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
