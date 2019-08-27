@@ -2,15 +2,18 @@
 <html>
 
 <head>
+    <% include ../common/head %>
+    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
   <title>
     Edit role
   </title>
 </head>
 
-<body>
+<body class="container">
+  <% include ../common/alert %>
   <h2> Edit a role in system </h2>
-  <form action='edit_role/status' method='post'>
-    <input type="hidden" name="user_id" value=<%= role_id %> >
+  <form action='edit_role' method='post'>
+    <input type="hidden" name="role_id" value=<%= role_id %> >
     name : <br />
     <input type="text" name="name"><br />
     <br />

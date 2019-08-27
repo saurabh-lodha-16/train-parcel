@@ -64,8 +64,9 @@ async function createPackage(senderId, receiverId, statusId, weightPackage, sour
 }
 
 export async function renderRegistration(req, res) {
-  let cityArray = await retrieveCityNames();
+  let cityArray;
   try {
+    cityArray = await retrieveCityNames();
     res.render('package/registerPackage.ejs', {
       citiesArray: cityArray
     });
@@ -82,7 +83,7 @@ export async function registerPackage(req, res) {
   let cityArray = await retrieveCityNames();
   try {
     let cityArray = await retrieveCityNames();
-    let senderId = 'bafd904a-8425-4e0d-8e95-c6ea531d76c8';
+    let senderId = 'aa1ac2b3-076a-4e63-be60-3254067c0476';
     let statusInstance = await getStatus('PENDING');
     let statusId = statusInstance.id;
     let createdUser = await createUser(req.body.name, req.body.email, req.body.phoneNo);

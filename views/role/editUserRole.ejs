@@ -2,15 +2,18 @@
 <html>
 
 <head>
+    <% include ../common/head %>
+    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
     <title>
         Edit role
     </title>
 </head>
 
-<body>
+<body class="container">
+    <% include ../common/alert %>
     <h2>Select Role</h2>
     <br />
-    <form action='editUserRole/status' method='post'>
+    <form action='editUserRole' method='post'>
         <input type="hidden" name = "user_id" value=<%=user_id%>> 
         <select name="role_id">
             <% for(role of roleArray) { %>
