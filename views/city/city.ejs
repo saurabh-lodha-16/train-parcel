@@ -18,20 +18,17 @@
 
 <body>
 	<% include ../common/alert %>
-	<p>
-		<h1>Cities List</h1>
-	</p>
-	<table id="table">
+	<table id="table" class="table">
 		<tr>
 			<th>City name</th>
 		</tr>
-
 	</table>
 
 	<br>
 	<br>
-	<a id="btn3" href="http://localhost:3000/city/add">Add city</a>
-
+	<form action="http://localhost:3000/city/add" method='get'>
+    <button class ="btn btn-primary" type="submit" value="Submit">Add city</button>
+  </form>
 </body>
 
 <style>

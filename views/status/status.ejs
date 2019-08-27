@@ -17,10 +17,7 @@
 
 <body>
 	<% include ../common/alert %>
-	<p>
-		<h1>Status List</h1>
-	</p>
-	<table id="table">
+	<table id="table" class="table">
 		<tr>
 			<th>Status Type</th>
 		</tr>
@@ -29,7 +26,9 @@
 
 	<br>
 	<br>
-	<a id="btn3" href="http://localhost:3000/status/add">Add Status</a>
+	<form action="http://localhost:3000/status/add" method='get'>
+    <button class ="btn btn-primary" type="submit" value="Submit">Add Status</button>
+  </form>
 
 </body>
 
