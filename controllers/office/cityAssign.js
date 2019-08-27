@@ -15,10 +15,15 @@ export function cityAssign(req, res) {
           cityId: req.body.city
         }).then(() => {
           console.log('Order created');
-          res.redirect('office');
+          res.redirect('/office');
         });
       } else {
-        res.render('office/cityAssign', { alert: 'danger', alertMsg: 'User Already Assigned' })
+        Office.update({
+          cityId: req.body.city
+        },{where :{userId: req.body.user} }).then(() => {
+          console.log('Order created');
+          res.redirect('/office');
+        });
       }
     })
   } catch (err) {
