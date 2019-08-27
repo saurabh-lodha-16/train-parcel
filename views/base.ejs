@@ -5,7 +5,7 @@
     <title>Dashboard</title>
 
     <% include ./common/head %>
-    <link rel="stylesheet" type="text/css" href="../stylesheets/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="/../stylesheets/dashboard.css">
 </head>
 
 
@@ -16,12 +16,13 @@
         <% include ./common/navbar %>
     </header>
 
-    <% include ./common/alert %>
 
     <div class="wrapper">
         <% include ./common/sidebar %>
 
         <div id="content">
+
+            <% include ./common/alert %>
             <%- include(content) %>
         </div>
 
