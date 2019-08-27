@@ -4,7 +4,6 @@ let roles = db['roles'];
 let roleAssigns = db['roleAssigns'];
 
 export async function viewUsers(req, res) {
-  exports.viewUsers = async function (req, res) {
     let userArray = await users.findAll({
       include: [{
         model: roleAssigns,
@@ -16,11 +15,9 @@ export async function viewUsers(req, res) {
     res.render('role/viewUsers.ejs', {
       usersArray: userArray
     });
-  };
 }
 
 export async function editUserRole(req, res) {
-  exports.editUserRole = async function (req, res) {
     let roleArray = await roles.findAll({
       attributes: ['id', 'name', 'level']
     });
@@ -28,7 +25,6 @@ export async function editUserRole(req, res) {
       user_id: req.body.user_id,
       roleArray: roleArray
     });
-  };
 }
 
 export async function editUserRoleResult(req, res) {

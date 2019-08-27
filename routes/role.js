@@ -7,7 +7,7 @@ router.get('/add_role', addRole);
 router.post('/add_role/status', addRoleResult);
 router.post('/edit_role', editRole);
 router.post('/edit_role/status', editRoleResult);
-router.get('/view_users', viewUsers);
+router.get('/view_users', viewUsers); // what this route is doing?
 router.post('/view_users/editUserRole', editUserRole);
 router.post('/view_users/editUserRole/status', editUserRoleResult);
 module.exports = router;

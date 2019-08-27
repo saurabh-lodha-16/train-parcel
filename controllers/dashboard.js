@@ -52,6 +52,7 @@ export async function dashboardGet(req, res) {
                         })[0].id,
                     }
                 })
+                console.log(pendingPackages,'--------------------------------------------')
 
 
                 let completedPackages = await models.packages.findAll({
@@ -118,7 +119,7 @@ export async function dashboardGet(req, res) {
 
         }
     } else {
-        res.redirect('/login')
+        res.render('auth/login', {alert:'danger', alertMsg:'Please Login first!'});
     }
 }
 

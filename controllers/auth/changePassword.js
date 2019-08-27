@@ -57,7 +57,7 @@ export async function changePassword(req, res) {
         });
       }
     } else {
-      res.redirect('./login');
+      res.redirect('/login');
     }
   } catch (err) {
     res.render('auth/changePassword.ejs', {

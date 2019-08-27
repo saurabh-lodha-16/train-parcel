@@ -4,6 +4,6 @@ import express from 'express';
 let router = express.Router();
 
 router.get('/', renderRegistration);
-router.post('/register', registerPackage);
+router.post('/', registerPackage);
 router.get('/track/:serial_no', trackGet)
 module.exports = router;
