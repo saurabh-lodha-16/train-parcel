@@ -17,11 +17,14 @@ export async function renderRolePage(req, res) {
 };
 
 export function addRole(req, res) {
-  try {
-    res.render('role/addRole.ejs');
-  } catch (err) {
-    res.send(err);
-  }
+  let user = req.session.user;
+  if (user && req.cookies.user_sid) {
+    res.render('base', {
+      content: 'role/addRole',
+    })
+  } else {
+    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
+  } 
 };
 
 export async function addRoleResult(req, res) {
