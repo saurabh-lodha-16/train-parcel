@@ -82,6 +82,7 @@ export async function addSomeShit() {
         const sourceCityId = start.dataValues.sCity;
         const curr_city = sourceCityId;
 
+
         cron.schedule('*/10 * * * *', async () => {
             var now_city = await getCurrCity(trainId);
             if (curr_city != now_city) {
@@ -91,13 +92,13 @@ export async function addSomeShit() {
                 let temp2 = await models.statuses.findOne({ where: { type: 'COMPLETED' } });
                 let completedId = temp2.dataValues.id;
 
-                const [numberOfAffectedRows, affectedRows] = await models.packages.update({ statusId: completedId},
+                const [,] = await models.packages.update({ statusId: completedId },
                     {
-                        where: { trainId:trainId, dCity: curr_city, statusId: inTransitId, isActive: true }, 
+                        where: { trainId: trainId, dCity: curr_city, statusId: inTransitId, isActive: true },
                         returning: true,
                         plain: true
                     })
-                    //change  train running status after it has completed like full journey..uska code aayega ek
+                //change  train running status after it has completed like full journey..uska code aayega ek
             }
             let temp = await models.cities.findOne({ where: { id: curr_city } });
             let city_name = temp.dataValues.name;
