@@ -6,15 +6,11 @@ import { updateOffice } from '../controllers/office/UpdateOffice';
 import { editOffice } from '../controllers/office/EditOffice';
 import { cityAssign } from '../controllers/office/cityAssign';
 
-router.get('/all', allCities);
+// router.get('/all', allCities);
 
 router.get('/', (req, res, next) => {
   res.render('office/offices');
 });
-router.get('/office', (req, res, next) => {
-  res.render('office/offices');
-});
-
 
 router.get('/add', function (req, res, next) {
   res.render('office/cityAssign');
@@ -22,7 +18,7 @@ router.get('/add', function (req, res, next) {
 
 router.post('/office', addOffice);
 
-router.get('/edit', editOffice);
+router.get('/edit', editOffice); //do error handling
 router.post('/edit', updateOffice);
 
 
