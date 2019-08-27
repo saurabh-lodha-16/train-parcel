@@ -67,7 +67,8 @@ export async function renderRegistration(req, res) {
   let cityArray;
   try {
     cityArray = await retrieveCityNames();
-    res.render('package/registerPackage.ejs', {
+    res.render('base', {
+      content: 'package/registerPackage',
       citiesArray: cityArray
     });
   } catch (err) {
