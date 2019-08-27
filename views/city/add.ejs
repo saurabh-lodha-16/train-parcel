@@ -8,7 +8,7 @@
   <form method="post" action="http://localhost:3000/city/add">
     <div>
       <label for="name">City Name:</label>
-      <input type="text" name="name">
+      <input type="text" pattern="^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$" name="name">
     </div>
     <div>
       <button type="submit">Add city</button>

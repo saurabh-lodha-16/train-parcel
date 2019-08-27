@@ -2,10 +2,15 @@
 import db from '../../models/index.js';
 const City = db.cities;
 export function addCity(req, res) {
-  City.create({
-    name: req.body.name
-  }).then(() => {
-    console.log('Order created');
-    res.redirect('city');
-  });
+  try {
+    City.create({
+      name: req.body.name
+    }).then(() => {
+      res.redirect('city');
+    });
+  } catch (err) {
+    console.log(`City was not Created 
+    ${err}`);
+  }
+  
 }

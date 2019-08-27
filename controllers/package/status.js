@@ -3,6 +3,8 @@ import db from '../../models/index.js';
 var moment = require('moment');
 const Op = db.Sequelize.Op;
 import { getCurrCity } from '../trainStatus/fillStations';
+import { getCityName } from '../getCityName';
+import { getISTTime } from '../getISTTime';
 
 //serialNo se 
 export async function getPackageStatus(serial_no) {
@@ -13,7 +15,10 @@ export async function getPackageStatus(serial_no) {
     let trainId = packageDetails.dataValues.trainId;
     let sCity = packageDetails.dataValues.sCity;
     let dCity = packageDetails.dataValues.dCity;
+    sCity = await getCityName(sCity);
+    dCity = await getCityName(dCity);
 
+    
     if (statusId == completedId) {
         console.log('Your package has reached')
     }
@@ -22,31 +27,29 @@ export async function getPackageStatus(serial_no) {
         const answer = await models.trainStatuses.findAll({ where: { trainId: trainId, isRunning: true } });
         const result = [];
         for (let i = 0; i < answer.length; i++) {
-            let y = answer[i].dataValues.sTime.toUTCString();
-            let myDate = new Date(y);
-            let x = myDate.toLocaleString();
-            result.push({ city_id: answer[i].dataValues.sCity, time: x, isLive: false });
+            let x = await getISTTime(answer[i].dataValues.sTime);
+            let city_name = await getCityName(answer[i].dataValues.sCity);
+            result.push({ city_name: city_name, time: x, isLive: false });
         }
-        let temp = answer[answer.length - 1].dataValues.dTime.toUTCString();
-        let myDate = new Date(temp);
-        let y = myDate.toLocaleString();
-        
-        result.push({ city_id: answer[answer.length - 1].dataValues.dCity, time: y, isLive: false });
-        const curr_city = await getCurrCity(trainId);
+        let y = await getISTTime(answer[answer.length - 1].dataValues.dTime);
+        let city_name = await getCityName(answer[answer.length - 1].dataValues.dCity);
+        result.push({ city_name: city_name, time: y, isLive: false });
+        let curr_city = await getCurrCity(trainId);
+        curr_city = await getCityName(curr_city);
+
         let sIndex, dIndex, liveIndex;
         for (let i = 0; i < result.length; i++) {
-            if (result[i].city_id == sCity) {
+            if (result[i].city_name == sCity) {
                 sIndex = i;
             }
-            if (result[i].city_id == dCity) {
+            if (result[i].city_name == dCity) {
                 dIndex = i;
             }
-            if (result[i].city_id == curr_city) {
+            if (result[i].city_name == curr_city) {
                 liveIndex = i;
             }
         }
     
-
         const final_answer = result.slice(sIndex, dIndex);
         final_answer[liveIndex].isLive = true;
         console.log(final_answer);
