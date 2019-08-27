@@ -82,7 +82,7 @@ export async function addSomeShit() {
         const sourceCityId = start.dataValues.sCity;
         const curr_city = sourceCityId;
 
-        cron.schedule('*/10 * * * * *', async () => {
+        cron.schedule('*/10 * * * *', async () => {
             var now_city = await getCurrCity(trainId);
             if (curr_city != now_city) {
                 curr_city = now_city;

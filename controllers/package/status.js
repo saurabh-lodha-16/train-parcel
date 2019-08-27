@@ -18,9 +18,7 @@ export async function getPackageStatus(serial_no) {
         console.log('Your package has reached')
     }
     else {
-        //show trail
-        let x = moment().format();
-        x = x.split('T');
+
         const answer = await models.trainStatuses.findAll({ where: { trainId: trainId, isRunning: true } });
         const result = [];
         for (let i = 0; i < answer.length; i++) {
@@ -32,9 +30,8 @@ export async function getPackageStatus(serial_no) {
         let temp = answer[answer.length - 1].dataValues.dTime.toUTCString();
         let myDate = new Date(temp);
         let y = myDate.toLocaleString();
-
+        
         result.push({ city_id: answer[answer.length - 1].dataValues.dCity, time: y, isLive: false });
-        console.log(result);
         const curr_city = await getCurrCity(trainId);
         let sIndex, dIndex, liveIndex;
         for (let i = 0; i < result.length; i++) {
@@ -48,8 +45,11 @@ export async function getPackageStatus(serial_no) {
                 liveIndex = i;
             }
         }
+    
+
         const final_answer = result.slice(sIndex, dIndex);
         final_answer[liveIndex].isLive = true;
+        console.log(final_answer);
         return final_answer
     }
 }
