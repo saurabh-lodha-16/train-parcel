@@ -7,6 +7,6 @@ import { trainBetween } from '../controllers/trainStatus/trainsBetween'
 router.get('/', getStations);
 router.get('/fillStations', fillStations);
 router.get('/addSomeShit', addSomeShit);
-router.get('/addDummyPackage', addDummyPackage);
+router.post('/addDummyPackage', addDummyPackage);
 router.post('/trainBetween', trainBetween);
 module.exports = router;

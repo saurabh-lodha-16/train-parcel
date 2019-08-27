@@ -22,16 +22,12 @@ module.exports = {
         type: Sequelize.UUID,
         allowNull: false,
       },
-      trainId: {
-        type: Sequelize.UUID,
-        allowNull: true,
-      },
-      statusId: {
-        type: Sequelize.UUID,
-        allowNull: false,
-      },
       weight: {
         type: Sequelize.FLOAT
+      },
+      name:{
+        type:Sequelize.STRING,
+        allowNull:true
       },
       sCity: {
         type: Sequelize.UUID,
@@ -40,6 +36,22 @@ module.exports = {
       dCity: {
         type: Sequelize.UUID,
         allowNull: false,
+      },
+      trainId: {
+        type: Sequelize.UUID,
+        allowNull: true,
+      },
+      statusId: {
+        type: Sequelize.UUID,
+        allowNull: false,
+      },
+      sCityTrainStatusId:{
+        type: Sequelize.UUID,
+        allowNull:true
+      },
+      dCityTrainStatusId:{
+        type: Sequelize.UUID,
+        allowNull:true
       },
       isActive: {
         type: Sequelize.BOOLEAN,

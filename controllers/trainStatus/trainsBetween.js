@@ -3,31 +3,41 @@ import db from '../../models/index.js';
 var moment = require('moment');
 const Op = db.Sequelize.Op;
 import { getCurrCity } from './fillStations';
+import { reservationsUrl } from 'twilio/lib/jwt/taskrouter/util';
 
 export async function trainBetween(req, res) {
     const sCity = req.body.sCity;
     const dCity = req.body.dCity;
-
-    const trainDetails = await models.trains.findAll({ where: { isActive: true } });
-    const trainIds = [];
-    for (let i = 0; i < trainDetails.length; i++) {
-        trainIds.push(trainDetails[i].dataValues.id);
+    let x = moment().format();
+    x = x.split('T');
+    let time = x[0] + " " + x[1];
+    const store = [];
+    const trainStatuses = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, sCity: sCity } });
+    for (let i = 0; i < trainStatuses.length; i++) {
+        store.push(trainStatuses[i].dataValues.trainId);
     }
+    const trainIds = [...new Set(store)];
     const answer = [];
     for (let i = 0; i < trainIds.length; i++) {
-        const trainId = trainIds[i];
-        const temp = await models.trainStatuses.findAll({ where: { trainId: trainId, isRunning: true } });
-        const start = [];
-        const end = [];
+        let trainId = trainIds[i];
+        let temp = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, dCity: dCity, trainId: trainId } });
         for (let j = 0; j < temp.length; j++) {
-            start.push(temp[j].dataValues.sCity);
-            end.push(temp[j].dataValues.dCity);
-        }
-        console.log(start);
-        if(start.includes(sCity) && end.includes(dCity)){
-            answer.push(trainId);
+            answer.push(temp[j].dataValues.trainId);
         }
     }
-res.send(answer);
-
+    let final_answer = [];
+    for (let i = 0; i < answer.length; i++) {
+        let trainId = answer[i];
+        let temp1 = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, sCity: sCity, trainId: trainId } });
+        let temp2 = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, dCity: dCity, trainId: trainId } });
+        for(let j=0; j<temp1.length; j++){
+        final_answer.push({ trainId:trainId, sourceStatusId: temp1[j].dataValues.id, destinationStatusId: temp2[j].dataValues.id });
+        }
+    }
+    if(final_answer.length == 0){
+    console.log('No trains between stations');
+    }
+    else{
+        res.send(final_answer);
+    }
 }

@@ -3,7 +3,7 @@
     "username": "saucr16",
     "password": "123456",
     "database": "trainParcel",
-    "host": "192.168.1.129",
+    "host": "127.0.0.1",
     "dialect": "postgres",
     "operatorsAliases": false
   },

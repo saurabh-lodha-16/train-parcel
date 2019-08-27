@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     trainId: {
       type: DataTypes.UUID,
-      allowNull: true,
+      allowNull: false,
     },
     sCity: {
       type: DataTypes.UUID,
@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     isRunning:{
       type: DataTypes.BOOLEAN,
-      defaultValue:true 
+      defaultValue:true
      },
   }, {});
   trainStatuses.associate = function (models) {
