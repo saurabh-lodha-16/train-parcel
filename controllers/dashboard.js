@@ -108,7 +108,8 @@ export async function dashboardGet(req, res) {
                 // })
 
 
-                res.render('dashboard', {
+                res.render('base', {
+                    content: 'dashboard',
                     completedPackages: completedPackages,
                     inTransitPackages: inTransitPackages,
                     pendingPackages: pendingPackages

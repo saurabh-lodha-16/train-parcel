@@ -6,20 +6,20 @@
 
     <% include ../common/head %>
     <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
-  
+
 </head>
 
 <body class="container">
 
     <% include ../common/alert %>
-    <main>
 
-        <div class="logo">
+    <div class="row">
+        <div class="col-md-2 offset-5 logo">
             <img src="images/deqode.png" width="70" height="auto">
         </div>
-
-        <div id="loginBlock">
-
+    </div>
+    <div class="row">
+        <div id="loginBlock" class="col-md-4 offset-4">
             <form method="POST" action="/login">
                 <div class="form-group">
                     <label for="email">Email address</label>
@@ -36,11 +36,16 @@
             <br>
             <a href="/register">Not Registered yet?</a>
         </div>
-    </main>
+    </div>
 
-    <footer>
-        <% include ../common/footer %>
-    </footer>
+
+    <div class="row">
+
+        <footer class="col-md-2 offset-5">
+            <% include ../common/footer %>
+        </footer>
+    </div>
+
 
 </body>
 
