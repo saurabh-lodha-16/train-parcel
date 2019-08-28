@@ -1,5 +1,7 @@
 import * as models from '../../models';
 import * as  fetch from 'node-fetch'
+const bcrypt = require('bcrypt')
+
 var FormData = require('form-data')
 export function registerGet(req, res) {
     res.render('auth/register');
@@ -31,25 +33,31 @@ export function registerPost(req, res) {
         let phone = req.body.phone;
         let pwd = req.body.pwd;
         let rpwd = req.body.rpwd;
+        try {
+            if (pwd == rpwd) {
+                let hashPwd = bcrypt.hashSync(pwd, 10);
+                models.users.create({
+                    name: name,
+                    mobileNo: phone,
+                    email: email,
+                    password: hashPwd,
+                    key: generateOTP()
+                }).then(user => {
+                    // create a default role for user
+                    req.session.user = user;
+                    sendWAOTP(name, phone, user.key)
+                    res.render('auth/phoneVerification', { alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
+                });
+            } else {
+                //==========================================
+                //send form data again when fails
+                res.render('auth/register', { alert: 'danger', alertMsg: 'Password didn\'t match!' })
+            }
+        } catch (e) {
+            res.render('auth/register', { alert: 'danger', alertMsg: 'Exception: ' + e })
 
-        if (pwd == rpwd) {
-            models.users.create({
-                name: name,
-                mobileNo: phone,
-                email: email,
-                password: pwd,
-                key: generateOTP()
-            }).then(user => {
-                // create a default role for user
-                req.session.user = user;
-                sendWAOTP(name, phone, user.key)
-                res.render('auth/phoneVerification', { alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
-            });
-        } else {
-            //==========================================
-            //send form data again when fails
-            res.render('auth/register', { alert: 'danger', alertMsg: 'Password didn\'t match!' })
         }
+
     }
 
 }

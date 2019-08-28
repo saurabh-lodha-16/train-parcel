@@ -1,5 +1,8 @@
 <div class="row tables-div">
+    <% if(typeof pendingPackages !== 'undefined') { %>
+
     <div class="col-md">
+
         <table class="table">
             <thead class="thead-dark">
                 <tr>
@@ -9,10 +12,21 @@
             </thead>
             <tbody>
                 <% var i=0; for(id in pendingPackages){ %>
-                <tr>
-                    <td><%= i %></td>
-                    <td><%= pendingPackages[id].serial_no %></td>
+
+                <tr onclick="window.location='package/track/<%= pendingPackages[id].serial_no %>';">
+                    <td><%= ++i %></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md">
+                                <%= pendingPackages[id].serial_no %>
+                            </div>
+                            <div class="col-md-2">
+                                >
+                            </div>
+                        </div>
+                    </td>
                 </tr>
+
                 <% } %>
             </tbody>
         </table>
@@ -28,9 +42,18 @@
             </thead>
             <tbody>
                 <% i=0; for(id in inTransitPackages){ %>
-                <tr>
-                    <td><%= i %></td>
-                    <td><%= inTransitPackages[id].serial_no %></td>
+                <tr onclick="window.location='package/track/<%= inTransitPackages[id].serial_no %>';">
+                    <td><%= ++i %></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md">
+                                <%= inTransitPackages[id].serial_no %>
+                            </div>
+                            <div class="col-md-2">
+                                >
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <% } %>
             </tbody>
@@ -47,15 +70,26 @@
             </thead>
             <tbody>
                 <% i=0; for(id in completedPackages){ %>
-                <tr>
-                    <td><%= i %></td>
-                    <td><%= completedPackages[id].serial_no %></td>
+                <tr onclick="window.location='package/track/<%= completedPackages[id].serial_no %>';">
+                    <td><%= ++i %></td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md">
+                                <%= completedPackages[id].serial_no %>
+                            </div>
+                            <div class="col-md-2">
+                                >
+                            </div>
+                        </div>
+                    </td>
                 </tr>
                 <% } %>
             </tbody>
         </table>
 
     </div>
+
+    <% } %>
 </div>
 
 </div>

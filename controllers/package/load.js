@@ -8,10 +8,10 @@ import { getISTTime } from '../getISTTime';
 //serialNo se 
 export async function loadPackage(req, res) {
     //parameters are packageId, trainId, sourceStatusID, destinationSourceID
-    const sCityTrainStatusId = req.body.sourceStatusId;
-    const dCityTrainStatusId = req.body.destinationStatusId;
-    const trainId = req.body.trainId;
-    const packageId = req.body.packageId;
+    let sCityTrainStatusId = req.body.sourceStatusId;
+    let dCityTrainStatusId = req.body.destinationStatusId;
+    let trainId = req.body.trainId;
+    let packageId = req.body.packageId;
     console.log(packageId);
     let temp1 = await models.statuses.findOne({ where: { type: 'IN-TRANSIT' } });
     let inTransitId = temp1.dataValues.id;
@@ -21,4 +21,11 @@ export async function loadPackage(req, res) {
         res.send(packageDetails);
 
 
+}
+
+
+export function loadPackageGet(req, res){
+    res.render('base',{
+        content: 'package/load'
+    })
 }

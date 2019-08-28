@@ -72,10 +72,11 @@ export async function renderRegistration(req, res) {
       citiesArray: cityArray
     });
   } catch (err) {
-    res.render('package/registerPackage.ejs', {
-      alertMsg: err,
-      alert: "danger",
-      citiesArray: cityArray
+    res.render('base', {
+      content: 'package/registerPackage',
+      citiesArray: cityArray,
+      alert: 'danger',
+      alertMsg: 'Error: ' + e
     });
   }
 };
@@ -92,16 +93,18 @@ export async function registerPackage(req, res) {
     let sourceId = req.body.source_city_id;
     let destinationId = req.body.destination_city_id;
     let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
-    res.render('package/registerPackage.ejs', {
+    res.render('base', {
+      content: 'package/registerPackage',
       alertMsg: "Package successfully registered.",
       alert: "success",
       citiesArray: cityArray
     });
   } catch (err) {
-    res.render('package/registerPackage.ejs', {
-      alertMsg: err,
-      alert: "danger",
-      citiesArray: cityArray
+    res.render('base', {
+      content: 'package/registerPackage',
+      citiesArray: cityArray,
+      alert: 'danger',
+      alertMsg: 'Error: ' + e
     });
   }
 };

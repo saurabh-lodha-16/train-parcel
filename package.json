@@ -8,6 +8,7 @@
     "nodemon": "nodemon --exec babel-node ./bin/www"
   },
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "coffeescript": "^2.4.1",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",

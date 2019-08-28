@@ -4,7 +4,7 @@ export async function trackGet(req, res) {
     if (serial_no) {
         try {
             let status = await getPackageStatus(serial_no)
-
+            
             let len = status.length
             let covered = 0;
             // let diffMins =1
@@ -35,10 +35,11 @@ export async function trackGet(req, res) {
                 // percent: diffCurrMins * 100 / diffMins
             })
         } catch (e) {
+            console.log(e)
             res.render('base', {
                 content: 'package/search',
                 alert: 'danger',
-                alertMsg: 'Enter a Valid Serial number!'
+                alertMsg: 'Enter a Valid Serial number! ' + e
             })
         }
     } else {
