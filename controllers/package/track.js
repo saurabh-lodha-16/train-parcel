@@ -4,7 +4,7 @@ export async function trackGet(req, res) {
     if (serial_no) {
         try {
             let status = await getPackageStatus(serial_no)
-            
+
             let len = status.length
             let covered = 0;
             // let diffMins =1
@@ -26,6 +26,9 @@ export async function trackGet(req, res) {
                         covered += 1
                     }
                 }
+            }
+            if (covered == len) {
+                covered = 0
             }
 
             res.render('base', {
