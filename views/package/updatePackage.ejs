@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <% include ../common/head %>
-    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
-    <title>
-        Add role
-    </title>
-</head>
-
-<body class="container">
-    <% include ../common/alert %>
-    <main>
-        <h2> Update package details </h2>
+<div class="container">
         <br />
-        <form action='/package/updatePackage' method='post'>
+        <form action='./update' method='post'>
+            <input type="hidden" name = "packageId" value= '<%= packageId %>' >
             weight : <br />
-            <input type="text" name="weight"><br />
+            <input type="number" name="weight" required value= '<%= weightPackage %>'><br />
             <br />
             source city : <br />
             <select name="source_city_id">
@@ -35,21 +23,17 @@
             <br />
             <br />
             Receiver Name : <br />
-            <input type="text" name="name">
+            <input type="text" name="name" required value=<%=name %>>
             <br />
             <br />
             Receiver email : <br />
-            <input type="text" name="email">
+            <input type="text" name="email" required value=<%=email %>>
             <br />
             <br />
             Receiver phone number : <br />
-            <input type="text" name="phoneNo">
+            <input type="text" name="phoneNo" required value=<%=phoneNo %>>
             <br />
             <br />
-            <button class ="btn btn-primary" type="submit" value="Submit"> Register Package </button>
+            <button class ="btn btn-primary" type="submit" value="Submit"> Update Package </button>
         </form>
-    </main>
-
-</body>
-
-</html>
+</div>

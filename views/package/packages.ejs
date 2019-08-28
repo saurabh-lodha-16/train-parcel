@@ -1,0 +1,16 @@
+<div class="container">
+    <main>
+        <form action='./update' method='get'>
+            <select name="package" text="select package">
+                 <option hidden disabled selected >select packages</option>
+                <% for(let package of packageList) { %>
+                <option value=<%=package.id%> ><%= `${package.serial_no}` %></option>
+                <% } %>
+            </select>
+            <br/>
+            <br/>
+            <button type="submit" class="btn btn-primary" value="Submit"> Update Package </button>
+        </form>
+    </main>
+</body>
+
