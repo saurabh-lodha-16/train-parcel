@@ -78,9 +78,7 @@ export async function editRole(req, res) {
 export async function editRoleResult(req, res) {
   try {
     if (req.session.user) {
-      console.log(req.body.role_id);
       let roleInstance = await roles.findOne({ where: { id: req.body.role_id } });
-      //console.log(roleInstance);
       await roles.update(
         { name: req.body.name, level: req.body.level },
         { where: { id: req.body.role_id } }

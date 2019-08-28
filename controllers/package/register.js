@@ -32,6 +32,11 @@ async function createUser(name, email, phoneNo) {
     let fetchedUser = await user.findOne({
       where: { mobileNo: phoneNo }
     });
+    if(!fetchedUser) {
+      fetchedUser = await user.findOne({
+        where: { email: email }
+      });
+    }
     if (!fetchedUser) {
       createdUser = await user.create({
         name: name,
@@ -86,7 +91,6 @@ export async function registerPackage(req, res) {
   if (user && req.cookies.user_sid) {
     let cityArray = await retrieveCityNames();
     try {
-
       let senderId = req.session.user.id;
       let statusInstance = await getStatus('PENDING');
       let statusId = statusInstance.id;

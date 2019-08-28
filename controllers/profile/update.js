@@ -67,7 +67,6 @@ export async function updateProfile(req, res) {
 export async function renderUpdation(req, res) {
   try {
     if (req.session.user) {
-      console.log(req.session.user);
       res.render('base', {
         content: 'profile/updateProfile.ejs',
         user: req.session.user

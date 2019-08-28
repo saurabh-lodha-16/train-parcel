@@ -19,7 +19,6 @@ export async function listPackages(req, res) {
   try {
     if (req.session.user) {
       let packageArray = await getPackages(req.session.user.id);
-      console.log(packageArray);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray
@@ -120,7 +119,6 @@ export async function renderUpdation(req, res) {
       res.redirect('/login');
     }
   } catch (err) {
-    console.log(err);
     res.render('base', {
       content: 'package/updatePackage.ejs',
       alertMsg: err,

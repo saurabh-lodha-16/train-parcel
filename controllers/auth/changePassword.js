@@ -37,14 +37,14 @@ export async function changePassword(req, res) {
       let oldPassword = req.body.oldPassword;
       let newPassword = req.body.newPassword;
       let reNewPassword = req.body.reNewPassword;
-      if(!(checkPassword(newPassword) && checkPassword(reNewPassword))) {
+      if (!(checkPassword(newPassword) && checkPassword(reNewPassword))) {
         res.render('auth/changePassword.ejs', {
           alertMsg: `Password should contain at least one lowercase letter, one uppercase letter,
           one number and 8 other letters.`,
           alert: "danger"
         });
       }
-      if(!(oldPassword && newPassword && reNewPassword)) {
+      if (!(oldPassword && newPassword && reNewPassword)) {
         res.render('auth/changePassword.ejs', {
           alertMsg: "One or more blank fields found.",
           alert: "danger"
