@@ -19,23 +19,25 @@ export async function updateUser(userId, name, email, phoneNo) {
 export async function updateProfile(req, res) {
   try {
     if (req.session.user) {
-      if(!(req.body.name && req.body.email && req.body.phoneNo)) {
+      if (!(req.body.name && req.body.email && req.body.phoneNo)) {
         res.render('profile/updateProfile.ejs', {
-          user : req.session.user,
+          user: req.session.user,
           alertMsg: "One or more blank fields found.",
           alert: "danger"
         });
       }
-      if(req.body.phoneNo.length !== 10) {
+      if (req.body.phoneNo.length !== 10) {
         res.render('profile/updateProfile.ejs', {
-          user : req.session.user,
+          user: req.session.user,
           alertMsg: "Phone number must consist 10 digits.",
           alert: "danger"
         });
       }
       let updatedUser = await updateUser(req.session.user.id, req.body.name, req.body.email, req.body.phoneNo);
-      res.render('profile/updateProfile.ejs', {
-        user : req.session.user,
+      console.log(updatedUser);
+      res.render('base', {
+        content: 'profile/updateProfile.ejs',
+        user: updatedUser,
         alertMsg: "Profile successfully updated.",
         alert: "success"
       });
@@ -44,8 +46,9 @@ export async function updateProfile(req, res) {
       res.redirect('/login');
     }
   } catch (err) {
-    res.render('profile/updateProfile.ejs', {
-      user : req.session.user,
+    res.render('base', {
+      content: 'profile/updateProfile.ejs',
+      user: req.session.user,
       alertMsg: err,
       alert: "danger"
     });
@@ -55,9 +58,10 @@ export async function updateProfile(req, res) {
 export async function renderUpdation(req, res) {
   try {
     if (req.session.user) {
-      console.log(req.session.user.name);
-      res.render('profile/updateProfile.ejs',{
-        user : req.session.user
+      console.log(req.session.user);
+      res.render('base', {
+        content: 'profile/updateProfile.ejs',
+        user: req.session.user
       });
     } else {
       res.redirect('/login');
