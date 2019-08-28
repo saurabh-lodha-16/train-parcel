@@ -64,7 +64,7 @@ app.use(function (req, res, next) {
 });
 
 //ye async karna hai
-models.sequelize.sync({force:true});
+models.sequelize.sync();
 // error handler
 import { trainStatusCron } from './controllers/trainStatus/fillStations';
 trainStatusCron();
