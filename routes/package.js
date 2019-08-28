@@ -4,7 +4,7 @@ import { renderUpdation, update} from '../controllers/package/update';
 import express from 'express';
 let router = express.Router();
 router.get('/', renderRegistration);
-router.post('/register', registerPackage);
+router.post('/', registerPackage);
 router.get('/track/', trackGet);
 router.get('/track/:serial_no', trackGet);
 router.get('/updatePackage', renderUpdation);
