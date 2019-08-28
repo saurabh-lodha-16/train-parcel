@@ -19,6 +19,7 @@ export async function listPackages(req, res) {
   try {
     if (req.session.user) {
       let packageArray = await getPackages(req.session.user.id);
+      console.log(packageArray);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray
