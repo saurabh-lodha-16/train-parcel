@@ -1,26 +1,22 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-    <% include ../common/head %>
-    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
-  <title>
-    Edit role
-  </title>
-</head>
-
-<body class="container">
-  <% include ../common/alert %>
-  <h2> Edit a role in system </h2>
+<div class="container">
+  <br/>
   <form action='edit_role' method='post'>
     <input type="hidden" name="role_id" value=<%= role_id %> >
-    name : <br />
-    <input type="text" name="name"><br />
+   
+    <input type="text" placeholder="name" name="name" required value= '<%= name%>' ><br />
     <br />
-    level : <br />
-    <input type="text" name="level"><br />
+    
+    <input type="text" placeholder="level" name="level" required value= '<%= level %>' ><br />
     <br />
     <button class ="btn btn-primary" type="submit" value="Submit"> Edit role </button>
   </form>
-</body>
-</html>
+  <br/>
+  <br/>
+  <form action='/role' method='get'>
+    <button class ="btn btn-primary" type="submit" value="Submit"> View Assigned Roles </button>
+  </form>
+  <br/>
+  <br/>
+</div>
+

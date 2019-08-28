@@ -1,39 +1,14 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-  <% include ../common/head %>
-  <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
-  <style>
-    table,
-    th,
-    td {
-      border: 1px solid black;
-      border-collapse: collapse;
-    }
-
-    th,
-    td {
-      padding: 5px;
-      text-align: left;
-    }
-  </style>
-</head>
-
-<body class="container">
-  <% include ../common/alert %>
-  <h2>Existing users in System</h2>
+<div class="container">
   <table class="table">
     <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>role</th>
+      <th>Name</th>
+      <th>Role</th>
       <th>Access Level</th>
     </tr>
-    <form action='editUserRole' method='post'>
+    <form action='view_users/editUserRole' method='get'>
       <% for (user of usersArray) { %>
       <tr>
-        <td> <%= `${user.id}` %> </td>
         <td> <%= `${user.name}` %> </td>
         <% if (user.roleAssign) { %>
         <td> <%= `${user.roleAssign.role.name}` %></td>
@@ -52,5 +27,5 @@
     </form>
   </table>
   <br />
-</body>
-</html>
+</div>
+

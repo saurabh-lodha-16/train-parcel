@@ -3,55 +3,73 @@ let roles = db['roles'];
 
 export async function renderRolePage(req, res) {
   try {
-    let roleArray = await roles.findAll({
-      attributes: ['id', 'name', 'level']
-    });
-    res.render('base', {
-      content: 'role/index.ejs',
-      rolesArray: roleArray
-  })
-
+    if (req.session.user) {
+      let roleArray = await roles.findAll({
+        attributes: ['id', 'name', 'level']
+      });
+      res.render('base', {
+        content: 'role/index.ejs',
+        rolesArray: roleArray
+      });
+    } else {
+      res.redirect('/login');
+    }
   } catch (err) {
     res.send(err);
   }
 };
 
 export function addRole(req, res) {
-  let user = req.session.user;
-  if (user && req.cookies.user_sid) {
-    res.render('base', {
-      content: 'role/addRole',
-    })
-  } else {
-    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
-  } 
+  try {
+    if (req.session.user) {
+      res.render('base', {
+        content: 'role/addRole.ejs',
+      });
+    } else {
+      res.redirect('/login');
+    }
+  } catch (err) {
+    res.send(err);
+  }
 };
 
 export async function addRoleResult(req, res) {
   try {
-    let createdRole = await roles.create({
-      name: req.body.name,
-      level: req.body.level
-    });
-    console.log("Added role");
-    res.render('role/addRole.ejs', {
-      alertMsg: "Role successfully added.",
-      alert: "success"
-    });
+    if (req.session.user) {
+      let createdRole = await roles.create({
+        name: req.body.name,
+        level: req.body.level
+      });
+      res.render('base', {
+        content: 'role/addRole.ejs',
+        alertMsg: "Role successfully added.",
+        alert: "success"
+      });
+    } else {
+      res.redirect('/login');
+    }
   } catch (err) {
-    res.render('role/addRole.ejs', {
+    res.render('base', {
+      content: 'role/addRole.ejs',
       alertMsg: err,
       alert: "danger"
     });
   }
 };
 
-export function editRole(req, res) {
+export async function editRole(req, res) {
   try {
-    console.log(req.body.role_id);
-    res.render('role/editRole.ejs', {
-      role_id: req.body.role_id
-    });
+    if (req.session.user) {
+      let roleInstance = await roles.findOne({ where: { id: req.query.role_id } });
+      res.render('base', {
+        content: 'role/editRole.ejs',
+        name: roleInstance.name,
+        level: roleInstance.level,
+        role_id: req.query.role_id
+      });
+    } else {
+      res.redirect('/login');
+    }
   } catch (err) {
     res.send(err);
   }
@@ -59,24 +77,31 @@ export function editRole(req, res) {
 
 export async function editRoleResult(req, res) {
   try {
-    await roles.update(
-      { name: req.body.name, level: req.body.level },
-      { where: { id: req.body.role_id } }
-    );
-    res.render('role/editRole.ejs', {
-      alertMsg: "Role successfully editted.",
-      alert: "success"
-    });
-    
-
-    
+    if (req.session.user) {
+      console.log(req.body.role_id);
+      let roleInstance = await roles.findOne({ where: { id: req.body.role_id } });
+      //console.log(roleInstance);
+      await roles.update(
+        { name: req.body.name, level: req.body.level },
+        { where: { id: req.body.role_id } }
+      );
+      res.render('base', {
+        content: 'role/editRole.ejs',
+        name: roleInstance.name,
+        level: roleInstance.level,
+        alertMsg: "Role successfully editted.",
+        role_id: req.body.role_id,
+        alert: "success"
+      });
+    } else {
+      res.redirect('/login');
+    }
   } catch (err) {
     res.render('base', {
-      content: 'role/editRole.js',
+      content: 'role/editRole.ejs',
       alertMsg: err,
       alert: "danger",
       role_id: req.body.role_id
-  })
-   
+    });
   }
 };

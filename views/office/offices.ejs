@@ -3,8 +3,9 @@
 		<% include ../common/alert %>
 		<table id="table" class="table">
 			<tr>
-				<th>User Id</th>
-				<th>City Id</th>
+				<th>User Name</th>
+				<th>User Email</th>
+				<th>City Name</th>
 			</tr>
 		</table>
 		<br>
@@ -17,8 +18,9 @@
 			console.log(data);
 			for (let office of data) {
 				console.log(office.id);
-				$("#table").append(`<tr> <td>${office.userName} </td>
-						<td>${office.cityName} </td>
+				$("#table").append(`<tr> <td>${office.user.name} </td>
+						<td>${office.user.email} </td>
+						<td>${office.city.name} </td>
 						<td><a class = "btn btn-info" href ="/office/edit?_id=${office.id}">Update</a></td>
 						</tr>`);
 			}

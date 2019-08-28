@@ -1,19 +1,19 @@
 <div class="container">
   <table class="table">
     <tr>
-      <th>id</th>
-      <th>name</th>
-      <th>level</th>
+      <!-- <th>id</th> -->
+      <th>Name</th>
+      <th>Level</th>
     </tr>
     <form action='role/edit_role' method='get'>
       <% for (role of rolesArray) { %>
       <tr>
-        <td> <%= `${role.id}` %> </td>
+        <!-- <td> <%= `${role.id}` %> </td> -->
         <td> <%= `${role.name}` %> </td>
         <td> <%= `${role.level}` %> </td>
         <td>
-          <button class="btn btn-info" type="submit" value=<%= role.id %> name="role_id">
-            Edit role
+          <button value='<%= role.id %>' name="role_id" class="btn btn-info" type="submit">
+            Edit
           </button>
         </td>
       </tr>
@@ -22,16 +22,5 @@
   </table>
   <br />
   <br />
-  <form action='add_role/' method='get'>
-    <button class="btn btn-primary" type="submit" value="Submit">Add role</button>
-  </form>
-  <br />
-  <form action='view_users/' method='get'>
-    <button class="btn btn-primary" type="submit" value="Submit">User role management</button>
-
-
-  </form>
   <br />
 </div>
-
-<
