@@ -1,3 +1,5 @@
+<script src="/../../javascripts/navbar.js"></script>
+
 <nav class="navbar navbar-expand navbar-light bg-light bd-navbar">
   <button class="navbar-toggler sidebar-toggler" type="button" data-toggle="sidebar-show">
     <span class="navbar-toggler-icon"></span>
@@ -25,9 +27,14 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Package" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <div class="row">
+      <div class="col-md">
+        <input id="search_pkg_nav" class="form-control mr-sm-2" placeholder="Search Package" aria-label="Search">
+      </div>
+      <div class="col-md offset-1">
+        <button class="btn btn-outline-success my-2 my-sm-0" onclick="changeURL();">Search</button>
+      </div>
+    </div>
+
   </div>
 </nav>
