@@ -11,6 +11,6 @@ export function updateOffice(req, res) {
       })
     res.redirect('/office');
   } catch (error) {
-
+    
   }
 }

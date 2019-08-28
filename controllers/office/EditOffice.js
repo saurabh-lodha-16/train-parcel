@@ -1,15 +1,24 @@
 'use strict';
 import db from '../../models/index.js';
+import { getCityName, getUserName } from '../getCityName'
 const Office = db.offices;
-export function editOffice(req, res) {
+export async function editOffice(req, res) {
+  console.log(req.query._id);
   try {
-    Office.findOne({
+    let office = await Office.findOne({
       attributes: ['id', 'userId', 'cityId'],
       where: { id: req.query._id }
-    }).then((city) => {
-      res.render('office/edit', city.dataValues);
     })
+    console.log(office)
+    office.dataValues.cityName = await getCityName(office.cityId);
+    office.dataValues.userName = await getUserName(office.userId);
+    console.log(office)
+    res.render('base',
+      {
+        content: 'office/edit',
+        office: office.dataValues
+      });
   } catch (err) {
-    res.render('office', { alert: 'danger', alertMsg: err});
+    res.render('base', { alert: 'danger', alertMsg: err });
   }
 }

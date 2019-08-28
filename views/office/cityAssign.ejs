@@ -1,36 +1,33 @@
-
 <body>
   <div class="container">
-      <% include ../common/alert %>
-      <form action="/office/cityAssign" method="POST">
-        <label for="City">Cities</label>
-        <select class="form-control" name="city" id="city">
-    
-        </select>
-        <br><br>
-        <label for="user">Users</label>
-        <select class="form-control" name="user" id="user">
-    
-        </select>
-        <br><br>
-        <input class ="btn btn-primary" type="submit">
-      </form>
-      <br>
-      <br>    
+    <form action="/office/cityAssign" method="POST">
+      <label for="user">Users</label>
+      <select class="form-control" name="user" id="user">
+
+      </select>
+      <label for="City">Cities</label>
+      <select class="form-control" name="city" id="city">
+
+      </select>
+      <br><br>
+      <br><br>
+      <input class="btn btn-primary" type="submit">
+    </form>
+    <br>
+    <br>
   </div>
 </body>
 <script>
-    $(document).ready(function () {
-      $.get("http://localhost:3000/city/", function (data, status) {
-        for (let city of data) {
-          $("#city").append(`<option value='${city.id}'> ${city.name}</option>`);
-        }
-      })
-      $.get("http://localhost:3000/users/", function (data, status) {
-        //console.log(data);
-        for (let user of data) {
-          $("#user").append(`<option value='${user.id}'> ${user.name}</option>`);
-        }
-      })
-    });
+  $(document).ready(function () {
+    $.get("http://localhost:3000/city/", function (data, status) {
+      for (let city of data) {
+        $("#city").append(`<option value='${city.id}'> ${city.name}</option>`);
+      }
+    })
+    $.get("http://localhost:3000/users/", function (data, status) {
+      for (let user of data) {
+        $("#user").append(`<option value='${user.id}'> ${user.name}</option>`);
+      }
+    })
+  });
 </script>
