@@ -82,29 +82,35 @@ export async function renderRegistration(req, res) {
 };
 
 export async function registerPackage(req, res) {
-  let cityArray = await retrieveCityNames();
-  try {
+  let user = req.session.user;
+  if (user && req.cookies.user_sid) {
     let cityArray = await retrieveCityNames();
-    let senderId = 'aa1ac2b3-076a-4e63-be60-3254067c0476';
-    let statusInstance = await getStatus('PENDING');
-    let statusId = statusInstance.id;
-    let createdUser = await createUser(req.body.name, req.body.email, req.body.phoneNo);
-    let receiverId = createdUser.id;
-    let sourceId = req.body.source_city_id;
-    let destinationId = req.body.destination_city_id;
-    let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
-    res.render('base', {
-      content: 'package/registerPackage',
-      alertMsg: "Package successfully registered.",
-      alert: "success",
-      citiesArray: cityArray
-    });
-  } catch (err) {
-    res.render('base', {
-      content: 'package/registerPackage',
-      citiesArray: cityArray,
-      alert: 'danger',
-      alertMsg: 'Error: ' + err
-    });
+    try {
+
+      let senderId = req.session.user.id;
+      let statusInstance = await getStatus('PENDING');
+      let statusId = statusInstance.id;
+      let createdUser = await createUser(req.body.name, req.body.email, req.body.phoneNo);
+      let receiverId = createdUser.id;
+      let sourceId = req.body.source_city_id;
+      let destinationId = req.body.destination_city_id;
+      let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
+      res.render('base', {
+        content: 'package/registerPackage',
+        alertMsg: "Package successfully registered.",
+        alert: "success",
+        citiesArray: cityArray
+      });
+    } catch (err) {
+      res.render('base', {
+        content: 'package/registerPackage',
+        citiesArray: cityArray,
+        alert: 'danger',
+        alertMsg: 'Error: ' + err
+      });
+    }
+  } else {
+    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
   }
+
 };

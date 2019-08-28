@@ -1,55 +1,40 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <% include ../common/head %>
-    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
-    <title>
-        Add role
-    </title>
-</head>
-
-<body class="container">
-    <% include ../common/alert %>
-    <main>
-        <h2> Update package details </h2>
+<div class="container">
+    <br />
+    <form action='./update' method='post'>
+        <input type="hidden" name="packageId" value='<%= packageId %>'>
+        <div class="form-group">
+            <label for="weight">Weight :</label>
+            <input type="number" name="weight" class="form-control" required value='<%= weightPackage %>'>
+        </div>
+        <div class="form-group">
+            <label for="source_city_id">Source City :</label>
+            <select class="form-control name=" source_city_id">
+                <% for(let city of citiesArray) { %>
+                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+                <% } %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="destination_city_id">Destination City:</label>
+            <select class="form-control" name="destination_city_id">
+                <% for(let city of citiesArray) { %>
+                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+                <% } %>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">Receiver Name :</label>
+            <input type="text" class="form-control" name="name" required value=<%=name %>>
+        </div>
+        <div class="form-group">
+            <label for="email">Receiver email :</label>
+            <input type="text" class="form-control" name="email" required value=<%=email %>>
+        </div>
+        <div class="form-group">
+            <label for="phoneNo">Receiver phone number :</label>
+            <input type="text" name="phoneNo" class="form-control" required value=<%=phoneNo %>>
+        </div>
         <br />
-        <form action='/package/updatePackage' method='post'>
-            weight : <br />
-            <input type="text" name="weight"><br />
-            <br />
-            source city : <br />
-            <select name="source_city_id">
-                <% for(let city of citiesArray) { %>
-                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <% } %>
-            </select>
-            <br />
-            <br />
-            destination city: <br />
-            <select name="destination_city_id">
-                <% for(let city of citiesArray) { %>
-                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <% } %>
-            </select>
-            <br />
-            <br />
-            Receiver Name : <br />
-            <input type="text" name="name">
-            <br />
-            <br />
-            Receiver email : <br />
-            <input type="text" name="email">
-            <br />
-            <br />
-            Receiver phone number : <br />
-            <input type="text" name="phoneNo">
-            <br />
-            <br />
-            <button class ="btn btn-primary" type="submit" value="Submit"> Register Package </button>
-        </form>
-    </main>
-
-</body>
-
-</html>
+        <button class="btn btn-primary" type="submit" value="Submit"> Update Package </button>
+    </form>
+</div>

@@ -19,12 +19,12 @@
 </body>
 <script>
   $(document).ready(function () {
-    $.get("http://localhost:3000/city/", function (data, status) {
+    $.get("/city/", function (data, status) {
       for (let city of data) {
         $("#city").append(`<option value='${city.id}'> ${city.name}</option>`);
       }
     })
-    $.get("http://localhost:3000/users/", function (data, status) {
+    $.get("/users/", function (data, status) {
       for (let user of data) {
         $("#user").append(`<option value='${user.id}'> ${user.name}</option>`);
       }

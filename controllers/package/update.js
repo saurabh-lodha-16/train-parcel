@@ -4,6 +4,39 @@ let status = db['statuses'];
 let user = db['users'];
 let packages = db['packages'];
 
+async function getPackages(userId) {
+  try {
+    let packageArray = await packages.findAll({
+      where: { senderUserId: userId }
+    });
+    return packageArray;
+  } catch (err) {
+    throw (err);
+  }
+}
+
+export async function listPackages(req, res) {
+  try {
+    if (req.session.user) {
+      let packageArray = await getPackages(req.session.user.id);
+      console.log(packageArray);
+      res.render('base', {
+        content: 'package/packages.ejs',
+        packageList: packageArray
+      });
+    } else {
+      res.redirect('/login');
+    }
+  } catch (err) {
+    res.render('base', {
+      content: 'package/packages.ejs',
+      packageList: packageArray,
+      alert: "danger",
+      alertMsg: err
+    });
+  }
+}
+
 async function retrieveCityNames() {
   try {
     let cities = await city.findAll({
@@ -68,15 +101,36 @@ async function updatePackage(packageId, weightPackage, sourceId, destinationId) 
 export async function renderUpdation(req, res) {
   let cityArray;
   try {
-    cityArray = await retrieveCityNames();
-    res.render('package/updatePackage.ejs', {
-      citiesArray: cityArray
-    });
+    if (req.session.user) {
+      let packageId = req.query.package;
+      let packageInstance = await packages.findOne({ where: { id: packageId } });
+      let rcvrUserId = packageInstance.rcvrUserId;
+      let receiver = await user.findOne({ where: { id: rcvrUserId } });
+      cityArray = await retrieveCityNames();
+      res.render('base', {
+        content: 'package/updatePackage.ejs',
+        citiesArray: cityArray,
+        weightPackage: packageInstance.weight,
+        name: receiver.name,
+        email: receiver.email,
+        phoneNo: receiver.mobileNo,
+        packageId: packageId
+      });
+    } else {
+      res.redirect('/login');
+    }
   } catch (err) {
-    res.render('package/updatePackage.ejs', {
+    console.log(err);
+    res.render('base', {
+      content: 'package/updatePackage.ejs',
       alertMsg: err,
       alert: "danger",
-      citiesArray: cityArray
+      citiesArray: cityArray,
+      weightPackage: '',
+      name: '',
+      email: '',
+      phoneNo: '',
+      packageId: 1
     });
   }
 };
@@ -84,38 +138,60 @@ export async function renderUpdation(req, res) {
 export async function update(req, res) {
   let cityArray;
   try {
-    cityArray = await retrieveCityNames();
-    let packageId = 'd9c38679-4a24-4472-bd39-5b873b582a3a';
-    let packageInstance = await getPackage(packageId);
-    let statusId = packageInstance.statusId;
-    let statusInstance = await getStatus(statusId);
-    if (statusInstance.type === 'PENDING') {
-      let weight = req.body.weight;
-      let sourceCity = req.body.source_city_id;
-      let destinationCity = req.body.destination_city_id;
-      let receiverId = packageInstance.rcvrUserId;
-      let name = req.body.name;
-      let email = req.body.email;
-      let phoneNo = req.body.phoneNo;
-      updatePackage(packageId, weight, sourceCity, destinationCity);
-      updateUser(receiverId, name, email, phoneNo);
-      res.render('package/updatePackage.ejs', {
-        alertMsg: "Package successfully updated.",
-        alert: "success",
-        citiesArray: cityArray
-      });
+    if (req.session.user) {
+      cityArray = await retrieveCityNames();
+      let packageId = req.body.packageId;
+      let packageInstance = await getPackage(packageId);
+      let statusId = packageInstance.statusId;
+      let statusInstance = await getStatus(statusId);
+      if (statusInstance.type === 'PENDING') {
+        let weight = req.body.weight;
+        let sourceCity = req.body.source_city_id;
+        let destinationCity = req.body.destination_city_id;
+        let receiverId = packageInstance.rcvrUserId;
+        let name = req.body.name;
+        let email = req.body.email;
+        let phoneNo = req.body.phoneNo;
+        updatePackage(packageId, weight, sourceCity, destinationCity);
+        updateUser(receiverId, name, email, phoneNo);
+        res.render('base', {
+          content: 'package/updatePackage.ejs',
+          alertMsg: "Package successfully updated.",
+          alert: "success",
+          citiesArray: cityArray,
+          weightPackage: '',
+          name: '',
+          email: '',
+          phoneNo: '',
+          packageId: packageId
+        });
+      } else {
+        res.render('base', {
+          content: 'package/updatePackage.ejs',
+          alertMsg: "Your package is already processed.",
+          alert: "info",
+          citiesArray: cityArray,
+          weightPackage: '',
+          name: '',
+          email: '',
+          phoneNo: '',
+          packageId: packageId
+        });
+      }
     } else {
-      res.render('package/updatePackage.ejs', {
-        alertMsg: "Your package is already processed.",
-        alert: "info",
-        citiesArray: cityArray
-      });
+      res.redirect('/login');
     }
   } catch (err) {
-    res.render('package/updatePackage.ejs', {
+    res.render('base', {
+      content: 'package/updatePackage.ejs',
       alertMsg: err,
       alert: "danger",
-      citiesArray: cityArray
+      citiesArray: cityArray,
+      weightPackage: '',
+      name: '',
+      email: '',
+      phoneNo: '',
+      packageId: 1
     });
   }
 };
