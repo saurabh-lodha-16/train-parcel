@@ -3,15 +3,21 @@
   <br />
   <br />
   <form action='/role/add_role' method='post'>
-    <input type="text" placeholder="name" name="name" required><br />
+    <div class="form-group">
+      <label for="name">Role Name</label>
+      <input type="text" class="form-control" placeholder="Enter Name" name="name" required>
+    </div>
     <br />
-    <input type="number" placeholder="level" name="level" required><br />
+    <div class="form-group">
+      <label for="level">Role level</label>
+      <input type="number" class="form-control" placeholder="Enter level" name="level" required>
+    </div>
     <br />
-    <br/>
+    <br />
     <button class="btn btn-primary" type="submit" value="Submit"> Add role </button>
   </form>
-  <br/>
-  <br/>
+  <br />
+  <br />
   <form action='/dashboard' method='get'>
     <button class="btn btn-primary" type="submit" value="Submit"> Dashboard </button>
   </form>
