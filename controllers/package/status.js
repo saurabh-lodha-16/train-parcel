@@ -1,34 +1,41 @@
 import models from '../../models';
 import db from '../../models/index.js';
-var moment = require('moment');
-const Op = db.Sequelize.Op;
 import { getCurrCity } from '../trainStatus/fillStations';
 import { getCityName } from '../getCityName';
 import { getISTTime } from '../getISTTime';
+const moment = require('moment');
+const Op = db.Sequelize.Op;
 
 //serialNo se 
 export async function getPackageStatus(serial_no) {
     let temp2 = await models.statuses.findOne({ where: { type: 'COMPLETED' } });
     let completedId = temp2.dataValues.id;
+    let temp3 = await models.statuses.findOne({ where: { type: 'PENDING' } });
+    let pendingId = temp3.dataValues.id;
     let packageDetails = await models.packages.findOne({ where: { serial_no: serial_no } });
     let statusId = packageDetails.dataValues.statusId;
-    let trainId = packageDetails.dataValues.trainId;
-    let sCity = packageDetails.dataValues.sCity;
-    let dCity = packageDetails.dataValues.dCity;
-    sCity = await getCityName(sCity);
-    dCity = await getCityName(dCity);
-    let dCityTrainStatusId = packageDetails.dataValues.dCityTrainStatusId;
-    let sCityTrainStatusId = packageDetails.dataValues.sCityTrainStatusId;
-
-    if (statusId == completedId) {
-        console.log('Your package has reached')
+    if (statusId == pendingId) {
+        let final_answer = [];
+        let msg;
+        msg = 'Your package is yet to be loaded';
+        final_answer['msg'] = msg;
+        console.log(final_answer);
+        return final_answer;
     }
     else {
-        var x = moment().format();
+        let trainId = packageDetails.dataValues.trainId;
+        let sCity = packageDetails.dataValues.sCity;
+        let dCity = packageDetails.dataValues.dCity;
+        sCity = await getCityName(sCity);
+        dCity = await getCityName(dCity);
+        let dCityTrainStatusId = packageDetails.dataValues.dCityTrainStatusId;
+        let sCityTrainStatusId = packageDetails.dataValues.sCityTrainStatusId;
+
+        let x = moment().format();
         x = x.split('T');
-        var time = x[0] + " " + x[1];
-        const answer = await models.trainStatuses.findAll({ where: { trainId: trainId } });
-        const result = [];
+        let time = x[0] + " " + x[1];
+        let answer = await models.trainStatuses.findAll({ where: { trainId: trainId } });
+        let result = [];
         for (let i = 0; i < answer.length; i++) {
             let x = await getISTTime(answer[i].dataValues.sTime);
             let city_name = await getCityName(answer[i].dataValues.sCity);
@@ -51,18 +58,31 @@ export async function getPackageStatus(serial_no) {
                 dIndex = i;
             }
         }
-        const final_answer = result.slice(sIndex, dIndex+1);
+        const final_answer = result.slice(sIndex, dIndex + 1);
         for (let i = 0; i < final_answer.length; i++) {
             if (final_answer[i].city_name == curr_city) {
                 liveIndex = i;
             }
         }
-        if(liveIndex === undefined){
-            console.log(`Your train hasn't started yet`);
-        }else{
-        final_answer[liveIndex].isLive = true;
+        let msg;
+        console.log(liveIndex);
+        if (statusId == completedId) {
+            final_answer[final_answer.length - 1].isLive = true;
+            msg = 'Your package has reached';
+            final_answer['msg'] = msg;
+            console.log(final_answer);
+            return final_answer;
         }
-        console.log(final_answer);
-        return final_answer
+        else if (liveIndex == undefined) {
+            console.log(final_answer);
+            return final_answer;
+        }
+        else {
+            final_answer[liveIndex].isLive = true;
+            msg = 'Your package is on its way';
+            final_answer['msg'] = msg;
+            console.log(final_answer);
+            return final_answer
+        }
     }
 }
