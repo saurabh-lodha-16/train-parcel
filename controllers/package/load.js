@@ -6,9 +6,10 @@ const sequelize = require('sequelize')
 import { getCityName } from '../getCityName';
 import { getISTTime } from '../getISTTime';
 import { trainBetween } from '../trainStatus/trainsBetween';
+import { sendWAmsg } from '../common';
 
 //serialNo se 
-export async function loadPackage(packageId, sCityTrainStatusId, dCityTrainStatusId, trainId) {
+export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatusId, trainId) {
     //parameters are packageId, trainId, sourceStatusID, destinationSourceID
     // let sCityTrainStatusId = req.body.sourceStatusId;
     // let dCityTrainStatusId = req.body.destinationStatusId;
@@ -28,34 +29,45 @@ export async function loadPackage(packageId, sCityTrainStatusId, dCityTrainStatu
     let temp1 = await models.statuses.findOne({ where: { type: 'IN-TRANSIT' } });
     let inTransitId = temp1.dataValues.id;
     const packageDetails = await models.packages.update({ trainId: trainId, statusId: inTransitId, sCityTrainStatusId: sCityTrainStatusId, dCityTrainStatusId: dCityTrainStatusId },
-        { where: { id: packageId } })
+        { where: { serial_no: serialNo } })
+
+    let senderUser = await models.users.findOne({ where: { id: packageDetails.dataValues.senderUserId } })
+    let train = await models.trains.findOne({ where: { id: trainId } })
+
+    // notify user thru whatsapp
+    sendWAmsg(senderUser.phone, `Your Package ${serialNo} has been loaded in the train ${train.trainNo} ${train.name}`)
     return packageDetails;
 }
 
-export async function loadPackagePost(req, res){
-    try{
-        let select_date = req.body.select_date
-        let serial_no = req.body.package_serial_no
-            if (select_date) {
-                let trainStatusesList = await trainBetween(serial_no, select_date)
-                res.render('base', {
-                    content: 'package/selectTrainStatus',
-                    trainStatuses: trainStatusesList,
-                    package_serial_no: req.body.serialNo
-                })
-            } else {
-                res.render('base', {
-                    content: 'package/selectTrainStatus',
-                    package_serial_no: req.body.serialNo
-                })
-            }
-        }catch(e){
-            console.log(e);
-        }
+export async function loadPackagePost(req, res) {
+
 }
 
-export function loadPackageGet(req, res) {
-    res.render('base', {
-        content: 'package/load',
-    })
+export async function loadPackageGet(req, res) {
+    try {
+        let selectDate = req.query.selectDate
+        let serialNo = req.query.serialNo
+        // console.log(serialNo, '===============================================================')
+        if (selectDate) {
+            let trainStatusesList = await trainBetween(serialNo, selectDate)
+            // console.log('=============================', trainStatusesList.length)
+            res.render('base', {
+                content: 'package/selectTrainStatus',
+                trainStatuses: trainStatusesList,
+                serialNo: serialNo
+            })
+        } else if (serialNo) {
+            res.render('base', {
+                content: 'package/selectTrainStatus',
+                serialNo: serialNo
+            })
+        } else {
+            res.render('base', {
+                content: 'package/load'
+            })
+        }
+    } catch (e) {
+        console.log(e);
+    }
+
 }

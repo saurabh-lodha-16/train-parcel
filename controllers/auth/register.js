@@ -1,5 +1,5 @@
 import * as models from '../../models';
-import * as  fetch from 'node-fetch'
+import { sendWAmsg } from '../common';
 const bcrypt = require('bcrypt')
 
 var FormData = require('form-data')
@@ -45,7 +45,7 @@ export function registerPost(req, res) {
                 }).then(user => {
                     // create a default role for user
                     req.session.user = user;
-                    sendWAOTP(name, phone, user.key)
+                    sendWAmsg(phone, `Hello ${name}, Your OTP is ${user.key}`)
                     res.render('auth/phoneVerification', { alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
                 });
             } else {
@@ -75,44 +75,3 @@ function generateOTP() {
     return OTP;
 }
 
-function sendWAOTP(name, phone, otp) {
-    // let formData = FormData()
-    // formData.append('To', `whatsapp:+91${phone}`)
-    // formData.append('From', 'whatsapp:+14155238886')
-    // formData.append('Body', `Hello ${name}, Your OTP is ${otp}`)
-
-    // //     --data-urlencode 'To=whatsapp:+918275273559' \
-    // // --data-urlencode 'From=whatsapp:+14155238886' \
-    // // --data-urlencode 'Body=Your Twilio code is 1238432' \
-    // fetch('https://api.twilio.com/2010-04-01/Accounts/AC4eecddeed388af0beb36880bd18938f7/Messages.json',
-    //     {
-    //         method: "POST",
-    //         headers: {
-    //             'Authorization': 'Basic ' + Buffer.from('AC4eecddeed388af0beb36880bd18938f7:7f5b9c3fff5b2a8fec1eda34c705ef4f', 'base64').toString(),
-    //             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
-    //         },
-    //         body: formData,
-
-    //     })
-    //     .then(response => {
-    //         console.log('=======================================', response.json())
-    //     }) // .text(), etc.
-    //     .catch((e) => { console.log('================errorWAOTP===================', e) });
-
-
-
-    //TODO: to be shifted to external file
-    const accountSid = 'AC4eecddeed388af0beb36880bd18938f7';
-    const authToken = '7f5b9c3fff5b2a8fec1eda34c705ef4f';
-    const client = require('twilio')(accountSid, authToken);
-
-    client.messages
-        .create({
-            body: `Hello ${name}, Your OTP is ${otp}`,
-            from: 'whatsapp:+14155238886',
-            to: `whatsapp:+91${phone}`
-        })
-        .then(message => console.log(message.sid))
-        .done();
-
-}
