@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <% include ../common/head %>
-    <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
-    <title>
-        Edit role
-    </title>
-</head>
-
-<body class="container">
-    <% include ../common/alert %>
-    <h2>Select Role</h2>
-    <br />
-    <form action='editUserRole' method='post'>
-        <input type="hidden" name = "user_id" value=<%=user_id%>> 
+<div class="container">
+    <form action='./editUserRole' method='post'>
+        <input type="hidden" name="user_id" value=<%=user_id%>>
         <select name="role_id">
             <% for(role of roleArray) { %>
             <option value=<%= `${role.id}` %>><%= `${role.name}` %></option>
@@ -22,8 +8,12 @@
         </select>
         <br />
         <br />
-        <button class ="btn btn-primary" type="submit" value="Submit"> Confirm role </button>
+        <br />
+        <button class="btn btn-primary" type="submit" value="Submit"> Confirm role </button>
     </form>
-</body>
-
-</html>
+    <br />
+    <br/>
+    <form action='../view_users' method='get'>
+        <button class="btn btn-primary" type="submit" value="Submit"> Users list </button>
+    </form>
+</div>
