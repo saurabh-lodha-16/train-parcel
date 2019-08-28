@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     //change its type
     mobileNo: {
       unique: true,
-      allowNull: false,
+      allowNull: true,
       type: DataTypes.BIGINT
     },
     password: {

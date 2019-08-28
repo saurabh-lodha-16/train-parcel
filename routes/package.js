@@ -1,7 +1,8 @@
 import { renderRegistration, registerPackage } from '../controllers/package/register';
 import { trackGet } from '../controllers/package/track'
 import { renderUpdation, update} from '../controllers/package/update';
-import { loadPackage, loadPackageGet } from '../controllers/package/load'
+import {  loadPackageGet } from '../controllers/package/load'
+import {  linkPackageTrainGet } from '../controllers/package/link'
 import express from 'express';
 let router = express.Router();
 router.get('/', renderRegistration);
@@ -11,5 +12,8 @@ router.get('/track/:serial_no', trackGet);
 router.get('/updatePackage', renderUpdation);
 router.post('/updatePackage', update);
 router.get('/load', loadPackageGet);
-router.post('/load', loadPackage);
+router.get('/load/?serialNo=:serialNo', loadPackageGet);
+
+router.get('/link/:sourceStatusId/:destinationStatusId/:trainId/:serialNo', linkPackageTrainGet);
+// router.get('/load/o', loadPackageGet);
 module.exports = router;

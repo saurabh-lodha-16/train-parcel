@@ -104,7 +104,7 @@ export async function registerPackage(req, res) {
       content: 'package/registerPackage',
       citiesArray: cityArray,
       alert: 'danger',
-      alertMsg: 'Error: ' + e
+      alertMsg: 'Error: ' + err
     });
   }
 };

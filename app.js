@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var session = require('express-session');
+const passportSetup = require('./config/passport-setup')
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -16,6 +18,7 @@ const officeRouter = require('./routes/office');
 const trainStatusRouter = require('./routes/trainStatus');
 const packageRouter = require('./routes/package');
 const updateProfileRouter = require('./routes/profile')
+const oAuthRouter = require('./routes/oAuth')
 
 
 import models from './models';
@@ -38,7 +41,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-      expires: 6000000
+    expires: 6000000
   }
 }));
 
@@ -50,22 +53,23 @@ app.use('/status', statusRouter);
 app.use('/role', roleRouter);
 //app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
-app.use('/package',packageRouter);
-app.use('/office',officeRouter);
-app.use('/updateProfile',updateProfileRouter);
+app.use('/package', packageRouter);
+app.use('/office', officeRouter);
+app.use('/updateProfile', updateProfileRouter);
+app.use('/oAuth', oAuthRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 //ye async karna hai
-models.sequelize.sync();
+models.sequelize.sync({force:true});
 // error handler
 import { trainStatusCron } from './controllers/trainStatus/fillStations';
 trainStatusCron();
 
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

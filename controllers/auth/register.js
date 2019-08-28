@@ -26,7 +26,20 @@ export function registerPost(req, res) {
         }
 
 
-    } else {
+    } else if (req.body.userId) {
+        //Google Sign: user model already created
+        let userId = req.body.userId
+        let phone = req.body.phone;
+
+        models.users.findOne({ where: { id: userId } }).then(user => {
+            req.session.user = user;
+            sendWAmsg(phone, `Hello ${user.name}, Your OTP is ${user.key}`)
+            res.render('auth/phoneVerification', { alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
+        })
+
+    }
+
+    else {
         console.log('====================== Register 1st step')
         let email = req.body.email;
         let name = req.body.name;

@@ -53,8 +53,7 @@ export async function trainBetween(serial_no, date) {
     }
     console.log(output);
     if (output.length == 0) {
-        let msg = 'No trains between stations';
-        return msg;
+        return false;
     }
     else {
         return output;
