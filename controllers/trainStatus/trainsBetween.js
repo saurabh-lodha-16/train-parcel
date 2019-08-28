@@ -33,13 +33,16 @@ export async function trainBetween(serial_no, date) {
     let final_answer = [];
     for (let i = 0; i < answer.length; i++) {
         let trainId = answer[i];
+        let trainDetails = await models.trains.findOne({where:{id:trainId}});
+        let trainName = trainDetails.dataValues.name;
+        let trainNo = trainDetails.dataValues.trainNo;
         let temp1 = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, sCity: sCity, trainId: trainId } });
         let temp2 = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, sCity: dCity, trainId: trainId } });
         for (let j = 0; j < temp1.length; j++) {
             let x = temp1[j].dataValues.sTime;
             let y = await getISTTime(x);
             y = y.split(',');
-            final_answer.push({ date: y[0], trainId: trainId, sourceStatusId: temp1[j].dataValues.id, destinationStatusId: temp2[j].dataValues.id });
+            final_answer.push({ date: y[0], trainName:trainName, trainNo:trainNo, trainId: trainId, sourceStatusId: temp1[j].dataValues.id, destinationStatusId: temp2[j].dataValues.id });
         }
     }
     let output = []
@@ -48,6 +51,7 @@ export async function trainBetween(serial_no, date) {
             output.push(final_answer[i]);
         }
     }
+    console.log(output);
     if (output.length == 0) {
         let msg = 'No trains between stations';
         return msg;
