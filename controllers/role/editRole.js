@@ -6,20 +6,25 @@ export async function renderRolePage(req, res) {
     let roleArray = await roles.findAll({
       attributes: ['id', 'name', 'level']
     });
-    res.render('role/index.ejs', {
+    res.render('base', {
+      content: 'role/index.ejs',
       rolesArray: roleArray
-    });
+  })
+
   } catch (err) {
     res.send(err);
   }
 };
 
 export function addRole(req, res) {
-  try {
-    res.render('role/addRole.ejs');
-  } catch (err) {
-    res.send(err);
-  }
+  let user = req.session.user;
+  if (user && req.cookies.user_sid) {
+    res.render('base', {
+      content: 'role/addRole',
+    })
+  } else {
+    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
+  } 
 };
 
 export async function addRoleResult(req, res) {
@@ -62,11 +67,16 @@ export async function editRoleResult(req, res) {
       alertMsg: "Role successfully editted.",
       alert: "success"
     });
+    
+
+    
   } catch (err) {
-    res.render('role/editRole.ejs', {
+    res.render('base', {
+      content: 'role/editRole.js',
       alertMsg: err,
       alert: "danger",
       role_id: req.body.role_id
-    });
+  })
+   
   }
 };

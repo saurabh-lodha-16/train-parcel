@@ -69,5 +69,6 @@ export async function editUserRoleResult(req, res) {
       alertMsg: err,
       alert: "error"
     });
+    
   }
 };

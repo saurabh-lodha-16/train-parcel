@@ -4,9 +4,9 @@ const City = db.cities;
 const Train = db.trains;
 var request = require('request');
 
-export function getStations(req, res) {
-    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/12136/date/20190826/",
-        (error, response, body) => {
+export async function getStations(req, res) {
+    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/17031/date/20190827/",
+        async (error, response, body) => {
             if (error) {
                 return console.dir(error);
             }
@@ -18,15 +18,12 @@ export function getStations(req, res) {
                     cities.push(store[i].StationName);
                 }
                 for (let i = 0; i < cities.length; i++) {
-                    City.create({
-                        name: cities[i]
-                    }).then(() => {
-                        console.log('City Added');
-                        res.send('Done');
-                    });
+                    const cityExists = await City.findOne({ where: { name: cities[i] } });
+                    if (!cityExists) {
+                        const x = await City.create({ name: cities[i] })
+                    }
                 }
             }
         });
 }
-
 

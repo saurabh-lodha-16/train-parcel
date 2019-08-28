@@ -1,10 +1,22 @@
-<html>
-
-<head>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script>
+<body>
+	<div class="container">
+			<% include ../common/alert %>
+			<table id="table" class="table">
+				<tr>
+					<th>User Id</th>
+					<th>City Id</th>
+				</tr>
+			</table>
+			<br>
+			<br>
+			<form action="/office/add" method='get'>
+				<button class ="btn btn-primary" type="submit" value="Submit">Update User</button>
+			</form>	
+	</div>
+</body>
+<script>
 		$(document).ready(function () {
-			$.get("http://localhost:3000/office/all", function (data, status) {
+			$.get("/office/all", function (data, status) {
 				console.log(data);
 				for (let office of data) {
 					console.log(office.id);
@@ -15,32 +27,4 @@
 			})
 		});
 	</script>
-</head>
-
-<body>
-	<% include ../common/alert %>
-	<table id="table" class="table">
-		<tr>
-      <th>User Id</th>
-			<th>City Id</th>
-		</tr>
-
-	</table>
-
-	<br>
-	<br>
-	<form action="http://localhost:3000/office/add" method='get'>
-    <button class ="btn btn-primary" type="submit" value="Submit">Update User</button>
-  </form>
-
-</body>
-
 <style>
-	table,
-	th,
-	td {
-		border: 1px solid black;
-	}
-</style>
-
-</html>

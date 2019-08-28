@@ -10,7 +10,7 @@ module.exports = {
       },
       train_id: {
         type: Sequelize.UUID,
-        allowNull: true,
+        allowNull: false,
       },
       sCity: {
         type: Sequelize.UUID,
@@ -29,8 +29,8 @@ module.exports = {
         allowNull: false
       },
       isRunning:{
-       type: Sequelize.BOOLEAN,
-       defaultValue:true 
+        type: Sequelize.BOOLEAN,
+        defaultValue:true
       },
       createdAt: {
         allowNull: false,

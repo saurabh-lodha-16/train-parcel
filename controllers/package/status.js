@@ -17,41 +17,51 @@ export async function getPackageStatus(serial_no) {
     let dCity = packageDetails.dataValues.dCity;
     sCity = await getCityName(sCity);
     dCity = await getCityName(dCity);
+    let dCityTrainStatusId = packageDetails.dataValues.dCityTrainStatusId;
+    let sCityTrainStatusId = packageDetails.dataValues.sCityTrainStatusId;
 
-    
     if (statusId == completedId) {
         console.log('Your package has reached')
     }
     else {
-
-        const answer = await models.trainStatuses.findAll({ where: { trainId: trainId, isRunning: true } });
+        var x = moment().format();
+        x = x.split('T');
+        var time = x[0] + " " + x[1];
+        const answer = await models.trainStatuses.findAll({ where: { trainId: trainId } });
         const result = [];
         for (let i = 0; i < answer.length; i++) {
             let x = await getISTTime(answer[i].dataValues.sTime);
             let city_name = await getCityName(answer[i].dataValues.sCity);
-            result.push({ city_name: city_name, time: x, isLive: false });
+            let trainStatusId = answer[i].dataValues.id;
+            result.push({ trainStatusId: trainStatusId, city_name: city_name, time: x, isLive: false });
         }
         let y = await getISTTime(answer[answer.length - 1].dataValues.dTime);
         let city_name = await getCityName(answer[answer.length - 1].dataValues.dCity);
-        result.push({ city_name: city_name, time: y, isLive: false });
+        let trainStatusId = answer[answer.length - 1].dataValues.id;
+        result.push({ trainStatusId: trainStatusId, city_name: city_name, time: y, isLive: false });
         let curr_city = await getCurrCity(trainId);
         curr_city = await getCityName(curr_city);
 
         let sIndex, dIndex, liveIndex;
         for (let i = 0; i < result.length; i++) {
-            if (result[i].city_name == sCity) {
+            if (result[i].trainStatusId == sCityTrainStatusId) {
                 sIndex = i;
             }
-            if (result[i].city_name == dCity) {
+            if (result[i].trainStatusId == dCityTrainStatusId) {
                 dIndex = i;
             }
-            if (result[i].city_name == curr_city) {
+        }
+        const final_answer = result.slice(sIndex, dIndex+1);
+        for (let i = 0; i < final_answer.length; i++) {
+            if (final_answer[i].city_name == curr_city) {
                 liveIndex = i;
             }
         }
-    
-        const final_answer = result.slice(sIndex, dIndex);
+        if(liveIndex === undefined){
+            console.log(`Your train hasn't started yet`);
+        }else{
         final_answer[liveIndex].isLive = true;
+        }
         console.log(final_answer);
         return final_answer
     }
