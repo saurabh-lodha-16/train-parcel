@@ -58,14 +58,14 @@ export async function getPackageStatus(serial_no) {
                 dIndex = i;
             }
         }
-        const final_answer = result.slice(sIndex, dIndex + 1);
+        let final_answer = result.slice(sIndex, dIndex + 1);
         for (let i = 0; i < final_answer.length; i++) {
             if (final_answer[i].city_name == curr_city) {
                 liveIndex = i;
             }
         }
         let msg;
-        console.log(liveIndex);
+        final_answer = removeDuplicates(final_answer, 'cityId');
         if (statusId == completedId) {
             final_answer[final_answer.length - 1].isLive = true;
             msg = 'Your package has reached';
@@ -85,4 +85,10 @@ export async function getPackageStatus(serial_no) {
             return final_answer
         }
     }
+}
+
+function removeDuplicates(myArr, prop) {
+    return myArr.filter((obj, pos, arr) => {
+        return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+    });
 }
