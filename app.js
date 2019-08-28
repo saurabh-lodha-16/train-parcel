@@ -62,8 +62,8 @@ app.use(function(req, res, next) {
 //ye async karna hai
 models.sequelize.sync();
 // error handler
-import { addSomeShit } from './controllers/trainStatus/fillStations';
-addSomeShit();
+import { trainStatusCron } from './controllers/trainStatus/fillStations';
+trainStatusCron();
 
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development

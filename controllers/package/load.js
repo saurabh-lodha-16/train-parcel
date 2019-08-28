@@ -5,9 +5,10 @@ const Op = db.Sequelize.Op;
 const sequelize = require('sequelize')
 import { getCityName } from '../getCityName';
 import { getISTTime } from '../getISTTime';
+import { trainBetween } from '../trainStatus/trainsBetween';
 
 //serialNo se 
-export async function loadPackage(req, res) {
+export async function loadPackage(packageId, sCityTrainStatusId, dCityTrainStatusId, trainId) {
     //parameters are packageId, trainId, sourceStatusID, destinationSourceID
     // let sCityTrainStatusId = req.body.sourceStatusId;
     // let dCityTrainStatusId = req.body.destinationStatusId;
@@ -21,39 +22,37 @@ export async function loadPackage(req, res) {
     //notify code
     // res.send(packageDetails);
 
-try{
-    if (req.body.select_date) {
-        let selectDate = req.body.select_date
-        let trainStatuses = await models.trainStatuses.findAll(
-            {
-                include: [models.trains],
-                attributes: [
-                    'id',
-                    [sequelize.fn('date_format', sequelize.col('sTime'), '%d-%m-%Y'), 'sTime']
-                ], where: {
-                    sTime: selecteDate
-                }
-            })
-        res.render('base', {
-            content: 'package/selectTrainStatus',
-            trainStatuses: trainStatuses,
-            package_serial_no: req.body.serialNo
-        })
-    } else {
-        res.render('base', {
-            content: 'package/selectTrainStatus',
-            trainStatuses: await models.trainStatuses.findAll({ include: [models.trains] }),
-            package_serial_no: req.body.serialNo
-        })
-    }
-}catch(e){
-    console.log(e);
+
+
+
+    let temp1 = await models.statuses.findOne({ where: { type: 'IN-TRANSIT' } });
+    let inTransitId = temp1.dataValues.id;
+    const packageDetails = await models.packages.update({ trainId: trainId, statusId: inTransitId, sCityTrainStatusId: sCityTrainStatusId, dCityTrainStatusId: dCityTrainStatusId },
+        { where: { id: packageId } })
+    return packageDetails;
 }
 
-  
-
+export async function loadPackagePost(req, res){
+    try{
+        let select_date = req.body.select_date
+        let serial_no = req.body.package_serial_no
+            if (select_date) {
+                let trainStatusesList = await trainBetween(serial_no, select_date)
+                res.render('base', {
+                    content: 'package/selectTrainStatus',
+                    trainStatuses: trainStatusesList,
+                    package_serial_no: req.body.serialNo
+                })
+            } else {
+                res.render('base', {
+                    content: 'package/selectTrainStatus',
+                    package_serial_no: req.body.serialNo
+                })
+            }
+        }catch(e){
+            console.log(e);
+        }
 }
-
 
 export function loadPackageGet(req, res) {
     res.render('base', {

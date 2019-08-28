@@ -1,30 +1,28 @@
 <body>
 	<div class="container">
-			<% include ../common/alert %>
-			<table id="table" class="table">
-				<tr>
-					<th>User Id</th>
-					<th>City Id</th>
-				</tr>
-			</table>
-			<br>
-			<br>
-			<form action="/office/add" method='get'>
-				<button class ="btn btn-primary" type="submit" value="Submit">Update User</button>
-			</form>	
+		<% include ../common/alert %>
+		<table id="table" class="table">
+			<tr>
+				<th>User Id</th>
+				<th>City Id</th>
+			</tr>
+		</table>
+		<br>
+		<br>
 	</div>
 </body>
 <script>
-		$(document).ready(function () {
-			$.get("/office/all", function (data, status) {
-				console.log(data);
-				for (let office of data) {
-					console.log(office.id);
-          $("#table").append(`<tr> <td>${office.userId} </td>
-            <td>${office.cityId} </td>
+	$(document).ready(function () {
+		$.get("/office/all", function (data, status) {
+			console.log(data);
+			for (let office of data) {
+				console.log(office.id);
+				$("#table").append(`<tr> <td>${office.userName} </td>
+						<td>${office.cityName} </td>
+						<td><a class = "btn btn-info" href ="/office/edit?_id=${office.id}">Update</a></td>
 						</tr>`);
-				}
-			})
-		});
-	</script>
+			}
+		})
+	});
+</script>
 <style>

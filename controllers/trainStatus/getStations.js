@@ -5,7 +5,7 @@ const Train = db.trains;
 var request = require('request');
 
 export async function getStations(req, res) {
-    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/17031/date/20190827/",
+    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/12136/date/20190828/",
         async (error, response, body) => {
             if (error) {
                 return console.dir(error);
