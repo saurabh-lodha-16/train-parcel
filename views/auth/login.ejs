@@ -23,15 +23,19 @@
             <form method="POST" action="/login">
                 <div class="form-group">
                     <label for="email">Email address</label>
-                    <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                    <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
                 </div>
                 <div class="form-group">
                     <label for="pwd">Password</label>
-                    <input name="pwd" type="password" class="form-control" id="pwd">
+                    <input name="pwd" type="password" class="form-control" id="pwd" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
             </form>
-            <br>
+            OR<br>
+            Login with<button class="btn fa fa-google"></button>
+            <br><br>
             <a href="/forgot-password">Forgot Password?</a>
             <br>
             <a href="/register">Not Registered yet?</a>
