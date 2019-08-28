@@ -1,8 +1,8 @@
 <div class="container">
     <main>
         <form action='./update' method='get'>
-            <select name="package" text="select package">
-                 <option hidden disabled selected >select packages</option>
+            <select name="package" class="form-control" text="select package">
+                 <option hidden disabled selected >Select Serial ID</option>
                 <% for(let package of packageList) { %>
                 <option value=<%=package.id%> ><%= `${package.serial_no}` %></option>
                 <% } %>
