@@ -3,7 +3,8 @@ import db from '../models/index.js';
 const notifier = require('node-notifier');
 export async function getRole(userId) {
   let roleAssign = await db.roleAssigns.findOne({
-    where: { userId: userId }
+    where: { userId: userId },
+    include: [{ model: db.roles }]
   })
   if (roleAssign != null) {
     let role = await db.roles.findOne({
@@ -13,10 +14,12 @@ export async function getRole(userId) {
     if (role != null) {
       return role.name;
     } else {
-      throw console.error('Role doesnt exist');
+      return
+      // throw console.error('Role doesnt exist');
     }
   } else {
-    throw console.error('User doesnt exist');
+    return
+    // throw console.error('User doesnt exist');
   }
 }
 
