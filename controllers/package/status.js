@@ -34,7 +34,7 @@ export async function getPackageStatus(serial_no) {
         let x = moment().format();
         x = x.split('T');
         let time = x[0] + " " + x[1];
-        let answer = await models.trainStatuses.findAll({ where: { trainId: trainId } });
+        let answer = await models.trainStatuses.findAll({ where: {sTime: { [Op.gte]: time }, trainId: trainId } });
         let result = [];
         for (let i = 0; i < answer.length; i++) {
             let x = await getISTTime(answer[i].dataValues.sTime);
@@ -68,23 +68,18 @@ export async function getPackageStatus(serial_no) {
         final_answer = removeDuplicates(final_answer, 'city_name');
         if (statusId == completedId) {
             final_answer[final_answer.length - 1].isLive = true;
-            msg = 'Your package has reached';
-            final_answer['msg'] = msg;
+            final_answer.push('Your package has reached');
             console.log(final_answer);
             return final_answer;
         }
         else if (liveIndex == undefined) {
-            console.log(final_answer);
-              msg = 'Your package is loaded and will soon start';
-            return msg;
-            
-           // return final_answer;
+            final_answer.push('Your package is loaded and will soon start');
+            return final_answer
+
         }
         else {
             final_answer[liveIndex].isLive = true;
-            msg = 'Your package is on its way';
-            final_answer['msg'] = msg;
-            console.log(final_answer);
+            final_answer.push('Your package is on its way');
             return final_answer
         }
     }
