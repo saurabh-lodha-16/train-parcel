@@ -47,7 +47,18 @@ export async function viewUsers(req, res) {
       alert: "error"
     });
   }
-};
+}
+
+async function getRole(name) {
+  try {
+    let roleInstance = await roles.findOne({
+      where: { name: name }
+    });
+    return roleInstance;
+  } catch (err) {
+    throw (err);
+  }
+}
 
 export async function editUserRole(req, res) {
   try {
@@ -75,6 +86,15 @@ export async function editUserRoleResult(req, res) {
       roleArray = await roles.findAll({
         attributes: ['id', 'name', 'level']
       });
+      let userRoleEntry = await roleAssigns.findOne({
+        where : {userId: req.body.user_id} 
+      });
+      if(!userRoleEntry) {
+        await roleAssigns.create({
+          roleId : req.body.role_id,
+          userId : req.body.user_id
+        });
+      }
       await roleAssigns.update(
         { roleId: req.body.role_id },
         { where: { userId: req.body.user_id } }

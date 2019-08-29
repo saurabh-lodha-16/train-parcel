@@ -5,6 +5,16 @@
       <th>Name</th>
       <th>Level</th>
     </tr>
+    <% function compare( a, b ) {
+      if ( a.name.toLowerCase() < b.name.toLowerCase() ){
+        return -1;
+      }
+      if ( a.name.toLowerCase() > b.name.toLowerCase() ){
+        return 1;
+      }
+      return 0;
+   }%>
+   <% rolesArray.sort(compare) %>
     <form action='role/edit_role' method='get'>
       <% for (role of rolesArray) { %>
       <tr>

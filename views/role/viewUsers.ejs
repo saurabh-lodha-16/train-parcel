@@ -5,6 +5,16 @@
       <th>Role</th>
       <th>Access Level</th>
     </tr>
+    <% function compare( a, b ) {
+      if ( a.name.toLowerCase() < b.name.toLowerCase() ){
+        return -1;
+      }
+      if ( a.name.toLowerCase() > b.name.toLowerCase() ){
+        return 1;
+      }
+      return 0;
+  }%>
+  <% usersArray.sort(compare) %>
     <form action='view_users/editUserRole' method='get'>
       <% for (user of usersArray) { %>
       <tr>
@@ -13,8 +23,8 @@
         <td> <%= `${user.roleAssign.role.name}` %></td>
         <td> <%= `${user.roleAssign.role.level}` %></td>
         <% } else { %>
-        <td> User </td>
-        <td> 10 </td>
+        <td> Unassigned </td>
+        <td> Unassigned </td>
         <% } %>
         <td>
           <button class="btn btn-primary" type="submit" value=<%= user.id %> name="user_id">
