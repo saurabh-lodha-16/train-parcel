@@ -75,9 +75,10 @@ export async function getPackageStatus(serial_no) {
         }
         else if (liveIndex == undefined) {
             console.log(final_answer);
-            msg = 'Your package is loaded and will soon start';
-            final_answer['msg'] = msg;
-            return final_answer;
+              msg = 'Your package is loaded and will soon start';
+            return msg;
+            
+           // return final_answer;
         }
         else {
             final_answer[liveIndex].isLive = true;
