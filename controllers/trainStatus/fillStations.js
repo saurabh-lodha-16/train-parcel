@@ -114,19 +114,19 @@ export async function trainStatusCron() {
                 let inTransitId = temp1.dataValues.id;
                 let temp2 = await models.statuses.findOne({ where: { type: 'COMPLETED' } });
                 let completedId = temp2.dataValues.id;
-                const toBeUpdated = await models.packages.findAll({where:{trainId: trainId, dCity: curr_city, statusId: inTransitId, isActive: true}});
-                if(toBeUpdated.length > 0){
-                const updatedPackages = await models.packages.update({ statusId: completedId },
-                    {
-                        where: { trainId: trainId, dCity: curr_city, statusId: inTransitId, isActive: true },
-                        returning: true,
-                        plain: true
-                    })
-                    if(updatedPackages){
+                const toBeUpdated = await models.packages.findAll({ where: { trainId: trainId, dCity: curr_city, statusId: inTransitId, isActive: true } });
+                if (toBeUpdated.length > 0) {
+                    const updatedPackages = await models.packages.update({ statusId: completedId },
+                        {
+                            where: { trainId: trainId, dCity: curr_city, statusId: inTransitId, isActive: true },
+                            returning: true,
+                            plain: true
+                        })
+                    if (updatedPackages) {
                         console.log(updatedPackages);
                     }
                 }
-                else{
+                else {
                     console.log('No packages to be delivered at this station');
                 }
             }

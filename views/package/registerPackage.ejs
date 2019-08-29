@@ -30,7 +30,7 @@
             <select class="form-control" name="destination_city_id" id="destination_city_id" required>
                 <% for(let city of citiesArray) { %>
                 <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <% } %> 
+                <% } %>
             </select>
         </div>
 
@@ -44,8 +44,8 @@
         </div>
         <div class="form-group">
             <label for="phoneNo">Receiver Phone</label>
-            <input name="phoneNo" type="text" class="form-control" id="phoneNo" pattern=".{10}" title="10 characters only"
-            required>
+            <input name="phoneNo" type="text" class="form-control" id="phoneNo" pattern=".{10}"
+                title="10 characters only" required>
         </div>
 
         <button type="submit" value="Submit" class="btn btn-primary">Add Package</button>

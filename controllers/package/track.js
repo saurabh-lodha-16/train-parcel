@@ -17,7 +17,7 @@ export async function trackGet(req, res) {
             //     diffCurrMins = getDiffMins(sTime, currTime)
             // }
             // console.log(diffCurrMins * 100 / diffMins, '-0000000000000000000000000000')
-            
+
             if (len > 1 && Array.isArray(status)) {
                 for (let id in status) {
                     if (status[id].isLive) {

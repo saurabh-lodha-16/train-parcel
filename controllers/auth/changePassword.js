@@ -60,7 +60,7 @@ export async function changePassword(req, res) {
           alert: "danger"
         });
       }
-      if ((oldPassword === newPassword )) {
+      if ((oldPassword === newPassword)) {
         res.render('base', {
           content: 'auth/changePassword.ejs',
           alertMsg: "New Password must be different from Old Password.",

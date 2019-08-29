@@ -12,5 +12,5 @@ export function addCity(req, res) {
     console.log(`City was not Created 
     ${err}`);
   }
-  
+
 }

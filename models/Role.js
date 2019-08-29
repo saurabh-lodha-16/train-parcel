@@ -14,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER
     }
   }, {});
-  roles.associate = function(models) {
+  roles.associate = function (models) {
     // associations can be defined here
-   roles.hasOne(models.roleAssigns, {foreignKey:'roleId', sourceKey:'id'});
+    roles.hasOne(models.roleAssigns, { foreignKey: 'roleId', sourceKey: 'id' });
   };
   return roles;
 };

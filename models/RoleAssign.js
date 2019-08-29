@@ -11,19 +11,19 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    roleId:{
-      type:DataTypes.UUID,
+    roleId: {
+      type: DataTypes.UUID,
       allowNull: false,
     },
-    isActive:{
-      type:DataTypes.BOOLEAN,
-      defaultValue:true
-    } 
+    isActive: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    }
   }, {});
-  roleAssigns.associate = function(models) {
+  roleAssigns.associate = function (models) {
     // associations can be defined here
-   roleAssigns.belongsTo(models.users, {targetKey:'id'});
-   roleAssigns.belongsTo(models.roles, {targetKey:'id'});
+    roleAssigns.belongsTo(models.users, { targetKey: 'id' });
+    roleAssigns.belongsTo(models.roles, { targetKey: 'id' });
   };
   return roleAssigns;
 };

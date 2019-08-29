@@ -1,5 +1,5 @@
 <div class="container">
-        <% function compare( a, b ) {
+  <% function compare( a, b ) {
             if ( a.name.toLowerCase() < b.name.toLowerCase() ){
               return -1;
             }
@@ -8,22 +8,22 @@
             }
             return 0;
          }%>
-         <% roleArray.sort(compare) %>
-    <form action='./editUserRole' method='post'>
-        <input type="hidden" name="user_id" value=<%=user_id%>>
-        <select name="role_id">
-            <% for(role of roleArray) { %>
-            <option value=<%= `${role.id}` %>><%= `${role.name}` %></option>
-            <% } %>
-        </select>
-        <br />
-        <br />
-        <br />
-        <button class="btn btn-primary" type="submit" value="Submit"> Confirm role </button>
-    </form>
+  <% roleArray.sort(compare) %>
+  <form action='./editUserRole' method='post'>
+    <input type="hidden" name="user_id" value=<%=user_id%>>
+    <select name="role_id">
+      <% for(role of roleArray) { %>
+      <option value=<%= `${role.id}` %>><%= `${role.name}` %></option>
+      <% } %>
+    </select>
     <br />
     <br />
-    <form action='../view_users' method='get'>
-        <button class="btn btn-primary" type="submit" value="Submit"> Users list </button>
-    </form>
+    <br />
+    <button class="btn btn-primary" type="submit" value="Submit"> Confirm role </button>
+  </form>
+  <br />
+  <br />
+  <form action='../view_users' method='get'>
+    <button class="btn btn-primary" type="submit" value="Submit"> Users list </button>
+  </form>
 </div>

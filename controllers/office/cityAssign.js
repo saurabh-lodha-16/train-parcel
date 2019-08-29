@@ -20,13 +20,13 @@ export function cityAssign(req, res) {
       } else {
         Office.update({
           cityId: req.body.city
-        },{where :{userId: req.body.user} }).then(() => {
+        }, { where: { userId: req.body.user } }).then(() => {
           console.log('Order created');
           res.redirect('/office');
         });
       }
     })
   } catch (err) {
-    res.render('office/cityAssign', { alert: 'danger', alertMsg: err});
+    res.render('office/cityAssign', { alert: 'danger', alertMsg: err });
   }
 }
