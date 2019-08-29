@@ -1,8 +1,10 @@
 import db from '../../models';
+let roles = db['roles'];
 let city = db['cities'];
 let status = db['statuses'];
 let user = db['users'];
 let packages = db['packages'];
+let roleAssigns = db['roleAssigns'];
 
 async function retrieveCityNames() {
   try {
@@ -116,5 +118,4 @@ export async function registerPackage(req, res) {
   } else {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
   }
-
 };
