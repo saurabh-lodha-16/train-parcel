@@ -33,3 +33,4 @@ module.exports = {
     return queryInterface.dropTable('trains');
   }
 };
+
