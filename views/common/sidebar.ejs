@@ -102,13 +102,25 @@
                     <span class="menu-collapsed">Train List</span>
                 </a>
             </div>
-
-            <a href="/updateProfile" aria-expanded="false" class=" list-group-item flex-column align-items-start">
+            
+            <a href="#submenu5" data-toggle="collapse" aria-expanded="false"
+                class=" list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-user-circle fa-fw mr-3"></span>
+                    <span class="fa fa-train fa-fw mr-3"></span>
                     <span class="menu-collapsed">Settings</span>
+                    <span class="submenu-icon ml-auto"></span>
                 </div>
             </a>
+            <div id='submenu5' class="collapse sidebar-submenu">
+                <a href="/updateProfile" class="list-group-item list-group-item-action ">
+                    <span class="menu-collapsed">Update Profile</span>
+                </a>
+
+                <a href="/changePassword" class="list-group-item list-group-item-action ">
+                    <span class="menu-collapsed">Change Password</span>
+                </a>
+            </div>
+            
             <a href="/logout" aria-expanded="false" class=" list-group-item flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-sign-out fa-fw mr-3"></span>
