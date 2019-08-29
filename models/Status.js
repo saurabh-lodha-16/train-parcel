@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {});
-  statuses.associate = function(models) {
+  statuses.associate = function (models) {
     // associations can be defined here
-    statuses.hasOne(models.packages, {foreignKey:'statusId', sourceKey:'id'});
+    statuses.hasOne(models.packages, { foreignKey: 'statusId', sourceKey: 'id' });
   };
   return statuses;
 };

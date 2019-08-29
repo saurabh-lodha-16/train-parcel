@@ -15,7 +15,7 @@ export function getRedirect(req, res) {
             alert: 'success',
             alertMsg: `Hey ${user.name}! You need to verify your Phone number to continue.`
         })
-    } else if (req.loggedIn){
+    } else if (req.loggedIn) {
         res.redirect('/')
     }
 

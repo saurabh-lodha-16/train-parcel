@@ -24,9 +24,9 @@ module.exports = (sequelize, DataTypes) => {
     weight: {
       type: DataTypes.FLOAT
     },
-    name:{
-      type:DataTypes.STRING,
-      allowNull:true
+    name: {
+      type: DataTypes.STRING,
+      allowNull: true
     },
     sCity: {
       type: DataTypes.UUID,
@@ -44,13 +44,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    sCityTrainStatusId:{
+    sCityTrainStatusId: {
       type: DataTypes.UUID,
-      allowNull:true
+      allowNull: true
     },
-    dCityTrainStatusId:{
+    dCityTrainStatusId: {
       type: DataTypes.UUID,
-      allowNull:true
+      allowNull: true
     },
     isActive: {
       type: DataTypes.BOOLEAN,

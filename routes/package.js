@@ -1,8 +1,8 @@
 import { renderRegistration, registerPackage } from '../controllers/package/register';
 import { trackGet } from '../controllers/package/track'
-import { renderUpdation, update} from '../controllers/package/update';
-import {  loadPackageGet } from '../controllers/package/load'
-import {  linkPackageTrainGet } from '../controllers/package/link'
+import { renderUpdation, update } from '../controllers/package/update';
+import { loadPackageGet } from '../controllers/package/load'
+import { linkPackageTrainGet } from '../controllers/package/link'
 import express from 'express';
 import { listPackages } from '../controllers/package/update';
 let router = express.Router();

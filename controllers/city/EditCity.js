@@ -1,7 +1,7 @@
 'use strict';
 import db from '../../models/index.js';
 const City = db.cities;
-export function editCity(req, res) { 
+export function editCity(req, res) {
   try {
     City.findOne({
       attributes: ['id', 'name'],

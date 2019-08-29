@@ -1,7 +1,7 @@
 import db from '../../models';
 let user = db['users'];
 
-export async function updateUser(userId, name, email   ) {
+export async function updateUser(userId, name, email) {
   try {
     await user.update(
       {

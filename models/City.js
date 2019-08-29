@@ -8,17 +8,17 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: DataTypes.UUIDV4
     },
     name: {
-      type:DataTypes.STRING,
-      unique:true
+      type: DataTypes.STRING,
+      unique: true
     }
   }, {});
-  cities.associate = function(models) {
+  cities.associate = function (models) {
     // associations can be defined here
-    cities.hasOne(models.offices, {foreignKey:'cityId', sourceKey:'id'})
-    cities.hasOne(models.trainStatuses, {foreignKey:'sCity', sourceKey:'id'})
-    cities.hasOne(models.trainStatuses, {foreignKey:'dCity', sourceKey:'id'})
-    cities.hasOne(models.packages, {foreignKey:'sCity', sourceKey:'id'})
-    cities.hasOne(models.packages, {foreignKey:'dCity', sourceKey:'id'})
+    cities.hasOne(models.offices, { foreignKey: 'cityId', sourceKey: 'id' })
+    cities.hasOne(models.trainStatuses, { foreignKey: 'sCity', sourceKey: 'id' })
+    cities.hasOne(models.trainStatuses, { foreignKey: 'dCity', sourceKey: 'id' })
+    cities.hasOne(models.packages, { foreignKey: 'sCity', sourceKey: 'id' })
+    cities.hasOne(models.packages, { foreignKey: 'dCity', sourceKey: 'id' })
   };
   return cities;
 };

@@ -34,7 +34,7 @@ async function createUser(name, email, phoneNo) {
     let fetchedUser = await user.findOne({
       where: { mobileNo: phoneNo }
     });
-    if(!fetchedUser) {
+    if (!fetchedUser) {
       fetchedUser = await user.findOne({
         where: { email: email }
       });

@@ -87,12 +87,12 @@ export async function editUserRoleResult(req, res) {
         attributes: ['id', 'name', 'level']
       });
       let userRoleEntry = await roleAssigns.findOne({
-        where : {userId: req.body.user_id} 
+        where: { userId: req.body.user_id }
       });
-      if(!userRoleEntry) {
+      if (!userRoleEntry) {
         await roleAssigns.create({
-          roleId : req.body.role_id,
-          userId : req.body.user_id
+          roleId: req.body.role_id,
+          userId: req.body.user_id
         });
       }
       await roleAssigns.update(
