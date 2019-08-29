@@ -2,6 +2,7 @@
   <table class="table">
     <tr>
       <th>Name</th>
+      <th>Email</th>
       <th>Role</th>
       <th>Access Level</th>
     </tr>
@@ -19,6 +20,7 @@
       <% for (user of usersArray) { %>
       <tr>
         <td> <%= `${user.name}` %> </td>
+        <td> <%= `${user.email}` %> </td>
         <% if (user.roleAssign) { %>
         <td> <%= `${user.roleAssign.role.name}` %></td>
         <td> <%= `${user.roleAssign.role.level}` %></td>

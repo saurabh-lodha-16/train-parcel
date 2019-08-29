@@ -1,12 +1,14 @@
 import * as models from '../models'
+import { getRole } from './common';
 
 export async function dashboardGet(req, res) {
     let user = req.session.user;
     if (user && req.cookies.user_sid) {
 
         try {
-            let role = 'Manager'
-            if (role == 'Manager') {
+            let userRole = await getRole(user.id)
+            console.log(userRole, '==============')
+            if (userRole == 'Manager') {
                 let curr_office = await models.offices.findOne({
                     where: {
                         userId: user.id
@@ -115,22 +117,26 @@ export async function dashboardGet(req, res) {
                         content: 'dashboard',
                         completedPackages: completedPackages,
                         inTransitPackages: inTransitPackages,
-                        pendingPackages: pendingPackages
+                        pendingPackages: pendingPackages,
+                        userRole: await getRole(user.id)
                     })
                 } else {
                     res.render('base', {
                         content: 'dashboard',
+                        userRole: await getRole(user.id)
                     })
                 }
 
             } else {
                 res.render('base', {
                     content: 'dashboard',
+                    userRole: await getRole(user.id)
                 })
             }
         } catch (e) {
             res.render('base', {
                 content: 'dashboard',
+                userRole: await getRole(user.id),
                 alert: 'danger',
                 alertMsg: 'Exception: ' + e
             })

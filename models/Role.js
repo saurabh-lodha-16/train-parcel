@@ -20,3 +20,8 @@ module.exports = (sequelize, DataTypes) => {
   };
   return roles;
 };
+
+
+//Manager
+//User
+//Admin

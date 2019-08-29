@@ -1,4 +1,5 @@
 import db from '../../models';
+import { getRole } from '../common';
 const bcrypt = require('bcrypt')
 const users = db['users'];
 
@@ -7,11 +8,13 @@ function checkPassword(str) {
   return re.test(str);
 }
 
-export function renderChangePassword(req, res) {
+export async function renderChangePassword(req, res) {
   try {
-    if (req.session.user) {
+    let user = req.session.user
+    if (user) {
       res.render('base',{
-        content: 'auth/changePassword.ejs'
+        content: 'auth/changePassword.ejs',
+        userRole: await getRole(user.id)
       });
     } else {
       res.redirect('/login');

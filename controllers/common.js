@@ -1,26 +1,23 @@
 'use strict';
 import db from '../models/index.js';
 const notifier = require('node-notifier');
-export function getRole(userId) {
-  db.roleAssigns.findOne({
-    attribute: [roleId],
+export async function getRole(userId) {
+  let roleAssign = await db.roleAssigns.findOne({
     where: { userId: userId }
-  }).then((role) => {
+  })
+  if (roleAssign != null) {
+    let role = await db.roles.findOne({
+      where: { id: roleAssign.roleId }
+    })
+
     if (role != null) {
-      db.roles.findOne({
-        attribute: [roleId],
-        where: { roleId: role.datavalues.roleId }
-      }).then((role) => {
-        if (role != null) {
-          return role;
-        } else {
-          throw console.error('Role doesnt exist');
-        }
-      })
+      return role.name;
     } else {
-      throw console.error('User doesnt exist');
+      throw console.error('Role doesnt exist');
     }
-  });
+  } else {
+    throw console.error('User doesnt exist');
+  }
 }
 
 export function desktopNotification(title, message) {
@@ -54,3 +51,14 @@ export function sendWAmsg(phone, msg) {
     .done();
 
 }
+
+
+// export async function getRole(userId) {
+//   let roleAssign = await models.roleAssigns.findOne({
+//     include: [{ model: models.roles }],
+//     where: {
+//       userId: userId
+//     }
+//   })
+//   return roleAssign.roles[0].name
+// }

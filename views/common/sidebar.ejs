@@ -22,91 +22,97 @@
                     <span class="submenu-icon ml-auto"></span>
                 </div>
             </a>
+
             <div id='submenu1' class="collapse sidebar-submenu">
                 <a href="/package" class="list-group-item list-group-item-action ">
                     <span class="menu-collapsed">Add Package</span>
                 </a>
 
+                <% if(typeof userRole != 'undefined' && (userRole == 'Manager' || userRole == 'Admin')){ %>
+
                 <a href="/package/load" class="list-group-item list-group-item-action ">
                     <span class="menu-collapsed">Load a Package</span>
                 </a>
-
+                <% } %>
                 <a href="/package/track" class="list-group-item list-group-item-action">
                     <span class="menu-collapsed">Track Package</span>
                 </a>
+                <% if(typeof userRole != 'undefined' && (userRole == 'Manager' || userRole == 'Admin')){ %>
 
                 <a href="/package/list" class="list-group-item list-group-item-action">
                     <span class="menu-collapsed">Update Package</span>
                 </a>
-
+                <%}%>
 
             </div>
-            <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
-                class=" list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-id-badge fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Role</span>
-                    <span class="submenu-icon ml-auto"></span>
+            <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
+
+                <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
+                    class=" list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-id-badge fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Role</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <div id='submenu2' class="collapse sidebar-submenu">
+                    <a href="/role" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">View Master Roles</span>
+                    </a>
+                    <a href="/role/add_role" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">Add Master Role</span>
+                    </a>
+
+                    <a href="/role/view_users" class="list-group-item list-group-item-action">
+                        <span class="menu-collapsed">Update User's Role</span>
+                    </a>
+
+
                 </div>
-            </a>
-            <div id='submenu2' class="collapse sidebar-submenu">
-                <a href="/role" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">View assigned Roles</span>
-                </a>
-                <a href="/role/add_role" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">Add Master Role</span>
-                </a>
+                <%}%>
 
-                <a href="#" class="list-group-item list-group-item-action">
-                    <span class="menu-collapsed">Assign Role</span>
+                <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
+
+                <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
+                    class=" list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-building-o fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Offices</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
                 </a>
+                <div id='submenu3' class="collapse sidebar-submenu">
+                    <a href="/office/cityAssign" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">Assign Manager</span>
+                    </a>
 
-                <a href="/role/view_users" class="list-group-item list-group-item-action">
-                    <span class="menu-collapsed">Update User's Role</span>
-                </a>
-
-
-            </div>
-            <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
-                class=" list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-building-o fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Offices</span>
-                    <span class="submenu-icon ml-auto"></span>
+                    <a href="/office" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">Office Manager List</span>
+                    </a>
                 </div>
-            </a>
-            <div id='submenu3' class="collapse sidebar-submenu">
-                <a href="/office/cityAssign" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">Assign Manager</span>
+                <%}%>
+                <a href="#submenu4" data-toggle="collapse" aria-expanded="false"
+                    class=" list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-train fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Trains</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
                 </a>
+                <div id='submenu4' class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">Running Status</span>
+                    </a>
 
-                <a href="/office" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">Office Manager List</span>
-                </a>
-            </div>
-
-            <a href="#submenu4" data-toggle="collapse" aria-expanded="false"
-                class=" list-group-item list-group-item-action flex-column align-items-start">
-                <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-train fa-fw mr-3"></span>
-                    <span class="menu-collapsed">Trains</span>
-                    <span class="submenu-icon ml-auto"></span>
+                    <a href="#" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">Train List</span>
+                    </a>
                 </div>
-            </a>
-            <div id='submenu4' class="collapse sidebar-submenu">
-                <a href="#" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">Running Status</span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-action ">
-                    <span class="menu-collapsed">Train List</span>
-                </a>
-            </div>
-            
+                
             <a href="#submenu5" data-toggle="collapse" aria-expanded="false"
                 class=" list-group-item list-group-item-action flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
-                    <span class="fa fa-train fa-fw mr-3"></span>
+                    <span class="fa fa-user fa-fw mr-3"></span>
                     <span class="menu-collapsed">Settings</span>
                     <span class="submenu-icon ml-auto"></span>
                 </div>
@@ -120,7 +126,7 @@
                     <span class="menu-collapsed">Change Password</span>
                 </a>
             </div>
-            
+
             <a href="/logout" aria-expanded="false" class=" list-group-item flex-column align-items-start">
                 <div class="d-flex w-100 justify-content-start align-items-center">
                     <span class="fa fa-sign-out fa-fw mr-3"></span>
