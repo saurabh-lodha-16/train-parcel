@@ -8,7 +8,7 @@ const Op = db.Sequelize.Op;
 const cron = require('node-cron');
 
 export async function fillStations(req, res) {
-    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/12136/date/20190828/",
+    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/17031/date/20190829/",
         async (error, response, body) => {
             if (error) {
                 return console.dir(error);
@@ -43,7 +43,7 @@ export async function fillStations(req, res) {
                             date1 = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate() + 1);
                             destDay = date1;
                         }
-                        let temp3 = await Train.findOne({ where: { trainNo: 12136 } })
+                        let temp3 = await Train.findOne({ where: { trainNo: 17031 } })
                         let trainId = temp3.dataValues.id;
                         let sTime = sourceDay + " " + source.ActualArrival + "+05:30";
                         let dTime = destDay + " " + destination.ActualArrival + "+05:30";
@@ -77,7 +77,7 @@ export async function fillStations(req, res) {
                         }
                         console.log(sourceDayNumber + " " + destDayNumber);
 
-                        let temp3 = await Train.findOne({ where: { trainNo: 12136 } })
+                        let temp3 = await Train.findOne({ where: { trainNo: 17031 } })
                         let trainId = temp3.dataValues.id;
                         let sTime = sourceDay + " " + source.ActualDeparture + "+05:30";
                         let dTime = destDay + " " + destination.ActualArrival + "+05:30";
@@ -101,7 +101,7 @@ export async function trainStatusCron() {
     }
     const trainIds = [...new Set(store)]
 
-    cron.schedule('*/20 * * * * *', async () => {
+    cron.schedule('*/15 * * * *', async () => {
         for (let i = 0; i < trainIds.length; i++) {
             let trainId = trainIds[i];
             let start = await models.trainStatuses.findOne({ where: { trainId: trainId } });

@@ -65,7 +65,7 @@ export async function getPackageStatus(serial_no) {
             }
         }
         let msg;
-        final_answer = removeDuplicates(final_answer, 'cityId');
+        final_answer = removeDuplicates(final_answer, 'city_name');
         if (statusId == completedId) {
             final_answer[final_answer.length - 1].isLive = true;
             msg = 'Your package has reached';
