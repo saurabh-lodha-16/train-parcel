@@ -1,13 +1,12 @@
 import db from '../../models';
 let user = db['users'];
 
-export async function updateUser(userId, name, email, phoneNo) {
+export async function updateUser(userId, name, email   ) {
   try {
     await user.update(
       {
         name: name,
         email: email,
-        mobileNo: phoneNo
       },
       { where: { id: userId } }
 
@@ -26,7 +25,7 @@ export async function updateUser(userId, name, email, phoneNo) {
 export async function updateProfile(req, res) {
   try {
     if (req.session.user) {
-      if (!(req.body.name && req.body.email && req.body.phoneNo)) {
+      if (!(req.body.name && req.body.email)) {
         res.render('base', {
           content: 'profile/updateProfile.ejs',
           user: req.session.user,
@@ -34,15 +33,7 @@ export async function updateProfile(req, res) {
           alert: "danger"
         });
       }
-      if (req.body.phoneNo.length !== 10) {
-        res.render('base', {
-          content: 'profile/updateProfile.ejs',
-          user: req.session.user,
-          alertMsg: "Phone number must consist 10 digits.",
-          alert: "danger"
-        });
-      }
-      let User = await updateUser(req.session.user.id, req.body.name, req.body.email, req.body.phoneNo);
+      let User = await updateUser(req.session.user.id, req.body.name, req.body.email);
       req.session.user = User;
       res.render('base', {
         content: 'profile/updateProfile.ejs',
