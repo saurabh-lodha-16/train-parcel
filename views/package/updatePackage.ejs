@@ -1,5 +1,15 @@
 <div class="container">
     <br />
+    <% function compare( a, b ) {
+        if (a.name.toLowerCase() < b.name.toLowerCase()){
+          return -1;
+        }
+        if (a.name.toLowerCase() > b.name.toLowerCase()){
+          return 1;
+        }
+        return 0;
+    }%>
+    <% citiesArray.sort(compare) %>
     <form action='./update' method='post'>
         <input type="hidden" name="packageId" value='<%= packageId %>'>
         <div class="form-group">
@@ -24,15 +34,16 @@
         </div>
         <div class="form-group">
             <label for="name">Receiver Name :</label>
-            <input type="text" class="form-control" name="name" required value=<%=name %>>
+            <input type="text" class="form-control" name="name" required value="<%=name %>">
         </div>
         <div class="form-group">
             <label for="email">Receiver email :</label>
-            <input type="text" class="form-control" name="email" required value=<%=email %>>
+            <input type="text" class="form-control" name="email" required value="<%=email %>">
         </div>
         <div class="form-group">
             <label for="phoneNo">Receiver phone number :</label>
-            <input type="text" name="phoneNo" class="form-control" required value=<%=phoneNo %>>
+            <input type="text" name="phoneNo" class="form-control" required pattern=".{10}" title="10 characters only"
+            value="<%=phoneNo %>">
         </div>
         <br />
         <button class="btn btn-primary" type="submit" value="Submit"> Update Package </button>

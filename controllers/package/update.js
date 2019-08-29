@@ -150,8 +150,8 @@ export async function update(req, res) {
         let name = req.body.name;
         let email = req.body.email;
         let phoneNo = req.body.phoneNo;
-        updatePackage(packageId, weight, sourceCity, destinationCity);
-        updateUser(receiverId, name, email, phoneNo);
+        await updatePackage(packageId, weight, sourceCity, destinationCity);
+        await updateUser(receiverId, name, email, phoneNo);
         res.render('base', {
           content: 'package/updatePackage.ejs',
           alertMsg: "Package successfully updated.",
