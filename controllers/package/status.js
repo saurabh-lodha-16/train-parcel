@@ -34,7 +34,7 @@ export async function getPackageStatus(serial_no) {
         let x = moment().format();
         x = x.split('T');
         let time = x[0] + " " + x[1];
-        let answer = await models.trainStatuses.findAll({ where: {sTime: { [Op.gte]: time }, trainId: trainId } });
+        let answer = await models.trainStatuses.findAll({ where: { trainId: trainId } });
         let result = [];
         for (let i = 0; i < answer.length; i++) {
             let x = await getISTTime(answer[i].dataValues.sTime);
@@ -74,6 +74,7 @@ export async function getPackageStatus(serial_no) {
         }
         else if (liveIndex == undefined) {
             final_answer.push('Your package is loaded and will soon start');
+            console.log(final_answer);
             return final_answer
 
         }
