@@ -11,7 +11,7 @@
             return 0;
         }%>
     <% packageList.sort(compare) %>
-    <select name="package" class="form-control" text="select package">
+    <select name="packageId" class="form-control" text="select package">
       <option hidden disabled selected>Select Package Serial ID</option>
       <% for(let package of packageList) { %>
       <option value=<%=package.id%>><%= `${package.serial_no}` %></option>

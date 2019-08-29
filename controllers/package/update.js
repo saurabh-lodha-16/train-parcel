@@ -101,7 +101,7 @@ export async function renderUpdation(req, res) {
   let cityArray;
   try {
     if (req.session.user) {
-      let packageId = req.query.package;
+      let packageId = req.query.packageId;
       let packageInstance = await packages.findOne({ where: { id: packageId } });
       let rcvrUserId = packageInstance.rcvrUserId;
       let receiver = await user.findOne({ where: { id: rcvrUserId } });
