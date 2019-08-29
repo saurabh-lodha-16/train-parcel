@@ -24,3 +24,4 @@ export function addTrain(req, res) {
     res.render('train/add', { alert: 'danger', alertMsg: error })
   }
 }
+

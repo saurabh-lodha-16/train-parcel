@@ -119,3 +119,4 @@ export async function registerPackage(req, res) {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
   }
 };
+

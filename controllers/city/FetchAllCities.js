@@ -12,3 +12,4 @@ export function fetchAllCities(req, res) {
     console.log(err);
   }
 }
+

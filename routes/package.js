@@ -19,3 +19,4 @@ router.get('/load', loadPackageGet);
 router.get('/load/?serialNo=:serialNo', loadPackageGet);
 router.get('/link/:sourceStatusId/:destinationStatusId/:trainId/:serialNo', linkPackageTrainGet);
 module.exports = router;
+

@@ -5,3 +5,4 @@ import { fetchAllUsers } from '../controllers/users/FetchAllUsers';
 router.get('/', fetchAllUsers);
 
 module.exports = router;
+

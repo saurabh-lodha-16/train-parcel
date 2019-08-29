@@ -30,3 +30,4 @@ export function cityAssign(req, res) {
     res.render('office/cityAssign', { alert: 'danger', alertMsg: err });
   }
 }
+

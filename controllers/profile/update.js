@@ -69,3 +69,4 @@ export async function renderUpdation(req, res) {
     res.send(err);
   }
 }
+

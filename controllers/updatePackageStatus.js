@@ -14,3 +14,4 @@ export function updatePackageStatus(packageId, status, res) {
     res.write(error);
   }
 }
+

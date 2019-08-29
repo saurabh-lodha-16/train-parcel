@@ -13,3 +13,4 @@ export function updateCity(req, res) {
     console.log(err);
   }
 }
+

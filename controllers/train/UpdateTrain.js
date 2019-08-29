@@ -14,3 +14,4 @@ export function updateTrain(req, res) {
     res.redirect('train', { alert: 'danger', alertMsg: error })
   }
 }
+

@@ -11,3 +11,4 @@ export async function getUserName(user_id) {
   let user_name = temp.dataValues.name;
   return user_name;
 }
+
