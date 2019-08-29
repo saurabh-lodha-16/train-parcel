@@ -98,11 +98,15 @@ async function updatePackage(packageId, weightPackage, sourceId, destinationId) 
 }
 
 export async function renderUpdation(req, res) {
-  let cityArray;
+  let cityArray, packageId;
   try {
     if (req.session.user) {
-      let packageId = req.query.packageId;
+      packageId = req.query.packageId;
       let packageInstance = await packages.findOne({ where: { id: packageId } });
+      let sId = packageInstance.sCity;
+      let dId = packageInstance.dCity;
+      let sCityInstance = await city.findOne({ where: { id: sId } });
+      let dCityInstance = await city.findOne({ where: { id: dId } });
       let rcvrUserId = packageInstance.rcvrUserId;
       let receiver = await user.findOne({ where: { id: rcvrUserId } });
       cityArray = await retrieveCityNames();
@@ -113,6 +117,8 @@ export async function renderUpdation(req, res) {
         name: receiver.name,
         email: receiver.email,
         phoneNo: receiver.mobileNo,
+        sCity : sCityInstance.name,
+        dCity : dCityInstance.name,
         packageId: packageId
       });
     } else {
@@ -128,17 +134,19 @@ export async function renderUpdation(req, res) {
       name: '',
       email: '',
       phoneNo: '',
-      packageId: 1
+      packageId: packageId,
+      sCity: '',
+      dCity: ''
     });
   }
-};
+}
 
 export async function update(req, res) {
-  let cityArray;
+  let cityArray, packageId;
   try {
     if (req.session.user) {
       cityArray = await retrieveCityNames();
-      let packageId = req.body.packageId;
+      packageId = req.body.packageId;
       let packageInstance = await getPackage(packageId);
       let statusId = packageInstance.statusId;
       let statusInstance = await getStatus(statusId);
@@ -152,16 +160,20 @@ export async function update(req, res) {
         let phoneNo = req.body.phoneNo;
         await updatePackage(packageId, weight, sourceCity, destinationCity);
         await updateUser(receiverId, name, email, phoneNo);
+        let sCityInstance = await city.findOne({ where: { id: sourceCity } });
+        let dCityInstance = await city.findOne({ where: { id: destinationCity } });
         res.render('base', {
           content: 'package/updatePackage.ejs',
           alertMsg: "Package successfully updated.",
           alert: "success",
           citiesArray: cityArray,
-          weightPackage: '',
-          name: '',
-          email: '',
-          phoneNo: '',
-          packageId: packageId
+          weightPackage: weight,
+          name: name,
+          email: email,
+          phoneNo: phoneNo,
+          packageId: packageId,
+          sCity : sCityInstance.name,
+          dCity : dCityInstance.name
         });
       } else {
         res.render('base', {
@@ -173,7 +185,9 @@ export async function update(req, res) {
           name: '',
           email: '',
           phoneNo: '',
-          packageId: packageId
+          packageId: packageId,
+          sCity : '',
+          dCity : ''
         });
       }
     } else {
@@ -189,7 +203,9 @@ export async function update(req, res) {
       name: '',
       email: '',
       phoneNo: '',
-      packageId: 1
+      packageId: packageId,
+      sCity: '',
+      dCity: ''
     });
   }
 };
