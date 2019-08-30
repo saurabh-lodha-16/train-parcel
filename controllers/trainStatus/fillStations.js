@@ -8,7 +8,7 @@ const Op = db.Sequelize.Op;
 const cron = require('node-cron');
 
 export async function fillStations(req, res) {
-    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/17031/date/20190829/",
+    request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/12136/date/20190831/",
         async (error, response, body) => {
             if (error) {
                 return console.dir(error);
@@ -43,7 +43,7 @@ export async function fillStations(req, res) {
                             date1 = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate() + 1);
                             destDay = date1;
                         }
-                        let temp3 = await Train.findOne({ where: { trainNo: 17031 } })
+                        let temp3 = await Train.findOne({ where: { trainNo: 12136 } })
                         let trainId = temp3.dataValues.id;
                         let sTime = sourceDay + " " + source.ActualArrival + "+05:30";
                         let dTime = destDay + " " + destination.ActualArrival + "+05:30";
@@ -55,9 +55,16 @@ export async function fillStations(req, res) {
                         let source = stations[i];
                         let destination = stations[i + 1];
                         let sourceCity = source.StationName;
+                        let destcity = destination.StationName;
+                        if(sourceCity == ""){
+                            sourceCity = "Lohgaon";
+                        }
+                        if(destcity == ""){
+                            destcity = "Lohgaon"
+                        }
+
                         let temp1 = await City.findOne({ where: { name: sourceCity } });
                         let sCity = temp1.dataValues.id;
-                        let destcity = destination.StationName;
                         let temp2 = await City.findOne({
                             where: { name: destcity }
                         })
@@ -77,7 +84,7 @@ export async function fillStations(req, res) {
                         }
                         console.log(sourceDayNumber + " " + destDayNumber);
 
-                        let temp3 = await Train.findOne({ where: { trainNo: 17031 } })
+                        let temp3 = await Train.findOne({ where: { trainNo: 12136 } })
                         let trainId = temp3.dataValues.id;
                         let sTime = sourceDay + " " + source.ActualDeparture + "+05:30";
                         let dTime = destDay + " " + destination.ActualArrival + "+05:30";

@@ -18,10 +18,8 @@ export async function getPackageStatus(serial_no) {
     }
     let statusId = packageDetails.dataValues.statusId;
     if (statusId == pendingId) {
-        let final_answer = [];
-        let msg;
-        msg = 'Your package is yet to be loaded';
-        final_answer['msg'] = msg;
+        let final_answer = [];   
+        final_answer.push('Your package is yet to be loaded');
         console.log(final_answer);
         return final_answer;
     }

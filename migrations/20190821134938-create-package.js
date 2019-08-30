@@ -71,3 +71,4 @@ module.exports = {
     return queryInterface.dropTable('packages');
   }
 };
+
