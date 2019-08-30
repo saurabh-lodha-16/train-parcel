@@ -4,8 +4,8 @@ services:
     build: .
     command: npm run nodemon
     volumes:
-      - .:/home/deqode/train-parcel
-      - /home/app/train-parcel/node_modules
+      - .:/train-parcel
+      - /train-parcel/node_modules
     ports:
       - "3000:3000"
     depends_on:

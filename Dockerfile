@@ -1,5 +1,5 @@
 FROM node:12.9
-WORKDIR /home/deqode/train-parcel
+WORKDIR /train-parcel
 COPY package*.json ./
 RUN npm install --quiet
 COPY . .
