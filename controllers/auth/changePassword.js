@@ -27,10 +27,15 @@ export async function renderChangePassword(req, res) {
 async function updatePassword(userId, password) {
   try {
     let hashPwd = bcrypt.hashSync(password, 10);
-    let updatedInstance = await users.update(
+    await users.update(
       { password: hashPwd },
       { where: { id: userId } }
     );
+    let updatedInstance = await users.findOne(
+      { where: { id: userId } }
+    );
+    console.log(updatedInstance);
+    return updatedInstance.dataValues;
   } catch (err) {
     throw (err);
   }
@@ -83,7 +88,7 @@ export async function changePassword(req, res) {
       }
       await bcrypt.compare(oldPassword, user.password, async function (err, result) {
         if (result) {
-          await updatePassword(user.id, newPassword);
+          req.session.user = await updatePassword(user.id, newPassword);
           res.render('base', {
             content: 'auth/changePassword.ejs',
             alertMsg: "Password successfully updated.",
