@@ -1,3 +1,5 @@
+
+
 <div class="container">
     <br />
     <form action='/package' method='post'>
@@ -13,7 +15,7 @@
         <% citiesArray.sort(compare) %>
         <div class="form-group">
             <label for="weight">Weight (Kgs)</label>
-            <input name="weight" type="number" class="form-control" id="weight" required>
+            <input name="weight" onkeyup="calculateAmount();" type="number" class="form-control" id="weight" required>
         </div>
         <div class="form-group">
             <label for="source_city_id">Source City</label>
@@ -47,8 +49,12 @@
             <input name="phoneNo" type="text" class="form-control" id="phoneNo" pattern=".{10}"
                 title="10 characters only" required>
         </div>
-
-        <button type="submit" value="Submit" class="btn btn-primary">Add Package</button>
+        <div class="form-group">
+            <label for="phoneNo">Amount To be Paid</label>
+            <input name="amount" type="text" class="form-control" id="amount" readonly>
+        </div>
+        <button type="submit" value="Submit" class="btn btn-primary">Pay</button>
     </form>
 </div>
 
+<script src="/javascripts/package.js"></script>

@@ -7,8 +7,8 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4
     },
-    userId: {
-      type: DataTypes.UUID,
+    transactionId: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
     packageId: {
@@ -19,13 +19,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.FLOAT,
       allowNull: false,
     },
+    isSuccess: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     isActive: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
   }, {});
   receipts.associate = function (models) {
-    receipts.belongsTo(models.users, { targetKey: 'id' });
     receipts.belongsTo(models.packages, { targetKey: 'id' });
   };
   return receipts;

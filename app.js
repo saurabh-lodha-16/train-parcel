@@ -8,7 +8,6 @@ var session = require('express-session');
 require('./config/passport-setup')
 
 
-
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const cityRouter = require('./routes/city');
@@ -23,6 +22,7 @@ const updateProfileRouter = require('./routes/profile')
 const oAuthRouter = require('./routes/oAuth')
 
 
+export const stripe = require("stripe")(stripeSecretKey);
 import models from './models';
 const app = express();
 
@@ -50,6 +50,7 @@ app.use(session({
   }
 }));
 
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/city', cityRouter);
@@ -72,6 +73,7 @@ app.use(function (req, res, next) {
 models.sequelize.sync();
 // error handler
 import { trainStatusCron } from './controllers/trainStatus/fillStations';
+import { stripeKey, stripeSecretKey } from './config/payment';
 trainStatusCron();
 
 app.use(function (err, req, res, next) {

@@ -8,6 +8,7 @@
     "nodemon": "nodemon --exec babel-node ./bin/www"
   },
   "dependencies": {
+    "@types/stripe": "^6.31.23",
     "bcrypt": "^3.0.6",
     "coffeescript": "^2.4.1",
     "cookie-parser": "~1.4.4",
@@ -30,6 +31,7 @@
     "request": "^2.88.0",
     "sequelize": "^5.13.0",
     "sequelize-cli": "^5.5.0",
+    "stripe": "^7.8.0",
     "twilio": "^3.33.4",
     "uuid": "^3.3.3"
   },

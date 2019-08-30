@@ -6,8 +6,9 @@ let user = db['users'];
 let packages = db['packages'];
 let roleAssigns = db['roleAssigns'];
 import { getRole } from '../common'
+import { makePayment } from '../payment';
 
-async function retrieveCityNames() {
+export async function retrieveCityNames() {
   try {
     let cities = await city.findAll({
       attributes: ['name', 'id']
@@ -82,7 +83,7 @@ export async function renderRegistration(req, res) {
         citiesArray: cityArray,
         userRole: await getRole(loggedUser.id)
       });
-    }else{
+    } else {
       res.redirect('/login')
     }
 
@@ -108,14 +109,14 @@ export async function registerPackage(req, res) {
       let sourceId = req.body.source_city_id;
       let destinationId = req.body.destination_city_id;
       let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
-      console.log(createdPackage);
-      res.render('base', {
-        content: 'package/registerPackage',
-        alertMsg: `Package successfully registered. \n Package Serial ID : ${createdPackage.serial_no}`,
-        alert: "success",
-        citiesArray: cityArray,
-        userRole: await getRole(loggedUser.id)
-      });
+      makePayment(createdPackage.id, loggedUser, res)
+      // res.render('base', {
+      //   content: 'package/registerPackage',
+      //   alertMsg: `Package successfully registered. \n Package Serial ID : ${createdPackage.serial_no}`,
+      //   alert: "success",
+      //   citiesArray: cityArray,
+      //   userRole: await getRole(loggedUser.id)
+      // });
     } catch (err) {
       res.render('base', {
         content: 'package/registerPackage',
