@@ -101,9 +101,10 @@ export async function registerPackage(req, res) {
       let sourceId = req.body.source_city_id;
       let destinationId = req.body.destination_city_id;
       let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
+      console.log(createdPackage);
       res.render('base', {
         content: 'package/registerPackage',
-        alertMsg: "Package successfully registered.",
+        alertMsg: `Package successfully registered. \n Package Serial ID : ${createdPackage.serial_no}`,
         alert: "success",
         citiesArray: cityArray
       });
