@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "postgres",
-    "password": "password",
+    "username": "saucr16",
+    "password": "123456",
     "database": "trainParcel",
-    "host": "postgres",
+    "host": "192.168.1.129",
     "dialect": "postgres",
     "operatorsAliases": false
   },
