@@ -42,7 +42,7 @@
         return 0
       });
       for (let user of data) {
-        $("#user").append(`<option value='${user.id}'> ${user.name}</option>`);
+        $("#user").append(`<option value='${user.id}'>${user.name} ${user.email}</option>`);
       }
     })
   });

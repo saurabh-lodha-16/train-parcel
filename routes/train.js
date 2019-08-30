@@ -4,11 +4,21 @@ import { fetchAllTrains as allCities } from '../controllers/train/FetchAllTrains
 import { addTrain } from '../controllers/train/AddTrain';
 import { updateTrain } from '../controllers/train/UpdateTrain';
 import { editTrain } from '../controllers/train/EditTrain';
+import { getRole } from '../controllers/common';
 
 router.get('/', allCities);
 
-router.get('/train', (req, res, next) => {
-  res.render('train/train');
+router.get('/list', async (req, res, next) => {
+  let loggedUser = req.session.user
+  if(loggedUser){
+    res.render('base',{
+      content: 'train/train',
+      userRole: await getRole(loggedUser.id)
+    });
+  }else{
+    res.redirect('/login')
+  }
+ 
 });
 
 

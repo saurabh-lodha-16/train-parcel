@@ -5,10 +5,35 @@ let status = db['statuses'];
 let userDB = db['users'];
 let packages = db['packages'];
 
-async function getPackages(userId) {
+async function getPackages(userId, userRole) {
   try {
-    let packageArray = await packages.findAll({
-    });
+    let packageArray
+    if (userRole == 'Manager') {
+      let curr_office = await db.offices.findOne({
+        where: {
+          userId: userId
+        }
+      })
+      console.log(curr_office, '--------------------------------------')
+      if (curr_office) {
+        packageArray = await packages.findAll({
+          where: {
+            [db.Sequelize.Op.or]: [
+              {
+                sCity: curr_office.cityId
+              }
+            ]
+          }
+        });
+      } else {
+        return []
+      }
+    } else {
+      packageArray = await packages.findAll({
+        where: { senderUserId: userId }
+      });
+    }
+
     return packageArray;
   } catch (err) {
     throw (err);
@@ -16,15 +41,16 @@ async function getPackages(userId) {
 }
 
 export async function listPackages(req, res) {
-  let user = req.session.user
-
+  let user = req.session.user;
   if (user) {
+    let packageArray = []
     try {
-      let packageArray = await getPackages(req.session.user.id);
+      let userRole = await getRole(user.id)
+      packageArray = await getPackages(req.session.user.id, userRole);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
-        userRole: await getRole(user.id)
+        userRole: userRole
       });
 
     } catch (err) {
@@ -35,7 +61,6 @@ export async function listPackages(req, res) {
         alertMsg: err,
         userRole: await getRole(user.id)
       });
-
     }
   } else {
     res.redirect('/login');
