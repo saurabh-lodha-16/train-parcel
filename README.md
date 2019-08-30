@@ -18,23 +18,24 @@ This is the web application which is useful for Parcel Office Managers and Custo
 
 # Project Setup Instructions
 
-## Install
+## Setting up Project Directory
 
     $ git clone https://gitlab.com/akzarma/train-parcel.git
     $ cd train-parcel
-    $ npm install
-
-## Configure app
-
-- Create a postgres database named 'trainParcel' and create a role with passoword to access it.
-- Update these configurations in the `config/config.json` file.
+    
 - Create googleCreds.js file in `config` folder and enter your Google Developer credentials (clientId and clientSecret).
 - Export these credentials to implement OAuth2 Login via Google.
+    
+
+## Install
+
+- If Docker Engine and Docker Compose are not installed -
+
+    $ make install-docker
 
 
 ## Running the project
 
-    $ npm run nodemon
+    $ docker-compose up
     
-    
-Visit  http://localhost:3000/register to render Registration Page.
+    Visit  http://localhost:3000/register to access Registration Page.
