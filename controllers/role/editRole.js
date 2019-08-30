@@ -78,15 +78,14 @@ export async function editRole(req, res) {
 export async function editRoleResult(req, res) {
   try {
     if (req.session.user) {
-      let roleInstance = await roles.findOne({ where: { id: req.body.role_id } });
       await roles.update(
         { name: req.body.name, level: req.body.level },
         { where: { id: req.body.role_id } }
       );
       res.render('base', {
         content: 'role/editRole.ejs',
-        name: roleInstance.name,
-        level: roleInstance.level,
+        name: req.body.name,
+        level: req.body.level,
         alertMsg: "Role successfully editted.",
         role_id: req.body.role_id,
         alert: "success"
