@@ -6,7 +6,7 @@ const sequelize = require('sequelize')
 import { getCityName } from '../getCityName';
 import { getISTTime } from '../getISTTime';
 import { trainBetween } from '../trainStatus/trainsBetween';
-import { sendWAmsg } from '../common';
+import { sendWAmsg, getRole } from '../common';
 
 //serialNo se 
 export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatusId, trainId) {
@@ -34,27 +34,36 @@ export async function loadPackagePost(req, res) {
 
 export async function loadPackageGet(req, res) {
     try {
+        let user = req.session.user
         let selectDate = req.query.selectDate
         let serialNo = req.query.serialNo
         // console.log(serialNo, '===============================================================')
-        if (selectDate) {
-            let trainStatusesList = await trainBetween(serialNo, selectDate)
-            // console.log('=============================', trainStatusesList.length)
-            res.render('base', {
-                content: 'package/selectTrainStatus',
-                trainStatuses: trainStatusesList,
-                serialNo: serialNo
-            })
-        } else if (serialNo) {
-            res.render('base', {
-                content: 'package/selectTrainStatus',
-                serialNo: serialNo
-            })
-        } else {
-            res.render('base', {
-                content: 'package/load'
-            })
+        if(user){
+            if (selectDate) {
+                let trainStatusesList = await trainBetween(serialNo, selectDate)
+                // console.log('=============================', trainStatusesList.length)
+                res.render('base', {
+                    content: 'package/selectTrainStatus',
+                    trainStatuses: trainStatusesList,
+                    serialNo: serialNo,
+                    userRole: await getRole(user.id)
+                })
+            } else if (serialNo) {
+                res.render('base', {
+                    content: 'package/selectTrainStatus',
+                    serialNo: serialNo,
+                    userRole: await getRole(user.id)
+                })
+            } else {
+                res.render('base', {
+                    content: 'package/load',
+                    userRole: await getRole(user.id)
+                })
+            }
+        }else{
+            res.redirect('/login')
         }
+       
     } catch (e) {
         console.log(e);
     }

@@ -13,8 +13,10 @@ export async function addRoleAssign(userId, roleId) {
 
 export async function viewUsers(req, res) {
   let userArray;
-  try {
-    if (req.session.user) {
+  let loggedUser = req.session.user
+  if (loggedUser) {
+
+    try {
       userArray = await users.findAll({
         include: [{
           model: roleAssigns,
@@ -26,26 +28,30 @@ export async function viewUsers(req, res) {
       if (userArray) {
         res.render('base', {
           content: 'role/viewUsers.ejs',
-          usersArray: userArray
+          usersArray: userArray,
+          userRole: await getRole(loggedUser.id)
         });
       } else {
         res.render('base', {
           content: 'role/viewUsers.ejs',
           usersArray: userArray,
           alertMsg: "No users found",
-          alert: "info"
+          alert: "info",
+          userRole: await getRole(loggedUser.id)
         });
       }
-    } else {
-      res.redirect('/login');
+
+    } catch (err) {
+      res.render('base', {
+        content: 'role/viewUsers.ejs',
+        usersArray: userArray,
+        alertMsg: err,
+        alert: "error",
+        userRole: await getRole(loggedUser.id)
+      });
     }
-  } catch (err) {
-    res.render('base', {
-      content: 'role/viewUsers.ejs',
-      usersArray: userArray,
-      alertMsg: err,
-      alert: "error"
-    });
+  } else {
+    res.redirect('/login');
   }
 }
 
@@ -61,28 +67,34 @@ async function getRole(name) {
 }
 
 export async function editUserRole(req, res) {
-  try {
-    if (req.session.user) {
+  let loggedUser = req.session.user
+
+  if (loggedUser) {
+    try {
       let roleArray = await roles.findAll({
         attributes: ['id', 'name', 'level']
       });
       res.render('base', {
         content: 'role/editUserRole.ejs',
         user_id: req.query.user_id,
-        roleArray: roleArray
+        roleArray: roleArray,
+        userRole: await getRole(loggedUser.id)
       });
-    } else {
-      res.redirect('/login');
+
+    } catch (err) {
+      res.send(err);
     }
-  } catch (err) {
-    res.send(err);
+  } else {
+    res.redirect('/login');
   }
 };
 
 export async function editUserRoleResult(req, res) {
   let roleArray;
-  try {
-    if (req.session.user) {
+  let loggedUser = req.session.user
+
+  if (loggedUser) {
+    try {
       roleArray = await roles.findAll({
         attributes: ['id', 'name', 'level']
       });
@@ -104,18 +116,21 @@ export async function editUserRoleResult(req, res) {
         user_id: req.body.user_id,
         roleArray: roleArray,
         alert: "success",
-        alertMsg: "Role successfully updated for user"
+        alertMsg: "Role successfully updated for user",
+        userRole: await getRole(loggedUser.id)
       });
-    } else {
-      res.redirect('/login');
+
+    } catch (err) {
+      res.render('base', {
+        content: 'role/editUserRole.ejs',
+        user_id: req.body.user_id,
+        roleArray: roleArray,
+        alertMsg: err,
+        alert: "error",
+        userRole: await getRole(loggedUser.id)
+      });
     }
-  } catch (err) {
-    res.render('base', {
-      content: 'role/editUserRole.ejs',
-      user_id: req.body.user_id,
-      roleArray: roleArray,
-      alertMsg: err,
-      alert: "error"
-    });
+  } else {
+    res.redirect('/login');
   }
 };

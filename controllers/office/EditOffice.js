@@ -1,6 +1,7 @@
 'use strict';
 import db from '../../models/index.js';
 import { getCityName, getUserName } from '../getCityName'
+import { getRole } from '../common.js';
 const Office = db.offices;
 export async function editOffice(req, res) {
   console.log(req.query._id);
@@ -16,7 +17,8 @@ export async function editOffice(req, res) {
     res.render('base',
       {
         content: 'office/edit',
-        office: office.dataValues
+        office: office.dataValues,
+        userRole: await getRole(user.id)
       });
   } catch (err) {
     res.render('base', { alert: 'danger', alertMsg: err });

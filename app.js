@@ -3,8 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
 var session = require('express-session');
-const passportSetup = require('./config/passport-setup')
+require('./config/passport-setup')
+
 
 
 const indexRouter = require('./routes/index');
@@ -23,6 +25,9 @@ const oAuthRouter = require('./routes/oAuth')
 
 import models from './models';
 const app = express();
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

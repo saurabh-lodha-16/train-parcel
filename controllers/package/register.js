@@ -5,6 +5,7 @@ let status = db['statuses'];
 let user = db['users'];
 let packages = db['packages'];
 let roleAssigns = db['roleAssigns'];
+import { getRole } from '../common'
 
 async function retrieveCityNames() {
   try {
@@ -73,24 +74,30 @@ async function createPackage(senderId, receiverId, statusId, weightPackage, sour
 export async function renderRegistration(req, res) {
   let cityArray;
   try {
-    cityArray = await retrieveCityNames();
-    res.render('base', {
-      content: 'package/registerPackage',
-      citiesArray: cityArray
-    });
+    let loggedUser = req.session.user
+    if (loggedUser) {
+      cityArray = await retrieveCityNames();
+      res.render('base', {
+        content: 'package/registerPackage',
+        citiesArray: cityArray,
+        userRole: await getRole(loggedUser.id)
+      });
+    }else{
+      res.redirect('/login')
+    }
+
   } catch (err) {
     res.render('base', {
       content: 'package/registerPackage',
       citiesArray: cityArray,
-      alert: 'danger',
-      alertMsg: 'Error: ' + e
+      alert: 'danger'
     });
   }
 };
 
 export async function registerPackage(req, res) {
-  let user = req.session.user;
-  if (user && req.cookies.user_sid) {
+  let loggedUser = req.session.user;
+  if (loggedUser && req.cookies.user_sid) {
     let cityArray = await retrieveCityNames();
     try {
       let senderId = req.session.user.id;
@@ -105,14 +112,16 @@ export async function registerPackage(req, res) {
         content: 'package/registerPackage',
         alertMsg: "Package successfully registered.",
         alert: "success",
-        citiesArray: cityArray
+        citiesArray: cityArray,
+        userRole: await getRole(loggedUser.id)
       });
     } catch (err) {
       res.render('base', {
         content: 'package/registerPackage',
         citiesArray: cityArray,
         alert: 'danger',
-        alertMsg: 'Error: ' + err
+        alertMsg: 'Error: ' + err,
+        userRole: await getRole(loggedUser.id)
       });
     }
   } else {

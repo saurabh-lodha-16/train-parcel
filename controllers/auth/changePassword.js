@@ -50,28 +50,35 @@ export async function changePassword(req, res) {
           content: 'auth/changePassword.ejs',
           alertMsg: `Password should contain at least one lowercase letter, one uppercase letter,
           one number and 8 other letters.`,
-          alert: "danger"
+          alert: "danger",
+          userRole: await getRole(user.id)
+
         });
       }
       if (!(oldPassword && newPassword && reNewPassword)) {
         res.render('base', {
           content: 'auth/changePassword.ejs',
           alertMsg: "One or more blank fields found.",
-          alert: "danger"
+          alert: "danger",
+          userRole: await getRole(user.id)
         });
       }
       if ((oldPassword === newPassword)) {
         res.render('base', {
           content: 'auth/changePassword.ejs',
           alertMsg: "New Password must be different from Old Password.",
-          alert: "danger"
+          alert: "danger",
+          userRole: await getRole(user.id)
+
         });
       }
       if (newPassword !== reNewPassword) {
         res.render('base', {
           content: 'auth/changePassword.ejs',
           alertMsg: "Passwords didn't match",
-          alert: "danger"
+          alert: "danger",
+          userRole: await getRole(user.id)
+
         });
       }
       await bcrypt.compare(oldPassword, user.password, async function (err, result) {
@@ -80,14 +87,16 @@ export async function changePassword(req, res) {
           res.render('base', {
             content: 'auth/changePassword.ejs',
             alertMsg: "Password successfully updated.",
-            alert: "success"
+            alert: "success",
+            userRole: await getRole(user.id)
           });
 
         } else {
           res.render('base', {
             content: 'auth/changePassword.ejs',
             alertMsg: "Old password is incorrect.",
-            alert: "danger"
+            alert: "danger",
+            userRole: await getRole(user.id)
           });
         }
       })
