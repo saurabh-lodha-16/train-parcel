@@ -21,7 +21,7 @@ export async function makePayment(packageId, loggedUser, res) {
             ]
         })
         if (packageObj) {
-            let amountToBeCharged = packageObj.weight * 100
+            let amountToBeCharged = packageObj.weight * 100 * 100
             // Create a new customer and then a new charge for that customer:
             stripe.customers
                 .create({
@@ -42,7 +42,7 @@ export async function makePayment(packageId, loggedUser, res) {
                 })
                 .then(async (charge) => {
                     console.log(charge)
-                    sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
+                    sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged/100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
                     res.render('base', {
                         content: 'package/registerPackage',
                         alertMsg: `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`,
