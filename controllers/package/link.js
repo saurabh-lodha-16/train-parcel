@@ -8,7 +8,7 @@ export async function linkPackageTrainGet(req, res) {
     let trainId = req.params['trainId']
 
     let result = await loadPackage(serialNo, sourceStatusId, destinationStatusId, trainId)
-    let user = req.user.session
+    let user = req.session.user;
     // console.log(result, '================================================')
     if(user){
         if (result == 1) {
