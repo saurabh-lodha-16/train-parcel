@@ -12,8 +12,11 @@
             </thead>
             <tbody>
                 <% var i=0; for(id in pendingPackages){ %>
-
-                <tr onclick="window.location='package/load/?serialNo=<%= pendingPackages[id].serial_no %>';">
+                <% if(userRole=='Manager'){ %>
+                window.location='package/load/?serialNo=<%= pendingPackages[id].serial_no %>';
+                <% }else{ %>
+                <tr onclick="window.location='package/track/<%= pendingPackages[id].serial_no %>';">
+                    <% } %>
                     <td><%= ++i %></td>
                     <td>
                         <div class="row">
