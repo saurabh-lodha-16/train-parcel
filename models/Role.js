@@ -25,3 +25,5 @@ module.exports = (sequelize, DataTypes) => {
 //Manager
 //User
 //Admin
+
+

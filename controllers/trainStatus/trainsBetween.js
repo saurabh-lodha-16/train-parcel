@@ -67,3 +67,4 @@ function removeDuplicates(myArr, prop) {
         return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
 }
+

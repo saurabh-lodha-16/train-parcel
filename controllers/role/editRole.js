@@ -102,8 +102,8 @@ export async function editRoleResult(req, res) {
       );
       res.render('base', {
         content: 'role/editRole.ejs',
-        name: roleInstance.name,
-        level: roleInstance.level,
+        name: req.body.name,
+        level: req.body.level,
         alertMsg: "Role successfully editted.",
         role_id: req.body.role_id,
         alert: "success",
@@ -123,3 +123,4 @@ export async function editRoleResult(req, res) {
     res.redirect('/login');
   }
 };
+

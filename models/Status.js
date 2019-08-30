@@ -22,3 +22,4 @@ module.exports = (sequelize, DataTypes) => {
 // PENDING
 // IN-TRANSIT
 // COMPLETED
+

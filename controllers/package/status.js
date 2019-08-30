@@ -13,6 +13,9 @@ export async function getPackageStatus(serial_no) {
     let temp3 = await models.statuses.findOne({ where: { type: 'PENDING' } });
     let pendingId = temp3.dataValues.id;
     let packageDetails = await models.packages.findOne({ where: { serial_no: serial_no } });
+    if (packageDetails === null) {
+        throw 'No package found with this serial id';
+    }
     let statusId = packageDetails.dataValues.statusId;
     if (statusId == pendingId) {
         let final_answer = [];
@@ -91,3 +94,4 @@ function removeDuplicates(myArr, prop) {
         return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
     });
 }
+

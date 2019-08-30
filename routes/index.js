@@ -25,3 +25,4 @@ router.get('/dashboard', dashboardGet);
 router.get('/register/resendOTP/:userId', resendOTPGet)
 
 module.exports = router;
+

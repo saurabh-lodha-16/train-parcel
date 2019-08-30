@@ -25,3 +25,4 @@ module.exports = {
     return queryInterface.dropTable('statuses');
   }
 };
+

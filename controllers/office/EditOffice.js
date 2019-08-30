@@ -24,3 +24,4 @@ export async function editOffice(req, res) {
     res.render('base', { alert: 'danger', alertMsg: err });
   }
 }
+

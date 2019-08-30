@@ -17,3 +17,4 @@ export async function fetchAllOffices(req, res) {
     res.send(error);
   }
 }
+

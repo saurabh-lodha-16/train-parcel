@@ -10,3 +10,4 @@ router.get('/logout', getLogout);
 router.get('/redirect', passport.authenticate('google'), getRedirect);
 
 module.exports = router;
+

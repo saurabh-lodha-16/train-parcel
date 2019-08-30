@@ -12,3 +12,4 @@ export function fetchAllUsers(req, res) {
     res.send(error);
   }
 }
+

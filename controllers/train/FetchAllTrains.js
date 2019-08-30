@@ -12,3 +12,4 @@ export function fetchAllTrains(req, res) {
     res.send(error);
   }
 }
+

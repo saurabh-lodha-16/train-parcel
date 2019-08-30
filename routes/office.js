@@ -51,3 +51,4 @@ router.get('/cityAssign', async (req, res, next) => {
 });
 router.post('/cityAssign', cityAssign);
 module.exports = router;
+

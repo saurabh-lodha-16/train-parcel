@@ -20,3 +20,4 @@ router.get('/edit', editStatus);
 router.post('/edit', updateStatus);
 
 module.exports = router;
+

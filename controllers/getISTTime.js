@@ -5,3 +5,4 @@ export async function getISTTime(weird_time) {
     let x = myDate.toLocaleString();
     return x;
 }
+

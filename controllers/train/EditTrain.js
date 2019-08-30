@@ -13,3 +13,4 @@ export function editTrain(req, res) {
     res.send(error);
   }
 }
+

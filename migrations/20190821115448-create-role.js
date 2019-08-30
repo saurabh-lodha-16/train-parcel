@@ -28,3 +28,4 @@ module.exports = {
     return queryInterface.dropTable('roles');
   }
 };
+

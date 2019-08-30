@@ -108,8 +108,12 @@ export async function renderUpdation(req, res) {
   let user = req.session.user
   if (user) {
     try {
-      let packageId = req.query.package;
+      let packageId = req.query.packageId;
       let packageInstance = await packages.findOne({ where: { id: packageId } });
+      let sId = packageInstance.sCity;
+      let dId = packageInstance.dCity;
+      let sCityInstance = await city.findOne({ where: { id: sId } });
+      let dCityInstance = await city.findOne({ where: { id: dId } });
       let rcvrUserId = packageInstance.rcvrUserId;
       let receiver = await userDB.findOne({ where: { id: rcvrUserId } });
       cityArray = await retrieveCityNames();
@@ -121,6 +125,8 @@ export async function renderUpdation(req, res) {
         email: receiver.email,
         phoneNo: receiver.mobileNo,
         packageId: packageId,
+        sCity: sCityInstance.name,
+        dCity: dCityInstance.name,
         userRole: await getRole(user.id)
       });
 
@@ -134,6 +140,8 @@ export async function renderUpdation(req, res) {
         name: '',
         email: '',
         phoneNo: '',
+        sCity: '',
+        dCity: '',
         packageId: 1,
         userRole: await getRole(user.id)
       });
@@ -141,16 +149,16 @@ export async function renderUpdation(req, res) {
   } else {
     res.redirect('/login');
   }
-};
+}
 
 export async function update(req, res) {
-  let cityArray;
+  let cityArray, packageId;
   let user = req.session.user
   if (user) {
 
     try {
       cityArray = await retrieveCityNames();
-      let packageId = req.body.packageId;
+      packageId = req.body.packageId;
       let packageInstance = await getPackage(packageId);
       let statusId = packageInstance.statusId;
       let statusInstance = await getStatus(statusId);
@@ -164,6 +172,8 @@ export async function update(req, res) {
         let phoneNo = req.body.phoneNo;
         await updatePackage(packageId, weight, sourceCity, destinationCity);
         await updateUser(receiverId, name, email, phoneNo);
+        let sCityInstance = await city.findOne({ where: { id: sourceCity } });
+        let dCityInstance = await city.findOne({ where: { id: destinationCity } });
         res.render('base', {
           content: 'package/updatePackage.ejs',
           alertMsg: "Package successfully updated.",
@@ -174,6 +184,8 @@ export async function update(req, res) {
           email: '',
           phoneNo: '',
           packageId: packageId,
+          sCity: sCityInstance.name,
+          dCity: dCityInstance.name,
           userRole: await getRole(user.id)
         });
       } else {
@@ -186,6 +198,8 @@ export async function update(req, res) {
           name: '',
           email: '',
           phoneNo: '',
+          sCity: '',
+          dCity: '',
           packageId: packageId,
           userRole: await getRole(user.id)
         });
@@ -200,6 +214,8 @@ export async function update(req, res) {
         weightPackage: '',
         name: '',
         email: '',
+        sCity: '',
+        dCity: '',
         phoneNo: '',
         packageId: 1,
         userRole: await getRole(user.id)
@@ -209,3 +225,4 @@ export async function update(req, res) {
     res.redirect('/login');
   }
 };
+

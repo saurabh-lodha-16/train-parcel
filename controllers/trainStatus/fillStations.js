@@ -153,3 +153,4 @@ export async function addDummyPackage(req, res) {
     const package11 = await models.packages.create(req.body);
     res.send(package11);
 }
+
