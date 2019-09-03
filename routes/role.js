@@ -7,8 +7,8 @@ router.get('/add_role', addRole);
 router.post('/add_role', addRoleResult);
 router.get('/edit_role', editRole);
 router.post('/edit_role', editRoleResult);
-router.get('/view_users', viewUsers);
-router.get('/view_users/editUserRole', editUserRole);
-router.post('/view_users/editUserRole', editUserRoleResult);
+router.get('/users', viewUsers);
+router.get('/edit_user_role', editUserRole);
+router.post('/edit_user_role', editUserRoleResult);
 module.exports = router;
 
