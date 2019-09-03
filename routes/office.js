@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-import { updateOffice } from '../controllers/office/UpdateOffice';
-import { editOffice } from '../controllers/office/EditOffice';
+import { updateOffice } from '../controllers/office/update';
+import { editOffice } from '../controllers/office/edit';
 import { cityAssign } from '../controllers/office/cityAssign';
 import { getRole } from '../controllers/common';
 

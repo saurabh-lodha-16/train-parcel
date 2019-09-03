@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-import { addTrain } from '../controllers/train/AddTrain';
-import { updateTrain } from '../controllers/train/UpdateTrain';
-import { editTrain } from '../controllers/train/EditTrain';
+import { addTrain } from '../controllers/train/add';
+import { updateTrain } from '../controllers/train/update';
+import { editTrain } from '../controllers/train/edit';
 import { getRole } from '../controllers/common';
 
 
