@@ -12,7 +12,7 @@ router.post('/register', registerPackage);
 router.get('/track/', trackGet);
 router.get('/track/:serial_no', trackGet);
 router.get('/update', renderUpdation);
-router.post('/update', update);
+router.put('/update', update);
 router.get('/load', loadPackageGet);
 router.get('/load/?serialNo=:serialNo', loadPackageGet);
 router.get('/link/:sourceStatusId/:destinationStatusId/:trainId/:serialNo', linkPackageTrainGet);

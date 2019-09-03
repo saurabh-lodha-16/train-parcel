@@ -4,5 +4,5 @@ import express from 'express';
 let router = express.Router();
 router.get('/', viewUsers);
 router.get('/edit', editUserRole);
-router.post('/edit', editUserRoleResult);
+router.put('/edit', editUserRoleResult);
 module.exports = router;

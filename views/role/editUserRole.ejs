@@ -10,6 +10,7 @@
          }%>
   <% roleArray.sort(compare) %>
   <form action='./edit' method='post'>
+    <input type="hidden" name="_method" value="put">
     <input type="hidden" name="user_id" value=<%=user_id%>>
     <select name="role_id">
       <% for(role of roleArray) { %>
