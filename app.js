@@ -26,8 +26,6 @@ const apiCity = require('./api/v1.0/city')
 const apiTrain = require('./api/v1.0/train')
 const apiStatus = require('./api/v1.0/status')
 const apiOffices = require('./api/v1.0/office')
-const methodOverride = require('method-override')
-const bodyParser = require('body-parser');
 
 export const stripe = require("stripe")(stripeSecretKey);
 import models from './models';
@@ -36,13 +34,8 @@ const app = express();
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(bodyParser.json());
-<<<<<<< Updated upstream
 app.use(bodyParser.urlencoded())
 app.use(methodOverride('_method'))
-=======
-app.use(methodOverride('_method'))
-app.use(bodyParser.urlencoded())
->>>>>>> Stashed changes
 
 app.use(methodOverride(function (req, res) {
   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
@@ -57,14 +50,6 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-app.use(methodOverride(function (req, res) {
-  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-    // look in urlencoded POST bodies and delete it
-    var method = req.body._method
-    delete req.body._method
-    return method
-  }
-}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

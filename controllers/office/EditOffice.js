@@ -5,23 +5,31 @@ import { getRole } from '../common.js';
 const Office = db.offices;
 export async function editOffice(req, res) {
   console.log(req.query._id);
-  try {
-    let office = await Office.findOne({
-      attributes: ['id', 'userId', 'cityId'],
-      where: { id: req.query._id }
-    })
-    console.log(office)
-    office.dataValues.cityName = await getCityName(office.cityId);
-    office.dataValues.userName = await getUserName(office.userId);
-    console.log(office)
-    res.render('base',
-      {
-        content: 'office/edit',
-        office: office.dataValues,
-        userRole: await getRole(user.id)
+  let loggedUser = req.session.user
+  if (loggedUser) {
+    try {
+      let office = await Office.findOne({
+        attributes: ['id', 'userId', 'cityId'],
+        where: { id: req.query._id }
+      })
+      //console.log(office)
+      office.dataValues.cityName = await getCityName(office.cityId);
+      office.dataValues.userName = await getUserName(office.userId);
+      console.log(office)
+      res.render('base',
+        {
+          content: 'office/edit',
+          office: office.dataValues,
+          userRole: await getRole(loggedUser.id)
+        });
+    } catch (err) {
+      res.render('base', {
+        content: 'office/offices', alert: 'danger', alertMsg: err
       });
-  } catch (err) {
-    res.render('base', { alert: 'danger', alertMsg: err });
+    }
+  } else {
+    res.redirect('./login')
   }
+  
 }
 

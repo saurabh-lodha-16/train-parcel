@@ -9,7 +9,7 @@ export function updateOffice(req, res) {
     }, {
         where: { id: req.body.id }
       })
-    res.redirect('/office');
+    res.redirect('/offices');
   } catch (error) {
 
   }
