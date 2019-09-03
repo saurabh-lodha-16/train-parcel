@@ -4,8 +4,8 @@ import express from 'express';
 let router = express.Router();
 router.get('/', renderRolePage);
 router.get('/add', addRole);
-router.post('/add', addRoleResult);
+router.post('/', addRoleResult);
 router.get('/edit', editRole);
-router.put('/edit', editRoleResult);
+router.put('/', editRoleResult);
 module.exports = router;
 

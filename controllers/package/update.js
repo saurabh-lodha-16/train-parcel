@@ -5,7 +5,7 @@ let status = db['statuses'];
 let userDB = db['users'];
 let packages = db['packages'];
 
-async function getPackages(userId, userRole) {
+export async function getPackages(userId, userRole) {
   try {
     let packageArray
     if (userRole == 'Manager') {
@@ -180,7 +180,8 @@ export async function update(req, res) {
   let cityArray, packageId;
   let user = req.session.user
   if (user) {
-
+    let userRole = await getRole(req.session.user.id);
+    let packageArray = await getPackages(req.session.user.id, userRole);
     try {
       cityArray = await retrieveCityNames();
       packageId = req.body.packageId;
@@ -199,51 +200,47 @@ export async function update(req, res) {
         await updateUser(receiverId, name, email, phoneNo);
         let sCityInstance = await city.findOne({ where: { id: sourceCity } });
         let dCityInstance = await city.findOne({ where: { id: destinationCity } });
+
+        userRole = await getRole(req.session.user.id);
+        packageArray = await getPackages(req.session.user.id, userRole);
         res.render('base', {
-          content: 'package/updatePackage.ejs',
+          content: 'package/packages.ejs',
+          packageList: packageArray,
+          userRole: userRole,
           alertMsg: "Package successfully updated.",
-          alert: "success",
-          citiesArray: cityArray,
-          weightPackage: weight,
-          name: name,
-          email: email,
-          phoneNo: phoneNo,
-          packageId: packageId,
-          sCity: sCityInstance.name,
-          dCity: dCityInstance.name,
-          userRole: await getRole(user.id)
+          alert: "success"
         });
+        // res.render('base', {
+        //   content: 'package/updatePackage.ejs',
+        //   alertMsg: "Package successfully updated.",
+        //   alert: "success",
+        //   citiesArray: cityArray,
+        //   weightPackage: weight,
+        //   name: name,
+        //   email: email,
+        //   phoneNo: phoneNo,
+        //   packageId: packageId,
+        //   sCity: sCityInstance.name,
+        //   dCity: dCityInstance.name,
+        //   userRole: await getRole(user.id)
+        // });
       } else {
         res.render('base', {
-          content: 'package/updatePackage.ejs',
-          alertMsg: "Your package is already processed.",
-          alert: "info",
-          citiesArray: cityArray,
-          weightPackage: '',
-          name: '',
-          email: '',
-          phoneNo: '',
-          sCity: '',
-          dCity: '',
-          packageId: packageId,
-          userRole: await getRole(user.id)
+          content: 'package/packages.ejs',
+          packageList: packageArray,
+          userRole: userRole,
+          alertMsg: "Package already processed.",
+          alert: "info"
         });
       }
 
     } catch (err) {
       res.render('base', {
-        content: 'package/updatePackage.ejs',
+        content: 'package/packages.ejs',
+        packageList: packageArray,
+        userRole: userRole,
         alertMsg: err,
-        alert: "danger",
-        citiesArray: cityArray,
-        weightPackage: '',
-        name: '',
-        email: '',
-        sCity: '',
-        dCity: '',
-        phoneNo: '',
-        packageId: 1,
-        userRole: await getRole(user.id)
+        alert: "danger"
       });
     }
   } else {
