@@ -8,7 +8,7 @@ export function updateCity(req, res) {
     }, {
         where: { id: req.body.id }
       })
-    res.redirect('city');
+    res.redirect('/cities');
   } catch (err) {
     console.log(err);
   }

@@ -9,7 +9,7 @@
 				for (let city of data) {
 					console.log(city.id);
 					$("#table").append(`<tr> <td>${city.name} </td>
-						<td><form action="http://localhost:3000/city/edit?_id=${city.id}" method='get'>
+						<td><form action="/cities/edit?_id=${city.id}" method='get'>
     							<button class ="btn btn-primary" type="submit" value="Submit">Edit</button>
 								</form>
 						</td></tr>`);
@@ -30,7 +30,7 @@
 
 	<br>
 	<br>
-	<form action="/city/add" method='get'>
+	<form action="/cities/add" method='get'>
 		<button class="btn btn-primary" type="submit" value="Submit">Add city</button>
 	</form>
 

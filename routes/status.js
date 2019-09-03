@@ -16,7 +16,7 @@ router.get('/add', function (req, res, next) {
 
 router.post('/add', addStatus);
 router.get('/edit', editStatus);
-router.post('/edit', updateStatus);
+router.put('/', updateStatus);
 
 module.exports = router;
 

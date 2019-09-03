@@ -25,10 +25,10 @@ router.get('/add', function (req, res, next) {
   res.render('train/add');
 });
 
-router.post('/add', addTrain);
+router.post('/', addTrain);
 
 router.get('/edit', editTrain);
-router.post('/edit', updateTrain);
+router.put('/', updateTrain);
 
 module.exports = router;
 

@@ -8,7 +8,7 @@
 				console.log(data);
 				for (let status of data) {
 					$("#table").append(`<tr> <td>${status.type} </td>
-						<td><a href ="/status/edit?_id=${status.id}">Edit</a> </td></tr>`);
+						<td><a href ="/statuses/edit?_id=${status.id}">Edit</a> </td></tr>`);
 				}
 			})
 		});
@@ -26,7 +26,7 @@
 
 	<br>
 	<br>
-	<form action="/status/add" method='get'>
+	<form action="/statuses/add" method='get'>
 		<button class="btn btn-primary" type="submit" value="Submit">Add Status</button>
 	</form>
 
