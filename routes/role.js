@@ -6,6 +6,6 @@ router.get('/', renderRolePage);
 router.get('/add', addRole);
 router.post('/add', addRoleResult);
 router.get('/edit', editRole);
-router.post('/edit', editRoleResult);
+router.put('/edit', editRoleResult);
 module.exports = router;
 

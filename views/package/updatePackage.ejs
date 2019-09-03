@@ -11,6 +11,7 @@
     }%>
     <% citiesArray.sort(compare) %>
     <form action='./update' method='post'>
+        <input type="hidden" name="_method" value="put">
         <input type="hidden" name="packageId" value='<%= packageId %>'>
         <div class="form-group">
             <label for="weight">Weight :</label>
