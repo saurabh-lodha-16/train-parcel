@@ -4,19 +4,26 @@ let roles = db['roles'];
 
 export async function renderRolePage(req, res) {
   let loggedUser = req.session.user
-  if (req.session.user) {
-    try {
-      let roleArray = await roles.findAll({
-        attributes: ['id', 'name', 'level']
-      });
-      res.render('base', {
-        content: 'role/index.ejs',
-        rolesArray: roleArray,
-        userRole: await getRole(loggedUser.id)
-      });
 
-    } catch (err) {
-      res.send(err);
+  if (req.session.user) {
+    let role = await getRole(loggedUser.id)
+    if (role == 'Admin') {
+      try {
+        let roleArray = await roles.findAll({
+          attributes: ['id', 'name', 'level']
+        });
+        res.render('base', {
+          content: 'role/index.ejs',
+          rolesArray: roleArray,
+          userRole: role
+        });
+
+      } catch (err) {
+        res.send(err);
+      }
+    }
+    else {
+      res.send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');

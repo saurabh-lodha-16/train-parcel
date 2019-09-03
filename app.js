@@ -69,9 +69,9 @@ app.use('/packages', packageRouter);
 app.use('/office', officeRouter);
 app.use('/updateProfile', updateProfileRouter);
 app.use('/oAuth', oAuthRouter);
-app.use('/api/v1.0/city', apiCity);
-app.use('/api/v1.0/train', apiTrain);
-app.use('/api/v1.0/status', apiStatus);
+app.use('/api/v1.0/cities', apiCity);
+app.use('/api/v1.0/trains', apiTrain);
+app.use('/api/v1.0/statuses', apiStatus);
 app.use('/api/v1.0/offices', apiOffices);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
