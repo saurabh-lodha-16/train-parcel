@@ -28,7 +28,7 @@
             <tbody>
                 <% var i=0; for(id in trainStatuses){ %>
 
-                <tr onclick="window.location='/package/link/<%= trainStatuses[id].sourceStatusId %>/<%= trainStatuses[id].destinationStatusId %>/<%= trainStatuses[id].trainId %>/<%= serialNo %>';"
+                <tr onclick="window.location='/packages/link/<%= trainStatuses[id].sourceStatusId %>/<%= trainStatuses[id].destinationStatusId %>/<%= trainStatuses[id].trainId %>/<%= serialNo %>';"
                     id="table_row_<%= trainStatuses[id].id %>">
                     <td><%= ++i %></td>
                     <td>

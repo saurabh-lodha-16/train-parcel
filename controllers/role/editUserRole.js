@@ -92,7 +92,7 @@ export async function editUserRole(req, res) {
 export async function editUserRoleResult(req, res) {
   let roleArray;
   let loggedUser = req.session.user
-
+  
   if (loggedUser) {
     try {
       roleArray = await roles.findAll({

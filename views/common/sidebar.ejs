@@ -24,22 +24,22 @@
             </a>
 
             <div id='submenu1' class="collapse sidebar-submenu">
-                <a href="/package" class="list-group-item list-group-item-action ">
+                <a href="/packages/register" class="list-group-item list-group-item-action ">
                     <span class="menu-collapsed">Add Package</span>
                 </a>
 
                 <% if(typeof userRole != 'undefined' && (userRole == 'Manager' || userRole == 'Admin')){ %>
 
-                <a href="/package/load" class="list-group-item list-group-item-action ">
+                <a href="/packages/load" class="list-group-item list-group-item-action ">
                     <span class="menu-collapsed">Load a Package</span>
                 </a>
                 <% } %>
-                <a href="/package/track" class="list-group-item list-group-item-action">
+                <a href="/packages/track" class="list-group-item list-group-item-action">
                     <span class="menu-collapsed">Track Package</span>
                 </a>
                 <% if(typeof userRole != 'undefined' && (userRole == 'Manager' || userRole == 'Admin')){ %>
 
-                <a href="/package/list" class="list-group-item list-group-item-action">
+                <a href="/packages" class="list-group-item list-group-item-action">
                     <span class="menu-collapsed">Update Package</span>
                 </a>
                 <%}%>
@@ -63,7 +63,7 @@
                         <span class="menu-collapsed">Add Master Role</span>
                     </a>
 
-                    <a href="/userRole" class="list-group-item list-group-item-action">
+                    <a href="/user-role" class="list-group-item list-group-item-action">
                         <span class="menu-collapsed">Update User's Role</span>
                     </a>
 
