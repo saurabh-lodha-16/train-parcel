@@ -115,6 +115,7 @@ export async function trainStatusCron() {
             let sourceCityId = start.dataValues.sCity;
             let curr_city = sourceCityId;
             let now_city = await getCurrCity(trainId);
+            if(now_city){
             if (curr_city != now_city) {
                 curr_city = now_city;
                 let temp1 = await models.statuses.findOne({ where: { type: 'IN-TRANSIT' } });
@@ -137,6 +138,7 @@ export async function trainStatusCron() {
                     console.log('No packages to be delivered at this station');
                 }
             }
+        }
             let temp = await models.cities.findOne({ where: { id: curr_city } });
             let city_name = temp.dataValues.name;
             console.log(city_name);
@@ -151,6 +153,9 @@ export async function getCurrCity(trainId) {
     x = x.split('T');
     let time = x[0] + " " + x[1];
     let answer = await models.trainStatuses.findOne({ where: { dTime: { [Op.gte]: time }, trainId: trainId } });
+    if(!answer){
+        return 0;
+    }
     let curr_city = answer.dataValues.sCity;
     return curr_city;
 }
