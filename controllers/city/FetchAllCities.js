@@ -10,6 +10,8 @@ export function fetchAllCities(req, res) {
     })
   } catch (err) {
     console.log(err);
+    res.status(404);
+    res.send('Not Found');
   }
 }
 

@@ -21,6 +21,10 @@ const packageRouter = require('./routes/package');
 const updateProfileRouter = require('./routes/profile')
 const oAuthRouter = require('./routes/oAuth')
 const userRoleRouter = require('./routes/userRole')
+const apiCity = require('./api/v1.0/city')
+const apiTrain = require('./api/v1.0/train')
+const apiStatus = require('./api/v1.0/status')
+const apiOffices = require('./api/v1.0/office')
 
 
 export const stripe = require("stripe")(stripeSecretKey);
@@ -65,7 +69,10 @@ app.use('/packages', packageRouter);
 app.use('/office', officeRouter);
 app.use('/updateProfile', updateProfileRouter);
 app.use('/oAuth', oAuthRouter);
-
+app.use('/api/v1.0/city', apiCity);
+app.use('/api/v1.0/train', apiTrain);
+app.use('/api/v1.0/status', apiStatus);
+app.use('/api/v1.0/offices', apiOffices);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

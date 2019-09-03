@@ -1,13 +1,9 @@
 const express = require('express');
 const router = express.Router();
-import { fetchAllOffices as allCities } from '../controllers/office/FetchAllOffices';
-
 import { updateOffice } from '../controllers/office/UpdateOffice';
 import { editOffice } from '../controllers/office/EditOffice';
 import { cityAssign } from '../controllers/office/cityAssign';
 import { getRole } from '../controllers/common';
-
-router.get('/all', allCities);
 
 router.get('/', async (req, res, next) => {
   let user = req.session.user;

@@ -4,11 +4,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			$.get("http://localhost:3000/status/", function (data, statuse) {
+			$.get("/api/v1.0/statuses/", function (data, statuse) {
 				console.log(data);
 				for (let status of data) {
 					$("#table").append(`<tr> <td>${status.type} </td>
-						<td><a href ="http://localhost:3000/status/edit?_id=${status.id}">Edit</a> </td></tr>`);
+						<td><a href ="/status/edit?_id=${status.id}">Edit</a> </td></tr>`);
 				}
 			})
 		});

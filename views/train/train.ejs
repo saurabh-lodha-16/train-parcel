@@ -9,7 +9,7 @@
 
 	<br>
 	<br>
-	<form action="http://localhost:3000/train/add" method='get'>
+	<form action="/train/add" method='get'>
 		<button class="btn btn-primary" type="submit" value="Submit">Add Train</button>
 	</form>
 
@@ -17,12 +17,12 @@
 </div>
 <script>
 	$(document).ready(function () {
-		$.get("http://localhost:3000/train/", function (data, status) {
+		$.get("/api/v1.0/train/", function (data, status) {
 			console.log(data);
 			for (let train of data) {
 				$("#table").append(`<tr> <td>${train.name} </td>
 						<td>${train.trainNo} </td>
-					<td><a class="btn btn-info" href ="http://localhost:3000/train/edit?_id=${train.id}">Edit</a> </td></tr>`);
+					<td><a class="btn btn-info" href ="/train/edit?_id=${train.id}">Edit</a> </td></tr>`);
 			}
 		})
 	});

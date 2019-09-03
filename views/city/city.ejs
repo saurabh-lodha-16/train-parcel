@@ -4,7 +4,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script>
 		$(document).ready(function () {
-			$.get("http://localhost:3000/city/", function (data, status) {
+			$.get("/api/v1.0/cities", function (data, status) {
 				console.log(data);
 				for (let city of data) {
 					console.log(city.id);
@@ -25,6 +25,7 @@
 		<tr>
 			<th>City name</th>
 		</tr>
+		
 	</table>
 
 	<br>

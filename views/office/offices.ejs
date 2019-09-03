@@ -14,7 +14,7 @@
 </body>
 <script>
 	$(document).ready(function () {
-		$.get("/office/all", function (data, status) {
+		$.get("/api/v1.0/offices", function (data, status) {
 			console.log(data);
 			for (let office of data) {
 				console.log(office.id);

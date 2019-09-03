@@ -1,0 +1,397 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Parcel Management System
+host: localhost:3000
+
+tags:
+  - name: System-admin
+    description: Secured Admin-only calls
+  - name: manager
+    description: Operations available to Manager
+  - name: user
+    description: Operations available to regular developers
+
+paths:
+  /city:
+    get:
+      tags:
+      - manager
+      - user
+      - admins
+      summary: returns all the cities
+      operationId: getAllCities
+      description: |
+        Would return all the cities present in the Databas
+      produces:
+      - application/json
+      responses:
+        200:
+          description: returns cities
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/cities'
+        400:
+          description: bad input parameter
+
+  /city/add:
+  get:
+    tags:
+    - admins
+    summary: renders page to add city
+    operationId: renderAddCity
+    description: |
+      Would return all the cities present in the Databas
+    produces:
+    - ejs
+    responses:
+      200:
+        description: returns page to add city
+      400:
+        description: Internal Server error
+  post:
+    tags:
+    - admins
+    summary: adds an City 
+    operationId: addCity
+    description: Adds a city to the system
+    consumes:
+    - application/json
+    produces:
+    - application/json
+    parameters:
+    - in: body
+      name: cityName
+      description: Inventory item to add
+      schema:
+        $ref: '#/definitions/cities'
+    responses:
+      201:
+        description: item created
+      400:
+        description: invalid input, object invalid
+      409:
+        description: an item already exists
+        
+  /acity/edit:
+  get:
+    tags:
+    - admins
+    summary: renders page to edit city information
+    operationId: renderEditCity
+    description: |
+      Would render page to edit city in database
+    produces:
+    - ejs
+    responses:
+      200:
+        description: returns page to edit city
+      400:
+        description: Internal Server error
+  post:
+    tags:
+    - admins
+    summary: edit's a City 
+    operationId: editCity
+    description: edit's a city to the system
+    consumes:
+    - application/json
+    produces:
+    - application/json
+    parameters:
+    - in: body
+      name: id
+      schema:
+        $ref: '#/definitions/cities'
+    - in: body
+      name: name
+      schema:
+        $ref: '#/definitions/cities'
+    responses:
+      201:
+        description: item created
+      400:
+        description: invalid input, object invalid
+      409:
+        description: an item already exists
+  /login:
+  get:
+    tags:
+    - admin
+    - user
+    - manager
+    summary: renders login page
+    operationId: loginGet
+    description: |
+      Would render page to Login for the user
+    produces:
+    - ejs
+    responses:
+      200:
+        description: Log in page
+      400:
+        description: Internal Server error
+  post:
+    tags:
+    - admins
+    - user
+    - manager
+    summary: Credentials validation
+    operationId: loginPost
+    description: |
+      Sends user entered login credentials to the backend for validations
+    consumes:
+    - application/json
+    produces:
+    - application/json
+    parameters:
+    - in: email
+      name: id
+      schema:
+        $ref: '#/definitions/users'
+    - in: password
+      name: name
+      schema:
+        $ref: '#/definitions/users'
+    responses:
+      200:
+        description: Successfully logged in
+      400:
+        description: invalid input, object invalid
+  /login:
+  get:
+    tags:
+    - admin
+    - user
+    - manager
+    summary: renders Registration Page
+    operationId: loginGet
+    description: |
+      Displays Registration Page and form to the user
+    produces:
+    - ejs
+    responses:
+      200:
+      description: | Log in page
+      400:
+        description: Internal Server error
+  post:
+    tags:
+    - admins
+    - user
+    - manager
+    summary: User Creation
+    operationId: loginPost
+    description: |
+      Sends form data of registration page to the backend for user creationalidations
+    consumes:
+    - application/json
+    produces:
+    - application/json
+    parameters:
+    - in: email
+      name: id
+      schema:
+        $ref: '#/definitions/users'
+    - in: password
+      name: name
+      schema:
+        $ref: '#/definitions/users'
+    responses:
+      200:
+        description: Successfully logged in
+      400:
+        description: invalid input, object invalid
+        
+definitions:
+  cities:
+    type: object
+    required:
+    - id
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+  offices:
+    type: object
+    required:
+    - id
+    - userId
+    - cityId
+    properties:
+      id:
+        type: string
+        format: uuid
+      userId:
+        $ref: '#/definitions/users'
+      cityId:
+        $ref: '#/definitions/cities'
+      isActive:
+        type: boolean
+  packages:
+    type: object
+    required:
+    - id
+    - serial_no
+    - senderUserId
+    - rcvrUserId
+    - sCity
+    - dCity
+    - statusId
+    properties:
+      id:
+        type: string
+        format: uuid
+      serial_no:
+        type: integer
+      senderUserId:
+        $ref: '#/definitions/users'
+      rcvrUserId:
+        $ref: '#/definitions/users'
+      weight:
+        type: number
+        format: float
+      name:
+        type: string
+      sCity:
+        $ref: '#/definitions/cities'
+      dCity:
+        $ref: '#/definitions/cities'
+      trainId:
+        $ref: '#/definitions/trains'
+      statusId:
+        $ref: '#/definitions/statuses'
+      isActive:
+        type: boolean
+  receipts:
+    type: object
+    required:
+    - id
+    - userId
+    - packageId
+    - totalAmount
+    properties:
+      id:
+        type: string
+        format: uuid
+      userId:
+        $ref: '#/definitions/users'
+      packageId:
+        $ref: '#/definitions/packages'
+      totalAmount:
+        type: number
+        format: float
+      isActive:
+        type: boolean
+  roles:
+    type: object
+    required:
+    - id
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+      level:
+        type: integer
+  roleAssigns:
+    type: object
+    required:
+    - id
+    - userId
+    - roleId
+    properties:
+      id:
+        type: string
+        format: uuid
+      userId:
+        $ref: '#/definitions/users'
+      roleId:
+        $ref: '#/definitions/roles'
+      isActive:
+        type: boolean
+        format: uuid
+  statuses:
+    type: object
+    required:
+      -id
+    properties:
+      id:
+        type: string
+        format: uuid
+      type:
+        type: string
+  trains:
+    type: object
+    required:
+      -id
+      -trainNo
+    properties:
+      id:
+        type: string
+        format: uuid
+      trainNo:
+        type: integer
+      name:
+        type: string
+      isActive:
+        type: boolean
+  trainStatuses:
+    type: object
+    required:
+      -id
+      -trainId
+      -sCity
+      -dCity
+      -sTime
+      -dTime
+    properties:
+      id:
+        type: string
+        format: uuid
+      trainId:
+        $ref: '#/definitions/trains'
+      sCity:
+        $ref: '#/definitions/cities'
+      dCity:
+        $ref: '#/definitions/cities'
+      sTime:
+        type: string
+        format: date
+      dTime:
+        type: string
+        format: date
+      isRunning:
+        type:boolean
+  users:
+    type: object
+    required:
+      -id
+      -name
+    properties:
+      id:
+        type: string
+        format: uuid
+      name:
+        type: string
+      email:
+        type: string
+      mobileNo:
+        type: integer
+      password:
+        type: string
+        format: password
+      key:
+        type: string
+      eKey:
+        type: string
+      isActive:
+        type: boolean
+basePath: /Deqode/TrainParcel/1.0.0
+schemes:
+- https
+- http
