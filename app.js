@@ -20,6 +20,7 @@ const trainStatusRouter = require('./routes/trainStatus');
 const packageRouter = require('./routes/package');
 const updateProfileRouter = require('./routes/profile')
 const oAuthRouter = require('./routes/oAuth')
+const userRoleRouter = require('./routes/userRole')
 
 
 export const stripe = require("stripe")(stripeSecretKey);
@@ -56,7 +57,8 @@ app.use('/users', usersRouter);
 app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
-app.use('/role', roleRouter);
+app.use('/roles', roleRouter);
+app.use('/userRole',userRoleRouter)
 //app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
 app.use('/package', packageRouter);

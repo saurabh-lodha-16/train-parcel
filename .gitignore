@@ -3,5 +3,3 @@ node_modules
 .vscode
 coverage
 package-lock.json
-config/googleCreds.js
-config/payment.js

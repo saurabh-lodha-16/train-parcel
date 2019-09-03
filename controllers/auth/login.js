@@ -38,7 +38,7 @@ export function loginPost(req, res) {
             }
         });
     } catch (e) {
-        res.render('auth/login', { alert: 'danger', alertMsg: 'Exception: ' + e })
+        res.render('auth/login', { alert: 'danger', alertMsg: `Exception: ${e.message}` })
     }
 
 
