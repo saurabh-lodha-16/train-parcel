@@ -9,9 +9,9 @@ export function updateTrain(req, res) {
     }, {
         where: { id: req.body.id }
       })
-    res.redirect('train');
+    res.redirect('/trains');
   } catch (error) {
-    res.redirect('train', { alert: 'danger', alertMsg: error })
+    res.redirect('/trains', { alert: 'danger', alertMsg: error })
   }
 }
 

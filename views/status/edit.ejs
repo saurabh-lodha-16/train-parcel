@@ -5,7 +5,8 @@
 
 <body>
   <% include ../common/alert %>
-  <form method="post" action="http://localhost:3000/status/edit">
+  <form method="post" action="/statuses/edit">
+    <input type="hidden" name="_method" value="put" />
     <div>
       <label for="name">Status Type:</label>
       <input type="text" name="type" value=<%= type %>>

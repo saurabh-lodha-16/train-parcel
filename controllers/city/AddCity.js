@@ -6,11 +6,10 @@ export function addCity(req, res) {
     City.create({
       name: req.body.name
     }).then(() => {
-      res.redirect('city');
+      res.redirect('/cities');
     });
   } catch (err) {
-    console.log(`City was not Created 
-    ${err}`);
+    console.log(`City was not Created ${err}`);
   }
 
 }

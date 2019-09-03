@@ -1,6 +1,7 @@
 <body>
   <div class="container">
-    <form method="post" action="/office/edit">
+    <form method="post" action="/offices/edit">
+      <input type="hidden" name="_method" value="put" />
       <div>
         <label for="name">User Name:</label>
         <strong class="form-control">
@@ -26,7 +27,7 @@
 </body>
 <script>
   $(document).ready(function () {
-    $.get("http://localhost:3000/city/", function (data, status) {
+    $.get("http://localhost:3000/api/v1.0/cities", function (data, status) {
       let cityId = $("#cityId").attr('value');
       data.sort((a, b) => {
         if (a.name < b.name) //sort string ascending

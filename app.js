@@ -6,7 +6,8 @@ var logger = require('morgan');
 const passport = require('passport');
 var session = require('express-session');
 require('./config/passport-setup')
-
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -35,9 +36,22 @@ const app = express();
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(bodyParser.json());
+<<<<<<< Updated upstream
 app.use(bodyParser.urlencoded())
 app.use(methodOverride('_method'))
+=======
+app.use(methodOverride('_method'))
+app.use(bodyParser.urlencoded())
+>>>>>>> Stashed changes
 
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+  // look in urlencoded POST bodies and delete it
+  var method = req.body._method
+  delete req.body._method
+  return method
+  }
+  }))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -71,15 +85,15 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/city', cityRouter);
-app.use('/train', trainsRouter);
-app.use('/status', statusRouter);
+app.use('/cities', cityRouter);
+app.use('/trains', trainsRouter);
+app.use('/statuses', statusRouter);
 app.use('/roles', roleRouter);
 app.use('/user-role', userRoleRouter)
 //app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
 app.use('/packages', packageRouter);
-app.use('/office', officeRouter);
+app.use('/offices', officeRouter);
 app.use('/updateProfile', updateProfileRouter);
 app.use('/oAuth', oAuthRouter);
 app.use('/api/v1.0/cities', apiCity);
