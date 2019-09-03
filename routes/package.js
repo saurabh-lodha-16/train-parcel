@@ -6,9 +6,7 @@ import { linkPackageTrainGet } from '../controllers/package/link'
 import express from 'express';
 import { listPackages } from '../controllers/package/update';
 let router = express.Router();
-router.get('/', renderRegistration);
-router.post('/', registerPackage);
-router.get('/list', listPackages);
+router.get('/', listPackages);
 router.get('/register', renderRegistration);
 router.post('/register', registerPackage);
 router.get('/track/', trackGet);

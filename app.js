@@ -58,10 +58,10 @@ app.use('/city', cityRouter);
 app.use('/train', trainsRouter);
 app.use('/status', statusRouter);
 app.use('/roles', roleRouter);
-app.use('/userRole',userRoleRouter)
+app.use('/user-role',userRoleRouter)
 //app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
-app.use('/package', packageRouter);
+app.use('/packages', packageRouter);
 app.use('/office', officeRouter);
 app.use('/updateProfile', updateProfileRouter);
 app.use('/oAuth', oAuthRouter);
