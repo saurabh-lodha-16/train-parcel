@@ -19,7 +19,7 @@
 </body>
 <script>
   $(document).ready(function () {
-    $.get("api/v1.0/cities/", function (data, status) {
+    $.get("/api/v1.0/cities/", function (data, status) {
       data.sort((a, b) => {
         if (a.name < b.name) //sort string ascending
           return -1
