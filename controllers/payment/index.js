@@ -42,21 +42,28 @@ export async function makePayment(packageId, loggedUser, res) {
                     });
                 })
                 .then(async (charge) => {
-                    //console.log(charge)
-                    console.log("done here2");
                     sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged / 100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
                     let userRole = await getRole(loggedUser.id);
                     let packageArray = await getPackages(loggedUser.id, userRole);
-                    //console.log(packageArray);
-                    res.render('base', {
-                        content: 'package/packages.ejs',
-                        packageList: packageArray,
-                        userRole: userRole,
-                        alertMsg: `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`,
-                        alert: "success",
-                        citiesArray: await retrieveCityNames()
-                    });
-                    // New charge created on a new customer
+                    if (userRole == 'Admin' || userRole == 'Manager') {
+                        res.render('base', {
+                            content: 'package/packages.ejs',
+                            packageList: packageArray,
+                            userRole: userRole,
+                            alertMsg: `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`,
+                            alert: "success",
+                            citiesArray: await retrieveCityNames()
+                        });
+                    } else {
+                        res.render('base', {
+                            content: 'package/registerPackage.ejs',
+                            packageList: packageArray,
+                            userRole: userRole,
+                            alertMsg: `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`,
+                            alert: "success",
+                            citiesArray: await retrieveCityNames()
+                        });
+                    }
                 })
                 .catch(async (err) => {
                     await models.packages.update(
@@ -66,7 +73,6 @@ export async function makePayment(packageId, loggedUser, res) {
                         })
                     let userRole = await getRole(loggedUser.id);
                     let packageArray = await getPackages(loggedUser.id, userRole);
-                    //console.log(packageArray);
                     console.log("done here3");
                     res.render('base', {
                         content: 'package/packages.ejs',
@@ -82,7 +88,6 @@ export async function makePayment(packageId, loggedUser, res) {
         } else {
             let userRole = await getRole(loggedUser.id);
             let packageArray = await getPackages(loggedUser.id, userRole);
-           // console.log(packageArray);
             console.log("done here4");
             res.render('base', {
                 content: 'package/packages.ejs',
@@ -101,7 +106,6 @@ export async function makePayment(packageId, loggedUser, res) {
             })
         let userRole = await getRole(loggedUser.id);
         let packageArray = await getPackages(loggedUser.id, userRole);
-        //console.log(packageArray);
         console.log("done here5");
         res.render('base', {
             content: 'package/packages.ejs',
