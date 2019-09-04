@@ -1,4 +1,5 @@
 import db from '../../models';
+import { getRole } from '../common';
 let users = db['users'];
 let roles = db['roles'];
 let roleAssigns = db['roleAssigns'];
@@ -15,47 +16,51 @@ export async function viewUsers(req, res) {
   let userArray;
   let loggedUser = req.session.user
   if (loggedUser) {
-
-    try {
-      userArray = await users.findAll({
-        include: [{
-          model: roleAssigns,
+    let role = await getRole(loggedUser.id)
+    if (role == 'Admin') {
+      try {
+        userArray = await users.findAll({
           include: [{
-            model: roles
+            model: roleAssigns,
+            include: [{
+              model: roles
+            }]
           }]
-        }]
-      });
-      if (userArray) {
-        res.render('base', {
-          content: 'userRole/index.ejs',
-          usersArray: userArray,
-          userRole: await getRole(loggedUser.id)
         });
-      } else {
+        if (userArray) {
+          res.render('base', {
+            content: 'userRole/index.ejs',
+            usersArray: userArray,
+            userRole: await getRole(loggedUser.id)
+          });
+        } else {
+          res.render('base', {
+            content: 'userRole/index.ejs',
+            usersArray: userArray,
+            alertMsg: "No users found",
+            alert: "info",
+            userRole: await getRole(loggedUser.id)
+          });
+        }
+
+      } catch (err) {
         res.render('base', {
           content: 'userRole/index.ejs',
           usersArray: userArray,
-          alertMsg: "No users found",
-          alert: "info",
+          alertMsg: err,
+          alert: "error",
           userRole: await getRole(loggedUser.id)
         });
       }
-
-    } catch (err) {
-      res.render('base', {
-        content: 'userRole/index.ejs',
-        usersArray: userArray,
-        alertMsg: err,
-        alert: "error",
-        userRole: await getRole(loggedUser.id)
-      });
+    } else {
+      res.send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
   }
 }
 
-async function getRole(name) {
+async function getRoleByName(name) {
   try {
     let roleInstance = await roles.findOne({
       where: { name: name }
@@ -66,79 +71,89 @@ async function getRole(name) {
   }
 }
 
-export async function editUserRole(req, res) {
+export async function renderEditUserRole(req, res) {
   let loggedUser = req.session.user
 
   if (loggedUser) {
-    try {
-      let roleArray = await roles.findAll({
-        attributes: ['id', 'name', 'level']
-      });
-      res.render('base', {
-        content: 'userRole/edit.ejs',
-        user_id: req.query.user_id,
-        roleArray: roleArray,
-        userRole: await getRole(loggedUser.id)
-      });
+    let role = await getRole(loggedUser.id)
+    if (role == 'Admin') {
+      try {
+        let roleArray = await roles.findAll({
+          attributes: ['id', 'name', 'level']
+        });
+        res.render('base', {
+          content: 'userRole/edit.ejs',
+          user_id: req.query.user_id,
+          roleArray: roleArray,
+          userRole: await getRole(loggedUser.id)
+        });
 
-    } catch (err) {
-      res.send(err);
+      } catch (err) {
+        res.send(err);
+      }
+    } else {
+      res.send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
   }
 };
 
-export async function editUserRoleResult(req, res) {
-  let roleArray,userArray;
+export async function editUserRole(req, res) {
+  let roleArray, userArray;
   let loggedUser = req.session.user
-  
+
   if (loggedUser) {
-    try {
-      roleArray = await roles.findAll({
-        attributes: ['id', 'name', 'level']
-      });
-      let userRoleEntry = await roleAssigns.findOne({
-        where: { userId: req.body.user_id }
-      });
-      if (!userRoleEntry) {
-        await roleAssigns.create({
-          roleId: req.body.role_id,
-          userId: req.body.user_id
+    let role = await getRole(loggedUser.id)
+    if (role == 'Admin') {
+      try {
+        roleArray = await roles.findAll({
+          attributes: ['id', 'name', 'level']
+        });
+        let userRoleEntry = await roleAssigns.findOne({
+          where: { userId: req.body.user_id }
+        });
+        if (!userRoleEntry) {
+          await roleAssigns.create({
+            roleId: req.body.role_id,
+            userId: req.body.user_id
+          });
+        }
+        await roleAssigns.update(
+          { roleId: req.body.role_id },
+          { where: { userId: req.body.user_id } }
+        );
+        userArray = await users.findAll({
+          include: [{
+            model: roleAssigns,
+            include: [{
+              model: roles
+            }]
+          }]
+        });
+        res.render('base', {
+          content: 'userRole/index.ejs',
+          user_id: req.body.user_id,
+          roleArray: roleArray,
+          alert: "success",
+          usersArray: userArray,
+          alertMsg: "Role successfully updated for user",
+          userRole: await getRole(loggedUser.id)
+        });
+
+      } catch (err) {
+        res.render('base', {
+          content: 'userRole/index.ejs',
+          user_id: req.body.user_id,
+          roleArray: roleArray,
+          alertMsg: err,
+          usersArray: userArray,
+          alert: "error",
+          userRole: await getRole(loggedUser.id)
         });
       }
-      await roleAssigns.update(
-        { roleId: req.body.role_id },
-        { where: { userId: req.body.user_id } }
-      );
-      userArray = await users.findAll({
-        include: [{
-          model: roleAssigns,
-          include: [{
-            model: roles
-          }]
-        }]
-      });
-      res.render('base', {
-        content: 'userRole/index.ejs',
-        user_id: req.body.user_id,
-        roleArray: roleArray,
-        alert: "success",
-        usersArray: userArray,
-        alertMsg: "Role successfully updated for user",
-        userRole: await getRole(loggedUser.id)
-      });
-
-    } catch (err) {
-      res.render('base', {
-        content: 'userRole/index.ejs',
-        user_id: req.body.user_id,
-        roleArray: roleArray,
-        alertMsg: err,
-        usersArray: userArray,
-        alert: "error",
-        userRole: await getRole(loggedUser.id)
-      });
+    } else {
+      res.send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
