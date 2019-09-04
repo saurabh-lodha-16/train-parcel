@@ -10,6 +10,7 @@ export function addCity(req, res) {
     });
   } catch (err) {
     console.log(`City was not Created ${err}`);
+    res.status(404)
   }
 
 }
