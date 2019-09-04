@@ -18,10 +18,10 @@ export async function renderRolePage(req, res) {
         });
 
       } catch (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
@@ -40,10 +40,10 @@ export async function renderAddRole(req, res) {
         });
 
       } catch (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
@@ -78,6 +78,7 @@ export async function addRole(req, res) {
         });
 
       } catch (err) {
+        res.status(500);
         res.render('base', {
           content: 'role/index.ejs',
           alertMsg: err,
@@ -87,7 +88,7 @@ export async function addRole(req, res) {
         });
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
@@ -108,12 +109,11 @@ export async function renderEditRole(req, res) {
           role_id: req.query.role_id,
           userRole: await getRole(loggedUser.id)
         });
-
       } catch (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
@@ -152,6 +152,7 @@ export async function editRole(req, res) {
         });
 
       } catch (err) {
+        res.status(500);
         res.render('base', {
           content: 'role/index.ejs',
           alertMsg: err,
@@ -162,7 +163,7 @@ export async function editRole(req, res) {
         });
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access');
     }
   } else {
     res.redirect('/login');
