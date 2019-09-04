@@ -102,10 +102,11 @@
                     <a href="#" class="list-group-item list-group-item-action ">
                         <span class="menu-collapsed">Running Status</span>
                     </a>
-
-                    <a href="/trains/" class="list-group-item list-group-item-action ">
-                        <span class="menu-collapsed">Train List</span>
-                    </a>
+                    <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
+                        <a href="/trains/" class="list-group-item list-group-item-action ">
+                            <span class="menu-collapsed">Train List</span>
+                        </a>
+                    <%}%>
                 </div>
                 
             <a href="#submenu5" data-toggle="collapse" aria-expanded="false"
@@ -135,4 +136,3 @@
         </ul>
     </div>
 </div>
-
