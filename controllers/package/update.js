@@ -14,7 +14,6 @@ export async function getPackages(userId, userRole) {
           userId: userId
         }
       })
-      console.log(curr_office, '--------------------------------------')
       if (curr_office) {
         packageArray = await packages.findAll({
           where: {
@@ -54,6 +53,7 @@ export async function listPackages(req, res) {
       });
 
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
@@ -156,6 +156,7 @@ export async function renderUpdation(req, res) {
       });
 
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/updatePackage.ejs',
         alertMsg: err,
@@ -190,24 +191,12 @@ export async function update(req, res) {
       let statusInstance = await getStatus(statusId);
       if (statusInstance.type === 'PENDING') {
         if (req.body.phoneNo.length !== 10) {
-          res.render('base', {
-            content: 'package/packages.ejs',
-            packageList: packageArray,
-            userRole: userRole,
-            alertMsg: "Phone number must consist 10 digits.",
-            alert: "danger"
-          });
+          throw "Phone number must consist 10 digits.";
         }
         let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo);
         let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight);
         if (!(isEmpty1 && isEmpty2)) {
-          res.render('base', {
-            content: 'package/packages.ejs',
-            packageList: packageArray,
-            userRole: userRole,
-            alertMsg: "Fill the required fields.",
-            alert: "danger"
-          });
+          throw "Fill the required fields.";
         }
         let weight = req.body.weight;
         let sourceCity = req.body.source_city_id;
@@ -230,20 +219,6 @@ export async function update(req, res) {
           alertMsg: "Package successfully updated.",
           alert: "success"
         });
-        // res.render('base', {
-        //   content: 'package/updatePackage.ejs',
-        //   alertMsg: "Package successfully updated.",
-        //   alert: "success",
-        //   citiesArray: cityArray,
-        //   weightPackage: weight,
-        //   name: name,
-        //   email: email,
-        //   phoneNo: phoneNo,
-        //   packageId: packageId,
-        //   sCity: sCityInstance.name,
-        //   dCity: dCityInstance.name,
-        //   userRole: await getRole(user.id)
-        // });
       } else {
         res.render('base', {
           content: 'package/packages.ejs',
@@ -255,6 +230,7 @@ export async function update(req, res) {
       }
 
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,

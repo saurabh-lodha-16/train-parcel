@@ -44,6 +44,7 @@ export async function viewUsers(req, res) {
         }
 
       } catch (err) {
+        res.status(500);
         res.render('base', {
           content: 'userRole/index.ejs',
           usersArray: userArray,
@@ -53,7 +54,7 @@ export async function viewUsers(req, res) {
         });
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access');
     }
   } else {
     res.redirect('/login');
@@ -89,10 +90,10 @@ export async function renderEditUserRole(req, res) {
         });
 
       } catch (err) {
-        res.send(err);
+        res.status(500).send(err);
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access');
     }
   } else {
     res.redirect('/login');
@@ -142,6 +143,7 @@ export async function editUserRole(req, res) {
         });
 
       } catch (err) {
+        res.status(500);
         res.render('base', {
           content: 'userRole/index.ejs',
           user_id: req.body.user_id,
@@ -153,7 +155,7 @@ export async function editUserRole(req, res) {
         });
       }
     } else {
-      res.send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access');
     }
   } else {
     res.redirect('/login');

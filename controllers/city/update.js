@@ -11,6 +11,7 @@ export function updateCity(req, res) {
     res.redirect('/cities');
   } catch (err) {
     console.log(err);
+    res.status(402)
   }
 }
 
