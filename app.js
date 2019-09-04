@@ -22,10 +22,10 @@ const packageRouter = require('./routes/package');
 const updateProfileRouter = require('./routes/profile')
 const oAuthRouter = require('./routes/oAuth')
 const userRoleRouter = require('./routes/userRole')
-const apiCity = require('./api/v1.0/city')
-const apiTrain = require('./api/v1.0/train')
-const apiStatus = require('./api/v1.0/status')
-const apiOffices = require('./api/v1.0/office')
+const apiCity = require('./api/v1.0/cities')
+const apiTrain = require('./api/v1.0/trains')
+const apiStatus = require('./api/v1.0/statuses')
+const apiOffices = require('./api/v1.0/offices')
 
 export const stripe = require("stripe")(stripeSecretKey);
 import models from './models';
