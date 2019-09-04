@@ -69,21 +69,22 @@ export async function registerPost(req, res) {
                         });
                 } else {
                     let hashPwd = bcrypt.hashSync(pwd, 10);
-                    models.users.create({
+                    let user = await models.users.create({
                         name: name,
                         mobileNo: phone,
                         email: email,
                         password: hashPwd,
                         key: generateOTP()
-                    }).then(user => {
-                        // create a default role for user
-                        req.session.user = user;
-                        sendWAmsg(phone, `Hello ${name}, Your OTP is ${user.key}`)
-                        res.render('auth/phoneVerification', {
-                            userId: user.id,
-                            alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}`
-                        })
-                    });
+                    })
+
+                    // create a default role for user
+                    req.session.user = user;
+                    sendWAmsg(phone, `Hello ${name}, Your OTP is ${user.key}`)
+                    res.render('auth/phoneVerification', {
+                        userId: user.id,
+                        alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}`
+                    })
+
                 }
 
             } else {

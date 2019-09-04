@@ -79,7 +79,7 @@ app.use('/user-roles', userRoleRouter)
 app.use('/trainStatus', trainStatusRouter);
 app.use('/packages', packageRouter);
 app.use('/offices', officeRouter);
-app.use('/updateProfile', updateProfileRouter);
+app.use('/profiles', updateProfileRouter);
 app.use('/oAuth', oAuthRouter);
 app.use('/api/v1.0/cities', apiCity);
 app.use('/api/v1.0/trains', apiTrain);

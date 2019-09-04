@@ -19,10 +19,8 @@ export async function linkPackageTrainGet(req, res) {
                 userRole: await getRole(user.id)
             })
         } else {
-
         }
     } else {
         res.redirect('/login')
     }
-
 }
