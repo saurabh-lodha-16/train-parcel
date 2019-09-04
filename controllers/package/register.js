@@ -87,8 +87,8 @@ export async function renderRegistration(req, res) {
     } else {
       res.redirect('/login')
     }
-
   } catch (err) {
+    res.status(500);
     res.render('base', {
       content: 'package/registerPackage',
       citiesArray: cityArray,
@@ -122,14 +122,9 @@ export async function registerPackage(req, res) {
       let destinationId = req.body.destination_city_id;
       let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
       makePayment(createdPackage.id, loggedUser, res)
-      // res.render('base', {
-      //   content: 'package/registerPackage',
-      //   alertMsg: `Package successfully registered. \n Package Serial ID : ${createdPackage.serial_no}`,
-      //   alert: "success",
-      //   citiesArray: cityArray,
-      //   userRole: await getRole(loggedUser.id)
-      // });
+      
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,

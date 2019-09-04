@@ -14,7 +14,6 @@ export async function getPackages(userId, userRole) {
           userId: userId
         }
       })
-      console.log(curr_office, '--------------------------------------')
       if (curr_office) {
         packageArray = await packages.findAll({
           where: {
@@ -54,6 +53,7 @@ export async function listPackages(req, res) {
       });
 
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
@@ -156,6 +156,7 @@ export async function renderUpdation(req, res) {
       });
 
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/updatePackage.ejs',
         alertMsg: err,
@@ -218,20 +219,6 @@ export async function update(req, res) {
           alertMsg: "Package successfully updated.",
           alert: "success"
         });
-        // res.render('base', {
-        //   content: 'package/updatePackage.ejs',
-        //   alertMsg: "Package successfully updated.",
-        //   alert: "success",
-        //   citiesArray: cityArray,
-        //   weightPackage: weight,
-        //   name: name,
-        //   email: email,
-        //   phoneNo: phoneNo,
-        //   packageId: packageId,
-        //   sCity: sCityInstance.name,
-        //   dCity: dCityInstance.name,
-        //   userRole: await getRole(user.id)
-        // });
       } else {
         res.render('base', {
           content: 'package/packages.ejs',
@@ -243,6 +230,7 @@ export async function update(req, res) {
       }
 
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
