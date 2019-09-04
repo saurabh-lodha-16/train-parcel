@@ -18,7 +18,7 @@ export async function getPackageStatus(serial_no) {
     }
     let statusId = packageDetails.dataValues.statusId;
     if (statusId == pendingId) {
-        let final_answer = [];   
+        let final_answer = [];
         final_answer.push('Your package is yet to be loaded');
         console.log(final_answer);
         return final_answer;
@@ -48,8 +48,10 @@ export async function getPackageStatus(serial_no) {
         let trainStatusId = answer[answer.length - 1].dataValues.id;
         result.push({ trainStatusId: trainStatusId, city_name: city_name, time: y, isLive: false });
         let curr_city = await getCurrCity(trainId);
-        curr_city = await getCityName(curr_city);
-
+        let curr_city_name
+        if (curr_city) {
+            curr_city_name = await getCityName(curr_city);
+        }
         let sIndex, dIndex, liveIndex;
         for (let i = 0; i < result.length; i++) {
             if (result[i].trainStatusId == sCityTrainStatusId) {
@@ -61,8 +63,10 @@ export async function getPackageStatus(serial_no) {
         }
         let final_answer = result.slice(sIndex, dIndex + 1);
         for (let i = 0; i < final_answer.length; i++) {
-            if (final_answer[i].city_name == curr_city) {
-                liveIndex = i;
+            if (curr_city_name != 'undefined') {
+                if (final_answer[i].city_name == curr_city_name) {
+                    liveIndex = i;
+                }
             }
         }
         let msg;

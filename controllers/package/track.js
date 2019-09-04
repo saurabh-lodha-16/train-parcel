@@ -2,12 +2,13 @@ import { getPackageStatus } from './status'
 import { getRole } from '../common';
 export async function trackGet(req, res) {
     let serial_no = req.params['serial_no']
+    console.log('oooooooooooooooooooooooooo', serial_no);
     let loggedUser = req.session.user
     if (loggedUser) {
         if (serial_no) {
             try {
                 let status = await getPackageStatus(serial_no)
-
+              //  console.log('====================', status)
                 let len = status.length
                 let covered = 0;
                 // let diffMins =1
