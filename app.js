@@ -76,7 +76,7 @@ app.use('/statuses', statusRouter);
 app.use('/roles', roleRouter);
 app.use('/user-roles', userRoleRouter)
 //app.use('/unload', unloadRouter);
-app.use('/trainStatus', trainStatusRouter);
+app.use('/trainStatuses', trainStatusRouter);
 app.use('/packages', packageRouter);
 app.use('/offices', officeRouter);
 app.use('/profiles', updateProfileRouter);
