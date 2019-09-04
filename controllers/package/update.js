@@ -189,6 +189,26 @@ export async function update(req, res) {
       let statusId = packageInstance.statusId;
       let statusInstance = await getStatus(statusId);
       if (statusInstance.type === 'PENDING') {
+        if (req.body.phoneNo.length !== 10) {
+          res.render('base', {
+            content: 'package/packages.ejs',
+            packageList: packageArray,
+            userRole: userRole,
+            alertMsg: "Phone number must consist 10 digits.",
+            alert: "danger"
+          });
+        }
+        let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo);
+        let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight);
+        if (!(isEmpty1 && isEmpty2)) {
+          res.render('base', {
+            content: 'package/packages.ejs',
+            packageList: packageArray,
+            userRole: userRole,
+            alertMsg: "Fill the required fields.",
+            alert: "danger"
+          });
+        }
         let weight = req.body.weight;
         let sourceCity = req.body.source_city_id;
         let destinationCity = req.body.destination_city_id;

@@ -103,10 +103,28 @@ export async function registerPackage(req, res) {
   if (loggedUser && req.cookies.user_sid) {
     let cityArray = await retrieveCityNames();
     try {
-      console.log("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{");
       userRole = await getRole(loggedUser.id);
       packageArray = await getPackages(loggedUser.id, userRole);
-      console.log("done here1");
+      if (req.body.phoneNo.length !== 10) {
+        res.render('base', {
+          content: 'package/packages.ejs',
+          packageList: packageArray,
+          userRole: userRole,
+          alertMsg: "Phone number must consist 10 digits.",
+          alert: "danger"
+        });
+      }
+      let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo);
+      let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight);
+      if (!(isEmpty1 && isEmpty2)) {
+        res.render('base', {
+          content: 'package/packages.ejs',
+          packageList: packageArray,
+          userRole: userRole,
+          alertMsg: "Fill the required fields.",
+          alert: "danger"
+        });
+      }
       let senderId = req.session.user.id;
       let statusInstance = await getStatus('PENDING');
       let statusId = statusInstance.id;
