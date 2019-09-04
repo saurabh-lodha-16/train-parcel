@@ -148,26 +148,30 @@ export async function trainStatusCron() {
             let timeTemp = x[0] + " " + x[1];
             let time1 = timeTemp.split(' ');
             let date = time1[0].split('-');
-            date = parseInt(date[0])+'-' + parseInt(date[1])+ '-'+ parseInt(date[2]);
-            let time = date+ ' ' + time1[1];
-
-            for (let i = 0; i < pastPackages.length; i++) {
-                let id = pastPackages[i].dataValues.id;
-                let trainStatusId = pastPackages[i].dataValues.dCityTrainStatusId;
-                let trainStatus = await models.trainStatuses.findOne({ where: {id:trainStatusId} });
-                let timeToCompare = await getISTTime(trainStatus.dataValues.dTime);
-                let store = timeToCompare.split(',');
-                let date = store[0].split('/');
-                date = date[2]+'-'+date[0]+'-'+date[1] + ' ';
-                let tempTime = store[1] + '+05:30';
-                let final = date+tempTime
-                if(final < time){
-                    let temp2 = await models.statuses.findOne({ where: { type: 'COMPLETED' } });
-                    let completedId = temp2.dataValues.id;
-                    let changes = await models.packages.update({ statusId: completedId }, {where:{id:id}});
+            date = parseInt(date[0]) + '-' + parseInt(date[1]) + '-' + parseInt(date[2]);
+            let time = date + ' ' + time1[1];
+            if (pastPackages) {
+                for (let i = 0; i < pastPackages.length; i++) {
+                    let id = pastPackages[i].dataValues.id;
+                    let trainStatusId = pastPackages[i].dataValues.dCityTrainStatusId;
+                    let trainStatus = await models.trainStatuses.findOne({ where: { id: trainStatusId } });
+                    if (trainStatus) {
+                        let timeToCompare = await getISTTime(trainStatus.dataValues.dTime);
+                        let store = timeToCompare.split(',');
+                        let date = store[0].split('/');
+                        date = date[2] + '-' + date[0] + '-' + date[1] + ' ';
+                        let tempTime = store[1] + '+05:30';
+                        let final = date + tempTime
+                        if (final < time) {
+                            let temp2 = await models.statuses.findOne({ where: { type: 'COMPLETED' } });
+                            let completedId = temp2.dataValues.id;
+                            let changes = await models.packages.update({ statusId: completedId }, { where: { id: id } });
+                        }
+                    }
                 }
             }
-    
+
+
 
             let temp = await models.cities.findOne({ where: { id: curr_city } });
             let city_name = temp.dataValues.name;
