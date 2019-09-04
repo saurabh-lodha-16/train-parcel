@@ -7,7 +7,7 @@ let packages = db['packages'];
 let roleAssigns = db['roleAssigns'];
 import { getRole } from '../common'
 import { makePayment } from '../payment';
-import {getPackages} from './update'
+import { getPackages } from './update'
 
 export async function retrieveCityNames() {
   try {
@@ -106,24 +106,12 @@ export async function registerPackage(req, res) {
       userRole = await getRole(loggedUser.id);
       packageArray = await getPackages(loggedUser.id, userRole);
       if (req.body.phoneNo.length !== 10) {
-        res.render('base', {
-          content: 'package/packages.ejs',
-          packageList: packageArray,
-          userRole: userRole,
-          alertMsg: "Phone number must consist 10 digits.",
-          alert: "danger"
-        });
+        throw "Phone number must consist 10 digits.";
       }
       let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo);
       let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight);
       if (!(isEmpty1 && isEmpty2)) {
-        res.render('base', {
-          content: 'package/packages.ejs',
-          packageList: packageArray,
-          userRole: userRole,
-          alertMsg: "Fill the required fields.",
-          alert: "danger"
-        });
+        throw "Fill the required fields";
       }
       let senderId = req.session.user.id;
       let statusInstance = await getStatus('PENDING');
