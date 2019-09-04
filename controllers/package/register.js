@@ -7,6 +7,7 @@ let packages = db['packages'];
 let roleAssigns = db['roleAssigns'];
 import { getRole } from '../common'
 import { makePayment } from '../payment';
+import {getPackages} from './update'
 
 export async function retrieveCityNames() {
   try {
@@ -98,9 +99,14 @@ export async function renderRegistration(req, res) {
 
 export async function registerPackage(req, res) {
   let loggedUser = req.session.user;
+  let userRole, packageArray;
   if (loggedUser && req.cookies.user_sid) {
     let cityArray = await retrieveCityNames();
     try {
+      console.log("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{");
+      userRole = await getRole(loggedUser.id);
+      packageArray = await getPackages(loggedUser.id, userRole);
+      console.log("done here1");
       let senderId = req.session.user.id;
       let statusInstance = await getStatus('PENDING');
       let statusId = statusInstance.id;
@@ -119,11 +125,11 @@ export async function registerPackage(req, res) {
       // });
     } catch (err) {
       res.render('base', {
-        content: 'package/registerPackage',
-        citiesArray: cityArray,
-        alert: 'danger',
-        alertMsg: 'Error: ' + err,
-        userRole: await getRole(loggedUser.id)
+        content: 'package/packages.ejs',
+        packageList: packageArray,
+        userRole: userRole,
+        alertMsg: err,
+        alert: "danger"
       });
     }
   } else {

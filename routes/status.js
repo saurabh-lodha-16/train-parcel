@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-import { addStatus } from '../controllers/status/AddStatus';
-import { updateStatus } from '../controllers/status/UpdateStatus';
-import { editStatus } from '../controllers/status/EditStatus';
+import { addStatus } from '../controllers/status/add';
+import { updateStatus } from '../controllers/status/update';
+import { editStatus } from '../controllers/status/edit';
 
 
 router.get('/', (req, res, next) => {
@@ -16,7 +16,7 @@ router.get('/add', function (req, res, next) {
 
 router.post('/add', addStatus);
 router.get('/edit', editStatus);
-router.post('/edit', updateStatus);
+router.put('/', updateStatus);
 
 module.exports = router;
 

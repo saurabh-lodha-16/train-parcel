@@ -5,7 +5,8 @@
 
 <body>
   <% include ../common/alert %>
-  <form method="post" action="http://localhost:3000/city/edit">
+  <form method="post" action="/cities">
+    <input type="hidden" name="_method" value="put" />
     <div>
       <label for="name">City Name:</label>
       <input type="text" name="name" value=<%= name %>>

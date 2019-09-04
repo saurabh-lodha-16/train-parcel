@@ -6,7 +6,8 @@ var logger = require('morgan');
 const passport = require('passport');
 var session = require('express-session');
 require('./config/passport-setup')
-
+const methodOverride = require('method-override');
+const bodyParser = require('body-parser');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -25,8 +26,6 @@ const apiCity = require('./api/v1.0/city')
 const apiTrain = require('./api/v1.0/train')
 const apiStatus = require('./api/v1.0/status')
 const apiOffices = require('./api/v1.0/office')
-const methodOverride = require('method-override')
-const bodyParser = require('body-parser');
 
 export const stripe = require("stripe")(stripeSecretKey);
 import models from './models';
@@ -38,19 +37,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded())
 app.use(methodOverride('_method'))
 
+app.use(methodOverride(function (req, res) {
+  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+  // look in urlencoded POST bodies and delete it
+  var method = req.body._method
+  delete req.body._method
+  return method
+  }
+  }))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 
-app.use(methodOverride(function (req, res) {
-  if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-    // look in urlencoded POST bodies and delete it
-    var method = req.body._method
-    delete req.body._method
-    return method
-  }
-}))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -71,16 +70,16 @@ app.use(session({
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/city', cityRouter);
-app.use('/train', trainsRouter);
-app.use('/status', statusRouter);
+app.use('/cities', cityRouter);
+app.use('/trains', trainsRouter);
+app.use('/statuses', statusRouter);
 app.use('/roles', roleRouter);
-app.use('/user-role', userRoleRouter)
+app.use('/user-roles', userRoleRouter)
 //app.use('/unload', unloadRouter);
 app.use('/trainStatus', trainStatusRouter);
 app.use('/packages', packageRouter);
-app.use('/office', officeRouter);
-app.use('/profile', updateProfileRouter);
+app.use('/offices', officeRouter);
+app.use('/profiles', updateProfileRouter);
 app.use('/oAuth', oAuthRouter);
 app.use('/api/v1.0/cities', apiCity);
 app.use('/api/v1.0/trains', apiTrain);

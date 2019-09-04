@@ -6,7 +6,7 @@ import { registerGet, resendOTPGet } from '../controllers/auth/register'
 import { registerPost } from '../controllers/auth/register'
 import { dashboardGet } from '../controllers/dashboard'
 import { renderChangePassword } from '../controllers/auth/changePassword'
-import { changePassword } from '../controllers/auth/changePassword'
+import { updateProfile } from '../controllers/profile/update';
 /* GET home page. */
 router.get('/', loginGet);
 
@@ -15,10 +15,11 @@ router.post('/login', loginPost);
 router.get('/logout', logoutGet);
 
 router.get('/register', registerGet);
+router.post('/users', registerPost);
 router.post('/register', registerPost);
 
-router.get('/changePassword', renderChangePassword);
-router.post('/changePassword', changePassword);
+router.get('/password', renderChangePassword);
+router.put('/users', updateProfile);
 
 router.get('/dashboard', dashboardGet);
 

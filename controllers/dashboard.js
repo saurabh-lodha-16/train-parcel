@@ -153,7 +153,6 @@ export async function dashboardGet(req, res) {
     } catch (e) {
       res.render('base', {
         content: 'dashboard',
-        userRole: await getRole(user.id),
         alert: 'danger',
         alertMsg: 'Exception: ' + e
       })

@@ -16,7 +16,7 @@
       return 0;
   }%>
     <% usersArray.sort(compare) %>
-    <form action='user-role/edit' method='get'>
+    <form action='user-roles/edit' method='get'>
       <% for (user of usersArray) { %>
       <tr>
         <td> <%= `${user.name}` %> </td>

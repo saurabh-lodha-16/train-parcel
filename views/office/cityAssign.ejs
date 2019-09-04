@@ -1,7 +1,7 @@
 <body>
   <div class="container">
     <br />
-    <form action="/office/cityAssign" method="POST">
+    <form action="/offices/cityAssign" method="POST">
       <label for="user">Users</label>
       <select class="form-control" name="user" id="user">
 
@@ -19,7 +19,7 @@
 </body>
 <script>
   $(document).ready(function () {
-    $.get("api/v1.0/cities/", function (data, status) {
+    $.get("/api/v1.0/cities/", function (data, status) {
       data.sort((a, b) => {
         if (a.name < b.name) //sort string ascending
           return -1

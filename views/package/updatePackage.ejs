@@ -10,7 +10,7 @@
         return 0;
     }%>
     <% citiesArray.sort(compare) %>
-    <form action='./update' method='post'>
+    <form action='/packages' method='post'>
         <input type="hidden" name="_method" value="put">
         <input type="hidden" name="packageId" value='<%= packageId %>'>
         <div class="form-group">

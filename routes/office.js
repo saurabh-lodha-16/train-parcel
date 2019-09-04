@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-import { updateOffice } from '../controllers/office/UpdateOffice';
-import { editOffice } from '../controllers/office/EditOffice';
+import { updateOffice } from '../controllers/office/update';
+import { editOffice } from '../controllers/office/edit';
 import { cityAssign } from '../controllers/office/cityAssign';
 import { getRole } from '../controllers/common';
 
@@ -31,10 +31,10 @@ router.get('/add', async (req, res, next) => {
 });
 
 router.get('/edit', editOffice);
-router.post('/edit', updateOffice);
+router.put('/', updateOffice);
 
 
-router.get('/cityAssign', async (req, res, next) => {
+router.get('/add', async (req, res, next) => {
   let user = req.session.user;
   if (user && req.cookies.user_sid) {
     res.render('base', {
@@ -45,6 +45,6 @@ router.get('/cityAssign', async (req, res, next) => {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
   } 
 });
-router.post('/cityAssign', cityAssign);
+router.post('/', cityAssign);
 module.exports = router;
 

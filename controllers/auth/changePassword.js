@@ -1,5 +1,6 @@
 import db from '../../models';
 import { getRole } from '../common';
+import { usersPut } from '../users/update';
 const bcrypt = require('bcrypt')
 const users = db['users'];
 
@@ -9,10 +10,11 @@ function checkPassword(str) {
 }
 
 export async function renderChangePassword(req, res) {
+  console.log(req)
   try {
     let user = req.session.user
     if (user) {
-      res.render('base',{
+      res.render('base', {
         content: 'auth/changePassword.ejs',
         userRole: await getRole(user.id)
       });
@@ -27,93 +29,50 @@ export async function renderChangePassword(req, res) {
 async function updatePassword(userId, password) {
   try {
     let hashPwd = bcrypt.hashSync(password, 10);
-    await users.update(
-      { password: hashPwd },
-      { where: { id: userId } }
-    );
-    let updatedInstance = await users.findOne(
-      { where: { id: userId } }
-    );
-    console.log(updatedInstance);
-    return updatedInstance.dataValues;
+    let updatedInstance = await usersPut(userId, {
+      password: hashPwd
+    })
+    console.log(updatedInstance,'=====================++++++++++++++++++++++++++++');
+    return updatedInstance;
   } catch (err) {
     throw (err);
   }
 }
 
-export async function changePassword(req, res) {
+export async function changePassword(user, oldPassword, newPassword, reNewPassword) {
   try {
+    if (!(checkPassword(newPassword) && checkPassword(reNewPassword))) {
+      res.render('base', {
+        content: 'auth/changePassword.ejs',
+        alertMsg: `Password should contain at least one lowercase letter, one uppercase letter,
+            one number and 8 other letters.`,
+        alert: "danger",
+        userRole: await getRole(user.id)
 
-    let user = req.session.user;
-    if (user) {
-      let oldPassword = req.body.oldPassword;
-      let newPassword = req.body.newPassword;
-      let reNewPassword = req.body.reNewPassword;
-
-      if (!(checkPassword(newPassword) && checkPassword(reNewPassword))) {
-        res.render('base', {
-          content: 'auth/changePassword.ejs',
-          alertMsg: `Password should contain at least one lowercase letter, one uppercase letter,
-          one number and 8 other letters.`,
-          alert: "danger",
-          userRole: await getRole(user.id)
-
-        });
-      }
-      if (!(oldPassword && newPassword && reNewPassword)) {
-        res.render('base', {
-          content: 'auth/changePassword.ejs',
-          alertMsg: "One or more blank fields found.",
-          alert: "danger",
-          userRole: await getRole(user.id)
-        });
-      }
-      if ((oldPassword === newPassword)) {
-        res.render('base', {
-          content: 'auth/changePassword.ejs',
-          alertMsg: "New Password must be different from Old Password.",
-          alert: "danger",
-          userRole: await getRole(user.id)
-
-        });
-      }
-      if (newPassword !== reNewPassword) {
-        res.render('base', {
-          content: 'auth/changePassword.ejs',
-          alertMsg: "Passwords didn't match",
-          alert: "danger",
-          userRole: await getRole(user.id)
-
-        });
-      }
-      await bcrypt.compare(oldPassword, user.password, async function (err, result) {
-        if (result) {
-          req.session.user = await updatePassword(user.id, newPassword);
-          res.render('base', {
-            content: 'auth/changePassword.ejs',
-            alertMsg: "Password successfully updated.",
-            alert: "success",
-            userRole: await getRole(user.id)
-          });
-
-        } else {
-          res.render('base', {
-            content: 'auth/changePassword.ejs',
-            alertMsg: "Old password is incorrect.",
-            alert: "danger",
-            userRole: await getRole(user.id)
-          });
-        }
-      })
-    } else {
-      res.redirect('/login');
+      });
     }
+    if (!(oldPassword && newPassword && reNewPassword)) {
+      throw "One or more blank fields found."
+    }
+    if ((oldPassword === newPassword)) {
+      throw "New Password must be different from Old Password."
+    }
+    if (newPassword !== reNewPassword) {
+      throw "Passwords didn't match"
+    }
+
+
+    await bcrypt.compare(oldPassword, user.password, async function (err, result) {
+      if (result) {
+        let updatedInstance = await updatePassword(user.id, newPassword);
+        return updatedInstance
+      } else {
+        throw "Old password is incorrect."
+      }
+    })
   } catch (err) {
-    res.render('base', {
-      content: 'auth/changePassword.ejs',
-      alertMsg: err,
-      alert: "danger"
-    });
+    throw err
   }
+
 }
 
