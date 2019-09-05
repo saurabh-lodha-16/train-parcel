@@ -134,6 +134,9 @@ export async function renderUpdation(req, res) {
   if (user) {
     try {
       let packageId = req.query.packageId;
+      if (!packageId) {
+        res.redirect('../packages');
+      }
       let packageInstance = await packages.findOne({ where: { id: packageId } });
       let sId = packageInstance.sCity;
       let dId = packageInstance.dCity;
