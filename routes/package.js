@@ -12,9 +12,9 @@ router.post('/', registerPackage);
 router.get('/track/', trackGet);
 router.get('/track/:serial_no', trackGet);
 router.get('/update', renderUpdation);
-router.put('/', update);
+router.put('/:id', update);
 router.get('/load', loadPackageGet);
-router.get('/load/?serialNo=:serialNo', loadPackageGet);
-router.get('/link/:sourceStatusId/:destinationStatusId/:trainId/:serialNo', linkPackageTrainGet);
+// router.get('/load/?serialNo=:serialNo', loadPackageGet);
+router.get('/link', linkPackageTrainGet);
 module.exports = router;
 

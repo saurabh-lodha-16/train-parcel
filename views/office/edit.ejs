@@ -1,5 +1,5 @@
 <div class="container">
-  <form method="post" action="/offices/">
+  <form method="post" action="/offices/<%= office.id %>">
     <input type="hidden" name="_method" value="put" />
     <div>
       <label for="name">User Name:</label>
@@ -9,7 +9,6 @@
     </div>
     <br />
     <input type="hidden" id="cityId" readonly value=<%= office.cityId %>>
-    <input type="hidden" name="id" readonly value=<%= office.id %>>
     <div>
       <label for="City">Cities</label>
       <select class="form-control" name="city" id="city">

@@ -27,11 +27,11 @@ router.get('/add', async (req, res, next) => {
     })
   } else {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
-  } 
+  }
 });
 
 router.get('/edit', editOffice);
-router.put('/', updateOffice);
+router.put('/:id', updateOffice);
 
 
 router.get('/add', async (req, res, next) => {
@@ -43,7 +43,7 @@ router.get('/add', async (req, res, next) => {
     })
   } else {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
-  } 
+  }
 });
 router.post('/', cityAssign);
 module.exports = router;

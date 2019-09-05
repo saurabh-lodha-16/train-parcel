@@ -2,10 +2,10 @@ import { loadPackage } from "./load";
 import { getRole } from "../common";
 
 export async function linkPackageTrainGet(req, res) {
-    let serialNo = req.params['serialNo']
-    let sourceStatusId = req.params['sourceStatusId']
-    let destinationStatusId = req.params['destinationStatusId']
-    let trainId = req.params['trainId']
+    let serialNo = req.query['serialNo']
+    let sourceStatusId = req.query['sourceStatusId']
+    let destinationStatusId = req.query['destinationStatusId']
+    let trainId = req.query['trainId']
 
     let result = await loadPackage(serialNo, sourceStatusId, destinationStatusId, trainId)
     let user = req.session.user

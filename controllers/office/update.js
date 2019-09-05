@@ -4,14 +4,13 @@ const Office = db.offices;
 export function updateOffice(req, res) {
   try {
     Office.update({
-      userId: req.body.user,
       cityId: req.body.city
     }, {
-        where: { id: req.body.id }
+        where: { id: req.params.id }
       })
     res.redirect('/offices');
   } catch (error) {
-
+    console.log(error)
   }
 }
 

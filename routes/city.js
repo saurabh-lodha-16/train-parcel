@@ -16,7 +16,7 @@ router.get('/add', function (req, res, next) {
 router.post('/', addCity);
 
 router.get('/edit', editCity);
-router.put('/', updateCity);
+router.put('/:id', updateCity);
 
 module.exports = router;
 

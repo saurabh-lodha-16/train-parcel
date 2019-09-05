@@ -6,7 +6,7 @@ export function updateCity(req, res) {
     City.update({
       name: req.body.name
     }, {
-        where: { id: req.body.id }
+        where: { id: req.params.id }
       })
     res.redirect('/cities');
   } catch (err) {

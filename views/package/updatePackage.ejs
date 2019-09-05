@@ -10,9 +10,9 @@
         return 0;
     }%>
     <% citiesArray.sort(compare) %>
-    <form action='/packages' method='post'>
+    <form action='/packages/<%= packageId %>' method='post'>
         <input type="hidden" name="_method" value="put">
-        <input type="hidden" name="packageId" value='<%= packageId %>'>
+        <!-- <input type="hidden" name="packageId" value='<%= packageId %>'> -->
         <div class="form-group">
             <label for="weight">Weight :</label>
             <input type="number" name="weight" class="form-control" required value='<%= weightPackage %>'>
