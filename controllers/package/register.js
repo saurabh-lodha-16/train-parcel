@@ -105,6 +105,9 @@ export async function registerPackage(req, res) {
     try {
       userRole = await getRole(loggedUser.id);
       packageArray = await getPackages(loggedUser.id, userRole);
+      if (req.body.source_city_id === req.body.destination_city_id) {
+        throw "Source and destination city should be different.";
+      }
       if (req.body.phoneNo.length !== 10) {
         throw "Phone number must consist 10 digits.";
       }

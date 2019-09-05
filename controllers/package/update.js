@@ -190,6 +190,9 @@ export async function update(req, res) {
       let statusId = packageInstance.statusId;
       let statusInstance = await getStatus(statusId);
       if (statusInstance.type === 'PENDING') {
+        if (req.body.source_city_id === req.body.destination_city_id) {
+          throw "Source and destination city should be different.";
+        }
         if (req.body.phoneNo.length !== 10) {
           throw "Phone number must consist 10 digits.";
         }
@@ -209,7 +212,6 @@ export async function update(req, res) {
         await updateUser(receiverId, name, email, phoneNo);
         let sCityInstance = await city.findOne({ where: { id: sourceCity } });
         let dCityInstance = await city.findOne({ where: { id: destinationCity } });
-
         userRole = await getRole(req.session.user.id);
         packageArray = await getPackages(req.session.user.id, userRole);
         res.render('base', {
