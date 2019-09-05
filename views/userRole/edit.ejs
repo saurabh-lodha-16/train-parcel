@@ -9,7 +9,7 @@
             return 0;
          }%>
   <% roleArray.sort(compare) %>
-  <form action='../user-roles' method='post'>
+  <form action='../user-roles/<%=user_id%>' method='post'>
     <input type="hidden" name="_method" value="put">
     <input type="hidden" name="user_id" value=<%=user_id%>>
     <select name="role_id">

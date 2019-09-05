@@ -6,9 +6,9 @@ export function updateStatus(req, res) {
     Status.update({
       type: req.body.type
     }, {
-        where: { id: req.body.id }
+        where: { id: req.params.id }
       })
-    res.redirect('status');
+    res.redirect('/statuses');
   } catch (error) {
 
   }

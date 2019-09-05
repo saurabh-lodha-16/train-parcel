@@ -5,6 +5,6 @@ router.get('/', renderRolePage);
 router.get('/add', renderAddRole);
 router.post('/', addRole);
 router.get('/edit', renderEditRole);
-router.put('/', editRole);
+router.put('/:role_id', editRole);
 module.exports = router;
 
