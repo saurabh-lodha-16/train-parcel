@@ -185,7 +185,7 @@ export async function update(req, res) {
     let packageArray = await getPackages(req.session.user.id, userRole);
     try {
       cityArray = await retrieveCityNames();
-      packageId = req.body.packageId;
+      packageId = req.params.id;
       let packageInstance = await getPackage(packageId);
       let statusId = packageInstance.statusId;
       let statusInstance = await getStatus(statusId);
