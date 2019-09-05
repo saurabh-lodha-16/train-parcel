@@ -62,7 +62,6 @@ export async function makePayment(packageId, loggedUser, res) {
                         })
                     let userRole = await getRole(loggedUser.id);
                     let packageArray = await getPackages(loggedUser.id, userRole);
-                    console.log("done here3");
                     res.render('base', {
                         content: 'package/packages.ejs',
                         packageList: packageArray,
@@ -77,7 +76,6 @@ export async function makePayment(packageId, loggedUser, res) {
         } else {
             let userRole = await getRole(loggedUser.id);
             let packageArray = await getPackages(loggedUser.id, userRole);
-            console.log("done here4");
             res.render('base', {
                 content: 'package/packages.ejs',
                 packageList: packageArray,
@@ -95,7 +93,6 @@ export async function makePayment(packageId, loggedUser, res) {
             })
         let userRole = await getRole(loggedUser.id);
         let packageArray = await getPackages(loggedUser.id, userRole);
-        console.log("done here5");
         res.render('base', {
             content: 'package/packages.ejs',
             packageList: packageArray,
@@ -105,7 +102,5 @@ export async function makePayment(packageId, loggedUser, res) {
             citiesArray: await retrieveCityNames()
         });
     }
-
-
-
 }
+
