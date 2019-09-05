@@ -6,6 +6,7 @@
 
     <% include ../common/head %>
     <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+    <script src="/javascripts/register.js"></script>
 
 </head>
 
@@ -25,7 +26,8 @@
                     <label for="email">OTP</label>
                     <input name="otp" type="number" class="form-control" id="otp">
                     <% if(typeof userId != 'undefined'){ %>
-                    <a href="/register/resendOTP/<%= userId %>">resend OTP?</a>
+                    <a onclick="resendOTP();" id="resendOTPlink" href="#">resend OTP?</a>
+
 
                     <% } %>
                 </div>
@@ -42,4 +44,3 @@
 </body>
 
 </html>
-

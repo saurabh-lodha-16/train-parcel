@@ -101,7 +101,7 @@ export async function registerPost(req, res) {
 
 }
 
-export async function resendOTPGet(req, res) {
+export async function resendOTPPost(req, res) {
     let user = req.session.user
     if (user) {
         user = await models.users.findOne({ where: { id: user.id } })
