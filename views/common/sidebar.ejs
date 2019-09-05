@@ -37,12 +37,11 @@
                 <a href="/packages/track" class="list-group-item list-group-item-action">
                     <span class="menu-collapsed">Track Package</span>
                 </a>
-                <% if(typeof userRole != 'undefined' && (userRole == 'Manager' || userRole == 'Admin')){ %>
 
                 <a href="/packages" class="list-group-item list-group-item-action">
                     <span class="menu-collapsed">Update Package</span>
                 </a>
-                <%}%>
+                
 
             </div>
             <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
