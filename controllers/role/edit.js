@@ -132,20 +132,21 @@ export async function editRole(req, res) {
         if(!(req.body.name && req.body.level)) {
           throw "Please fill out required fields."
         }
-        let roleInstance = await roles.findOne({ where: { id: req.body.role_id } });
+        let roleInstance = await roles.findOne({ where: { id: req.params.role_id } });
         await roles.update(
           { name: req.body.name, level: req.body.level },
-          { where: { id: req.body.role_id } }
+          { where: { id: req.params.role_id } }
         );
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
+        //res.redirect('/roles');
         res.render('base', {
           content: 'role/index.ejs',
           name: req.body.name,
           level: req.body.level,
           alertMsg: "Role successfully editted.",
-          role_id: req.body.role_id,
+          role_id: req.params.role_id,
           rolesArray: roleArray,
           alert: "success",
           userRole: await getRole(loggedUser.id)
@@ -158,7 +159,7 @@ export async function editRole(req, res) {
           alertMsg: err,
           alert: "danger",
           rolesArray: roleArray,
-          role_id: req.body.role_id,
+          role_id: req.params.role_id,
           userRole: await getRole(loggedUser.id)
         });
       }

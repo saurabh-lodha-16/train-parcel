@@ -3,6 +3,7 @@ import db from '../../models/index.js';
 const City = db.cities;
 export function editCity(req, res) {
   try {
+    console.log(req.params._id)
     City.findOne({
       attributes: ['id', 'name'],
       where: { id: req.query._id }

@@ -112,17 +112,17 @@ export async function editUserRole(req, res) {
           attributes: ['id', 'name', 'level']
         });
         let userRoleEntry = await roleAssigns.findOne({
-          where: { userId: req.body.user_id }
+          where: { userId: req.params.user_id }
         });
         if (!userRoleEntry) {
           await roleAssigns.create({
             roleId: req.body.role_id,
-            userId: req.body.user_id
+            userId: req.params.user_id
           });
         }
         await roleAssigns.update(
           { roleId: req.body.role_id },
-          { where: { userId: req.body.user_id } }
+          { where: { userId: req.params.user_id } }
         );
         userArray = await users.findAll({
           include: [{
@@ -134,7 +134,7 @@ export async function editUserRole(req, res) {
         });
         res.render('base', {
           content: 'userRole/index.ejs',
-          user_id: req.body.user_id,
+          user_id: req.params.user_id,
           roleArray: roleArray,
           alert: "success",
           usersArray: userArray,
@@ -146,7 +146,7 @@ export async function editUserRole(req, res) {
         res.status(500);
         res.render('base', {
           content: 'userRole/index.ejs',
-          user_id: req.body.user_id,
+          user_id: req.params.user_id,
           roleArray: roleArray,
           alertMsg: err,
           usersArray: userArray,
