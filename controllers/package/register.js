@@ -7,7 +7,7 @@ let packages = db['packages'];
 let roleAssigns = db['roleAssigns'];
 import { getRole } from '../common'
 import { makePayment } from '../payment';
-import {getPackages} from './update'
+import { getPackages } from './update'
 
 export async function retrieveCityNames() {
   try {
@@ -87,8 +87,8 @@ export async function renderRegistration(req, res) {
     } else {
       res.redirect('/login')
     }
-
   } catch (err) {
+    res.status(500);
     res.render('base', {
       content: 'package/registerPackage',
       citiesArray: cityArray,
@@ -103,10 +103,16 @@ export async function registerPackage(req, res) {
   if (loggedUser && req.cookies.user_sid) {
     let cityArray = await retrieveCityNames();
     try {
-      console.log("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{");
       userRole = await getRole(loggedUser.id);
       packageArray = await getPackages(loggedUser.id, userRole);
-      console.log("done here1");
+      if (req.body.phoneNo.length !== 10) {
+        throw "Phone number must consist 10 digits.";
+      }
+      let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo);
+      let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight);
+      if (!(isEmpty1 && isEmpty2)) {
+        throw "Fill the required fields";
+      }
       let senderId = req.session.user.id;
       let statusInstance = await getStatus('PENDING');
       let statusId = statusInstance.id;
@@ -116,14 +122,9 @@ export async function registerPackage(req, res) {
       let destinationId = req.body.destination_city_id;
       let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
       makePayment(createdPackage.id, loggedUser, res)
-      // res.render('base', {
-      //   content: 'package/registerPackage',
-      //   alertMsg: `Package successfully registered. \n Package Serial ID : ${createdPackage.serial_no}`,
-      //   alert: "success",
-      //   citiesArray: cityArray,
-      //   userRole: await getRole(loggedUser.id)
-      // });
+      
     } catch (err) {
+      res.status(500);
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,

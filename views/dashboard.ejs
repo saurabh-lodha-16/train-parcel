@@ -13,9 +13,9 @@
             <tbody>
                 <% var i=0; for(id in pendingPackages){ %>
                 <% if(userRole=='Manager'){ %>
-                <tr onclick="window.location='package/load/?serialNo=<%= pendingPackages[id].serial_no %>'">
+                <tr onclick="window.location='packages/load/?serialNo=<%= pendingPackages[id].serial_no %>'">
                     <% }else{ %>
-                <tr onclick="window.location='package/track/<%= pendingPackages[id].serial_no %>'">
+                <tr onclick="window.location='packages/track/<%= pendingPackages[id].serial_no %>'">
                     <% } %>
                     <td><%= ++i %></td>
                     <td>
@@ -45,7 +45,7 @@
             </thead>
             <tbody>
                 <% i=0; for(id in inTransitPackages){ %>
-                <tr onclick="window.location='package/track/<%= inTransitPackages[id].serial_no %>';">
+                <tr onclick="window.location='packages/track/<%= inTransitPackages[id].serial_no %>';">
                     <td><%= ++i %></td>
                     <td>
                         <div class="row">
@@ -73,7 +73,7 @@
             </thead>
             <tbody>
                 <% i=0; for(id in completedPackages){ %>
-                <tr onclick="window.location='package/track/<%= completedPackages[id].serial_no %>';">
+                <tr onclick="window.location='packages/track/<%= completedPackages[id].serial_no %>';">
                     <td><%= ++i %></td>
                     <td>
                         <div class="row">

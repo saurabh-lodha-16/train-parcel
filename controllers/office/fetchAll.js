@@ -12,8 +12,10 @@ export async function fetchAllOffices(req, res) {
         model: db.cities,
       }]
     })
+    res.status(200)
     res.send(offices);
   } catch (error) {
+    res.status(404)
     res.send(error);
   }
 }
