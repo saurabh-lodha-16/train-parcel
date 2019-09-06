@@ -124,7 +124,7 @@ export async function registerPackage(req, res) {
       let sourceId = req.body.source_city_id;
       let destinationId = req.body.destination_city_id;
       let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
-      makePayment(createdPackage.id, loggedUser, res)
+      makePayment(req, createdPackage.id, loggedUser, res)
       
     } catch (err) {
       res.status(500);

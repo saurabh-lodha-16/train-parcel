@@ -13,7 +13,7 @@ import { getPackages } from "../package/update"
 //     }
 // })
 
-export async function makePayment(packageId, loggedUser, res) {
+export async function makePayment(req, packageId, loggedUser, res) {
     try {
         let packageObj = await models.packages.findOne({
             where: { id: packageId },
@@ -45,6 +45,7 @@ export async function makePayment(packageId, loggedUser, res) {
                     sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged / 100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
                     let userRole = await getRole(loggedUser.id);
                     let packageArray = await getPackages(loggedUser.id, userRole);
+                    req.flash('packageRegisterSuccess',`Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`);
                     res.redirect('../packages');
                 })
                 .catch(async (err) => {

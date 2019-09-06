@@ -8,6 +8,7 @@ var session = require('express-session');
 require('./config/passport-setup')
 const methodOverride = require('method-override');
 const bodyParser = require('body-parser');
+const flash = require('req-flash');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -66,7 +67,7 @@ app.use(session({
     expires: 6000000
   }
 }));
-
+app.use(flash());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

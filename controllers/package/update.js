@@ -46,12 +46,32 @@ export async function listPackages(req, res) {
     try {
       let userRole = await getRole(user.id)
       packageArray = await getPackages(req.session.user.id, userRole);
+      req.flash('updatePackageSuccess');
+      if (req.flash('updatePackageSuccess')) {
+        res.render('base', {
+          content: 'package/packages.ejs',
+          alertMsg: req.flash('updatePackageSuccess'),
+          alert: "success",
+          packageList: packageArray,
+          userRole: userRole
+        });
+        return "update";
+      }
+      if (req.flash('packageRegisterSuccess')) {
+        res.render('base', {
+          content: 'package/packages.ejs',
+          alertMsg: req.flash('packageRegisterSuccess'),
+          alert: "success",
+          packageList: packageArray,
+          userRole: userRole
+        });
+        return "register";
+      }
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
         userRole: userRole
       });
-
     } catch (err) {
       res.status(500);
       res.render('base', {
@@ -217,6 +237,7 @@ export async function update(req, res) {
         let dCityInstance = await city.findOne({ where: { id: destinationCity } });
         userRole = await getRole(req.session.user.id);
         packageArray = await getPackages(req.session.user.id, userRole);
+        req.flash('updatePackageSuccess', 'Package updated successfully!');
         res.redirect('../packages');
       } else {
         res.render('base', {
