@@ -1,4 +1,5 @@
-import { renderRolePage, addRole, editRole, renderAddRole, renderEditRole} from '../controllers/role/edit';
+import { editRole, renderEditRole} from '../controllers/role/edit';
+import {renderRolePage, addRole, renderAddRole} from '../controllers/role/add';
 import express from 'express';
 let router = express.Router();
 router.get('/', renderRolePage);

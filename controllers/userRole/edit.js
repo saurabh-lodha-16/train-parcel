@@ -1,5 +1,6 @@
 import db from '../../models';
 import { getRole } from '../common';
+import { redirectWithMsg } from '../common';
 let users = db['users'];
 let roles = db['roles'];
 let roleAssigns = db['roleAssigns'];
@@ -27,16 +28,6 @@ export async function viewUsers(req, res) {
             }]
           }]
         });
-        if (req.flash('editUserRoleSuccess')) {
-          res.render('base', {
-            content: 'userRole/index.ejs',
-            usersArray: userArray,
-            userRole: await getRole(loggedUser.id),
-            alertMsg: req.flash('editUserRoleSuccess'),
-            alert: "success"
-          });
-          return "editUserRoleSuccess";
-        }
         if (userArray) {
           res.render('base', {
             content: 'userRole/index.ejs',
@@ -142,19 +133,10 @@ export async function editUserRole(req, res) {
             }]
           }]
         });
-        req.flash('editUserRoleSuccess', "User's role successfully updated");
-        res.redirect('/user-roles');
+        redirectWithMsg('/user-roles', req, res, 'success', 'User role successfully updated.');
       } catch (err) {
         res.status(500);
-        res.render('base', {
-          content: 'userRole/index.ejs',
-          user_id: req.params.user_id,
-          roleArray: roleArray,
-          alertMsg: err,
-          usersArray: userArray,
-          alert: "error",
-          userRole: await getRole(loggedUser.id)
-        });
+        redirectWithMsg('/user-roles', req, res, 'danger', err);
       }
     } else {
       res.status(403).send('Unauthorized Access');

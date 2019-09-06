@@ -1,22 +1,21 @@
 import db from '../../models';
 import { getRole } from '../common';
 import { redirectWithMsg } from '../common';
-
 let roles = db['roles'];
 
-export async function renderEditRole(req, res) {
-  let loggedUser = req.session.user
-  if (loggedUser) {
+export async function renderRolePage(req, res) {
+  let loggedUser = req.session.user;
+  if (req.session.user) {
     let role = await getRole(loggedUser.id)
     if (role == 'Admin') {
       try {
-        let roleInstance = await roles.findOne({ where: { id: req.query.role_id } });
+        let roleArray = await roles.findAll({
+          attributes: ['id', 'name', 'level']
+        });
         res.render('base', {
-          content: 'role/edit.ejs',
-          name: roleInstance.name,
-          level: roleInstance.level,
-          role_id: req.query.role_id,
-          userRole: await getRole(loggedUser.id)
+          content: 'role/index.ejs',
+          rolesArray: roleArray,
+          userRole: role
         });
       } catch (err) {
         res.status(500).send(err);
@@ -29,7 +28,29 @@ export async function renderEditRole(req, res) {
   }
 };
 
-export async function editRole(req, res) {
+export async function renderAddRole(req, res) {
+  let loggedUser = req.session.user
+  if (loggedUser) {
+    let role = await getRole(loggedUser.id)
+    if (role == 'Admin') {
+      try {
+        res.render('base', {
+          content: 'role/add.ejs',
+          userRole: await getRole(loggedUser.id)
+        });
+
+      } catch (err) {
+        res.status(500).send(err);
+      }
+    } else {
+      res.status(403).send('Unauthorized Access')
+    }
+  } else {
+    res.redirect('/login');
+  }
+};
+
+export async function addRole(req, res) {
   let loggedUser = req.session.user
   let roleArray = await roles.findAll({
     attributes: ['id', 'name', 'level']
@@ -41,21 +62,20 @@ export async function editRole(req, res) {
         if(!(req.body.name && req.body.level)) {
           throw "Please fill out required fields."
         }
-        let roleInstance = await roles.findOne({ where: { id: req.params.role_id } });
-        await roles.update(
-          { name: req.body.name, level: req.body.level },
-          { where: { id: req.params.role_id } }
-        );
+        let createdRole = await roles.create({
+          name: req.body.name,
+          level: req.body.level
+        });
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
-        redirectWithMsg('/roles', req, res, 'success', 'Role successfully editted.');
+        redirectWithMsg('/roles', req, res, 'success', 'Role successfully added.');
       } catch (err) {
         res.status(500);
         redirectWithMsg('/roles', req, res, 'danger', err);
       }
     } else {
-      res.status(403).send('Unauthorized Access');
+      res.status(403).send('Unauthorized Access')
     }
   } else {
     res.redirect('/login');
