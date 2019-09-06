@@ -27,6 +27,16 @@ export async function viewUsers(req, res) {
             }]
           }]
         });
+        if (req.flash('editUserRoleSuccess')) {
+          res.render('base', {
+            content: 'userRole/index.ejs',
+            usersArray: userArray,
+            userRole: await getRole(loggedUser.id),
+            alertMsg: req.flash('editUserRoleSuccess'),
+            alert: "success"
+          });
+          return "editUserRoleSuccess";
+        }
         if (userArray) {
           res.render('base', {
             content: 'userRole/index.ejs',
@@ -132,6 +142,7 @@ export async function editUserRole(req, res) {
             }]
           }]
         });
+        req.flash('editUserRoleSuccess', "User's role successfully updated");
         res.redirect('/user-roles');
       } catch (err) {
         res.status(500);

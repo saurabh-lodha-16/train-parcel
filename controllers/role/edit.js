@@ -11,12 +11,31 @@ export async function renderRolePage(req, res) {
         let roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
+        if (req.flash('addRoleSuccess')) {
+          res.render('base', {
+            content: 'role/index.ejs',
+            rolesArray: roleArray,
+            alertMsg: req.flash('addRoleSuccess'),
+            alert : "success",
+            userRole: role
+          });
+          return "addRoleSuccess";
+        }
+        if (req.flash('editRoleSuccess')) {
+          res.render('base', {
+            content: 'role/index.ejs',
+            rolesArray: roleArray,
+            alertMsg: req.flash('editRoleSuccess'),
+            alert : "success",
+            userRole: role
+          });
+          return "editRoleSuccess";
+        }
         res.render('base', {
           content: 'role/index.ejs',
           rolesArray: roleArray,
           userRole: role
         });
-
       } catch (err) {
         res.status(500).send(err);
       }
@@ -69,6 +88,7 @@ export async function addRole(req, res) {
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
+        req.flash('addRoleSuccess', "Role successfully added");
         res.redirect('/roles');
       } catch (err) {
         res.status(500);
@@ -133,6 +153,7 @@ export async function editRole(req, res) {
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
+        req.flash('editRoleSuccess', "Role successfully updated");
         res.redirect('/roles');
       } catch (err) {
         res.status(500);
