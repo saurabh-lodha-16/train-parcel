@@ -69,14 +69,7 @@ export async function addRole(req, res) {
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
-        res.render('base', {
-          content: 'role/index.ejs',
-          alertMsg: "Role successfully added.",
-          alert: "success",
-          rolesArray: roleArray,
-          userRole: await getRole(loggedUser.id)
-        });
-
+        res.redirect('/roles');
       } catch (err) {
         res.status(500);
         res.render('base', {
@@ -140,18 +133,7 @@ export async function editRole(req, res) {
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
-        //res.redirect('/roles');
-        res.render('base', {
-          content: 'role/index.ejs',
-          name: req.body.name,
-          level: req.body.level,
-          alertMsg: "Role successfully editted.",
-          role_id: req.params.role_id,
-          rolesArray: roleArray,
-          alert: "success",
-          userRole: await getRole(loggedUser.id)
-        });
-
+        res.redirect('/roles');
       } catch (err) {
         res.status(500);
         res.render('base', {

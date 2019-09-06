@@ -132,16 +132,7 @@ export async function editUserRole(req, res) {
             }]
           }]
         });
-        res.render('base', {
-          content: 'userRole/index.ejs',
-          user_id: req.params.user_id,
-          roleArray: roleArray,
-          alert: "success",
-          usersArray: userArray,
-          alertMsg: "Role successfully updated for user",
-          userRole: await getRole(loggedUser.id)
-        });
-
+        res.redirect('/user-roles');
       } catch (err) {
         res.status(500);
         res.render('base', {
