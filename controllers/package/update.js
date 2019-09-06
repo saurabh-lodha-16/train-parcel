@@ -217,13 +217,7 @@ export async function update(req, res) {
         let dCityInstance = await city.findOne({ where: { id: destinationCity } });
         userRole = await getRole(req.session.user.id);
         packageArray = await getPackages(req.session.user.id, userRole);
-        res.render('base', {
-          content: 'package/packages.ejs',
-          packageList: packageArray,
-          userRole: userRole,
-          alertMsg: "Package successfully updated.",
-          alert: "success"
-        });
+        res.redirect('../packages');
       } else {
         res.render('base', {
           content: 'package/packages.ejs',

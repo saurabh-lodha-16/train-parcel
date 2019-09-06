@@ -45,14 +45,7 @@ export async function makePayment(packageId, loggedUser, res) {
                     sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged / 100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
                     let userRole = await getRole(loggedUser.id);
                     let packageArray = await getPackages(loggedUser.id, userRole);
-                    res.render('base', {
-                        content: 'package/packages.ejs',
-                        packageList: packageArray,
-                        userRole: userRole,
-                        alertMsg: `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`,
-                        alert: "success",
-                        citiesArray: await retrieveCityNames()
-                    });
+                    res.redirect('../packages');
                 })
                 .catch(async (err) => {
                     await models.packages.update(
