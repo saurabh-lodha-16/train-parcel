@@ -7,7 +7,7 @@ export async function dashboardGet(req, res) {
 
     try {
       let userRole = await getRole(user.id)
-      console.log(userRole, '==============')
+      // console.log(userRole, '==============')
       if (userRole == 'Manager') {
         let curr_office = await models.offices.findOne({
           where: {

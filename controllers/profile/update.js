@@ -1,5 +1,5 @@
 import db from '../../models';
-import { getRole } from '../common';
+import { getRole, redirectWithMsg } from '../common';
 import { usersPut } from '../users/update';
 import { changePassword } from '../auth/changePassword';
 let user = db['users'];
@@ -40,45 +40,24 @@ export async function updateProfile(req, res) {
           email: req.body.email
         });
         req.session.user = User;
-        res.render('base', {
-          content: 'profile/updateProfile.ejs',
-          user: User,
-          alertMsg: "Profile successfully updated.",
-          alert: "success",
-          userRole: await getRole(loggedUser.id)
-        });
+        redirectWithMsg('/dashboard', req, res, 'success', "Profile successfully updated.")
 
       } else if (oldPassword && newPassword && reNewPassword) {
-        let res1 = changePassword(loggedUser, oldPassword, newPassword, reNewPassword)
-        if (res) {
-          req.session.user = res1
-          res.render('base', {
-            content: 'auth/changePassword.ejs',
-            alertMsg: "Password changed successfully",
-            alert: "success",
-            userRole: await getRole(loggedUser.id)
-          });
-        } else {
-          throw 'Some problem has occured during password change.'
-        }
-      } else {
-        res.render('base', {
-          content: 'profile/updateProfile.ejs',
-          user: loggedUser,
-          alertMsg: "One or more blank fields found.",
-          alert: "danger",
-          userRole: await getRole(loggedUser.id)
-        });
-      }
+        let res1 = await changePassword(loggedUser, oldPassword, newPassword, reNewPassword)
 
+        // req.session.user = res1
+        redirectWithMsg('/password',req,res,'success',"Password successfully updated.")
+        
+
+      } else {
+        redirectWithMsg('/profiles',req,res,'danger',"One or more blank fields found.")
+
+        
+      }
     } catch (err) {
-      res.render('base', {
-        content: 'profile/updateProfile.ejs',
-        user: req.session.user,
-        alertMsg: err,
-        alert: "danger",
-        userRole: await getRole(loggedUser.id)
-      });
+      redirectWithMsg('/dashboard',req,res,'danger',err)
+
+      
     }
   }
   else {

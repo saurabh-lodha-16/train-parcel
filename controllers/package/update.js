@@ -1,5 +1,5 @@
 import db from '../../models';
-import { getRole } from '../common';
+import { getRole, redirectWithMsg } from '../common';
 let city = db['cities'];
 let status = db['statuses'];
 let userDB = db['users'];
@@ -237,27 +237,16 @@ export async function update(req, res) {
         let dCityInstance = await city.findOne({ where: { id: destinationCity } });
         userRole = await getRole(req.session.user.id);
         packageArray = await getPackages(req.session.user.id, userRole);
-        req.flash('updatePackageSuccess', 'Package updated successfully!');
-        res.redirect('../packages');
+        redirectWithMsg('/packages', req, res, 'success', 'Package updated successfully!')
       } else {
-        res.render('base', {
-          content: 'package/packages.ejs',
-          packageList: packageArray,
-          userRole: userRole,
-          alertMsg: "Package already processed.",
-          alert: "info"
-        });
+        redirectWithMsg('/packages', req, res, 'info', 'Package already processed.')
+        
       }
 
     } catch (err) {
       res.status(500);
-      res.render('base', {
-        content: 'package/packages.ejs',
-        packageList: packageArray,
-        userRole: userRole,
-        alertMsg: err,
-        alert: "danger"
-      });
+      redirectWithMsg('/packages', req, res, 'danger', err)
+
     }
   } else {
     res.redirect('/login');

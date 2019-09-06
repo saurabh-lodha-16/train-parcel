@@ -66,3 +66,8 @@ export function sendWAmsg(phone, msg) {
 //   return roleAssign.roles[0].name
 // }
 
+export function redirectWithMsg(url, req, res, alert, alertMsg) {
+  req.flash('alert', alert)
+  req.flash('alertMsg', alertMsg);
+  res.redirect(url);
+}

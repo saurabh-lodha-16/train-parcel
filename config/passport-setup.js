@@ -13,8 +13,8 @@ try {
         }, async (req, accessToken, refreshToken, profile, done) => {
             //passport callback
 
-            console.log('passport callback fired returned with profile');
-            console.log(profile.emails[0].value, '========================================');
+            //console.log('passport callback fired returned with profile');
+            //console.log(profile.emails[0].value, '========================================');
             try {
                 let user = await users.findOne({ where: { email: profile.emails[0].value } })
                 if (user) {
@@ -25,12 +25,12 @@ try {
                             req.loggedIn = true
                             return done(null, user)
                         } else {
-                            console.log('=============token not matching======================');
+                            // console.log('=============token not matching======================');
                             return done(null, user)
                             // throw 'Error in passport-setup: accessToken not matching.'
                         }
                     } else {
-                        console.log('============ekey null======================');
+                        // console.log('============ekey null======================');
                         req.googleOAuth = true
                         req.userId = user.id
                         return done(null, user)
@@ -38,7 +38,7 @@ try {
                     }
 
                 } else {
-                    console.log('========================================');
+                    // console.log('========================================');
                     let user = await users.create({
                         name: profile.displayName,
                         email: profile.emails[0].value,
