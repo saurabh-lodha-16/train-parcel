@@ -44,11 +44,7 @@ export async function makePayment(req, packageId, loggedUser, res) {
                     });
                 })
                 .then(async (charge) => {
-                    sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged / 100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
-                    let userRole = await getRole(loggedUser.id);
-                    let packageArray = await getPackages(loggedUser.id, userRole);
-                    /*req.flash('packageRegisterSuccess',`Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`);
-                    res.redirect('../packages');*/
+                    sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged / 100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`);
                     redirectWithMsg('/packages', req, res, 'success', `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`);
                 })
                 .catch(async (err) => {
@@ -57,30 +53,12 @@ export async function makePayment(req, packageId, loggedUser, res) {
                         {
                             where: { id: packageId }
                         })
-                    let userRole = await getRole(loggedUser.id);
-                    let packageArray = await getPackages(loggedUser.id, userRole);
-                    res.render('base', {
-                        content: 'package/packages.ejs',
-                        packageList: packageArray,
-                        userRole: userRole,
-                        alertMsg: `Payment Failed. Register again! ${err}`,
-                        alert: "danger",
-                        citiesArray: await retrieveCityNames()
-                    });
+                    redirectWithMsg('/packages', req, res, 'danger', `Payment Failed. Register again! ${err}`);
                     // Deal with an error
                 });
 
         } else {
-            let userRole = await getRole(loggedUser.id);
-            let packageArray = await getPackages(loggedUser.id, userRole);
-            res.render('base', {
-                content: 'package/packages.ejs',
-                packageList: packageArray,
-                userRole: userRole,
-                alertMsg: `Some error has occured! No Package found while doing payment. Please Try again.`,
-                alert: "danger",
-                citiesArray: await retrieveCityNames()
-            });
+            redirectWithMsg('/packages', req, res, 'danger', `Some error has occured! No Package found while doing payment. Please Try again.`);
         }
     } catch (e) {
         await models.packages.update(
@@ -88,16 +66,7 @@ export async function makePayment(req, packageId, loggedUser, res) {
             {
                 where: { id: packageId }
             })
-        let userRole = await getRole(loggedUser.id);
-        let packageArray = await getPackages(loggedUser.id, userRole);
-        res.render('base', {
-            content: 'package/packages.ejs',
-            packageList: packageArray,
-            userRole: userRole,
-            alertMsg: `Payment Failed. Please Try again. Exception: ${e}`,
-            alert: "danger",
-            citiesArray: await retrieveCityNames()
-        });
+        redirectWithMsg('/packages', req, res, 'danger', `Payment Failed. Please Try again. Exception: ${e}`);
     }
 }
 
