@@ -3,6 +3,8 @@ import models from '../../models'
 import { sendWAmsg, getRole } from "../common";
 import { retrieveCityNames } from "../package/register";
 import { getPackages } from "../package/update"
+import { redirectWithMsg } from '../common';
+
 // import { stripeSecretKey } from "../../config/payment";
 
 // let stripeHandler = StripeCheckout.configure({
@@ -45,8 +47,9 @@ export async function makePayment(req, packageId, loggedUser, res) {
                     sendWAmsg(packageObj.user.mobileNo, `We have received a payment of ₹${amountToBeCharged / 100}\nPackage Serial ID: ${packageObj.serial_no}\nTransaction ID: ${charge.balance_transaction}`)
                     let userRole = await getRole(loggedUser.id);
                     let packageArray = await getPackages(loggedUser.id, userRole);
-                    req.flash('packageRegisterSuccess',`Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`);
-                    res.redirect('../packages');
+                    /*req.flash('packageRegisterSuccess',`Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`);
+                    res.redirect('../packages');*/
+                    redirectWithMsg('/packages', req, res, 'success', `Payment has been processed successfully. Package Serial ID: ${packageObj.serial_no}. Transaction ID: ${charge.balance_transaction}`);
                 })
                 .catch(async (err) => {
                     await models.packages.update(

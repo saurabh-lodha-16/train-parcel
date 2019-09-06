@@ -8,6 +8,7 @@ let roleAssigns = db['roleAssigns'];
 import { getRole } from '../common'
 import { makePayment } from '../payment';
 import { getPackages } from './update'
+import { redirectWithMsg } from '../common';
 
 export async function retrieveCityNames() {
   try {
@@ -128,13 +129,7 @@ export async function registerPackage(req, res) {
       
     } catch (err) {
       res.status(500);
-      res.render('base', {
-        content: 'package/packages.ejs',
-        packageList: packageArray,
-        userRole: userRole,
-        alertMsg: err,
-        alert: "danger"
-      });
+      redirectWithMsg('/packages', req, res, 'danger', err)
     }
   } else {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });

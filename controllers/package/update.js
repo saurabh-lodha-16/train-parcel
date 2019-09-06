@@ -46,27 +46,6 @@ export async function listPackages(req, res) {
     try {
       let userRole = await getRole(user.id)
       packageArray = await getPackages(req.session.user.id, userRole);
-      req.flash('updatePackageSuccess');
-      if (req.flash('updatePackageSuccess')) {
-        res.render('base', {
-          content: 'package/packages.ejs',
-          alertMsg: req.flash('updatePackageSuccess'),
-          alert: "success",
-          packageList: packageArray,
-          userRole: userRole
-        });
-        return "update";
-      }
-      if (req.flash('packageRegisterSuccess')) {
-        res.render('base', {
-          content: 'package/packages.ejs',
-          alertMsg: req.flash('packageRegisterSuccess'),
-          alert: "success",
-          packageList: packageArray,
-          userRole: userRole
-        });
-        return "register";
-      }
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
@@ -240,13 +219,11 @@ export async function update(req, res) {
         redirectWithMsg('/packages', req, res, 'success', 'Package updated successfully!')
       } else {
         redirectWithMsg('/packages', req, res, 'info', 'Package already processed.')
-        
       }
 
     } catch (err) {
       res.status(500);
       redirectWithMsg('/packages', req, res, 'danger', err)
-
     }
   } else {
     res.redirect('/login');
