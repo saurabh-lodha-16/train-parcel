@@ -54,7 +54,7 @@ export async function trackGet(req, res) {
 
 
 function getDiffMins(sTime, dTime) {
-    let diffMs = dTime - sTime
-    return Math.round(((diffMs % 86400000) % 3600000) / 60000)
+  let diffMs = dTime - sTime
+  return Math.round(((diffMs % 86400000) % 3600000) / 60000)
 }
 
