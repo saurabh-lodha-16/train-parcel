@@ -2,89 +2,68 @@
 <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
 <div class="container">
-	<br>
-	<form id="dateForm" action="" method="GET">
-		<div class="form-group date" data-provide="datepicker">
-			<input name="serialNo" value="<%= serialNo %>" hidden>
-			<input id="selectDate" name="selectDate" onchange="document.getElementById('dateForm').submit()" type="text"
-				placeholder="Pick a date" class="form-control datepicker" readonly>
-			<div class="input-group-addon">
-				<span class="glyphicon glyphicon-th"></span>
-			</div>
-		</div>
-	</form>
+  <br>
+  <form id="dateForm" action="" method="GET">
+    <div class="form-group date" data-provide="datepicker">
+      <input name="serialNo" value="<%= serialNo %>" hidden>
+      <input id="selectDate" name="selectDate" onchange="document.getElementById('dateForm').submit()" type="text"
+        placeholder="Pick a date" class="form-control datepicker" readonly>
+      <div class="input-group-addon">
+        <span class="glyphicon glyphicon-th"></span>
+      </div>
+    </div>
+  </form>
 
-	<% if(typeof trainStatuses !== 'undefined') { %>
+  <% if(typeof trainStatuses !== 'undefined') { %>
 
-	<div class="trains-block">
-		<table class="table" id="trainStatusTable">
-			<thead class="thead">
-				<tr>
-					<th scope="col">#</th>
-					<th scope="col">Select a Train</th>
-					<th scope="col">Train No.</th>
-				</tr>
-			</thead>
-			<tbody>
-				<% var i=0; for(id in trainStatuses){ %>
+  <div class="trains-block">
+    <table class="table" id="trainStatusTable">
+      <thead class="thead">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Select a Train</th>
+          <th scope="col">Train No.</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% var i=0; for(id in trainStatuses){ %>
 
-				<tr
-					onclick="window.location='/packages/link/?sourceStatusId=<%= trainStatuses[id].sourceStatusId %>&destinationStatusId=<%= trainStatuses[id].destinationStatusId %>&trainId=<%= trainStatuses[id].trainId %>&serialNo=<%= serialNo %>';"
-					id="table_row_<%= trainStatuses[id].id %>">
-					<td><%= ++i %></td>
-					<td>
-						<div class="row">
-							<div class="col-md">
-								<%= trainStatuses[id].trainName %>
-							</div>
-						</div>
-					</td>
-					<td>
-						<div class="row">
-							<div class="col-md">
-								<%= trainStatuses[id].trainNo %>
-							</div>
-							<div class="col-md-2">
-								>
-							</div>
-						</div>
-					</td>
-				</tr>
+        <tr
+          onclick="window.location='/packages/link/?sourceStatusId=<%= trainStatuses[id].sourceStatusId %>&destinationStatusId=<%= trainStatuses[id].destinationStatusId %>&trainId=<%= trainStatuses[id].trainId %>&serialNo=<%= serialNo %>';"
+          id="table_row_<%= trainStatuses[id].id %>">
+          <td><%= ++i %></td>
+          <td>
+            <div class="row">
+              <div class="col-md">
+                <%= trainStatuses[id].trainName %>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div class="row">
+              <div class="col-md">
+                <%= trainStatuses[id].trainNo %>
+              </div>
+              <div class="col-md-2">
+                >
+              </div>
+            </div>
+          </td>
+        </tr>
 
-				<% } %>
-			</tbody>
-		</table>
+        <% } %>
+      </tbody>
+    </table>
 
-	</div>
+  </div>
 
-	<% } %>
+  <% } %>
 </div>
 
 <script>
-	$('.datepicker').datepicker({
-		format: 'mm/dd/yyyy',
-		startDate: '-1d',
-	});
-
-    // function showTrainofThisDate(date_string) {
-    //     //string date dd-mm-yyyy
-    //     let [date, month, year] = date_string.split('-')
-    //     var table = document.getElementById("trainStatusTable");
-    //     for (var i = 0, row; row = table.rows[i]; i++) {
-    //         let table_date_string = row.cells[2].innerHTML.trim()
-    //         if (table_date_string) {
-    //             let [tdate, tmonth, tyear] = table_date_string.split('-')
-    //             console.log(parseInt(date) == parseInt(tdate) && parseInt(month) == parseInt(tmonth) && parseInt(year) == parseInt(tyear))
-
-    //             if (parseInt(date) == parseInt(tdate) && parseInt(month) == parseInt(tmonth) && parseInt(year) == parseInt(tyear)) {
-    //                 row.style.display = "none"
-    //             }
-    //         }
-    //         //iterate through rows
-    //         //rows would be accessed using the "row" variable assigned in the for loop
-
-    //     }
-
-    // }
+  $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-1d',
+  });
 
 </script>

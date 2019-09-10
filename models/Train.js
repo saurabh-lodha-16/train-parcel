@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const trains = sequelize.define('trains', {
     id: {
@@ -18,12 +18,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
-  }, {});
+  }, {})
   trains.associate = function (models) {
-    // associations can be defined here
-    trains.hasOne(models.packages, { foreignKey: 'trainId', sourceKey: 'id' });
-    trains.hasMany(models.trainStatuses, { foreignKey: 'trainId', sourceKey: 'id' });
-  };
-  return trains;
-};
+    trains.hasOne(models.packages, { foreignKey: 'trainId', sourceKey: 'id' })
+    trains.hasMany(models.trainStatuses, { foreignKey: 'trainId', sourceKey: 'id' })
+  }
+  return trains
+}
 

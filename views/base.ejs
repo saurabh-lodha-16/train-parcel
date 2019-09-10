@@ -2,37 +2,31 @@
 <html>
 
 <head>
-    <title>Dashboard</title>
+  <title>Dashboard</title>
 
-    <% include ./common/head %>
-    <link rel="stylesheet" type="text/css" href="/../stylesheets/dashboard.css">
+  <% include ./common/head %>
+  <link rel="stylesheet" type="text/css" href="/../stylesheets/dashboard.css">
 </head>
 
-
-
 <body>
-    <header>
+  <header>
 
-        <% include ./common/navbar %>
-    </header>
+    <% include ./common/navbar %>
+  </header>
 
+  <div class="wrapper">
+    <% include ./common/sidebar %>
 
-    <div class="wrapper">
-        <% include ./common/sidebar %>
+    <div id="content">
 
-        <div id="content">
-
-            <% include ./common/alert %>
-            <%- include(content) %>
-        </div>
-
-
-
+      <% include ./common/alert %>
+      <%- include(content) %>
     </div>
-    <footer>
-        <% include ./common/footer %>
-    </footer>
+
+  </div>
+  <footer>
+    <% include ./common/footer %>
+  </footer>
 </body>
 
 </html>
-

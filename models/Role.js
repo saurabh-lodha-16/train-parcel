@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const roles = sequelize.define('roles', {
     id: {
@@ -13,17 +13,11 @@ module.exports = (sequelize, DataTypes) => {
     level: {
       type: DataTypes.INTEGER
     }
-  }, {});
+  }, {})
   roles.associate = function (models) {
-    // associations can be defined here
-    roles.hasOne(models.roleAssigns, { foreignKey: 'roleId', sourceKey: 'id' });
-  };
-  return roles;
-};
-
-
-//Manager
-//User
-//Admin
+    roles.hasOne(models.roleAssigns, { foreignKey: 'roleId', sourceKey: 'id' })
+  }
+  return roles
+}
 
 
