@@ -11,7 +11,6 @@ export function registerGet(req, res) {
 export async function registerPost(req, res) {
 
     if (req.body.otp) {
-        // console.log('====================== Register 2nd step')
         let otp = req.body.otp
         let user = req.session.user
         console.log(otp, user)
@@ -19,7 +18,6 @@ export async function registerPost(req, res) {
             if (user.key == otp) {
                 res.redirect('/dashboard/')
             } else {
-                // delete user created if this error
                 res.render('auth/phoneVerification', { userId: user.id, alert: 'danger', alertMsg: `You've entered a wrong OTP. Check the OTP again!` })
             }
         } else {
@@ -88,8 +86,6 @@ export async function registerPost(req, res) {
                 }
 
             } else {
-                //==========================================
-                //send form data again when fails
                 res.render('auth/register', { alert: 'danger', alertMsg: 'Password didn\'t match!' })
             }
         } catch (e) {

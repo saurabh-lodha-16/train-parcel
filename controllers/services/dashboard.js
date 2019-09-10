@@ -7,14 +7,12 @@ export async function dashboardGet(req, res) {
 
     try {
       let userRole = await getRole(user.id)
-      // console.log(userRole, '==============')
       if (userRole == 'Manager') {
         let curr_office = await models.offices.findOne({
           where: {
             userId: user.id
           }
         })
-        // console.log(curr_office)
 
         let statuses = await models.statuses.findAll()
 
@@ -27,10 +25,6 @@ export async function dashboardGet(req, res) {
               })[0].id,
             }
           })
-
-
-          //packages contains scity or dcity == current office city pkgs
-          // console.log(pendingPackages)
 
           let inTransitPackages = await models.packages.findAll({
             where: {
@@ -48,8 +42,6 @@ export async function dashboardGet(req, res) {
               })[0].id,
             }
           })
-          // console.log(pendingPackages, '--------------------------------------------')
-
 
           let completedPackages = await models.packages.findAll({
             where: {
@@ -67,7 +59,6 @@ export async function dashboardGet(req, res) {
               })[0].id,
             }
           })
-
 
           res.render('base', {
             content: 'dashboard',
@@ -104,9 +95,6 @@ export async function dashboardGet(req, res) {
         })
 
 
-        //packages contains scity or dcity == current office city pkgs
-        // console.log(pendingPackages)
-
         let inTransitPackages = await models.packages.findAll({
           where: {
             [models.Sequelize.Op.or]: [
@@ -122,8 +110,6 @@ export async function dashboardGet(req, res) {
             })[0].id,
           }
         })
-        // console.log(pendingPackages, '--------------------------------------------')
-
 
         let completedPackages = await models.packages.findAll({
           where: {

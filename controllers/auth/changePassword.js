@@ -10,7 +10,6 @@ function checkPassword(str) {
 }
 
 export async function renderChangePassword(req, res) {
-  // console.log(req)
   try {
     let user = req.session.user
     if (user) {
@@ -32,7 +31,6 @@ async function updatePassword(userId, password) {
     let updatedInstance = await usersPut(userId, {
       password: hashPwd
     })
-    console.log(updatedInstance, '=====================++++++++++++++++++++++++++++');
     return updatedInstance;
   } catch (err) {
     throw (err);
@@ -65,7 +63,6 @@ export async function changePassword(user, oldPassword, newPassword, reNewPasswo
     await bcrypt.compare(oldPassword, user.password, async function (err, result) {
       if (result) {
         let updatedInstance = await updatePassword(user.id, newPassword);
-        // console.log('===================', updatedInstance, '======================================')
         return updatedInstance
       } else {
         throw "Old password is incorrect."
