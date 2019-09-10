@@ -1,8 +1,8 @@
-import { renderUpdation } from '../../controllers/profile/update';
-import express from 'express';
-let router = express.Router();
+import { renderUpdation } from '../../controllers/profile/update'
+import express from 'express'
+let router = express.Router()
 
-router.get('/', renderUpdation);
+router.get('/', renderUpdation)
 
-module.exports = router;
+module.exports = router
 
