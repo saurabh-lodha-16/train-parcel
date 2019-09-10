@@ -1,5 +1,6 @@
 'use strict';
 import db from '../../models/index.js';
+import { redirectWithMsg } from '../common.js';
 const Train = db.trains;
 export function addTrain(req, res) {
   try {
@@ -14,14 +15,14 @@ export function addTrain(req, res) {
           name: req.body.name,
           trainNo: req.body.trainNo
         }).then(() => {
-          res.redirect('train');
+          redirectWithMsg('/trains', req, res, "success", "Successfully Updated")
         });
       } else {
         res.render('train/add', { alert: 'danger', alertMsg: 'Train exist' })
       }
     })
   } catch (error) {
-    res.render('train/add', { alert: 'danger', alertMsg: error })
+    redirectWithMsg('/trains', req, res, "success", "Successfully Updated")
   }
 }
 

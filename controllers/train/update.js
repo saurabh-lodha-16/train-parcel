@@ -1,5 +1,6 @@
 'use strict';
 import db from '../../models/index.js';
+import { redirectWithMsg } from '../common.js';
 const Train = db.trains;
 export function updateTrain(req, res) {
   try {
@@ -9,7 +10,7 @@ export function updateTrain(req, res) {
     }, {
         where: { id: req.body.id }
       })
-    res.redirect('/trains');
+    redirectWithMsg('/trains', req, res, "success", "Successfully Updated")
   } catch (error) {
     res.redirect('/trains', { alert: 'danger', alertMsg: error })
   }
