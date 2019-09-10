@@ -61,7 +61,7 @@ export async function listPackages(req, res) {
       })
     }
   } else {
-    res.redirect('/login')
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 }
 
@@ -174,7 +174,7 @@ export async function renderUpdation(req, res) {
       })
     }
   } else {
-    res.redirect('/login')
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 }
 
@@ -225,7 +225,7 @@ export async function update(req, res) {
       redirectWithMsg('/packages', req, res, 'danger', err)
     }
   } else {
-    res.redirect('/login')
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 }
 
