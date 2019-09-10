@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const packages = sequelize.define('packages', {
     id: {
@@ -56,17 +56,16 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
-  }, {});
+  }, {})
   packages.associate = function (models) {
-    // associations can be defined here
-    packages.belongsTo(models.users, { targetKey: 'id', foreignKey: 'senderUserId' });
-    packages.belongsTo(models.users, { targetKey: 'id', foreignKey: 'rcvrUserId' });
-    packages.belongsTo(models.trains, { targetKey: 'id' });
-    packages.belongsTo(models.statuses, { targetKey: 'id' });
-    packages.belongsTo(models.cities, { targetKey: 'id', foreignKey: 'sCity' });
-    packages.belongsTo(models.cities, { targetKey: 'id', foreignKey: 'dCity' });
-    packages.hasOne(models.receipts, { foreignKey: 'packageId', sourceKey: 'id' });
-  };
-  return packages;
-};
+    packages.belongsTo(models.users, { targetKey: 'id', foreignKey: 'senderUserId' })
+    packages.belongsTo(models.users, { targetKey: 'id', foreignKey: 'rcvrUserId' })
+    packages.belongsTo(models.trains, { targetKey: 'id' })
+    packages.belongsTo(models.statuses, { targetKey: 'id' })
+    packages.belongsTo(models.cities, { targetKey: 'id', foreignKey: 'sCity' })
+    packages.belongsTo(models.cities, { targetKey: 'id', foreignKey: 'dCity' })
+    packages.hasOne(models.receipts, { foreignKey: 'packageId', sourceKey: 'id' })
+  }
+  return packages
+}
 

@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.createTable('users', {
@@ -17,7 +17,6 @@ module.exports = {
         allowNull: true,
         type: Sequelize.STRING
       },
-      //change its type
       mobileNo: {
         unique: true,
         allowNull: true,
@@ -49,10 +48,10 @@ module.exports = {
 
 
       }
-    });
+    })
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('users')
   }
-};
+}
 

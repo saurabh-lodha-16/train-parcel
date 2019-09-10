@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const offices = sequelize.define('offices', {
     id: {
@@ -19,12 +19,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
-  }, {});
+  }, {})
   offices.associate = function (models) {
-    // associations can be defined here
-    offices.belongsTo(models.users, { targetKey: 'id' });
-    offices.belongsTo(models.cities, { targetKey: 'id' });
-  };
-  return offices;
-};
+    offices.belongsTo(models.users, { targetKey: 'id' })
+    offices.belongsTo(models.cities, { targetKey: 'id' })
+  }
+  return offices
+}
 

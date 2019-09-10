@@ -12,7 +12,6 @@ export async function editOffice(req, res) {
         attributes: ['id', 'userId', 'cityId'],
         where: { id: req.query._id }
       })
-      //console.log(office)
       office.dataValues.cityName = await getCityName(office.cityId);
       office.dataValues.userName = await getUserName(office.userId);
       console.log(office)
