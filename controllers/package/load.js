@@ -20,38 +20,38 @@ export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatus
 }
 
 export async function loadPackageGet(req, res) {
-    try {
-        let user = req.session.user
-        let selectDate = req.query.selectDate
-        let serialNo = req.query.serialNo
-        if(user){
-            if (selectDate) {
-                let trainStatusesList = await trainBetween(serialNo, selectDate)
-                res.render('base', {
-                    content: 'package/selectTrainStatus',
-                    trainStatuses: trainStatusesList,
-                    serialNo: serialNo,
-                    userRole: await getRole(user.id)
-                })
-            } else if (serialNo) {
-                res.render('base', {
-                    content: 'package/selectTrainStatus',
-                    serialNo: serialNo,
-                    userRole: await getRole(user.id)
-                })
-            } else {
-                res.render('base', {
-                    content: 'package/load',
-                    userRole: await getRole(user.id)
-                })
-            }
-        }else{
-            res.redirect('/login')
-        }
-       
-    } catch (e) {
-        console.log(e)
+  try {
+    let user = req.session.user
+    let selectDate = req.query.selectDate
+    let serialNo = req.query.serialNo
+    if (user) {
+      if (selectDate) {
+        let trainStatusesList = await trainBetween(serialNo, selectDate)
+        res.render('base', {
+          content: 'package/selectTrainStatus',
+          trainStatuses: trainStatusesList,
+          serialNo: serialNo,
+          userRole: await getRole(user.id)
+        })
+      } else if (serialNo) {
+        res.render('base', {
+          content: 'package/selectTrainStatus',
+          serialNo: serialNo,
+          userRole: await getRole(user.id)
+        })
+      } else {
+        res.render('base', {
+          content: 'package/load',
+          userRole: await getRole(user.id)
+        })
+      }
+    } else {
+      res.redirect('/login')
     }
+
+  } catch (e) {
+    console.log(e);
+  }
 
 }
 

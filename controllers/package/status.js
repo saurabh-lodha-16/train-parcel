@@ -86,12 +86,24 @@ export async function getPackageStatus(serial_no) {
             return final_answer
         }
     }
+    else {
+      final_answer[liveIndex].isLive = true;
+      final_answer.push('Your package is on its way');
+      return final_answer
+    }
+  }
 }
 
 function removeDuplicates(myArr, prop) {
+<<<<<<< HEAD
     return myArr.filter((obj, pos, arr) => {
         return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos
     })
+=======
+  return myArr.filter((obj, pos, arr) => {
+    return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos;
+  });
+>>>>>>> e38e68c1c0453037cbf08266bb2bcc41effe436a
 }
 
 
