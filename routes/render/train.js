@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-import { addTrain } from '../controllers/train/add';
-import { updateTrain } from '../controllers/train/update';
-import { editTrain } from '../controllers/train/edit';
-import { getRole } from '../controllers/common';
+import { addTrain } from '../../controllers/train/add';
+import { updateTrain } from '../../controllers/train/update';
+import { editTrain } from '../../controllers/train/edit';
+import { getRole } from '../../controllers/services/common';
 
 
 

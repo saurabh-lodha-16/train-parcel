@@ -1,5 +1,5 @@
 import db from '../../models';
-import { getRole, redirectWithMsg } from '../common';
+import { getRole, redirectWithMsg } from '../services/common';
 import { usersPut } from '../users/update';
 import { changePassword } from '../auth/changePassword';
 let user = db['users'];

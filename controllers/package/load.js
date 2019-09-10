@@ -3,10 +3,10 @@ import db from '../../models/index.js';
 var moment = require('moment');
 const Op = db.Sequelize.Op;
 const sequelize = require('sequelize')
-import { getCityName } from '../getCityName';
-import { getISTTime } from '../getISTTime';
+import { getCityName } from '../services/getCityName';
+import { getISTTime } from '../services/getISTTime';
 import { trainBetween } from '../trainStatus/trainsBetween';
-import { sendWAmsg, getRole } from '../common';
+import { sendWAmsg, getRole } from '../services/common';
 
 //serialNo se 
 export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatusId, trainId) {
@@ -18,8 +18,6 @@ export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatus
         const details = await models.packages.findOne({ where: { serial_no: serialNo } });
         let senderUser = await models.users.findOne({ where: { id: details.dataValues.senderUserId } })
         let train = await models.trains.findOne({ where: { id: trainId } })
-        // console.log(senderUserId);
-        // notify user thru whatsapp
         sendWAmsg(senderUser.mobileNo, `Your Package ${serialNo} has been loaded in the train ${train.trainNo} ${train.name}`)
         return packageDetails;
     }
@@ -37,11 +35,9 @@ export async function loadPackageGet(req, res) {
         let user = req.session.user
         let selectDate = req.query.selectDate
         let serialNo = req.query.serialNo
-        // console.log(serialNo, '===============================================================')
         if(user){
             if (selectDate) {
                 let trainStatusesList = await trainBetween(serialNo, selectDate)
-                // console.log('=============================', trainStatusesList.length)
                 res.render('base', {
                     content: 'package/selectTrainStatus',
                     trainStatuses: trainStatusesList,

@@ -4,7 +4,7 @@ var moment = require('moment');
 const Op = db.Sequelize.Op;
 import { getCurrCity } from './fillStations';
 import { reservationsUrl } from 'twilio/lib/jwt/taskrouter/util';
-import { getISTTime } from '../getISTTime';
+import { getISTTime } from '../services/getISTTime';
 
 export async function trainBetween(serial_no, date) {
     const elem = date.split('/');
@@ -37,7 +37,6 @@ export async function trainBetween(serial_no, date) {
         let trainName = trainDetails.dataValues.name;
         let trainNo = trainDetails.dataValues.trainNo;
         let temp1 = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, sCity: sCity, trainId: trainId } });
-        // console.log(temp1.dataValues);
         let temp2 = await models.trainStatuses.findAll({ where: { sTime: { [Op.gte]: time }, isRunning: true, sCity: dCity, trainId: trainId } });
         for (let j = 0; j < temp1.length; j++) {
             let x = temp1[j].dataValues.sTime;

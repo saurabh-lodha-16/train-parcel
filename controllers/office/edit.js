@@ -1,7 +1,7 @@
 'use strict';
 import db from '../../models/index.js';
-import { getCityName, getUserName } from '../getCityName'
-import { getRole, redirectWithMsg } from '../common.js';
+import { getCityName, getUserName } from '../services/getCityName'
+import { getRole, redirectWithMsg } from '../services/common.js';
 const Office = db.offices;
 export async function editOffice(req, res) {
   console.log(req.query._id);

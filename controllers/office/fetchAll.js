@@ -1,6 +1,6 @@
 'use strict';
 import db from '../../models/index.js';
-import { getCityName, getUserName } from '../getCityName'
+import { getCityName, getUserName } from '../services/getCityName'
 const Office = db.offices;
 export async function fetchAllOffices(req, res) {
   try {

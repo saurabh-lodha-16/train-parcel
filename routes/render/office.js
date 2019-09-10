@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-import { updateOffice } from '../controllers/office/update';
-import { editOffice } from '../controllers/office/edit';
-import { cityAssign } from '../controllers/office/cityAssign';
-import { getRole, redirectWithMsg } from '../controllers/common';
+import { updateOffice } from '../../controllers/office/update';
+import { editOffice } from '../../controllers/office/edit';
+import { cityAssign } from '../../controllers/office/cityAssign';
+import { getRole, redirectWithMsg } from '../../controllers/services/common';
 
 router.get('/', async (req, res, next) => {
   let user = req.session.user;

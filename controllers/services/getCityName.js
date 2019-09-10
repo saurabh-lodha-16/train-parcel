@@ -1,4 +1,4 @@
-import models from '../models';
+import models from '../../models';
 
 export async function getCityName(city_id) {
   try {

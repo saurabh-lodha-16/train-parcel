@@ -1,26 +1,14 @@
 import { getPackageStatus } from './status'
-import { getRole } from '../common';
+import { getRole } from '../services/common';
 export async function trackGet(req, res) {
     let serial_no = req.params['serial_no']
-    // console.log('oooooooooooooooooooooooooo', serial_no);
     let loggedUser = req.session.user
     if (loggedUser) {
         if (serial_no) {
             try {
                 let status = await getPackageStatus(serial_no)
-              //  console.log('====================', status)
                 let len = status.length
                 let covered = 0;
-                // let diffMins =1
-                // let diffCurrMins = 0
-                // if (status.length > 1) {
-                //     let sTime = new Date(status[0].time)
-                //     let dTime = new Date(status[len - 1].time);
-                //     let currTime = new Date();
-                //     diffMins = getDiffMins(sTime, dTime)
-                //     diffCurrMins = getDiffMins(sTime, currTime)
-                // }
-                // console.log(diffCurrMins * 100 / diffMins, '-0000000000000000000000000000')
 
                 if (len > 1 && Array.isArray(status)) {
                     for (let id in status) {
@@ -40,7 +28,6 @@ export async function trackGet(req, res) {
                     status: status,
                     percent: covered * 100 / len,
                     userRole: await getRole(loggedUser.id)
-                    // percent: diffCurrMins * 100 / diffMins
                 })
             } catch (e) {
                 console.log(e)

@@ -1,5 +1,5 @@
 'use strict';
-import db from '../models/index.js';
+import db from '../../models/index.js';
 const notifier = require('node-notifier');
 export async function getRole(userId) {
   let roleAssign = await db.roleAssigns.findOne({
@@ -15,11 +15,9 @@ export async function getRole(userId) {
       return role.name;
     } else {
       return
-      // throw console.error('Role doesnt exist');
     }
   } else {
     return
-    // throw console.error('User doesnt exist');
   }
 }
 
@@ -54,17 +52,6 @@ export function sendWAmsg(phone, msg) {
     .done();
 
 }
-
-
-// export async function getRole(userId) {
-//   let roleAssign = await models.roleAssigns.findOne({
-//     include: [{ model: models.roles }],
-//     where: {
-//       userId: userId
-//     }
-//   })
-//   return roleAssign.roles[0].name
-// }
 
 export function redirectWithMsg(url, req, res, alert, alertMsg) {
   req.flash('alert', alert)

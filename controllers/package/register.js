@@ -5,10 +5,10 @@ let status = db['statuses'];
 let user = db['users'];
 let packages = db['packages'];
 let roleAssigns = db['roleAssigns'];
-import { getRole } from '../common'
+import { getRole } from '../services/common'
 import { makePayment } from '../payment';
 import { getPackages } from './update'
-import { redirectWithMsg } from '../common';
+import { redirectWithMsg } from '../services/common';
 
 export async function retrieveCityNames() {
   try {

@@ -1,5 +1,5 @@
 import db from '../../models';
-import { getRole, redirectWithMsg } from '../common';
+import { getRole, redirectWithMsg } from '../services/common';
 let city = db['cities'];
 let status = db['statuses'];
 let userDB = db['users'];

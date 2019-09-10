@@ -20,7 +20,6 @@ export function loginPost(req, res) {
                 email: email
             }
         }).then(user => {
-            //console.log(user);
             if (user) {
                 bcrypt.compare(pwd, user.password, function (err, result) {
                     if (result) {
@@ -41,8 +40,6 @@ export function loginPost(req, res) {
         res.render('auth/login', { alert: 'danger', alertMsg: `Exception: ${e.message}` })
     }
 
-
-    // res.render('login');
 }
 
 

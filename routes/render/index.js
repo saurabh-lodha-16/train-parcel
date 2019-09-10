@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-import { loginGet, logoutGet } from '../controllers/auth/login'
-import { loginPost } from '../controllers/auth/login'
-import { registerGet, resendOTPPost } from '../controllers/auth/register'
-import { registerPost } from '../controllers/auth/register'
-import { dashboardGet } from '../controllers/dashboard'
-import { renderChangePassword } from '../controllers/auth/changePassword'
-import { updateProfile } from '../controllers/profile/update';
+import { loginGet, logoutGet } from '../../controllers/auth/login'
+import { loginPost } from '../../controllers/auth/login'
+import { registerGet, resendOTPPost } from '../../controllers/auth/register'
+import { registerPost } from '../../controllers/auth/register'
+import { dashboardGet } from '../../controllers/services/dashboard'
+import { renderChangePassword } from '../../controllers/auth/changePassword'
+import { updateProfile } from '../../controllers/profile/update';
 /* GET home page. */
 router.get('/', loginGet);
 

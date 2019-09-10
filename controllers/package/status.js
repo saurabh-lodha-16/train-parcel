@@ -1,8 +1,8 @@
 import models from '../../models';
 import db from '../../models/index.js';
 import { getCurrCity } from '../trainStatus/fillStations';
-import { getCityName } from '../getCityName';
-import { getISTTime } from '../getISTTime';
+import { getCityName } from '../services/getCityName';
+import { getISTTime } from '../services/getISTTime';
 const moment = require('moment');
 const Op = db.Sequelize.Op;
 
