@@ -1,8 +1,6 @@
-import db from '../../models';
 import { getRole } from '../services/common';
 import { usersPut } from '../users/update';
 const bcrypt = require('bcrypt')
-const users = db['users'];
 
 function checkPassword(str) {
   let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;

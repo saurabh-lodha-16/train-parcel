@@ -1,6 +1,7 @@
-'use strict';
 import db from '../../models/index.js';
 const notifier = require('node-notifier');
+import { accountSid, authToken } from '../../config/twilio'
+
 export async function getRole(userId) {
   let roleAssign = await db.roleAssigns.findOne({
     where: { userId: userId },
@@ -28,8 +29,6 @@ export function desktopNotification(title, message) {
     wait: true
   });
   notifier.on('click', function (notifierObject, options, event) {
-    // Triggers if `wait: true` and user clicks notification
-    console.log('clicked');
   });
 
 }
@@ -38,8 +37,6 @@ export function desktopNotification(title, message) {
 export function sendWAmsg(phone, msg) {
 
   //TODO: to be shifted to external file
-  const accountSid = 'AC4eecddeed388af0beb36880bd18938f7';
-  const authToken = '7f5b9c3fff5b2a8fec1eda34c705ef4f';
   const client = require('twilio')(accountSid, authToken);
 
   client.messages

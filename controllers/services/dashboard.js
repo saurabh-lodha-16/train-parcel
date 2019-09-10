@@ -75,9 +75,7 @@ export async function dashboardGet(req, res) {
         }
 
       } else {
-
         let statuses = await models.statuses.findAll()
-
         let pendingPackages = await models.packages.findAll({
           where: {
             [models.Sequelize.Op.or]: [
@@ -93,7 +91,6 @@ export async function dashboardGet(req, res) {
             })[0].id,
           }
         })
-
 
         let inTransitPackages = await models.packages.findAll({
           where: {
@@ -127,7 +124,6 @@ export async function dashboardGet(req, res) {
           }
         })
 
-
         res.render('base', {
           content: 'dashboard',
           completedPackages: completedPackages,
@@ -147,10 +143,5 @@ export async function dashboardGet(req, res) {
   } else {
     res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
   }
-}
-
-
-export function dashboardPost(req, res) {
-
 }
 

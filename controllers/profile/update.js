@@ -1,8 +1,6 @@
-import db from '../../models';
 import { getRole, redirectWithMsg } from '../services/common';
 import { usersPut } from '../users/update';
 import { changePassword } from '../auth/changePassword';
-let user = db['users'];
 
 export async function updateProfile(req, res) {
   let loggedUser = req.session.user
@@ -29,14 +27,9 @@ export async function updateProfile(req, res) {
     } catch (err) {
       redirectWithMsg('/dashboard',req,res,'danger',err)      
     }
-<<<<<<< Updated upstream
   }
   else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
-=======
-  } else {
-    res.redirect('/login');
->>>>>>> Stashed changes
   }
 }
 

@@ -21,7 +21,7 @@ const officeRouter = require('./routes/render/office');
 const trainStatusRouter = require('./routes/render/trainStatus');
 const packageRouter = require('./routes/render/package');
 const updateProfileRouter = require('./routes/render/profile')
-const oAuthRouter = require('./routes/render/oAuth')
+const oAuthRouter = require('./routes/render/oauth')
 const userRoleRouter = require('./routes/render/userRole')
 const apiCity = require('./routes/api/cities')
 const apiTrain = require('./routes/api/trains')
@@ -81,7 +81,6 @@ app.use('/trains', trainsRouter);
 app.use('/statuses', statusRouter);
 app.use('/roles', roleRouter);
 app.use('/user-roles', userRoleRouter)
-//app.use('/unload', unloadRouter);
 app.use('/trainStatuses', trainStatusRouter);
 app.use('/packages', packageRouter);
 app.use('/offices', officeRouter);
@@ -114,4 +113,3 @@ app.use(function (err, req, res, next) {
 });
 
 module.exports = app;
-

@@ -1,6 +1,6 @@
 <div class="container">
-    <br />
-    <% function compare( a, b ) {
+	<br />
+	<% function compare( a, b ) {
         if (a.name.toLowerCase() < b.name.toLowerCase()){
           return -1;
         }
@@ -9,52 +9,52 @@
         }
         return 0;
     }%>
-    <% citiesArray.sort(compare) %>
-    <form action='../packages/<%= packageId %>' method='post'>
-        <input type="hidden" name="_method" value="put">
-        <!-- <input type="hidden" name="packageId" value='<%= packageId %>'> -->
-        <div class="form-group">
-            <label for="weight">Weight :</label>
-            <input type="number" name="weight" class="form-control" required value='<%= weightPackage %>'>
-        </div>
-        <div class="form-group">
-            <label for="source_city_id">Source City :</label>
-            <select class="form-control" name="source_city_id">
-                <% for(let city of citiesArray) { %>
-                <%if (sCity === city.name ) { %>
-                <option selected value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <%} else { %>
-                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <% } %>
-                <% } %>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="destination_city_id">Destination City:</label>
-            <select class="form-control" name="destination_city_id">
-                <% for(let city of citiesArray) { %>
-                <%if (dCity === city.name ) { %>
-                <option selected value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <%} else { %>
-                <option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
-                <% } %>
-                <% } %>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="name">Receiver Name :</label>
-            <input type="text" class="form-control" name="name" required value="<%=name %>">
-        </div>
-        <div class="form-group">
-            <label for="email">Receiver email :</label>
-            <input type="text" class="form-control" name="email" required value="<%=email %>">
-        </div>
-        <div class="form-group">
-            <label for="phoneNo">Receiver phone number :</label>
-            <input type="text" name="phoneNo" class="form-control" required pattern=".{10}" title="10 characters only"
-                value="<%=phoneNo %>">
-        </div>
-        <br />
-        <button class="btn btn-primary" type="submit" value="Submit"> Update Package </button>
-    </form>
+	<% citiesArray.sort(compare) %>
+	<form action='../packages/<%= packageId %>' method='post'>
+		<input type="hidden" name="_method" value="put">
+		<!-- <input type="hidden" name="packageId" value='<%= packageId %>'> -->
+		<div class="form-group">
+			<label for="weight">Weight :</label>
+			<input type="number" name="weight" class="form-control" required value='<%= weightPackage %>'>
+		</div>
+		<div class="form-group">
+			<label for="source_city_id">Source City :</label>
+			<select class="form-control" name="source_city_id">
+				<% for(let city of citiesArray) { %>
+				<%if (sCity === city.name ) { %>
+				<option selected value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+				<%} else { %>
+				<option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+				<% } %>
+				<% } %>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="destination_city_id">Destination City:</label>
+			<select class="form-control" name="destination_city_id">
+				<% for(let city of citiesArray) { %>
+				<%if (dCity === city.name ) { %>
+				<option selected value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+				<%} else { %>
+				<option value=<%= `${city.id}` %>><%= `${city.name}` %></option>
+				<% } %>
+				<% } %>
+			</select>
+		</div>
+		<div class="form-group">
+			<label for="name">Receiver Name :</label>
+			<input type="text" class="form-control" name="name" required value="<%=name %>">
+		</div>
+		<div class="form-group">
+			<label for="email">Receiver email :</label>
+			<input type="text" class="form-control" name="email" required value="<%=email %>">
+		</div>
+		<div class="form-group">
+			<label for="phoneNo">Receiver phone number :</label>
+			<input type="text" name="phoneNo" class="form-control" required pattern=".{10}" title="10 characters only"
+				value="<%=phoneNo %>">
+		</div>
+		<br />
+		<button class="btn btn-primary" type="submit" value="Submit"> Update Package </button>
+	</form>
 </div>

@@ -7,8 +7,6 @@ export function loginGet(req, res) {
 	} else {
 		res.redirect('/dashboard')
 	}
-
-
 }
 
 export function loginPost(req, res) {
@@ -41,7 +39,6 @@ export function loginPost(req, res) {
     }
 
 }
-
 
 
 export function logoutGet(req, res) {

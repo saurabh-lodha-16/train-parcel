@@ -3,38 +3,34 @@
 <link rel="stylesheet" type="text/css" href="/../stylesheets/trackPackage.css">
 
 <div class="track-content">
-    <% if(typeof status != 'undefined'){ %>
-    <div class="alert alert-primary alert-div" role="alert">
-        <%= status[status.length-1] %>
-    </div>
+	<% if(typeof status != 'undefined'){ %>
+	<div class="alert alert-primary alert-div" role="alert">
+		<%= status[status.length-1] %>
+	</div>
 
-    <div class="progress">
-        <div class="progress-bar" role="progressbar" aria-valuenow="10 aria-valuemin=" 0" aria-valuemax="100"
-            style="width:<%= percent %>%">
-        </div>
+	<div class="progress">
+		<div class="progress-bar" role="progressbar" aria-valuenow="10 aria-valuemin=" 0" aria-valuemax="100"
+			style="width:<%= percent %>%">
+		</div>
 
-    </div>
+	</div>
 
+	<div class="row">
 
+		<% if(Array.isArray(status)){ for(id in status){ %>
+		<div class="col-md">
+			<% if(id<status.length-1){ %>
+			<% if(status[id].isLive){ %>
+			<div class="spinner-grow text-success"></div> <br>
+			<% }else{ %>
+			<br>
+			<% } %>
+			<%= status[id].city_name %><br>
+			<%= status[id].time %><br>
+			<% } %>
+		</div>
 
-
-    <div class="row">
-
-        <% if(Array.isArray(status)){ for(id in status){ %>
-        <div class="col-md">
-            <% if(id<status.length-1){ %>
-            <% if(status[id].isLive){ %>
-            <div class="spinner-grow text-success"></div> <br>
-            <% }else{ %>
-            <br>
-            <% } %>
-            <%= status[id].city_name %><br>
-            <%= status[id].time %><br>
-            <% } %>
-        </div>
-
-        <% } } %>
-    </div>
-    <%}%>
+		<% } } %>
+	</div>
+	<%}%>
 </div>
-
