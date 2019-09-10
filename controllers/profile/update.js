@@ -29,14 +29,9 @@ export async function updateProfile(req, res) {
     } catch (err) {
       redirectWithMsg('/dashboard',req,res,'danger',err)      
     }
-<<<<<<< Updated upstream
   }
   else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
-=======
-  } else {
-    res.redirect('/login');
->>>>>>> Stashed changes
   }
 }
 
