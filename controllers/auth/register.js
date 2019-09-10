@@ -11,7 +11,7 @@ export function registerGet(req, res) {
 export async function registerPost(req, res) {
 
     if (req.body.otp) {
-        console.log('====================== Register 2nd step')
+        // console.log('====================== Register 2nd step')
         let otp = req.body.otp
         let user = req.session.user
         console.log(otp, user)

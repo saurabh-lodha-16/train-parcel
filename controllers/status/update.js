@@ -11,7 +11,7 @@ export function updateStatus(req, res) {
       })
     redirectWithMsg('/statuses', req, res, "success", "Upadated Successfully")
   } catch (error) {
-    redirectWithMsg('/statuses', req, res, "danger", error) 
+    redirectWithMsg('/statuses', req, res, "danger", error)
   }
 }
 

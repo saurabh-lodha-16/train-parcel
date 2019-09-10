@@ -5,9 +5,9 @@
 	<script>
 		$(document).ready(function () {
 			$.get("/api/v1.0/cities", function (data, status) {
-				console.log(data);
+				// console.log(data);
 				for (let city of data) {
-					console.log(city.id);
+					// console.log(city.id);
 					$("#table").append(`<tr> <td>${city.name} </td>
 						<td><a class = "btn btn-info" href ="/cities/edit?_id=${city.id}">Update</a></td>
 						</tr>`);

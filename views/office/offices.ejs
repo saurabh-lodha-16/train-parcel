@@ -14,9 +14,9 @@
 <script>
 	$(document).ready(function () {
 		$.get("/api/v1.0/offices", function (data, status) {
-			console.log(data);
+			// console.log(data);
 			for (let office of data) {
-				console.log(office.id);
+				// console.log(office.id);
 				$("#table").append(`<tr> <td>${office.user.name} </td>
 						<td>${office.user.email} </td>
 						<td>${office.city.name} </td>

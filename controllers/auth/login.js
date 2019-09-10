@@ -20,7 +20,7 @@ export function loginPost(req, res) {
                 email: email
             }
         }).then(user => {
-            console.log(user);
+            //console.log(user);
             if (user) {
                 bcrypt.compare(pwd, user.password, function (err, result) {
                     if (result) {

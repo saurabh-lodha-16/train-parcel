@@ -7,7 +7,7 @@ export function getLogout() {
 
 
 export function getRedirect(req, res) {
-    console.log('final redirects', req);
+    // console.log('final redirects', req);
     if (req.googleOAuth) {
         res.render('auth/register', {
             googleOAuth: true,

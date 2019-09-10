@@ -7,7 +7,7 @@ export function addStatus(req, res) {
     Status.create({
       type: req.body.type
     }).then(() => {
-      console.log('Order created');
+      // console.log('Order created');
       redirectWithMsg('/statuses', req, res, "success", "Successfully Updated")
     });
   } catch (error) {

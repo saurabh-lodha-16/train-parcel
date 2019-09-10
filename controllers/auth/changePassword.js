@@ -10,7 +10,7 @@ function checkPassword(str) {
 }
 
 export async function renderChangePassword(req, res) {
-  console.log(req)
+  // console.log(req)
   try {
     let user = req.session.user
     if (user) {

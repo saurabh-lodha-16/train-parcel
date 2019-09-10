@@ -53,21 +53,8 @@ export async function makePayment(req, packageId, loggedUser, res) {
                         {
                             where: { id: packageId }
                         })
-<<<<<<< 6c7c675a2a24183e5b2a387c96d18103c67b1715
                     redirectWithMsg('/packages', req, res, 'danger', `Payment Failed. Register again! ${err}`);
                     // Deal with an error
-=======
-                    let userRole = await getRole(loggedUser.id);
-                    let packageArray = await getPackages(loggedUser.id, userRole);
-                    res.render('base', {
-                        content: 'package/packages.ejs',
-                        packageList: packageArray,
-                        userRole: userRole,
-                        alertMsg: `Payment Failed. Register again! ${err}`,
-                        alert: "danger",
-                        citiesArray: await retrieveCityNames()
-                    });
->>>>>>> Flash message implemented
                 });
 
         } else {

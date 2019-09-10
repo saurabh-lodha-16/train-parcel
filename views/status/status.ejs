@@ -5,7 +5,7 @@
 	<script>
 		$(document).ready(function () {
 			$.get("/api/v1.0/statuses/", function (data, statuse) {
-				console.log(data);
+				// console.log(data);
 				for (let status of data) {
 					$("#table").append(`<tr> <td>${status.type} </td>
 						<td><a href ="/statuses/edit?_id=${status.id}">Edit</a> </td></tr>`);
