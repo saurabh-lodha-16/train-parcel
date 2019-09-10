@@ -1,12 +1,12 @@
-import db from '../../models';
-import { getRole } from '../services/common';
-import { usersPut } from '../users/update';
+import db from '../../models'
+import { getRole } from '../services/common'
+import { usersPut } from '../users/update'
 const bcrypt = require('bcrypt')
-const users = db['users'];
+const users = db['users']
 
 function checkPassword(str) {
   let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
-  return re.test(str);
+  return re.test(str)
 }
 
 export async function renderChangePassword(req, res) {
@@ -16,12 +16,12 @@ export async function renderChangePassword(req, res) {
       res.render('base', {
         content: 'auth/changePassword.ejs',
         userRole: await getRole(user.id)
-      });
+      })
     } else {
-      res.redirect('/login');
+      res.redirect('/login')
     }
   } catch (err) {
-    res.send(err);
+    res.send(err)
   }
 }
 
@@ -31,9 +31,9 @@ async function updatePassword(userId, password) {
     let updatedInstance = await usersPut(userId, {
       password: hashPwd
     })
-    return updatedInstance;
+    return updatedInstance
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
@@ -46,7 +46,7 @@ export async function changePassword(user, oldPassword, newPassword, reNewPasswo
             one number and 8 other letters.`,
         alert: "danger",
         userRole: await getRole(user.id)
-      });
+      })
     }
     if (!(oldPassword && newPassword && reNewPassword)) {
       throw "One or more blank fields found."
@@ -59,7 +59,7 @@ export async function changePassword(user, oldPassword, newPassword, reNewPasswo
     }
     await bcrypt.compare(oldPassword, user.password, async function (err, result) {
       if (result) {
-        let updatedInstance = await updatePassword(user.id, newPassword);
+        let updatedInstance = await updatePassword(user.id, newPassword)
         return updatedInstance
       } else {
         throw "Old password is incorrect."

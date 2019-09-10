@@ -1,7 +1,7 @@
-import db from '../../models';
-import { getRole } from '../services/common';
-import { redirectWithMsg } from '../services/common';
-let roles = db['roles'];
+import db from '../../models'
+import { getRole } from '../services/common'
+import { redirectWithMsg } from '../services/common'
+let roles = db['roles']
 
 export async function renderRolePage(req, res) {
   let loggedUser = req.session.user;
@@ -11,14 +11,14 @@ export async function renderRolePage(req, res) {
       try {
         let roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
-        });
+        })
         res.render('base', {
           content: 'role/index.ejs',
           rolesArray: roleArray,
           userRole: role
-        });
+        })
       } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send(err)
       }
     } else {
       res.status(403).send('Unauthorized Access')
@@ -26,7 +26,7 @@ export async function renderRolePage(req, res) {
   } else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
-};
+}
 
 export async function renderAddRole(req, res) {
   let loggedUser = req.session.user
@@ -37,7 +37,7 @@ export async function renderAddRole(req, res) {
         res.render('base', {
           content: 'role/add.ejs',
           userRole: await getRole(loggedUser.id)
-        });
+        })
 
       } catch (err) {
         res.status(500).send(err);
@@ -48,13 +48,13 @@ export async function renderAddRole(req, res) {
   } else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
-};
+}
 
 export async function addRole(req, res) {
   let loggedUser = req.session.user
   let roleArray = await roles.findAll({
     attributes: ['id', 'name', 'level']
-  });
+  })
   if (loggedUser) {
     let role = await getRole(loggedUser.id)
     if (role == 'Admin') {
@@ -69,10 +69,10 @@ export async function addRole(req, res) {
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
         });
-        redirectWithMsg('/roles', req, res, 'success', 'Role successfully added.');
+        redirectWithMsg('/roles', req, res, 'success', 'Role successfully added.')
       } catch (err) {
         res.status(500);
-        redirectWithMsg('/roles', req, res, 'danger', err);
+        redirectWithMsg('/roles', req, res, 'danger', err)
       }
     } else {
       res.status(403).send('Unauthorized Access')
@@ -80,5 +80,5 @@ export async function addRole(req, res) {
   } else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
-};
+}
 

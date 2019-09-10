@@ -1,9 +1,9 @@
-import db from '../../models';
-import { getRole, redirectWithMsg } from '../services/common';
-let city = db['cities'];
-let status = db['statuses'];
-let userDB = db['users'];
-let packages = db['packages'];
+import db from '../../models'
+import { getRole, redirectWithMsg } from '../services/common'
+let city = db['cities']
+let status = db['statuses']
+let userDB = db['users']
+let packages = db['packages']
 
 export async function getPackages(userId, userRole) {
   try {
@@ -23,45 +23,45 @@ export async function getPackages(userId, userRole) {
               }
             ]
           }
-        });
+        })
       } else {
         return []
       }
     } else {
       packageArray = await packages.findAll({
         where: { senderUserId: userId }
-      });
+      })
     }
-    return packageArray;
+    return packageArray
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
 export async function listPackages(req, res) {
-  let user = req.session.user;
+  let user = req.session.user
   if (user) {
     let packageArray = []
     try {
       let userRole = await getRole(user.id)
-      packageArray = await getPackages(req.session.user.id, userRole);
+      packageArray = await getPackages(req.session.user.id, userRole)
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
         userRole: userRole
-      });
+      })
     } catch (err) {
-      res.status(500);
+      res.status(500)
       res.render('base', {
         content: 'package/packages.ejs',
         packageList: packageArray,
         alert: "danger",
         alertMsg: err,
         userRole: await getRole(user.id)
-      });
+      })
     }
   } else {
-    res.redirect('/login');
+    res.redirect('/login')
   }
 }
 
@@ -69,10 +69,10 @@ async function retrieveCityNames() {
   try {
     let cities = await city.findAll({
       attributes: ['name', 'id']
-    });
-    return cities;
+    })
+    return cities
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
@@ -80,10 +80,10 @@ async function getStatus(id) {
   try {
     let statusInstance = await status.findOne({
       where: { id: id }
-    });
-    return statusInstance;
+    })
+    return statusInstance
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
@@ -91,10 +91,10 @@ async function getPackage(id) {
   try {
     let packageInstance = await packages.findOne({
       where: { id: id }
-    });
-    return packageInstance;
+    })
+    return packageInstance
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
@@ -107,9 +107,9 @@ async function updateUser(userId, name, email, phoneNo) {
         mobileNo: phoneNo
       },
       { where: { id: userId } }
-    );
+    )
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
@@ -119,30 +119,30 @@ async function updatePackage(packageId, weightPackage, sourceId, destinationId) 
       weight: weightPackage,
       sCity: sourceId,
       dCity: destinationId
-    }, { where: { id: packageId } });
-    return packageInstance;
+    }, { where: { id: packageId } })
+    return packageInstance
   } catch (err) {
-    throw (err);
+    throw (err)
   }
 }
 
 export async function renderUpdation(req, res) {
-  let cityArray;
+  let cityArray
   let user = req.session.user
   if (user) {
     try {
-      let packageId = req.query.packageId;
+      let packageId = req.query.packageId
       if (!packageId) {
-        res.redirect('../packages');
+        res.redirect('../packages')
       }
-      let packageInstance = await packages.findOne({ where: { id: packageId } });
-      let sId = packageInstance.sCity;
-      let dId = packageInstance.dCity;
-      let sCityInstance = await city.findOne({ where: { id: sId } });
-      let dCityInstance = await city.findOne({ where: { id: dId } });
-      let rcvrUserId = packageInstance.rcvrUserId;
-      let receiver = await userDB.findOne({ where: { id: rcvrUserId } });
-      cityArray = await retrieveCityNames();
+      let packageInstance = await packages.findOne({ where: { id: packageId } })
+      let sId = packageInstance.sCity
+      let dId = packageInstance.dCity
+      let sCityInstance = await city.findOne({ where: { id: sId } })
+      let dCityInstance = await city.findOne({ where: { id: dId } })
+      let rcvrUserId = packageInstance.rcvrUserId
+      let receiver = await userDB.findOne({ where: { id: rcvrUserId } })
+      cityArray = await retrieveCityNames()
       res.render('base', {
         content: 'package/updatePackage.ejs',
         citiesArray: cityArray,
@@ -154,10 +154,10 @@ export async function renderUpdation(req, res) {
         sCity: sCityInstance.name,
         dCity: dCityInstance.name,
         userRole: await getRole(user.id)
-      });
+      })
 
     } catch (err) {
-      res.status(500);
+      res.status(500)
       res.render('base', {
         content: 'package/updatePackage.ejs',
         alertMsg: err,
@@ -171,61 +171,61 @@ export async function renderUpdation(req, res) {
         dCity: '',
         packageId: 1,
         userRole: await getRole(user.id)
-      });
+      })
     }
   } else {
-    res.redirect('/login');
+    res.redirect('/login')
   }
 }
 
 export async function update(req, res) {
-  let cityArray, packageId;
+  let cityArray, packageId
   let user = req.session.user
   if (user) {
-    let userRole = await getRole(req.session.user.id);
-    let packageArray = await getPackages(req.session.user.id, userRole);
+    let userRole = await getRole(req.session.user.id)
+    let packageArray = await getPackages(req.session.user.id, userRole)
     try {
-      cityArray = await retrieveCityNames();
-      packageId = req.params.id;
-      let packageInstance = await getPackage(packageId);
-      let statusId = packageInstance.statusId;
-      let statusInstance = await getStatus(statusId);
+      cityArray = await retrieveCityNames()
+      packageId = req.params.id
+      let packageInstance = await getPackage(packageId)
+      let statusId = packageInstance.statusId
+      let statusInstance = await getStatus(statusId)
       if (statusInstance.type === 'PENDING') {
         if (req.body.source_city_id === req.body.destination_city_id) {
-          throw "Source and destination city should be different.";
+          throw "Source and destination city should be different."
         }
         if (req.body.phoneNo.length !== 10) {
-          throw "Phone number must consist 10 digits.";
+          throw "Phone number must consist 10 digits."
         }
-        let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo);
-        let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight);
+        let isEmpty1 = (req.body.name && req.body.email && req.body.phoneNo)
+        let isEmpty2 = (req.body.source_city_id && req.body.destination_city_id && req.body.weight)
         if (!(isEmpty1 && isEmpty2)) {
-          throw "Fill the required fields.";
+          throw "Fill the required fields."
         }
-        let weight = req.body.weight;
-        let sourceCity = req.body.source_city_id;
-        let destinationCity = req.body.destination_city_id;
-        let receiverId = packageInstance.rcvrUserId;
-        let name = req.body.name;
-        let email = req.body.email;
-        let phoneNo = req.body.phoneNo;
-        await updatePackage(packageId, weight, sourceCity, destinationCity);
-        await updateUser(receiverId, name, email, phoneNo);
-        let sCityInstance = await city.findOne({ where: { id: sourceCity } });
-        let dCityInstance = await city.findOne({ where: { id: destinationCity } });
-        userRole = await getRole(req.session.user.id);
-        packageArray = await getPackages(req.session.user.id, userRole);
+        let weight = req.body.weight
+        let sourceCity = req.body.source_city_id
+        let destinationCity = req.body.destination_city_id
+        let receiverId = packageInstance.rcvrUserId
+        let name = req.body.name
+        let email = req.body.email
+        let phoneNo = req.body.phoneNo
+        await updatePackage(packageId, weight, sourceCity, destinationCity)
+        await updateUser(receiverId, name, email, phoneNo)
+        let sCityInstance = await city.findOne({ where: { id: sourceCity } })
+        let dCityInstance = await city.findOne({ where: { id: destinationCity } })
+        userRole = await getRole(req.session.user.id)
+        packageArray = await getPackages(req.session.user.id, userRole)
         redirectWithMsg('/packages', req, res, 'success', 'Package updated successfully!')
       } else {
         redirectWithMsg('/packages', req, res, 'info', 'Package already processed.')
       }
 
     } catch (err) {
-      res.status(500);
+      res.status(500)
       redirectWithMsg('/packages', req, res, 'danger', err)
     }
   } else {
-    res.redirect('/login');
+    res.redirect('/login')
   }
-};
+}
 
