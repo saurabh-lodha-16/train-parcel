@@ -86,7 +86,7 @@ export async function renderRegistration(req, res) {
         userRole: await getRole(loggedUser.id)
       })
     } else {
-      res.redirect('/login')
+      redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
     }
   } catch (err) {
     res.status(500)
@@ -131,7 +131,7 @@ export async function registerPackage(req, res) {
       redirectWithMsg('/packages', req, res, 'danger', err)
     }
   } else {
-    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' })
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 }
 

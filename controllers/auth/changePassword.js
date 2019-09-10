@@ -1,9 +1,10 @@
 import { getRole } from '../services/common';
 import { usersPut } from '../users/update';
+import { redirectWithMsg } from '../services/common'
 const bcrypt = require('bcrypt')
 
 function checkPassword(str) {
-  let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   return re.test(str)
 }
 
@@ -16,7 +17,7 @@ export async function renderChangePassword(req, res) {
         userRole: await getRole(user.id)
       })
     } else {
-      res.redirect('/login')
+      redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
     }
   } catch (err) {
     res.send(err)
