@@ -1,5 +1,5 @@
 import db from '../../models';
-import { getRole } from '../common';
+import { getRole } from '../services/common';
 import { usersPut } from '../users/update';
 const bcrypt = require('bcrypt')
 const users = db['users'];

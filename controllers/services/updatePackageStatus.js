@@ -1,5 +1,5 @@
 'use strict';
-import db from '../models/index.js';
+import db from '../../models/index.js';
 const Package = db.packages;
 export function updatePackageStatus(packageId, status, res) {
   try {

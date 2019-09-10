@@ -1,9 +1,9 @@
 import { stripe } from "../../app";
 import models from '../../models'
-import { sendWAmsg, getRole } from "../common";
+import { sendWAmsg, getRole } from "../services/common";
 import { retrieveCityNames } from "../package/register";
 import { getPackages } from "../package/update"
-import { redirectWithMsg } from '../common';
+import { redirectWithMsg } from '../services/common';
 
 // import { stripeSecretKey } from "../../config/payment";
 

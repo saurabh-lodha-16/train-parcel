@@ -3,10 +3,10 @@ import db from '../../models/index.js';
 var moment = require('moment');
 const Op = db.Sequelize.Op;
 const sequelize = require('sequelize')
-import { getCityName } from '../getCityName';
-import { getISTTime } from '../getISTTime';
+import { getCityName } from '../services/getCityName';
+import { getISTTime } from '../services/getISTTime';
 import { trainBetween } from '../trainStatus/trainsBetween';
-import { sendWAmsg, getRole } from '../common';
+import { sendWAmsg, getRole } from '../services/common';
 
 //serialNo se 
 export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatusId, trainId) {

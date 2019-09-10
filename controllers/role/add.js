@@ -1,6 +1,6 @@
 import db from '../../models';
-import { getRole } from '../common';
-import { redirectWithMsg } from '../common';
+import { getRole } from '../services/common';
+import { redirectWithMsg } from '../services/common';
 let roles = db['roles'];
 
 export async function renderRolePage(req, res) {

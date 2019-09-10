@@ -1,5 +1,5 @@
 import { loadPackage } from "./load";
-import { getRole } from "../common";
+import { getRole } from "../services/common";
 
 export async function linkPackageTrainGet(req, res) {
     let serialNo = req.query['serialNo']

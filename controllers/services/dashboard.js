@@ -1,4 +1,4 @@
-import * as models from '../models'
+import * as models from '../../models'
 import { getRole } from './common';
 
 export async function dashboardGet(req, res) {

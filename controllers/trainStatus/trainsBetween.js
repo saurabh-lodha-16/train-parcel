@@ -4,7 +4,7 @@ var moment = require('moment');
 const Op = db.Sequelize.Op;
 import { getCurrCity } from './fillStations';
 import { reservationsUrl } from 'twilio/lib/jwt/taskrouter/util';
-import { getISTTime } from '../getISTTime';
+import { getISTTime } from '../services/getISTTime';
 
 export async function trainBetween(serial_no, date) {
     const elem = date.split('/');

@@ -1,5 +1,5 @@
 import * as models from '../../models';
-import { sendWAmsg } from '../common';
+import { sendWAmsg } from '../services/common';
 const bcrypt = require('bcrypt')
 
 var FormData = require('form-data')

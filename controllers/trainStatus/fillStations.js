@@ -6,7 +6,7 @@ const request = require('request');
 const moment = require('moment');
 const Op = db.Sequelize.Op;
 const cron = require('node-cron');
-import { getISTTime } from '../getISTTime';
+import { getISTTime } from '../services/getISTTime';
 
 export async function fillStations(req, res) {
     request.get("http://indianrailapi.com/api/v2/livetrainstatus/apikey/c0298692ea871da8221f1df1cb24e2cc/trainnumber/17031/date/20190904/",

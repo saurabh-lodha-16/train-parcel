@@ -1,5 +1,5 @@
 'use strict';
-import db from '../models/index.js';
+import db from '../../models/index.js';
 const notifier = require('node-notifier');
 export async function getRole(userId) {
   let roleAssign = await db.roleAssigns.findOne({
