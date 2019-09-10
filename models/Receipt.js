@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const receipts = sequelize.define('receipts', {
     id: {
@@ -27,10 +27,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
-  }, {});
+  }, {})
   receipts.associate = function (models) {
-    receipts.belongsTo(models.packages, { targetKey: 'id' });
-  };
-  return receipts;
-};
+    receipts.belongsTo(models.packages, { targetKey: 'id' })
+  }
+  return receipts
+}
 

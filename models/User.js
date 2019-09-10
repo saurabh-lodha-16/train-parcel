@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = (sequelize, DataTypes) => {
   const users = sequelize.define('users', {
     id: {
@@ -16,7 +16,6 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       type: DataTypes.STRING
     },
-    //change its type
     mobileNo: {
       unique: true,
       allowNull: true,
@@ -38,15 +37,14 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true
     }
-  }, {});
+  }, {})
   users.associate = function (models) {
-    // associations can be defined here
-    users.hasOne(models.roleAssigns, { foreignKey: 'userId', sourceKey: 'id' });
-    users.hasMany(models.packages, { foreignKey: 'senderUserId', sourceKey: 'id' });
-    users.hasMany(models.packages, { foreignKey: 'rcvrUserId', sourceKey: 'id' });
-    users.hasOne(models.receipts, { foreignKey: 'userId', sourceKey: 'id' });
-    users.hasOne(models.offices, { foreignKey: 'userId', sourceKey: 'id' });
-  };
-  return users;
-};
+    users.hasOne(models.roleAssigns, { foreignKey: 'userId', sourceKey: 'id' })
+    users.hasMany(models.packages, { foreignKey: 'senderUserId', sourceKey: 'id' })
+    users.hasMany(models.packages, { foreignKey: 'rcvrUserId', sourceKey: 'id' })
+    users.hasOne(models.receipts, { foreignKey: 'userId', sourceKey: 'id' })
+    users.hasOne(models.offices, { foreignKey: 'userId', sourceKey: 'id' })
+  }
+  return users
+}
 
