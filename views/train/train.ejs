@@ -18,7 +18,7 @@
 <script>
 	$(document).ready(function () {
 		$.get("/api/v1.0/trains/", function (data, status) {
-			console.log(data);
+			// console.log(data);
 			for (let train of data) {
 				$("#table").append(`<tr> <td>${train.name} </td>
 						<td>${train.trainNo} </td>

@@ -83,7 +83,7 @@ export async function fillStations(req, res) {
                             date1 = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + (date.getDate() + 1);
                             destDay = date1;
                         }
-                        console.log(sourceDayNumber + " " + destDayNumber);
+                        // console.log(sourceDayNumber + " " + destDayNumber);
 
                         let temp3 = await Train.findOne({ where: { trainNo: 17031 } })
                         let trainId = temp3.dataValues.id;
@@ -132,7 +132,7 @@ export async function trainStatusCron() {
                                 plain: true
                             })
                         if (updatedPackages) {
-                            console.log(updatedPackages);
+                            // console.log(updatedPackages);
                         }
                     }
                     else {
@@ -175,7 +175,7 @@ export async function trainStatusCron() {
 
             let temp = await models.cities.findOne({ where: { id: curr_city } });
             let city_name = temp.dataValues.name;
-            console.log(city_name);
+            // console.log(city_name);
 
         }
     });

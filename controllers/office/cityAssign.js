@@ -1,5 +1,6 @@
 'use strict';
 import db from '../../models/index.js';
+import { redirectWithMsg } from '../common.js';
 const Office = db.offices;
 export function cityAssign(req, res) {
   try {
@@ -8,26 +9,25 @@ export function cityAssign(req, res) {
       where: {
         userId: req.body.user
       }
-    }).then((train) => {
-      if (train == null) {
+    }).then((office) => {
+      if (office == null) {
         Office.create({
           userId: req.body.user,
           cityId: req.body.city
         }).then(() => {
-          console.log('Order created');
-          res.redirect('/office');
+          redirectWithMsg('/offices',req,res,'success','Successfully Assigned')
+          res.redirect('/offices');
         });
       } else {
         Office.update({
           cityId: req.body.city
         }, { where: { userId: req.body.user } }).then(() => {
-          console.log('Order created');
-          res.redirect('/office');
+          redirectWithMsg('/offices',req,res,'success','Successfully Updated')
         });
       }
     })
   } catch (err) {
-    res.render('office/cityAssign', { alert: 'danger', alertMsg: err });
+    redirectWithMsg('/offices',req,res,'danger',err)
   }
 }
 

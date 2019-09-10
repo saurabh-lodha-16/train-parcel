@@ -10,94 +10,94 @@ export function registerGet(req, res) {
 
 export async function registerPost(req, res) {
 
-	if (req.body.otp) {
-		console.log('====================== Register 2nd step')
-		let otp = req.body.otp
-		let user = req.session.user
-		console.log(otp, user)
-		if (user) {
-			if (user.key == otp) {
-				res.redirect('/dashboard/')
-			} else {
-				// delete user created if this error
-				res.render('auth/phoneVerification', { userId: user.id, alert: 'danger', alertMsg: `You've entered a wrong OTP. Check the OTP again!` })
-			}
-		} else {
-			res.render('auth/register', { alert: 'danger', alertMsg: 'Some Error Occured.' })
-		}
+    if (req.body.otp) {
+        // console.log('====================== Register 2nd step')
+        let otp = req.body.otp
+        let user = req.session.user
+        console.log(otp, user)
+        if (user) {
+            if (user.key == otp) {
+                res.redirect('/dashboard/')
+            } else {
+                // delete user created if this error
+                res.render('auth/phoneVerification', { userId: user.id, alert: 'danger', alertMsg: `You've entered a wrong OTP. Check the OTP again!` })
+            }
+        } else {
+            res.render('auth/register', { alert: 'danger', alertMsg: 'Some Error Occured.' })
+        }
 
 
-	} else if (req.googleOAuth) {
-		//Google Sign: user model already created
-		let userId = req.body.userId
-		let phone = req.body.phone;
+    } else if (req.googleOAuth) {
+        //Google Sign: user model already created
+        let userId = req.body.userId
+        let phone = req.body.phone;
 
-		models.users.findOne({ where: { id: userId } }).then(user => {
-			req.session.user = user;
-			sendWAmsg(phone, `Hello ${user.name}, Your OTP is ${user.key}`)
-			res.render('auth/phoneVerification', { userId: user.id, alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
-		})
+        models.users.findOne({ where: { id: userId } }).then(user => {
+            req.session.user = user;
+            sendWAmsg(phone, `Hello ${user.name}, Your OTP is ${user.key}`)
+            res.render('auth/phoneVerification', { userId: user.id, alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
+        })
 
-	}
+    }
 
-	else {
-		console.log('====================== Register 1st step')
-		let email = req.body.email;
-		let name = req.body.name;
-		let phone = req.body.phone;
-		let pwd = req.body.pwd;
-		let rpwd = req.body.rpwd;
-		try {
-			if (pwd == rpwd) {
-				let user = await models.users.findOne({
-					where: {
-						[models.Sequelize.Op.or]: [
-							{
-								email: email
-							},
-							{
-								mobileNo: phone
-							}
-						]
-					}
-				})
-				if (user) {
-					res.render('auth/register',
-						{
-							alert: 'danger',
-							alertMsg: 'User with same email or phone already exists!'
-						});
-				} else {
-					let hashPwd = bcrypt.hashSync(pwd, 10);
-					let user = await models.users.create({
-						name: name,
-						mobileNo: phone,
-						email: email,
-						password: hashPwd,
-						key: generateOTP()
-					})
+    else {
+        console.log('====================== Register 1st step')
+        let email = req.body.email;
+        let name = req.body.name;
+        let phone = req.body.phone;
+        let pwd = req.body.pwd;
+        let rpwd = req.body.rpwd;
+        try {
+            if (pwd == rpwd) {
+                let user = await models.users.findOne({
+                    where: {
+                        [models.Sequelize.Op.or]: [
+                            {
+                                email: email
+                            },
+                            {
+                                mobileNo: phone
+                            }
+                        ]
+                    }
+                })
+                if (user) {
+                    res.render('auth/register',
+                        {
+                            alert: 'danger',
+                            alertMsg: 'User with same email or phone already exists!'
+                        });
+                } else {
+                    let hashPwd = bcrypt.hashSync(pwd, 10);
+                    let user = await models.users.create({
+                        name: name,
+                        mobileNo: phone,
+                        email: email,
+                        password: hashPwd,
+                        key: generateOTP()
+                    })
 
-					// create a default role for user
-					req.session.user = user;
-					sendWAmsg(phone, `Hello ${name}, Your OTP is ${user.key}`)
-					res.render('auth/phoneVerification', {
-						userId: user.id,
-						alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}`
-					})
+                    // create a default role for user
+                    req.session.user = user;
+                    sendWAmsg(phone, `Hello ${name}, Your OTP is ${user.key}`)
+                    res.render('auth/phoneVerification', {
+                        userId: user.id,
+                        alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}`
+                    })
 
-				}
+                }
 
-			} else {
-				//==========================================
-				//send form data again when fails
-				res.render('auth/register', { alert: 'danger', alertMsg: 'Password didn\'t match!' })
-			}
-		} catch (e) {
-			res.render('auth/register', { alert: 'danger', alertMsg: 'Exception: ' + e })
+            } else {
+                //==========================================
+                //send form data again when fails
+                res.render('auth/register', { alert: 'danger', alertMsg: 'Password didn\'t match!' })
+            }
+        } catch (e) {
+            res.render('auth/register', { alert: 'danger', alertMsg: 'Exception: ' + e })
 
-		}
+        }
 
-	}
+    }
 
 }
 

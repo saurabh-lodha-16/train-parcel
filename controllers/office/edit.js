@@ -1,7 +1,7 @@
 'use strict';
 import db from '../../models/index.js';
 import { getCityName, getUserName } from '../getCityName'
-import { getRole } from '../common.js';
+import { getRole, redirectWithMsg } from '../common.js';
 const Office = db.offices;
 export async function editOffice(req, res) {
   console.log(req.query._id);
@@ -28,7 +28,7 @@ export async function editOffice(req, res) {
       });
     }
   } else {
-    res.redirect('./login')
+    redirectWithMsg('/login',req,res,'danger','Please Login first!')
   }
   
 }

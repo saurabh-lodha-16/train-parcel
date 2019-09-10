@@ -24,7 +24,7 @@ export async function renderRolePage(req, res) {
       res.status(403).send('Unauthorized Access')
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 
@@ -46,7 +46,7 @@ export async function renderAddRole(req, res) {
       res.status(403).send('Unauthorized Access')
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 
@@ -78,7 +78,7 @@ export async function addRole(req, res) {
       res.status(403).send('Unauthorized Access')
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 

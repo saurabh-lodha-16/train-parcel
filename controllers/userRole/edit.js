@@ -58,7 +58,7 @@ export async function viewUsers(req, res) {
       res.status(403).send('Unauthorized Access');
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 }
 
@@ -97,7 +97,7 @@ export async function renderEditUserRole(req, res) {
       res.status(403).send('Unauthorized Access');
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 
@@ -142,7 +142,7 @@ export async function editUserRole(req, res) {
       res.status(403).send('Unauthorized Access');
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 

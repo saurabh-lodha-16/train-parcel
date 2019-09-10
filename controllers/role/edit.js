@@ -22,10 +22,10 @@ export async function renderEditRole(req, res) {
         res.status(500).send(err);
       }
     } else {
-      res.status(403).send('Unauthorized Access')
+      res.status(403).send('Unauthorized Access!! Please Login with Admin Role')
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 
@@ -38,7 +38,7 @@ export async function editRole(req, res) {
     let role = await getRole(loggedUser.id)
     if (role == 'Admin') {
       try {
-        if(!(req.body.name && req.body.level)) {
+        if (!(req.body.name && req.body.level)) {
           throw "Please fill out required fields."
         }
         let roleInstance = await roles.findOne({ where: { id: req.params.role_id } });
@@ -58,7 +58,7 @@ export async function editRole(req, res) {
       res.status(403).send('Unauthorized Access');
     }
   } else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 };
 

@@ -12,37 +12,37 @@ export function loginGet(req, res) {
 }
 
 export function loginPost(req, res) {
-	let email = req.body.email;
-	let pwd = req.body.pwd;
-	try {
-		models.users.findOne({
-			where: {
-				email: email
-			}
-		}).then(user => {
-			console.log(user);
-			if (user) {
-				bcrypt.compare(pwd, user.password, function (err, result) {
-					if (result) {
-						// Passwords match
-						req.session.user = user;
-						res.redirect('/dashboard')
-					} else {
-						// Passwords don't match
-						res.render('auth/login', { alert: 'danger', alertMsg: 'You have entered wrong credentials!' })
-					}
-				});
+    let email = req.body.email;
+    let pwd = req.body.pwd;
+    try {
+        models.users.findOne({
+            where: {
+                email: email
+            }
+        }).then(user => {
+            //console.log(user);
+            if (user) {
+                bcrypt.compare(pwd, user.password, function (err, result) {
+                    if (result) {
+                        // Passwords match
+                        req.session.user = user;
+                        res.redirect('/dashboard')
+                    } else {
+                        // Passwords don't match
+                        res.render('auth/login', { alert: 'danger', alertMsg: 'You have entered wrong credentials!' })
+                    }
+                });
 
-			} else {
-				res.render('auth/login', { alert: 'danger', alertMsg: 'You have entered wrong credentials!' })
-			}
-		});
-	} catch (e) {
-		res.render('auth/login', { alert: 'danger', alertMsg: `Exception: ${e.message}` })
-	}
+            } else {
+                res.render('auth/login', { alert: 'danger', alertMsg: 'You have entered wrong credentials!' })
+            }
+        });
+    } catch (e) {
+        res.render('auth/login', { alert: 'danger', alertMsg: `Exception: ${e.message}` })
+    }
 
 
-	// res.render('login');
+    // res.render('login');
 }
 
 

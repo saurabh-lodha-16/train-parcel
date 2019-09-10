@@ -1,18 +1,18 @@
 'use strict';
 import db from '../../models/index.js';
+import { redirectWithMsg } from '../common.js';
 const City = db.cities;
 export function addCity(req, res) {
   try {
     City.create({
       name: req.body.name
     }).then(() => {
-      res.redirect('/cities');
+      redirectWithMsg('/cities', req, res, "success", "Succesfully Added")
     });
   } catch (err) {
-    console.log(`City was not Created ${err}`);
     res.status(404)
+    redirectWithMsg('/cities', req, res, "danger", err)
   }
-
 }
 
 

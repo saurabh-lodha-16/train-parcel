@@ -14,7 +14,7 @@ export async function dashboardGet(req, res) {
             userId: user.id
           }
         })
-        console.log(curr_office)
+        // console.log(curr_office)
 
         let statuses = await models.statuses.findAll()
 
@@ -30,7 +30,7 @@ export async function dashboardGet(req, res) {
 
 
           //packages contains scity or dcity == current office city pkgs
-          console.log(pendingPackages)
+          // console.log(pendingPackages)
 
           let inTransitPackages = await models.packages.findAll({
             where: {
@@ -48,7 +48,7 @@ export async function dashboardGet(req, res) {
               })[0].id,
             }
           })
-          console.log(pendingPackages, '--------------------------------------------')
+          // console.log(pendingPackages, '--------------------------------------------')
 
 
           let completedPackages = await models.packages.findAll({
@@ -105,7 +105,7 @@ export async function dashboardGet(req, res) {
 
 
         //packages contains scity or dcity == current office city pkgs
-        console.log(pendingPackages)
+        // console.log(pendingPackages)
 
         let inTransitPackages = await models.packages.findAll({
           where: {

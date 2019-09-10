@@ -1,5 +1,6 @@
 'use strict';
 import db from '../../models/index.js';
+import { redirectWithMsg } from '../common.js';
 const Status = db.statuses;
 export function updateStatus(req, res) {
   try {
@@ -8,9 +9,9 @@ export function updateStatus(req, res) {
     }, {
         where: { id: req.params.id }
       })
-    res.redirect('/statuses');
+    redirectWithMsg('/statuses', req, res, "success", "Upadated Successfully")
   } catch (error) {
-
+    redirectWithMsg('/statuses', req, res, "danger", error)
   }
 }
 

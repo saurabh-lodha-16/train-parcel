@@ -61,7 +61,7 @@ export async function updateProfile(req, res) {
     }
   }
   else {
-    res.redirect('/login');
+    redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
 }
 
@@ -75,7 +75,7 @@ export async function renderUpdation(req, res) {
         userRole: await getRole(loggedUser.id)
       });
     } else {
-      res.redirect('/login');
+      redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
     }
   } catch (err) {
     res.send(err);
