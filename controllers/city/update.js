@@ -1,7 +1,7 @@
-'use strict';
-import db from '../../models/index.js';
-import { redirectWithMsg } from '../services/common.js';
-const City = db.cities;
+'use strict'
+import db from '../../models/index.js'
+import { redirectWithMsg } from '../services/common.js'
+const City = db.cities
 export function updateCity(req, res) {
   try {
     City.update({
@@ -11,7 +11,7 @@ export function updateCity(req, res) {
       })
     redirectWithMsg('/cities', req, res, 'success', 'Successfully updated!')
   } catch (err) {
-    console.log(err);
+    console.log(err)
     res.status(402)
   }
 }

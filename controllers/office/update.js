@@ -1,7 +1,7 @@
-'use strict';
-import db from '../../models/index.js';
-import { redirectWithMsg } from '../services/common.js';
-const Office = db.offices;
+'use strict'
+import db from '../../models/index.js'
+import { redirectWithMsg } from '../services/common.js'
+const Office = db.offices
 export function updateOffice(req, res) {
   try {
     Office.update({

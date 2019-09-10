@@ -1,10 +1,10 @@
-import * as models from '../../models';
-import { sendWAmsg } from '../services/common';
+import * as models from '../../models'
+import { sendWAmsg } from '../services/common'
 const bcrypt = require('bcrypt')
 
 var FormData = require('form-data')
 export function registerGet(req, res) {
-	res.render('auth/register');
+	res.render('auth/register')
 }
 
 
@@ -26,10 +26,10 @@ export async function registerPost(req, res) {
 
 	} else if (req.googleOAuth) {
 		let userId = req.body.userId
-		let phone = req.body.phone;
+		let phone = req.body.phone
 
 		models.users.findOne({ where: { id: userId } }).then(user => {
-			req.session.user = user;
+			req.session.user = user
 			sendWAmsg(phone, `Hello ${user.name}, Your OTP is ${user.key}`)
 			res.render('auth/phoneVerification', { userId: user.id, alert: 'primary', alertMsg: `Enter the OTP received on your Whatsapp +91${phone}` })
 		})
@@ -37,11 +37,11 @@ export async function registerPost(req, res) {
 	}
 
 	else {
-		let email = req.body.email;
-		let name = req.body.name;
-		let phone = req.body.phone;
-		let pwd = req.body.pwd;
-		let rpwd = req.body.rpwd;
+		let email = req.body.email
+		let name = req.body.name
+		let phone = req.body.phone
+		let pwd = req.body.pwd
+		let rpwd = req.body.rpwd
 		try {
 			if (pwd == rpwd) {
 				let user = await models.users.findOne({
@@ -61,9 +61,9 @@ export async function registerPost(req, res) {
 						{
 							alert: 'danger',
 							alertMsg: 'User with same email or phone already exists!'
-						});
+						})
 				} else {
-					let hashPwd = bcrypt.hashSync(pwd, 10);
+					let hashPwd = bcrypt.hashSync(pwd, 10)
 					let user = await models.users.create({
 						name: name,
 						mobileNo: phone,
@@ -72,7 +72,7 @@ export async function registerPost(req, res) {
 						key: generateOTP()
 					})
 
-					req.session.user = user;
+					req.session.user = user
 					sendWAmsg(phone, `Hello ${name}, Your OTP is ${user.key}`)
 					res.render('auth/phoneVerification', {
 						userId: user.id,
@@ -107,11 +107,11 @@ export async function resendOTPPost(req, res) {
 }
 
 function generateOTP() {
-	var digits = '0123456789';
-	let OTP = '';
+	var digits = '0123456789'
+	let OTP = ''
 	for (let i = 0; i < 4; i++) {
-		OTP += digits[Math.floor(Math.random() * 10)];
+		OTP += digits[Math.floor(Math.random() * 10)]
 	}
-	return OTP;
+	return OTP
 }
 

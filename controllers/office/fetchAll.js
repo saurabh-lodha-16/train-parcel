@@ -1,7 +1,7 @@
-'use strict';
-import db from '../../models/index.js';
+'use strict'
+import db from '../../models/index.js'
 import { getCityName, getUserName } from '../services/getCityName'
-const Office = db.offices;
+const Office = db.offices
 export async function fetchAllOffices(req, res) {
   try {
     let offices = await Office.findAll({
@@ -13,10 +13,10 @@ export async function fetchAllOffices(req, res) {
       }]
     })
     res.status(200)
-    res.send(offices);
+    res.send(offices)
   } catch (error) {
     res.status(404)
-    res.send(error);
+    res.send(error)
   }
 }
 

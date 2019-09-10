@@ -1,10 +1,8 @@
 import db from '../../models'
-let roles = db['roles']
 let city = db['cities']
 let status = db['statuses']
 let user = db['users']
 let packages = db['packages']
-let roleAssigns = db['roleAssigns']
 import { getRole } from '../services/common'
 import { makePayment } from '../payment'
 import { getPackages } from './update'

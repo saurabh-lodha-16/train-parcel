@@ -1,6 +1,6 @@
-import { getRole, redirectWithMsg } from '../services/common';
-import { usersPut } from '../users/update';
-import { changePassword } from '../auth/changePassword';
+import { getRole, redirectWithMsg } from '../services/common'
+import { usersPut } from '../users/update'
+import { changePassword } from '../auth/changePassword'
 
 export async function updateProfile(req, res) {
   let loggedUser = req.session.user

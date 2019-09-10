@@ -11,11 +11,9 @@ try {
 			clientSecret: clientSecret,
 			passReqToCallback: true
 		}, async (req, accessToken, refreshToken, profile, done) => {
-			//passport callback
 			try {
 				let user = await users.findOne({ where: { email: profile.emails[0].value } })
 				if (user) {
-					//google login user already exist. redirect to dashboard
 					if (user.eKey) {
 						if (user.eKey == accessToken) {
 							req.session.user = user;
@@ -35,7 +33,6 @@ try {
 						email: profile.emails[0].value,
 						ekey: accessToken
 					})
-					// create a default role for user     
 					req.googleOAuth = true
 					req.userId = user.id
 					return done(null, user)

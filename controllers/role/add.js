@@ -4,7 +4,7 @@ import { redirectWithMsg } from '../services/common'
 let roles = db['roles']
 
 export async function renderRolePage(req, res) {
-  let loggedUser = req.session.user;
+  let loggedUser = req.session.user
   if (req.session.user) {
     let role = await getRole(loggedUser.id)
     if (role == 'Admin') {
@@ -40,7 +40,7 @@ export async function renderAddRole(req, res) {
         })
 
       } catch (err) {
-        res.status(500).send(err);
+        res.status(500).send(err)
       }
     } else {
       res.status(403).send('Unauthorized Access')
@@ -65,13 +65,13 @@ export async function addRole(req, res) {
         let createdRole = await roles.create({
           name: req.body.name,
           level: req.body.level
-        });
+        })
         roleArray = await roles.findAll({
           attributes: ['id', 'name', 'level']
-        });
+        })
         redirectWithMsg('/roles', req, res, 'success', 'Role successfully added.')
       } catch (err) {
-        res.status(500);
+        res.status(500)
         redirectWithMsg('/roles', req, res, 'danger', err)
       }
     } else {

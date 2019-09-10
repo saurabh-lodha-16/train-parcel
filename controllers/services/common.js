@@ -1,5 +1,5 @@
-import db from '../../models/index.js';
-const notifier = require('node-notifier');
+import db from '../../models/index.js'
+const notifier = require('node-notifier')
 import { accountSid, authToken } from '../../config/twilio'
 
 export async function getRole(userId) {
@@ -13,7 +13,7 @@ export async function getRole(userId) {
     })
 
     if (role != null) {
-      return role.name;
+      return role.name
     } else {
       return
     }
@@ -27,17 +27,16 @@ export function desktopNotification(title, message) {
     title: title,
     message: message,
     wait: true
-  });
+  })
   notifier.on('click', function (notifierObject, options, event) {
-  });
+  })
 
 }
 
 
 export function sendWAmsg(phone, msg) {
 
-  //TODO: to be shifted to external file
-  const client = require('twilio')(accountSid, authToken);
+  const client = require('twilio')(accountSid, authToken)
 
   client.messages
     .create({
@@ -46,12 +45,12 @@ export function sendWAmsg(phone, msg) {
       to: `whatsapp:+91${phone}`
     })
     .then(message => console.log(message.sid))
-    .done();
+    .done()
 
 }
 
 export function redirectWithMsg(url, req, res, alert, alertMsg) {
   req.flash('alert', alert)
-  req.flash('alertMsg', alertMsg);
-  res.redirect(url);
+  req.flash('alertMsg', alertMsg)
+  res.redirect(url)
 }

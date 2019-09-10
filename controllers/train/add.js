@@ -1,7 +1,7 @@
-'use strict';
-import db from '../../models/index.js';
-import { redirectWithMsg } from '../services/common.js';
-const Train = db.trains;
+'use strict'
+import db from '../../models/index.js'
+import { redirectWithMsg } from '../services/common.js'
+const Train = db.trains
 export function addTrain(req, res) {
   try {
     Train.findOne({
@@ -16,7 +16,7 @@ export function addTrain(req, res) {
           trainNo: req.body.trainNo
         }).then(() => {
           redirectWithMsg('/trains', req, res, "success", "Successfully Updated")
-        });
+        })
       } else {
         res.render('train/add', { alert: 'danger', alertMsg: 'Train exist' })
       }

@@ -1,6 +1,5 @@
 import db from '../../models/index.js'
 const City = db.cities
-const Train = db.trains
 let request = require('request')
 
 export async function getStations(req, res) {

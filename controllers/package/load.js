@@ -1,33 +1,22 @@
-import models from '../../models';
-import db from '../../models/index.js';
-var moment = require('moment');
-const Op = db.Sequelize.Op;
-const sequelize = require('sequelize')
-import { getCityName } from '../services/getCityName';
-import { getISTTime } from '../services/getISTTime';
-import { trainBetween } from '../trainStatus/trainsBetween';
-import { sendWAmsg, getRole } from '../services/common';
+import models from '../../models'
+import { trainBetween } from '../trainStatus/trainsBetween'
+import { sendWAmsg, getRole } from '../services/common'
 
-//serialNo se 
 export async function loadPackage(serialNo, sCityTrainStatusId, dCityTrainStatusId, trainId) {
     try {
-        let temp1 = await models.statuses.findOne({ where: { type: 'IN-TRANSIT' } });
-        let inTransitId = temp1.dataValues.id;
+        let temp1 = await models.statuses.findOne({ where: { type: 'IN-TRANSIT' } })
+        let inTransitId = temp1.dataValues.id
         const packageDetails = await models.packages.update({ trainId: trainId, statusId: inTransitId, sCityTrainStatusId: sCityTrainStatusId, dCityTrainStatusId: dCityTrainStatusId },
             { where: { serial_no: serialNo } })
-        const details = await models.packages.findOne({ where: { serial_no: serialNo } });
+        const details = await models.packages.findOne({ where: { serial_no: serialNo } })
         let senderUser = await models.users.findOne({ where: { id: details.dataValues.senderUserId } })
         let train = await models.trains.findOne({ where: { id: trainId } })
         sendWAmsg(senderUser.mobileNo, `Your Package ${serialNo} has been loaded in the train ${train.trainNo} ${train.name}`)
-        return packageDetails;
+        return packageDetails
     }
     catch (e) {
-        return e;
+        return e
     }
-}
-
-export async function loadPackagePost(req, res) {
-
 }
 
 export async function loadPackageGet(req, res) {
@@ -61,7 +50,7 @@ export async function loadPackageGet(req, res) {
         }
        
     } catch (e) {
-        console.log(e);
+        console.log(e)
     }
 
 }

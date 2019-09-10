@@ -1,4 +1,4 @@
-const passport = require('passport');
+const passport = require('passport')
 
 export function getRedirect(req, res) {
     if (req.googleOAuth) {

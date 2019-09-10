@@ -1,7 +1,7 @@
-'use strict';
-import db from '../../models/index.js';
-import { redirectWithMsg } from '../services/common.js';
-const Office = db.offices;
+'use strict'
+import db from '../../models/index.js'
+import { redirectWithMsg } from '../services/common.js'
+const Office = db.offices
 export function cityAssign(req, res) {
   try {
     Office.findOne({
@@ -16,14 +16,14 @@ export function cityAssign(req, res) {
           cityId: req.body.city
         }).then(() => {
           redirectWithMsg('/offices',req,res,'success','Successfully Assigned')
-          res.redirect('/offices');
-        });
+          res.redirect('/offices')
+        })
       } else {
         Office.update({
           cityId: req.body.city
         }, { where: { userId: req.body.user } }).then(() => {
           redirectWithMsg('/offices',req,res,'success','Successfully Updated')
-        });
+        })
       }
     })
   } catch (err) {

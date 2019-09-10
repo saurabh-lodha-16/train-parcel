@@ -1,8 +1,8 @@
 import * as models from '../../models'
-import { getRole } from './common';
+import { getRole } from './common'
 
 export async function dashboardGet(req, res) {
-  let user = req.session.user;
+  let user = req.session.user
   if (user && req.cookies.user_sid) {
 
     try {
@@ -141,7 +141,7 @@ export async function dashboardGet(req, res) {
     }
 
   } else {
-    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' });
+    res.render('auth/login', { alert: 'danger', alertMsg: 'Please Login first!' })
   }
 }
 

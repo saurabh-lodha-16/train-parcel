@@ -1,9 +1,9 @@
-import { getRole } from '../services/common';
-import { usersPut } from '../users/update';
+import { getRole } from '../services/common'
+import { usersPut } from '../users/update'
 const bcrypt = require('bcrypt')
 
 function checkPassword(str) {
-  let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+  let re = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/
   return re.test(str)
 }
 
@@ -25,7 +25,7 @@ export async function renderChangePassword(req, res) {
 
 async function updatePassword(userId, password) {
   try {
-    let hashPwd = bcrypt.hashSync(password, 10);
+    let hashPwd = bcrypt.hashSync(password, 10)
     let updatedInstance = await usersPut(userId, {
       password: hashPwd
     })

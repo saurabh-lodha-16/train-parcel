@@ -27,7 +27,7 @@ export async function renderEditRole(req, res) {
   } else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
-};
+}
 
 export async function editRole(req, res) {
   let loggedUser = req.session.user
@@ -60,5 +60,5 @@ export async function editRole(req, res) {
   } else {
     redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
   }
-};
+}
 

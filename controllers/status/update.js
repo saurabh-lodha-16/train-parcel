@@ -1,7 +1,7 @@
-'use strict';
-import db from '../../models/index.js';
-import { redirectWithMsg } from '../services/common.js';
-const Status = db.statuses;
+'use strict'
+import db from '../../models/index.js'
+import { redirectWithMsg } from '../services/common.js'
+const Status = db.statuses
 export function updateStatus(req, res) {
   try {
     Status.update({

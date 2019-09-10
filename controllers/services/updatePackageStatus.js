@@ -8,7 +8,7 @@ export function updatePackageStatus(packageId, status, res) {
     }, {
         where: { id: packageId }
       }).then(() => {
-        res.write('notify krna hai ');
+        res.write('notify krna hai ')
       });
   } catch (error) {
     res.write(error);

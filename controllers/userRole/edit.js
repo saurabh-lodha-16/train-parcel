@@ -45,7 +45,7 @@ export async function viewUsers(req, res) {
         }
 
       } catch (err) {
-        res.status(500);
+        res.status(500)
         res.render('base', {
           content: 'userRole/index.ejs',
           usersArray: userArray,
@@ -67,7 +67,7 @@ async function getRoleByName(name) {
     let roleInstance = await roles.findOne({
       where: { name: name }
     })
-    return roleInstance;
+    return roleInstance
   } catch (err) {
     throw (err)
   }
@@ -131,7 +131,7 @@ export async function editUserRole(req, res) {
             }]
           }]
         })
-        redirectWithMsg('/user-roles', req, res, 'success', 'User role successfully updated.');
+        redirectWithMsg('/user-roles', req, res, 'success', 'User role successfully updated.')
       } catch (err) {
         res.status(500)
         redirectWithMsg('/user-roles', req, res, 'danger', err)

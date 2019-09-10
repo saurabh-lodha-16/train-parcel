@@ -2,8 +2,6 @@ import models from '../../models'
 import db from '../../models/index.js'
 const moment = require('moment')
 const Op = db.Sequelize.Op
-import { getCurrCity } from './fillStations'
-import { reservationsUrl } from 'twilio/lib/jwt/taskrouter/util'
 import { getISTTime } from '../services/getISTTime'
 
 export async function trainBetween(serial_no, date) {
