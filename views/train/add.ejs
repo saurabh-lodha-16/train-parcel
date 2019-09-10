@@ -13,11 +13,11 @@
       <form method="post" action="/trains/add">
         <div class="form-group">
           <label for="name">Train Name:</label>
-          <input type="text" name="name">
+          <input class="form-control" type="text" name="name">
         </div>
         <div class="form-group">
           <label for="trainNo">Train Number:</label>
-          <input type="text" name="trainNo">
+          <input class="form-control" type="text" name="trainNo">
         </div>
         <div class="form-group">
           <button class="btn btn-primary" type="submit" class="btn btn-primary">Add Train</button>
@@ -27,42 +27,7 @@
 
   </main>
 
-
 </body>
-<style>
-  form {
-    /* Just to center the form on the page */
-    margin: 0 auto;
-    width: 400px;
-    /* To see the outline of the form */
-    padding: 1em;
-    border: 1px solid #CCC;
-    border-radius: 1em;
-  }
-
-  form div+div {
-    margin-top: 1em;
-  }
-
-  label {
-    /* To make sure that all labels have the same size and are properly aligned */
-    display: inline-block;
-    width: 90px;
-    text-align: right;
-  }
-
-  .button {
-    /* To position the buttons to the same position of the text fields */
-    padding-left: 190px;
-    /* same size as the label elements */
-  }
-
-  button {
-    /* This extra margin represent roughly the same space as the space
-         between the labels and their text fields */
-    margin-left: 1.0em;
-  }
-</style>
 
 </html>
 

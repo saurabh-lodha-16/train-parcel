@@ -8,15 +8,15 @@ export async function updateProfile(req, res) {
     try {
       let name = req.body.name
       let email = req.body.email
-      let oldPassword = req.body.oldPassword;
-      let newPassword = req.body.newPassword;
-      let reNewPassword = req.body.reNewPassword;
+      let oldPassword = req.body.oldPassword
+      let newPassword = req.body.newPassword
+      let reNewPassword = req.body.reNewPassword
       if (name && email) {
         let User = await usersPut(loggedUser.id, {
           name: req.body.name,
           email: req.body.email
-        });
-        req.session.user = User;
+        })
+        req.session.user = User
         redirectWithMsg('/dashboard', req, res, 'success', "Profile successfully updated.")
       } else if (oldPassword && newPassword && reNewPassword) {
         let res1 = await changePassword(loggedUser, oldPassword, newPassword, reNewPassword)
@@ -41,12 +41,12 @@ export async function renderUpdation(req, res) {
         content: 'profile/updateProfile.ejs',
         user: loggedUser,
         userRole: await getRole(loggedUser.id)
-      });
+      })
     } else {
       redirectWithMsg('/login', req, res, 'danger', 'Please Login first!')
     }
   } catch (err) {
-    res.send(err);
+    res.send(err)
   }
 }
 
