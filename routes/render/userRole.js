@@ -3,7 +3,7 @@ import express from 'express'
 
 let router = express.Router()
 
-router.get('/', viewUsers);
+router.get('/', viewUsers)
 router.put('/:user_id', editUserRole)
 router.get('/edit', renderEditUserRole)
 
