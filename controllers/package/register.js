@@ -126,7 +126,6 @@ export async function registerPackage(req, res) {
       let destinationId = req.body.destination_city_id;
       let createdPackage = await createPackage(senderId, receiverId, statusId, req.body.weight, sourceId, destinationId);
       makePayment(req, createdPackage.id, loggedUser, res)
-      
     } catch (err) {
       res.status(500);
       redirectWithMsg('/packages', req, res, 'danger', err)

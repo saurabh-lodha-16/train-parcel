@@ -14,7 +14,6 @@ router.get('/track/:serial_no', trackGet);
 router.get('/update', renderUpdation);
 router.put('/:id', update);
 router.get('/load', loadPackageGet);
-// router.get('/load/?serialNo=:serialNo', loadPackageGet);
 router.get('/link', linkPackageTrainGet);
 module.exports = router;
 

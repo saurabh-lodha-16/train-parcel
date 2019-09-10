@@ -75,7 +75,6 @@ async function getRoleByName(name) {
 
 export async function renderEditUserRole(req, res) {
   let loggedUser = req.session.user
-
   if (loggedUser) {
     let role = await getRole(loggedUser.id)
     if (role == 'Admin') {
@@ -104,7 +103,6 @@ export async function renderEditUserRole(req, res) {
 export async function editUserRole(req, res) {
   let roleArray, userArray;
   let loggedUser = req.session.user
-
   if (loggedUser) {
     let role = await getRole(loggedUser.id)
     if (role == 'Admin') {

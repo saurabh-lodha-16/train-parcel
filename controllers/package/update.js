@@ -32,7 +32,6 @@ export async function getPackages(userId, userRole) {
         where: { senderUserId: userId }
       });
     }
-
     return packageArray;
   } catch (err) {
     throw (err);
