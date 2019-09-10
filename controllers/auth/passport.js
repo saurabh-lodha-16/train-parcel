@@ -7,17 +7,17 @@ export function getLogout() {
 
 
 export function getRedirect(req, res) {
-    console.log('final redirects', req);
-    if (req.googleOAuth) {
-        res.render('auth/register', {
-            googleOAuth: true,
-            userId: req.userId,
-            alert: 'success',
-            alertMsg: `Hey ${user.name}! You need to verify your Phone number to continue.`
-        })
-    } else if (req.loggedIn) {
-        res.redirect('/')
-    }
+	console.log('final redirects', req);
+	if (req.googleOAuth) {
+		res.render('auth/register', {
+			googleOAuth: true,
+			userId: req.userId,
+			alert: 'success',
+			alertMsg: `Hey ${user.name}! You need to verify your Phone number to continue.`
+		})
+	} else if (req.loggedIn) {
+		res.redirect('/')
+	}
 
 }
 

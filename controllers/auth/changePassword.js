@@ -32,7 +32,7 @@ async function updatePassword(userId, password) {
     let updatedInstance = await usersPut(userId, {
       password: hashPwd
     })
-    //console.log(updatedInstance,'=====================++++++++++++++++++++++++++++');
+    console.log(updatedInstance, '=====================++++++++++++++++++++++++++++');
     return updatedInstance;
   } catch (err) {
     throw (err);
