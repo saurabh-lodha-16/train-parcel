@@ -1,9 +1,13 @@
 <div class="container">
+	<input class="form-control" id="searchInput" type="text" placeholder="Search..">
+	<br>
 	<table class="table" id="table">
 		<tr>
 			<th>Train name</th>
 			<th>Train number</th>
 		</tr>
+		<tbody id="myTable">
+		</tbody>
 
 	</table>
 
@@ -12,18 +16,22 @@
 	<form action="/trains/add" method='get'>
 		<button class="btn btn-primary" type="submit" value="Submit">Add Train</button>
 	</form>
-
-
 </div>
 <script>
 	$(document).ready(function () {
 		$.get("/api/v1.0/trains/", function (data, status) {
 			// console.log(data);
 			for (let train of data) {
-				$("#table").append(`<tr> <td>${train.name} </td>
+				$("#myTable").append(`<tr> <td>${train.name} </td>
 						<td>${train.trainNo} </td>
 					<td><a class="btn btn-info" href ="/trains/edit?_id=${train.id}">Edit</a> </td></tr>`);
 			}
 		})
+		$("#searchInput").on("keyup", function () {
+			let value = $(this).val().toLowerCase();
+			$("#myTable tr").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			});
+		});
 	});
 </script>
