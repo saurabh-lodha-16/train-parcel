@@ -1,0 +1,61 @@
+{
+  "name": "train-parcel",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "babel": "babel-node ./bin/www",
+    "nodemon": "nodemon --exec babel-node ./bin/www"
+  },
+  "dependencies": {
+    "@types/stripe": "^6.31.23",
+    "bcrypt": "^3.0.6",
+    "coffeescript": "^2.4.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "express-session": "^1.16.2",
+    "flash": "^1.1.0",
+    "form-data": "^2.5.0",
+    "http-errors": "~1.6.3",
+    "method-override": "^3.0.0",
+    "moment": "^2.24.0",
+    "morgan": "~1.9.1",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.0",
+    "node-notifier": "^5.4.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^2.0.0",
+    "pg": "^7.12.0",
+    "pg-hstore": "^2.3.3",
+    "popper.js": "^1.15.0",
+    "req-flash": "0.0.3",
+    "request": "^2.88.0",
+    "sequelize": "^5.13.0",
+    "sequelize-cli": "^5.5.0",
+    "stripe": "^7.8.0",
+    "swagger": "^0.7.5",
+    "twilio": "^3.33.4",
+    "uuid": "^3.3.3"
+  },
+  "description": "This is the web application which is useful for Parcel Office Managers and Customers. It helps them to book a slot for sending a parcel, checking the live status and doing other management tasks digitally.",
+  "main": "bin/www",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "nodemon": "^1.19.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/akzarma/train-parcel.git"
+  },
+  "author": "demo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/akzarma/train-parcel/issues"
+  },
+  "homepage": "https://gitlab.com/akzarma/train-parcel#readme"
+}

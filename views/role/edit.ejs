@@ -1,0 +1,28 @@
+<div class="container">
+  <br />
+  <form action='../../roles/<%= role_id %>' method='post'>
+    <input type="hidden" name="_method" value="put">
+    <div class="form-group">
+      <label for="name">Role Name</label>
+      <input type="text" class="form-control" placeholder="name" name="name" required value='<%= name%>'>
+    </div>
+
+    <input type="hidden" name="role_id" value=<%= role_id %>>
+
+    <div class="form-group">
+      <label for="name">Role level</label>
+      <input type="number" class="form-control" placeholder="level" name="level" required value='<%= level %>'>
+    </div>
+
+    <br />
+    <button class="btn btn-primary" type="submit" value="Submit"> Update role </button>
+  </form>
+  <br />
+  <br />
+  <form action='/roles' method='get'>
+    <button class="btn btn-primary" type="submit" value="Submit"> View Assigned Roles </button>
+  </form>
+  <br />
+  <br />
+</div>
+

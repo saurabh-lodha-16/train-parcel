@@ -1,0 +1,18 @@
+version: '2'
+services:
+  web:
+    build: .
+    command: npm run nodemon
+    volumes:
+      - .:/train-parcel
+      - /train-parcel/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: trainParcel
+      POSTGRES_PASSWORD: password

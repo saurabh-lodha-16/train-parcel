@@ -1,0 +1,33 @@
+<html>
+
+<HEAD>
+  <% include ../common/head %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
+  <h2>Add New Train</h2>
+</HEAD>
+
+<body class="container">
+  <% include ../common/alert %>
+  <main>
+    <div id="loginBlock">
+      <form method="post" action="/trains/add">
+        <div class="form-group">
+          <label for="name">Train Name:</label>
+          <input class="form-control" type="text" name="name">
+        </div>
+        <div class="form-group">
+          <label for="trainNo">Train Number:</label>
+          <input class="form-control" type="text" name="trainNo">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-primary" type="submit" class="btn btn-primary">Add Train</button>
+        </div>
+      </form>
+    </div>
+
+  </main>
+
+</body>
+
+</html>
+

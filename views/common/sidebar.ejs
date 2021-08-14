@@ -1,0 +1,138 @@
+<div class="row" id="body-row">
+  <div id="sidebar-container" class="sidebar-expanded d-none d-md-block">
+    <ul class="list-group">
+
+      <a href="#" data-toggle="sidebar-colapse"
+        class=" list-group-item list-group-item-action d-flex align-items-center">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span id="collapse-icon" class="fa"></span>
+        </div>
+      </a>
+      <a href="/dashboard" aria-expanded="false" class=" list-group-item flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa fa-dashboard fa-fw mr-3 fa-fw mr-3"></span>
+          <span class="menu-collapsed">Dashboard</span>
+        </div>
+      </a>
+      <a href="#submenu1" data-toggle="collapse" aria-expanded="false"
+        class=" list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-inbox fa-fw mr-3"></span>
+          <span class="menu-collapsed">Package</span>
+          <span class="submenu-icon ml-auto"></span>
+        </div>
+      </a>
+
+      <div id='submenu1' class="collapse sidebar-submenu">
+        <a href="/packages/register" class="list-group-item list-group-item-action ">
+          <span class="menu-collapsed">Add Package</span>
+        </a>
+
+        <% if(typeof userRole != 'undefined' && (userRole == 'Manager' || userRole == 'Admin')){ %>
+
+        <a href="/packages/load" class="list-group-item list-group-item-action ">
+          <span class="menu-collapsed">Load a Package</span>
+        </a>
+        <% } %>
+        <a href="/packages/track" class="list-group-item list-group-item-action">
+          <span class="menu-collapsed">Track Package</span>
+        </a>
+
+        <a href="/packages" class="list-group-item list-group-item-action">
+          <span class="menu-collapsed">Update Package</span>
+        </a>
+
+
+      </div>
+      <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
+
+      <a href="#submenu2" data-toggle="collapse" aria-expanded="false"
+        class=" list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-id-badge fa-fw mr-3"></span>
+          <span class="menu-collapsed">Role</span>
+          <span class="submenu-icon ml-auto"></span>
+        </div>
+      </a>
+      <div id='submenu2' class="collapse sidebar-submenu">
+        <a href="/roles" class="list-group-item list-group-item-action ">
+          <span class="menu-collapsed">View Master Roles</span>
+        </a>
+        <a href="/roles/add" class="list-group-item list-group-item-action ">
+          <span class="menu-collapsed">Add Master Role</span>
+        </a>
+
+        <a href="/user-roles" class="list-group-item list-group-item-action">
+          <span class="menu-collapsed">Update User's Role</span>
+        </a>
+
+
+      </div>
+      <%}%>
+
+                <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
+
+      <a href="#submenu3" data-toggle="collapse" aria-expanded="false"
+        class=" list-group-item list-group-item-action flex-column align-items-start">
+        <div class="d-flex w-100 justify-content-start align-items-center">
+          <span class="fa fa-building-o fa-fw mr-3"></span>
+          <span class="menu-collapsed">Offices</span>
+          <span class="submenu-icon ml-auto"></span>
+        </div>
+      </a>
+      <div id='submenu3' class="collapse sidebar-submenu">
+        <a href="/offices/add" class="list-group-item list-group-item-action ">
+          <span class="menu-collapsed">Assign Manager</span>
+        </a>
+
+        <a href="/offices" class="list-group-item list-group-item-action ">
+          <span class="menu-collapsed">Office Manager List</span>
+        </a>
+      </div>
+      <%}%>
+                <a href="#submenu4" data-toggle="collapse" aria-expanded="false"
+                    class=" list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-start align-items-center">
+                        <span class="fa fa-train fa-fw mr-3"></span>
+                        <span class="menu-collapsed">Trains</span>
+                        <span class="submenu-icon ml-auto"></span>
+                    </div>
+                </a>
+                <div id='submenu4' class="collapse sidebar-submenu">
+                    <a href="#" class="list-group-item list-group-item-action ">
+                        <span class="menu-collapsed">Running Status</span>
+                    </a>
+                    <% if(typeof userRole != 'undefined' && userRole == 'Admin'){ %>
+      <a href="/trains/" class="list-group-item list-group-item-action ">
+        <span class="menu-collapsed">Train List</span>
+      </a>
+      <%}%>
+                </div>
+                
+            <a href="#submenu5" data-toggle="collapse" aria-expanded="false"
+                class=" list-group-item list-group-item-action flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-user fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Settings</span>
+                    <span class="submenu-icon ml-auto"></span>
+                </div>
+            </a>
+            <div id='submenu5' class="collapse sidebar-submenu">
+                <a href="/profiles" class="list-group-item list-group-item-action ">
+                    <span class="menu-collapsed">Profile</span>
+                </a>
+
+                <a href="/password" class="list-group-item list-group-item-action ">
+                    <span class="menu-collapsed">Password</span>
+                </a>
+            </div>
+
+            <a href="/logout" aria-expanded="false" class=" list-group-item flex-column align-items-start">
+                <div class="d-flex w-100 justify-content-start align-items-center">
+                    <span class="fa fa-sign-out fa-fw mr-3"></span>
+                    <span class="menu-collapsed">Logout</span>
+                </div>
+            </a>
+        </ul>
+    </div>
+</div>

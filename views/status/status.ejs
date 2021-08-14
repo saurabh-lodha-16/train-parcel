@@ -1,0 +1,43 @@
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$.get("/api/v1.0/statuses/", function (data, statuse) {
+				// console.log(data);
+				for (let status of data) {
+					$("#table").append(`<tr> <td>${status.type} </td>
+						<td><a href ="/statuses/edit?_id=${status.id}">Edit</a> </td></tr>`);
+				}
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<% include ../common/alert %>
+	<table id="table" class="table">
+		<tr>
+			<th>Status Type</th>
+		</tr>
+
+	</table>
+
+	<br>
+	<br>
+	<form action="/statuses/add" method='get'>
+		<button class="btn btn-primary" type="submit" value="Submit">Add Status</button>
+	</form>
+
+</body>
+
+<style>
+	table,
+	th,
+	td {
+		border: 1px solid black;
+	}
+</style>
+
+</html>

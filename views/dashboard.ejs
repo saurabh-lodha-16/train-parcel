@@ -1,0 +1,98 @@
+<div class="row tables-div">
+  <% if(typeof pendingPackages !== 'undefined') { %>
+
+  <div class="col-md">
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Pending</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% var i=0; for(id in pendingPackages){ %>
+        <% if(userRole=='Manager'){ %>
+        <tr onclick="window.location='packages/load/?serialNo=<%= pendingPackages[id].serial_no %>'">
+          <% }else{ %>
+        <tr onclick="window.location='packages/track/<%= pendingPackages[id].serial_no %>'">
+          <% } %>
+          <td><%= ++i %></td>
+          <td>
+            <div class="row">
+              <div class="col-md">
+                <%= pendingPackages[id].serial_no %>
+              </div>
+              <div class="col-md-2">
+                >
+              </div>
+            </div>
+          </td>
+        </tr>
+
+        <% } %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-md">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">In-Transit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% i=0; for(id in inTransitPackages){ %>
+        <tr onclick="window.location='packages/track/<%= inTransitPackages[id].serial_no %>';">
+          <td><%= ++i %></td>
+          <td>
+            <div class="row">
+              <div class="col-md">
+                <%= inTransitPackages[id].serial_no %>
+              </div>
+              <div class="col-md-2">
+                >
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-md">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Completed</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% i=0; for(id in completedPackages){ %>
+        <tr onclick="window.location='packages/track/<%= completedPackages[id].serial_no %>';">
+          <td><%= ++i %></td>
+          <td>
+            <div class="row">
+              <div class="col-md">
+                <%= completedPackages[id].serial_no %>
+              </div>
+              <div class="col-md-2">
+                >
+              </div>
+            </div>
+          </td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+
+  </div>
+
+  <% } %>
+</div>
+
+</div>

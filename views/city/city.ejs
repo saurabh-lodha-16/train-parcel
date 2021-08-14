@@ -1,0 +1,36 @@
+<html>
+
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$.get("/api/v1.0/cities", function (data, status) {
+				for (let city of data) {
+					$("#table").append(`<tr> <td>${city.name} </td>
+						<td><a class = "btn btn-info" href ="/cities/edit?_id=${city.id}">Update</a></td>
+						</tr>`);
+				}
+			})
+		});
+	</script>
+</head>
+
+<body>
+	<% include ../common/alert %>
+	<table id="table" class="table">
+		<tr>
+			<th>City name</th>
+		</tr>
+
+	</table>
+
+	<br>
+	<br>
+	<form action="/cities/add" method='get'>
+		<button class="btn btn-primary" type="submit" value="Submit">Add city</button>
+	</form>
+
+</body>
+
+</html>
+

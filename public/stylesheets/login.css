@@ -1,0 +1,14 @@
+#loginBlock {
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+    background: white;
+    text-align: center;
+    padding: 18px;
+    margin-top: 50px !important;
+}
+
+.logo {
+    margin-top: 100px;
+    text-align: center;
+}
+

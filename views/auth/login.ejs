@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Login</title>
+
+	<% include ../common/head %>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+
+</head>
+
+<body class="container">
+
+	<% include ../common/alert %>
+
+	<div class="row">
+		<div class="col-md-2 offset-5 logo">
+			<a href="/"><img src="/images/deqode.png" width="70" height="auto"></a>
+		</div>
+	</div>
+	<div class="row">
+		<div id="loginBlock" class="col-md-4 offset-4">
+			<form method="POST" action="/login">
+				<div class="form-group">
+					<label for="email">Email address</label>
+					<input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+				</div>
+				<div class="form-group">
+					<label for="pwd">Password</label>
+					<input name="pwd" type="password" class="form-control" id="pwd" required>
+				</div>
+				<div class="form-group">
+					<button type="submit" class="btn btn-primary">Login</button>
+				</div>
+			</form>
+			OR<br>
+			Login with<a href="/oauth/login" class="btn fa fa-google"></a>
+			<br><br>
+			<a href="/forgot-password">Forgot Password?</a>
+			<br>
+			<a href="/register">Not Registered yet?</a>
+		</div>
+	</div>
+
+
+
+	<footer style="text-align: center">
+		<% include ../common/footer %>
+	</footer>
+
+
+
+</body>
+
+</html>

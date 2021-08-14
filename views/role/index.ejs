@@ -1,0 +1,37 @@
+<div class="container">
+  <table class="table">
+    <tr>
+      <!-- <th>id</th> -->
+      <th>Name</th>
+      <th>Level</th>
+    </tr>
+    <% function compare( a, b ) {
+      if ( a.name.toLowerCase() < b.name.toLowerCase() ){
+        return -1;
+      }
+      if ( a.name.toLowerCase() > b.name.toLowerCase() ){
+        return 1;
+      }
+      return 0;
+   }%>
+    <% rolesArray.sort(compare) %>
+    <form action='/roles/edit' method='get'>
+      <% for (role of rolesArray) { %>
+      <tr>
+        <!-- <td> <%= `${role.id}` %> </td> -->
+        <td> <%= `${role.name}` %> </td>
+        <td> <%= `${role.level}` %> </td>
+        <td>
+          <button value='<%= role.id %>' name="role_id" class="btn btn-info" type="submit">
+            Edit
+          </button>
+        </td>
+      </tr>
+      <% } %>
+    </form>
+  </table>
+  <br />
+  <br />
+  <br />
+</div>
+

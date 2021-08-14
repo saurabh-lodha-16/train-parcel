@@ -1,0 +1,25 @@
+<div class="container">
+  <h1> Update profile details. </h1>
+  <br />
+  <form action='/users' method='post'>
+    <input name="_method" value="put" hidden>
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input type="text" class="form-control" name="name" value="<%= user.name %>" required>
+    </div>
+    <br />
+    <div class="form-group">
+      <label for="email">Email:</label>
+      <input type="email" class="form-control" name="email" value="<%= user.email %>" required>
+    </div>
+    <br />
+    <div class="form-group">
+      <label for="phoneNo">Phone Number:</label>
+      <strong type="number" class="form-control"> <%= user.mobileNo %> </strong>
+    </div>
+
+    <br />
+    <br />
+    <button class="btn btn-primary" type="submit" value="Submit"> Update Profile </button>
+  </form>
+</div>

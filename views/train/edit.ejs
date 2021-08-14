@@ -1,0 +1,30 @@
+<html>
+
+<HEAD>
+  <% include ../common/head %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
+</HEAD>
+
+<body>
+  <% include ../common/alert %>
+  <form method="post" action="/trains">
+    <input type="hidden" name="_method" value="put" />
+    <div class="form-group">
+      <label for="name">Train Name:</label>
+      <input class="form-control" type="text" name="name" value=<%= name %>>
+    </div>
+    <div class="form-group">
+      <label for="trainNo">Train Name:</label>
+      <input class="form-control" type="text" name="trainNo" value=<%= trainNo %>>
+    </div>
+    <div class="form-group">
+      <label for="name">Train id:</label>
+      <input class="form-control" type="text" readonly name="id" value=<%= id %>>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" type="submit">Update details</button>
+    </div>
+  </form>
+</body>
+
+</html>

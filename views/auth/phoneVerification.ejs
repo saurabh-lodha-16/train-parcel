@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>OTP Verification</title>
+
+  <% include ../common/head %>
+  <link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+  <script src="/javascripts/register.js"></script>
+
+</head>
+
+<body class="container">
+  <% include ../common/alert %>
+
+  <main>
+
+    <div class="logo">
+      <img src="/images/deqode.png" width="70" height="auto">
+    </div>
+
+    <div id="loginBlock">
+
+      <form method="POST" action="/register">
+        <div class="form-group">
+          <label for="email">OTP</label>
+          <input name="otp" type="number" class="form-control" id="otp">
+          <% if(typeof userId != 'undefined'){ %>
+          <a onclick="resendOTP();" id="resendOTPlink" href="#">resend OTP?</a>
+
+          <% } %>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Verify</button>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <% include ../common/footer %>
+  </footer>
+
+</body>
+
+</html>

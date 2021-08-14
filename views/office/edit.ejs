@@ -1,0 +1,47 @@
+<div class="container">
+  <form method="post" action="/offices/<%= office.id %>">
+    <input type="hidden" name="_method" value="put" />
+    <div>
+      <label for="name">User Name:</label>
+      <strong class="form-control">
+        <%= office.userName %>
+      </strong>
+    </div>
+    <br />
+    <input type="hidden" id="cityId" readonly value=<%= office.cityId %>>
+    <div>
+      <label for="City">Cities</label>
+      <select class="form-control" name="city" id="city">
+
+      </select>
+    </div>
+    <br />
+    <br />
+    <div>
+      <button class="btn btn-primary" type="submit">Update details</button>
+    </div>
+  </form>
+</div>
+<script>
+  $(document).ready(function () {
+    $.get("/api/v1.0/cities", function (data, status) {
+      let cityId = $("#cityId").attr('value');
+      data.sort((a, b) => {
+        if (a.name < b.name) //sort string ascending
+          return -1
+        if (a.name > b.name)
+          return 1
+        return 0
+      });
+      for (let city of data) {
+        if (city.name) {
+          if (city.id == cityId) {
+            $("#city").append(`<option selected value='${city.id}'> ${city.name}</option>`);
+          } else {
+            $("#city").append(`<option value='${city.id}'> ${city.name}</option>`);
+          }
+        }
+      }
+    })
+  });
+</script>

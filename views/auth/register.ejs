@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Register</title>
+
+  <% include ../common/head %>
+  <link rel="stylesheet" type="text/css" href="stylesheets/login.css">
+
+</head>
+
+<body class="container">
+  <% include ../common/alert %>
+
+  <main>
+
+    <div class="logo">
+      <a href="/"><img src="images/deqode.png" width="70" height="auto"></a>
+    </div>
+
+    <div class="row">
+      <div id="loginBlock" class="col-md-4 offset-4">
+
+        <form method="POST" action="/users">
+          <% if( typeof googleOAuth == 'undefined'){ %>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" required>
+          </div>
+          <% } %>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input name="phone" type="number" class="form-control" id="phone" aria-describedby="emailHelp" required>
+          </div>
+          <% if( typeof googleOAuth == 'undefined'){ %>
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input name="email" type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+          </div>
+          <div class="form-group">
+            <label for="pwd">Password</label>
+            <input name="pwd" type="password" class="form-control" id="pwd" required>
+          </div>
+          <div class="form-group">
+            <label for="rpwd">Re-enter Password</label>
+            <input name="rpwd" type="password" class="form-control" id="rpwd" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Register</button>
+          <% }else{ %>
+          <button type="submit" class="btn btn-primary">Send OTP</button>
+          <input name="userId" hidden value="<%= userId %>">
+          <%}%>
+                </form>
+                <br>
+                <a href="/login">Already Registered? Login here!</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <% include ../common/footer %>
+          </footer>
+
+</body>
+
+</html>

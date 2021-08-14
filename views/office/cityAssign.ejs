@@ -1,0 +1,50 @@
+<body>
+  <div class="container">
+    <br />
+    <form action="/offices/" method="POST">
+      <label for="user">Users</label>
+      <select class="form-control" name="user" id="user">
+
+      </select>
+      <label for="City">Cities</label>
+      <select class="form-control" name="city" id="city">
+
+      </select>
+      <br><br>
+      <input class="btn btn-primary" type="submit">
+    </form>
+    <br>
+    <br>
+  </div>
+</body>
+<script>
+  $(document).ready(function () {
+    $.get("/api/v1.0/cities/", function (data, status) {
+      data.sort((a, b) => {
+        if (a.name < b.name) //sort string ascending
+          return -1
+        if (a.name > b.name)
+          return 1
+        return 0
+      });
+      for (let city of data) {
+        if (city.name) {
+          $("#city").append(`<option value='${city.id}'> ${city.name}</option>`);
+        }
+      }
+    })
+    $.get("/users/", function (data, status) {
+      data.sort((a, b) => {
+        if (a.name < b.name) //sort string ascending
+          return -1
+        if (a.name > b.name)
+          return 1
+        return 0
+      });
+      for (let user of data) {
+        $("#user").append(`<option value='${user.id}'>${user.name} ${user.email}</option>`);
+      }
+    })
+  });
+</script>
+

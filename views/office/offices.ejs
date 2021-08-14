@@ -1,0 +1,38 @@
+<body>
+	<div class="container">
+		<input class="form-control" id="searchInput" type="text" placeholder="Search..">
+		<br>
+		<table id="table" class="table">
+			<tr>
+				<th>User Name</th>
+				<th>User Email</th>
+				<th>City Name</th>
+			</tr>
+			<tbody id="myTable">
+			</tbody>
+		</table>
+		<br>
+		<br>
+	</div>
+</body>
+<script>
+	$(document).ready(function () {
+		$.get("/api/v1.0/offices", function (data, status) {
+			// console.log(data);
+			for (let office of data) {
+				// console.log(office.id);
+				$("#myTable").append(`<tr> <td>${office.user.name} </td>
+						<td>${office.user.email} </td>
+						<td>${office.city.name} </td>
+						<td><a class = "btn btn-info" href ="/offices/edit?_id=${office.id}">Update</a></td>
+						</tr>`);
+			}
+		})
+		$("#searchInput").on("keyup", function () {
+			let value = $(this).val().toLowerCase()
+			$("#myTable tr").filter(function () {
+				$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+			})
+		})
+	});
+</script>
